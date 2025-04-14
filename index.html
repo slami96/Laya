@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="cs"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAYA Architecture Studio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>laya home | Architektura & Design</title> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
       *, *::before, *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth; /* Enable smooth scrolling for fallback */
       }
 
       body, html {
@@ -30,23 +32,25 @@
 
       /* --- BASE STYLES --- */
       :root {
-          --header-height: 75px; /* Slightly taller for architect feel */
-          --accent-color-1: #C0A080; /* Muted Gold/Bronze */
-          --accent-color-2: #5A5A5A; /* Dark Grey */
+          --header-height: 75px;
+          --accent-color-1: #B89A7B; /* Softer Gold/Bronze */
+          --accent-color-2: #6c757d; /* Grey */
           --accent-color-3: #EAEAEA; /* Light Grey */
-          --accent-color-4: #333333; /* Near Black */
-          --text-light: #f1f1f1;
-          --text-dark: #2d2d2d; /* Slightly softer black */
-          --bg-dark-1: #1a1a1a; /* Dark background */
-          --bg-dark-2: #252525; /* Slightly lighter dark */
-          --bg-light-1: #fdfdfd; /* Very light grey */
+          --accent-color-4: #343a40; /* Darker Grey/Soft Black */
+          --text-light: #f8f9fa; /* Slightly off-white */
+          --text-dark: #212529; /* Bootstrap default dark text */
+          --bg-dark-1: #1a1a1a;
+          --bg-dark-2: #252525;
+          --bg-light-1: #f8f9fa; /* Light grey background */
           --bg-light-2: #ffffff; /* White */
           --header-icon-color-dark: var(--text-light);
           --header-icon-color-light: var(--text-dark);
           --header-hover-color: var(--accent-color-1);
-          --header-bg-dark: rgba(26, 26, 26, 0.8); /* Darker semi-transparent bg */
-          --header-bg-light: rgba(253, 253, 253, 0.85); /* Lighter semi-transparent bg */
-          --logo-font: 'Montserrat', sans-serif; /* Architect font */
+          --header-bg-dark: rgba(26, 26, 26, 0.85); /* Slightly more opaque */
+          --header-bg-light: rgba(248, 249, 250, 0.9); /* Slightly more opaque */
+          /* --- FONT CHANGE --- */
+          /* Replace 'Cormorant Garamond' with 'Halimum' if you have the font */
+          --logo-font: 'Cormorant Garamond', serif;
       }
 
       /* --- HEADER STYLES (MODIFIED) --- */
@@ -57,7 +61,7 @@
           right: 0;
           width: 100%;
           height: var(--header-height);
-          padding: 0 40px; /* More padding */
+          padding: 0 40px;
           z-index: 100;
           display: flex;
           align-items: center;
@@ -81,32 +85,33 @@
       .logo-link {
           text-decoration: none;
           font-family: var(--logo-font);
-          font-size: 2.0rem; /* Slightly larger logo */
-          font-weight: 700;
-          letter-spacing: 2px; /* More spacing */
+          /* --- LOGO TEXT STYLE --- */
+          font-size: 1.8rem; /* Adjusted size for lowercase */
+          font-weight: 600; /* Adjusted weight */
+          letter-spacing: 1px; /* Less spacing */
           color: var(--header-icon-color-dark);
-          transition: color 0.3s ease, transform 0.3s ease;
+          transition: color 0.3s ease;
+          text-transform: lowercase; /* Ensure lowercase */
+          white-space: nowrap; /* Prevent wrapping */
       }
 
       .logo-link:hover {
           color: var(--header-hover-color);
-          transform: scale(1.05) translate(-50%, -50%); /* Adjust transform origin */
-          /* Removed the original logo link transform */
+          /* Removed transform on hover for stability */
       }
-
 
       body.on-light-section .logo-link {
           color: var(--header-icon-color-light);
       }
 
       .header-nav {
-          margin-left: auto; /* Pushes nav to the right */
+          margin-left: auto;
       }
 
       .header-nav ul {
           list-style: none;
           display: flex;
-          gap: 35px; /* Increased spacing */
+          gap: 35px;
           padding: 0;
           margin: 0;
           align-items: center;
@@ -119,7 +124,7 @@
       .header-nav a {
           text-decoration: none;
           color: var(--header-icon-color-dark);
-          font-size: 1.1rem; /* Adjusted icon size */
+          font-size: 1.1rem;
           transition: transform 0.3s ease, color 0.3s ease;
           display: flex;
           flex-direction: column;
@@ -142,10 +147,11 @@
           top: 100%;
           margin-top: 6px;
           background-color: transparent;
-          color: inherit; /* Inherit color from parent link (<a>) */
-          font-family: var(--logo-font); /* Use architect font */
-          font-weight: 500;
-          font-size: 0.75rem; /* Smaller label */
+          color: inherit;
+          /* --- LABEL FONT --- */
+          font-family: 'Poppins', sans-serif; /* Use body font for labels */
+          font-weight: 400; /* Lighter weight */
+          font-size: 0.75rem;
           padding: 2px 4px;
           border-radius: 4px;
           white-space: nowrap;
@@ -167,20 +173,19 @@
 
       /* --- FOOTER STYLES --- */
       /* Parent section needs position relative */
-      section#section-3 { /* Footer will be placed within the last content section */
+      section#section-4 { /* Footer will be placed within the Contact section */
           position: relative;
-          /* Other styles for the contact section */
            background-color: var(--bg-light-1);
           color: var(--text-dark);
-          min-height: 100vh; /* Ensure it takes full height */
-          height: auto; /* Allow content to define height */
+          min-height: 100vh;
+          height: auto;
           padding-top: calc(var(--header-height) + 10vh);
           padding-bottom: 20vh; /* Space for footer */
-          display: flex; /* Use flex for centering */
-          justify-content: center; /* Center horizontally */
-          align-items: center; /* Center vertically */
+          display: flex;
+          justify-content: center;
+          align-items: center;
           margin-top: calc(-1 * var(--header-height));
-          overflow: hidden; /* Hide overflow */
+          overflow: hidden;
       }
 
       .site-footer {
@@ -221,121 +226,237 @@
 
       .site-footer .social-icons a:hover {
           transform: scale(1.15);
-          color: var(--accent-color-2); /* Dark grey hover for footer */
+          color: var(--accent-color-2);
       }
 
 
       /* --- SECTION STYLES --- */
       section {
-        min-height: 100vh; /* Ensure sections take at least viewport height */
-        height: auto; /* Allow sections to grow if content requires */
+        min-height: 100vh;
+        height: auto;
         width: 100%;
-        display: flex; /* Use flex for default centering */
+        display: flex;
         justify-content: center;
         align-items: center;
         position: relative;
-        overflow: hidden; /* Crucial for many GSAP effects */
-        padding: 50px; /* Add some default padding */
-        /* Add padding top only if content MUST NOT go under the fixed header */
-        /* This is handled per-section if needed more specifically */
-        padding-top: var(--header-height); /* Default top padding */
-        margin-top: calc(-1 * var(--header-height)); /* Pull up */
+        overflow: hidden;
+        padding: 50px;
+        padding-top: var(--header-height);
+        margin-top: calc(-1 * var(--header-height));
       }
 
-      /* --- SECTION 0: Hero Image Stack --- */
+      /* --- SECTION 0: Hero Images Effect --- */
       .hero-section {
         background-color: var(--bg-dark-1);
         color: var(--text-light);
-        display: block; /* Override flex for specific layout */
-        padding: 0; /* Remove default padding */
+        padding: 0; /* Remove padding for full bleed effect */
+        display: block; /* Override flex */
       }
 
-      .hero-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-        text-align: center;
-        color: var(--text-light);
-        opacity: 0; /* Start hidden for GSAP */
-      }
-
-      .hero-title {
-        font-family: var(--logo-font);
-        font-size: clamp(2.5rem, 6vw, 5rem); /* Responsive font size */
-        font-weight: 800;
-        margin-bottom: 15px;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-      }
-
-       .hero-tagline {
-        font-size: clamp(1rem, 2vw, 1.5rem);
-        font-weight: 300;
-        max-width: 600px;
-        margin: 0 auto;
-        line-height: 1.6;
-       }
-
-
-      .hero-image-stack {
-          position: relative; /* Changed to relative for image stacking */
+      .hero-image-effect-container {
+          position: absolute; /* Changed from relative */
+          top: 0;
+          left: 0;
           width: 100%;
-          height: 100vh; /* Full viewport height */
-          overflow: hidden; /* Keep images contained */
+          height: 100vh;
+          overflow: hidden;
       }
 
-      .hero-image {
+      .hero-image-layer {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          object-fit: cover; /* Cover the area, may crop */
-          object-position: center;
-          opacity: 0; /* Start hidden for GSAP */
-          scale: 1.1; /* Start slightly zoomed for effect */
+          background-size: cover;
+          background-position: center center;
+          opacity: 0; /* Start hidden */
+          scale: 1.1; /* Start slightly zoomed */
+          /* Add will-change for performance */
+          will-change: transform, opacity;
       }
 
-      /* --- SECTION 1: About Me --- */
-      .about-section {
-        background-color: var(--bg-dark-2); /* Slightly lighter dark */
-        color: var(--text-light);
-        /* padding-top is handled by generic section style */
-      }
+      /* Specific background images */
+      #hero-layer-1 { background-image: url('interior_1.png'); }
+      #hero-layer-2 { background-image: url('interior_2.png'); }
+      #hero-layer-3 { background-image: url('interior_3.png'); }
 
-      .about-content-wrapper {
-        max-width: 900px;
+
+      .hero-content {
+        position: relative; /* Changed to relative to sit above absolute images */
+        z-index: 2; /* Ensure content is above images */
+        display: flex; /* Use flex to center content vertically */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Take full viewport height */
         text-align: center;
-        padding: 40px;
-        opacity: 0; /* Start hidden */
-        transform: translateY(50px); /* Start slightly down */
+        color: var(--text-light);
+        padding: 40px; /* Add padding to content */
+        opacity: 0; /* Start hidden for GSAP */
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)); /* Subtle overlay */
       }
 
-      .about-title {
+      .hero-title {
+        font-family: var(--logo-font);
+        font-size: clamp(2.5rem, 6vw, 4.5rem); /* Adjusted size */
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+         text-transform: lowercase; /* Lowercase title */
+         line-height: 1.1;
+      }
+
+       .hero-tagline {
+        font-size: clamp(1rem, 2vw, 1.4rem); /* Slightly smaller */
+        font-weight: 300;
+        max-width: 650px;
+        margin: 0 auto;
+        line-height: 1.7;
+        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+       }
+
+
+      /* --- SECTION 1: Philosophy --- */
+      .philosophy-section {
+        background-color: var(--bg-light-2); /* Light background */
+        color: var(--text-dark);
+        padding: 80px 40px; /* More vertical padding */
+      }
+
+      .philosophy-content-wrapper {
+        display: flex;
+        flex-direction: column; /* Stack on small screens */
+        align-items: center;
+        gap: 50px; /* Space between text and image */
+        max-width: 1100px; /* Limit width */
+        width: 100%;
+        opacity: 0; /* Start hidden */
+      }
+
+      @media (min-width: 768px) {
+          .philosophy-content-wrapper {
+              flex-direction: row; /* Side by side on larger screens */
+          }
+      }
+
+      .philosophy-text-content {
+          flex: 1 1 60%; /* Takes more space */
+          max-width: 650px; /* Limit text width */
+          opacity: 0; /* GSAP fade */
+          transform: translateX(-30px); /* GSAP slide */
+      }
+
+      .philosophy-title {
           font-family: var(--logo-font);
-          font-size: clamp(2rem, 5vw, 3.5rem);
+          font-size: clamp(2rem, 5vw, 3rem);
           font-weight: 700;
           margin-bottom: 30px;
-          color: var(--accent-color-1); /* Use accent color */
+          color: var(--accent-color-4);
+          text-align: left;
       }
 
-      .about-text p {
-          font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-          line-height: 1.8;
+      .philosophy-text p {
+          font-size: clamp(0.9rem, 1.5vw, 1.05rem); /* Controlled font size */
+          line-height: 1.9; /* Increased line height */
           margin-bottom: 20px;
-          font-weight: 300;
+          font-weight: 400; /* Regular weight */
+          color: #495057; /* Softer text color */
       }
 
-      .about-text strong {
-          font-weight: 600;
-          color: var(--accent-color-3); /* Light grey for emphasis */
+      .philosophy-image-container {
+          flex: 1 1 35%; /* Takes less space */
+          max-width: 350px; /* Limit image size */
+          text-align: center; /* Center image if container is wider */
+          opacity: 0; /* GSAP fade */
+          transform: translateX(30px); /* GSAP slide */
       }
 
-      /* --- SECTION 2: Portfolio Preview --- */
+      .philosophy-portrait {
+          display: block;
+          width: 100%;
+          height: auto;
+          border-radius: 8px; /* Subtle rounding */
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          object-fit: cover;
+      }
+
+      /* --- SECTION 2: Services --- */
+        .services-section {
+            background-color: var(--bg-dark-2); /* Dark background */
+            color: var(--text-light);
+            padding: 80px 40px;
+        }
+
+        .services-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .services-title {
+            font-family: var(--logo-font);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 60px;
+            text-align: center;
+            color: var(--accent-color-1); /* Accent title */
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            width: 100%;
+        }
+
+        .service-card {
+            background-color: var(--bg-dark-1); /* Slightly darker card */
+            border-radius: 10px;
+            padding: 35px 30px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            opacity: 0; /* Start hidden */
+            /* GSAP will handle transform */
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color-1);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .service-card-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .service-card-description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--accent-color-3); /* Light grey description */
+            font-weight: 300;
+        }
+
+      /* --- SECTION 3: Portfolio Preview --- */
       .portfolio-section {
-        background-color: var(--bg-light-2); /* White background */
+        background-color: var(--bg-light-1); /* Light background */
         color: var(--text-dark);
+         padding: 80px 40px;
       }
 
       .portfolio-preview-container {
@@ -344,7 +465,6 @@
         align-items: center;
         width: 100%;
         max-width: 1200px;
-        padding: 40px 0;
         opacity: 0; /* Start hidden */
         transform: translateY(50px); /* Start slightly down */
       }
@@ -367,20 +487,22 @@
       }
 
       .portfolio-item-placeholder {
-          aspect-ratio: 4 / 3; /* Common aspect ratio */
-          background: linear-gradient(135deg, var(--accent-color-3), #d0d0d0);
+          aspect-ratio: 4 / 3;
+          background: linear-gradient(135deg, #e0e0e0, #cccccc); /* Lighter gradient */
           border-radius: 8px;
           display: flex;
           justify-content: center;
           align-items: center;
-          color: var(--accent-color-2);
-          font-family: var(--logo-font);
+          color: var(--accent-color-4); /* Darker text */
+          font-family: 'Poppins', sans-serif; /* Using body font here */
           font-size: 1rem;
           font-weight: 600;
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-          opacity: 0; /* Start hidden for stagger */
-          transform: scale(0.9); /* Start small for stagger */
+          opacity: 0;
+          transform: scale(0.9);
           transition: transform 0.3s ease, box-shadow 0.3s ease;
+          text-align: center;
+          padding: 10px;
       }
         .portfolio-item-placeholder:hover {
             transform: scale(1.03);
@@ -392,33 +514,35 @@
           background-color: var(--accent-color-4);
           color: var(--text-light);
           padding: 15px 40px;
-          border-radius: 50px; /* Pill shape */
+          border-radius: 50px;
           font-family: var(--logo-font);
           font-weight: 600;
           text-decoration: none;
           font-size: 1rem;
-          transition: background-color 0.3s ease, transform 0.3s ease;
-          opacity: 0; /* Start hidden */
-          transform: translateY(20px); /* Start slightly down */
+          transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+          opacity: 0;
+          transform: translateY(20px);
+          border: 2px solid transparent; /* Add border for hover transition */
       }
         .portfolio-cta:hover {
-            background-color: var(--accent-color-1); /* Accent color on hover */
-            color: var(--text-dark);
+            background-color: transparent; /* Transparent background on hover */
+            color: var(--accent-color-4); /* Text color changes */
+            border: 2px solid var(--accent-color-4); /* Show border */
             transform: translateY(15px) scale(1.05);
         }
 
-      /* --- SECTION 3: Contact Form --- */
-      /* Container styles are handled by #section-3 rule above */
+      /* --- SECTION 4: Contact Form --- */
+      /* Container styles are handled by #section-4 rule above */
       .contact-form-container {
-         background-color: var(--bg-light-1); /* Match section bg */
-         padding: 50px clamp(20px, 8vw, 80px); /* Responsive padding */
+         background-color: var(--bg-light-2); /* White background */
+         padding: 50px clamp(20px, 8vw, 80px);
          border-radius: 10px;
          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
          width: 100%;
          max-width: 700px;
-         opacity: 0; /* Start hidden */
-         transform: translateY(50px); /* Start slightly down */
-         z-index: 1; /* Above footer */
+         opacity: 0;
+         transform: translateY(50px);
+         z-index: 1;
       }
 
       .contact-title {
@@ -442,8 +566,8 @@
           font-size: 0.9rem;
           color: var(--accent-color-2);
           margin-bottom: 8px;
-          opacity: 0; /* GSAP animation */
-          transform: translateX(-20px); /* GSAP animation */
+          opacity: 0;
+          transform: translateX(-20px);
       }
 
       .contact-form input[type="text"],
@@ -458,15 +582,15 @@
           color: var(--text-dark);
           background-color: var(--bg-light-2);
           transition: border-color 0.3s ease, box-shadow 0.3s ease;
-          opacity: 0; /* GSAP animation */
-          transform: translateX(-20px); /* GSAP animation */
+          opacity: 0;
+          transform: translateX(-20px);
       }
 
         .contact-form input[type="text"]:focus,
         .contact-form input[type="email"]:focus,
         .contact-form textarea:focus {
             border-color: var(--accent-color-1);
-            box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3); /* Muted gold focus ring */
+            box-shadow: 0 0 0 3px rgba(184, 154, 123, 0.3); /* Accent color focus ring */
             outline: none;
         }
 
@@ -487,15 +611,15 @@
           font-size: 1.1rem;
           font-weight: 600;
           cursor: pointer;
-          transition: background-color 0.3s ease, transform 0.3s ease;
+          transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
           margin-top: 10px;
-          opacity: 0; /* GSAP animation */
-          transform: translateY(20px); /* GSAP animation */
+          opacity: 0;
+          transform: translateY(20px);
       }
 
       .contact-form button:hover {
           background-color: var(--accent-color-1);
-          color: var(--text-dark);
+          color: var(--bg-dark-1); /* Dark text on accent hover */
           transform: scale(1.03);
       }
 
@@ -511,38 +635,38 @@
       }
 
       .nav-dot {
-        width: 10px; /* Smaller dots */
+        width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.3);
-        margin: 12px 0; /* More spacing */
+        background-color: rgba(255, 255, 255, 0.4); /* Slightly more visible */
+        margin: 12px 0;
         cursor: pointer;
         transition: background-color 0.3s, transform 0.3s;
         border: 1px solid rgba(0, 0, 0, 0.2);
       }
         body.on-light-section .nav-dot {
-         background-color: rgba(0, 0, 0, 0.2);
+         background-color: rgba(0, 0, 0, 0.3); /* Slightly more visible */
          border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
       .nav-dot.active {
         background-color: white;
-        transform: scale(1.4); /* Larger active dot */
+        transform: scale(1.4);
         border: 1px solid rgba(0, 0, 0, 0.3);
       }
       body.on-light-section .nav-dot.active {
-         background-color: var(--text-dark); /* Dark active dot on light bg */
+         background-color: var(--text-dark);
          border: 1px solid rgba(255, 255, 255, 0.3);
       }
 
       /* --- Scroll Indicator (First Section) --- */
       .scroll-indicator {
         position: absolute;
-        bottom: 40px; /* Higher position */
+        bottom: 40px;
         left: 50%;
         transform: translateX(-50%);
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 0.8rem; /* Smaller text */
+        color: rgba(255, 255, 255, 0.8); /* Brighter text */
+        font-size: 0.8rem;
         font-family: 'Poppins', sans-serif;
         display: flex;
         flex-direction: column;
@@ -551,21 +675,25 @@
         opacity: 0.8;
         transition: opacity 0.5s ease;
         letter-spacing: 1px;
+        /* Ensure it's clickable through content overlay if needed */
+        pointer-events: none; /* Make text non-blocking */
       }
+       /* Add pointer events back to arrow if needed */
+       .scroll-indicator > div { pointer-events: auto; cursor: pointer;}
 
       .scroll-arrow {
         margin-top: 12px;
         width: 18px;
         height: 18px;
-        border-right: 2px solid rgba(255, 255, 255, 0.7);
-        border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+        border-right: 2px solid rgba(255, 255, 255, 0.8);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.8);
         transform: rotate(45deg);
-        animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncier animation */
+        animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
       }
 
       @keyframes scrollArrow {
         0% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; }
-        50% { transform: rotate(45deg) translate(8px, 8px); opacity: 1; } /* Smaller movement */
+        50% { transform: rotate(45deg) translate(8px, 8px); opacity: 1; }
         100% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; }
       }
 
@@ -575,86 +703,103 @@
       }
 
       /* --- RESPONSIVE STYLES --- */
-      @media (max-width: 992px) {
-          /* Header */
-          .site-header { padding: 0 25px; }
-          .logo-link { font-size: 1.8rem; }
-          .header-nav ul { gap: 25px; }
-
-          /* Sections */
-          section { padding: 30px; padding-top: var(--header-height); }
-          .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-           .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
-      }
-
-       @media (max-width: 768px) {
-           :root { --header-height: 70px; } /* Adjust header height */
-           .site-header { padding: 0 20px; }
+       @media (max-width: 992px) {
+           /* Header */
+           .site-header { padding: 0 25px; }
            .logo-link { font-size: 1.6rem; }
-           .header-nav ul { gap: 20px; }
-           .header-nav a { font-size: 1rem; }
-           .nav-label { display: none; } /* Hide labels on smaller screens */
+           .header-nav ul { gap: 25px; }
 
-           .nav-dots { right: 20px; }
-           .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
+           /* Sections */
+           section { padding-left: 30px; padding-right: 30px; }
+           .philosophy-section { padding: 60px 30px; }
+           .services-section { padding: 60px 30px; }
+           .portfolio-section { padding: 60px 30px; }
+           section#section-4 { padding: 60px 30px 20vh; } /* Adjust contact padding */
 
-           .portfolio-grid { gap: 20px; }
-           .portfolio-item-placeholder { font-size: 0.9rem; }
-
-           .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
-           .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; }
-           .contact-form input, .contact-form textarea { padding: 12px 15px; font-size: 0.95rem;}
-           .contact-form button { padding: 12px 25px; font-size: 1rem; }
-
-           .site-footer { bottom: 20px; }
-           .site-footer .copyright { font-size: 0.75rem; }
-           .site-footer .social-icons { gap: 15px; }
-           .site-footer .social-icons a { font-size: 1.1rem; }
-
-           /* Ensure sections still clear the header */
-           section { padding-top: var(--header-height); }
+           .services-grid { gap: 30px; }
+           .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+           .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
        }
 
-       @media (max-width: 480px) {
-           :root { --header-height: 65px; }
-           .site-header { padding: 0 15px; }
-           .logo-link { font-size: 1.4rem; }
-           .header-nav ul { gap: 15px; } /* Reduce gap further */
-           .header-nav a { font-size: 0.9rem; }
+        @media (max-width: 768px) {
+            :root { --header-height: 70px; }
+            .site-header { padding: 0 20px; }
+            .logo-link { font-size: 1.5rem; }
+            .header-nav ul { gap: 20px; }
+            .header-nav a { font-size: 1rem; }
+            .nav-label { display: none; }
 
-           .nav-dots { right: 15px; }
+            .nav-dots { right: 20px; }
+            .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
 
-           .hero-title { font-size: clamp(2rem, 8vw, 3rem); }
-           .hero-tagline { font-size: clamp(0.9rem, 4vw, 1.1rem); }
+            .philosophy-content-wrapper { flex-direction: column; gap: 30px; }
+            .philosophy-text-content, .philosophy-image-container { max-width: 100%; flex-basis: auto; }
+            .philosophy-title { text-align: center; }
 
-           .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-           .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
+            .services-grid { gap: 25px; grid-template-columns: 1fr; } /* Stack services */
+            .portfolio-grid { gap: 20px; }
 
-           .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-           .portfolio-grid { grid-template-columns: 1fr; gap: 15px; } /* Stack items */
+            .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
+            .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; }
+            .contact-form input, .contact-form textarea { padding: 12px 15px; font-size: 0.95rem;}
+            .contact-form button { padding: 12px 25px; font-size: 1rem; }
 
-           .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+            .site-footer { bottom: 20px; }
+            .site-footer .copyright { font-size: 0.75rem; }
+            .site-footer .social-icons { gap: 15px; }
+            .site-footer .social-icons a { font-size: 1.1rem; }
 
-           .scroll-indicator { bottom: 25px; font-size: 0.75rem;}
-           .scroll-arrow { width: 16px; height: 16px; margin-top: 10px;}
+            section { padding-left: 20px; padding-right: 20px; padding-top: var(--header-height); }
+            section#section-4 { padding-bottom: 18vh; } /* Adjust contact padding */
+        }
 
-           section { padding-left: 15px; padding-right: 15px; padding-top: var(--header-height);}
-       }
+        @media (max-width: 480px) {
+            :root { --header-height: 65px; }
+            .site-header { padding: 0 15px; }
+            .logo-link { font-size: 1.4rem; }
+            .header-nav ul { gap: 15px; }
+            .header-nav a { font-size: 0.9rem; }
+
+            .nav-dots { right: 15px; }
+
+            .hero-title { font-size: clamp(2rem, 8vw, 3rem); }
+            .hero-tagline { font-size: clamp(0.9rem, 4vw, 1.1rem); }
+
+            .philosophy-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+            .philosophy-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.8; }
+
+            .services-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+            .service-card { padding: 25px 20px; }
+            .service-card-title { font-size: 1.1rem; }
+            .service-card-description { font-size: 0.9rem; }
+
+            .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+            .portfolio-grid { grid-template-columns: 1fr; gap: 15px; }
+
+            .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+
+            .scroll-indicator { bottom: 25px; font-size: 0.75rem;}
+            .scroll-arrow { width: 16px; height: 16px; margin-top: 10px;}
+
+            section { padding-left: 15px; padding-right: 15px; padding-top: var(--header-height); }
+            section#section-4 { padding-bottom: 15vh; } /* Adjust contact padding */
+        }
     </style>
 </head>
 <body data-current-theme="dark">
 
     <header class="site-header" id="site-header">
         <div class="header-logo">
-            <a href="#section-0" class="logo-link" aria-label="LAYA Home">LAYA</a>
+            <a href="#section-0" class="logo-link" aria-label="laya home">laya home</a>
         </div>
 
         <nav class="header-nav">
             <ul>
-                <li><a href="#section-0" aria-label="Home"><i class="fas fa-home"></i><span class="nav-label">Home</span></a></li>
-                <li><a href="#section-1" aria-label="About"><i class="fas fa-info-circle"></i><span class="nav-label">About</span></a></li>
-                <li><a href="#section-2" aria-label="Portfolio"><i class="fas fa-drafting-compass"></i><span class="nav-label">Portfolio</span></a></li>
-                <li><a href="#section-3" aria-label="Contact"><i class="fas fa-envelope"></i><span class="nav-label">Contact</span></a></li>
+                <li><a href="#section-0" aria-label="Domů"><i class="fas fa-home"></i><span class="nav-label">Domů</span></a></li>
+                <li><a href="#section-1" aria-label="O nás"><i class="fas fa-info-circle"></i><span class="nav-label">O nás</span></a></li>
+                <li><a href="#section-2" aria-label="Služby"><i class="fas fa-concierge-bell"></i><span class="nav-label">Služby</span></a></li>
+                <li><a href="#section-3" aria-label="Portfolio"><i class="fas fa-drafting-compass"></i><span class="nav-label">Portfolio</span></a></li>
+                <li><a href="#section-4" aria-label="Kontakt"><i class="fas fa-envelope"></i><span class="nav-label">Kontakt</span></a></li>
             </ul>
         </nav>
     </header>
@@ -664,71 +809,110 @@
       <div class="nav-dot" data-section="1"></div>
       <div class="nav-dot" data-section="2"></div>
       <div class="nav-dot" data-section="3"></div>
+      <div class="nav-dot" data-section="4"></div>
     </div>
 
     <section class="hero-section" id="section-0" data-theme="dark">
-        <div class="hero-image-stack">
-            <img src="interior_1.png" alt="Modern Interior Design 1" class="hero-image" id="hero-img-1">
-            <img src="interior_2.png" alt="Classic Interior Design 2" class="hero-image" id="hero-img-2">
-            <img src="interior_3.png" alt="Innovative Interior Design 3" class="hero-image" id="hero-img-3">
+        <div class="hero-image-effect-container">
+            <div class="hero-image-layer" id="hero-layer-1"></div>
+            <div class="hero-image-layer" id="hero-layer-2"></div>
+            <div class="hero-image-layer" id="hero-layer-3"></div>
         </div>
          <div class="hero-content">
-             <h1 class="hero-title">LAYA Architecture</h1>
-             <p class="hero-tagline">Designing spaces that inspire. Blending innovation with timeless tradition.</p>
+             <h1 class="hero-title">laya home</h1>
+             <p class="hero-tagline">Tvoříme domovy s příběhem, kde se snoubí design, funkčnost a vaše osobnost.</p>
          </div>
         <div class="scroll-indicator">
-            <span>Explore LAYA</span>
+            <span>Objevujte s námi</span>
             <div class="scroll-arrow"></div>
         </div>
     </section>
 
-    <section class="about-section" id="section-1" data-theme="dark">
-        <div class="about-content-wrapper">
-            <h2 class="about-title">Our Philosophy</h2>
-            <div class="about-text">
-                <p>At LAYA, we believe architecture is more than just buildings; it's about crafting experiences and shaping environments. Our approach is rooted in a deep respect for <strong>tradition and context</strong>, while constantly pushing the boundaries of <strong>design innovation</strong>.</p>
-                <p>We work closely with our clients, understanding their vision and needs to create spaces that are not only aesthetically stunning but also functional, sustainable, and enduring. From initial concept to final construction, <strong>collaboration and meticulous attention to detail</strong> are at the heart of everything we do.</p>
-                 <p>Let us help you bring your vision to life.</p>
+    <section class="philosophy-section" id="section-1" data-theme="light"> <div class="philosophy-content-wrapper">
+            <div class="philosophy-text-content">
+                <h2 class="philosophy-title">Naše filozofie</h2>
+                <div class="philosophy-text">
+                    <p>Každý domov vypráví svůj jedinečný příběh. Pod značkou laya home pomáhám vytvářet domovy, které nejsou jen esteticky působivé a funkční, ale především odrážejí osobnost a životní styl svých majitelů.</p>
+                    <p>Ať už jde o rekonstrukci starého venkovského stavení, návrh rodinného domu nebo proměnu interiéru, vždy hledám harmonii mezi tradicí, estetikou a současnými potřebami.</p>
+                    <p>Mým cílem je, aby prostor sloužil vám – ne vy jemu. Domov by měl být přirozeným pokračováním vašeho života, respektovat vaše zvyky, potřeby i sny. Ke každému projektu proto přistupuji individuálně, s maximální pečlivostí a respektem k místu i jeho historii.</p>
+                    <p>Spolupráce s architektem Vám přinese nové úhly pohledu a promyšlená řešení, která vám budou dělat radost po mnoho let. Každý projekt je pro mne jedinečný, a proto kladu důraz na osobní přístup, vzájemnou důvěru a pochopení Vašich potřeb.</p>
+                    <p>Pokud hledáte nadčasovou architekturu, která bude skutečným odrazem vaší individuality, ráda vám pomohu proměnit vaše představy a sny ve skutečnost, vytvoříme společně skutečný domov, ve kterém se budete cítit dobře každý den.</p>
+                 </div>
+            </div>
+            <div class="philosophy-image-container">
+                <img src="portrait.jpg" alt="Portrét architekta Laya" class="philosophy-portrait">
             </div>
         </div>
     </section>
 
-    <section class="portfolio-section" id="section-2" data-theme="light">
-        <div class="portfolio-preview-container">
-            <h2 class="portfolio-title">Featured Work</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item-placeholder">Project Alpha</div>
-                <div class="portfolio-item-placeholder">Villa Beta</div>
-                <div class="portfolio-item-placeholder">Urban Complex Gamma</div>
-                <div class="portfolio-item-placeholder">Cultural Center Delta</div>
-                <div class="portfolio-item-placeholder">Residence Epsilon</div>
-                <div class="portfolio-item-placeholder">Commercial Hub Zeta</div>
+    <section class="services-section" id="section-2" data-theme="dark"> <div class="services-container">
+            <h2 class="services-title">Naše služby</h2>
+            <div class="services-grid">
+                <div class="service-card" data-side="left">
+                    <div class="service-icon"><i class="fas fa-pencil-ruler"></i></div>
+                    <h3 class="service-card-title">Architektonická studie</h3>
+                    <p class="service-card-description">Zhmotnění vašich představ do prvotního návrhu, ověření možností pozemku a definování konceptu.</p>
+                </div>
+                 <div class="service-card" data-side="right">
+                    <div class="service-icon"><i class="fas fa-drafting-compass"></i></div>
+                    <h3 class="service-card-title">Projektová dokumentace</h3>
+                    <p class="service-card-description">Detailní zpracování projektu pro stavební povolení a realizaci stavby, včetně technických řešení.</p>
+                </div>
+                <div class="service-card" data-side="left">
+                    <div class="service-icon"><i class="fas fa-couch"></i></div>
+                    <h3 class="service-card-title">Návrh interiéru</h3>
+                    <p class="service-card-description">Vytvoření funkčního a estetického interiéru na míru, od dispozice po výběr materiálů a nábytku.</p>
+                </div>
+                 <div class="service-card" data-side="right">
+                    <div class="service-icon"><i class="fas fa-hard-hat"></i></div>
+                    <h3 class="service-card-title">Autorský dozor</h3>
+                    <p class="service-card-description">Dohled nad průběhem stavby, zajištění souladu realizace s projektem a řešení detailů na stavbě.</p>
+                </div>
+                 <div class="service-card" data-side="left">
+                    <div class="service-icon"><i class="fas fa-comments"></i></div>
+                    <h3 class="service-card-title">Konzultace</h3>
+                    <p class="service-card-description">Poradenství v oblasti architektury, designu, výběru pozemku nebo dílčích fází vašeho projektu.</p>
+                </div>
+                 <div class="service-card" data-side="right">
+                    <div class="service-icon"><i class="fas fa-paint-roller"></i></div>
+                    <h3 class="service-card-title">Rekonstrukce</h3>
+                    <p class="service-card-description">Citlivé návrhy rekonstrukcí starších objektů s respektem k historii a propojením s moderními prvky.</p>
+                </div>
             </div>
-            <a href="#portfolio-full" class="portfolio-cta">Explore Full Portfolio</a>
-            </div>
+        </div>
     </section>
 
-    <section class="contact-section" id="section-3" data-theme="light">
+    <section class="portfolio-section" id="section-3" data-theme="light">
+        <div class="portfolio-preview-container">
+            <h2 class="portfolio-title">Ukázky práce</h2> <div class="portfolio-grid">
+                <div class="portfolio-item-placeholder">Projekt Alfa</div>
+                <div class="portfolio-item-placeholder">Vila Beta</div>
+                <div class="portfolio-item-placeholder">Městský Komplex Gama</div>
+                <div class="portfolio-item-placeholder">Kulturní Centrum Delta</div>
+                <div class="portfolio-item-placeholder">Rezidence Epsilon</div>
+                <div class="portfolio-item-placeholder">Komerční Centrum Zeta</div>
+            </div>
+            <a href="#portfolio-full" class="portfolio-cta">Prohlédnout celé portfolio</a>
+        </div>
+    </section>
+
+    <section class="contact-section" id="section-4" data-theme="light">
          <div class="contact-form-container">
-             <h2 class="contact-title">Get In Touch</h2>
-             <form class="contact-form" action="#" method="POST"> <div class="form-group">
-                     <label for="name">Name</label>
-                     <input type="text" id="name" name="name" required placeholder="Your Full Name">
+             <h2 class="contact-title">Napište nám</h2> <form class="contact-form" action="#" method="POST">
+                 <div class="form-group">
+                     <label for="name">Jméno</label> <input type="text" id="name" name="name" required placeholder="Vaše celé jméno">
                  </div>
                  <div class="form-group">
                      <label for="email">Email</label>
-                     <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                     <input type="email" id="email" name="email" required placeholder="vas.email@priklad.cz">
                  </div>
                  <div class="form-group">
-                     <label for="subject">Subject</label>
-                     <input type="text" id="subject" name="subject" placeholder="Briefly, what's this about?">
+                     <label for="subject">Předmět</label> <input type="text" id="subject" name="subject" placeholder="Stručně, o co se jedná?">
                  </div>
                  <div class="form-group">
-                     <label for="message">Message</label>
-                     <textarea id="message" name="message" required placeholder="Tell us more about your project or inquiry..."></textarea>
+                     <label for="message">Zpráva</label> <textarea id="message" name="message" required placeholder="Řekněte nám více o vašem projektu nebo dotazu..."></textarea>
                  </div>
-                 <button type="submit">Send Message</button>
-             </form>
+                 <button type="submit">Odeslat zprávu</button> </form>
          </div>
 
         <footer class="site-footer">
@@ -736,10 +920,8 @@
                 <a href="#" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="#" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#" aria-label="Pinterest" title="Pinterest"><i class="fab fa-pinterest"></i></a>
-                <a href="#" aria-label="Behance" title="Behance"><i class="fab fa-behance"></i></a>
-            </div>
-            <p class="copyright">&copy; <span id="copyright-year"></span> LAYA Architecture Studio. All rights reserved.</p>
-        </footer>
+                <a href="#" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a> </div>
+            <p class="copyright">&copy; <span id="copyright-year"></span> laya home. Všechna práva vyhrazena.</p> </footer>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -747,7 +929,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 
     <script>
-      // --- JavaScript Code ---
       gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
         // --- Initialize Hero Section Animations ---
@@ -755,177 +936,215 @@
             const heroSection = document.querySelector('.hero-section');
             if (!heroSection) return;
 
-            const images = gsap.utils.toArray('.hero-image');
+            const layers = gsap.utils.toArray('.hero-image-layer');
             const content = document.querySelector('.hero-content');
 
-            // Initial setup
-            gsap.set(images, { opacity: 0, scale: 1.1 });
+            gsap.set(layers, { opacity: 0, scale: 1.1 });
             gsap.set(content, { opacity: 0, y: 30 });
 
-            // Create a timeline for the image sequence and content reveal
+            // Timeline for the main hero animation (pinning + content fade)
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: heroSection,
                     start: "top top",
-                    end: "+=200%", // Controls how long the pinning lasts (adjust as needed)
-                    scrub: 1,     // Smooth scrubbing effect
-                    pin: true,    // Pin the hero section while animating
-                   // markers: true, // For debugging
-                    anticipatePin: 1 // Helps prevent jumps
+                    end: "+=150%", // Adjust duration of pin
+                    scrub: 1,
+                    pin: true,
+                    anticipatePin: 1
                 }
             });
 
-            // Fade in the first image
-            tl.to(images[0], { opacity: 1, scale: 1, duration: 1, ease: 'power2.inOut' });
+            // Fade in the first layer and content
+            tl.to(layers[0], { opacity: 1, scale: 1, duration: 1, ease: 'power2.inOut' })
+              .to(content, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, "<0.3"); // Content appears slightly after bg
 
-            // Fade in the content slightly after the first image starts appearing
-            tl.to(content, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, ">-0.5"); // Overlap slightly
+            // Crossfade effect for subsequent layers within the pinned duration
+             if (layers.length > 1) {
+                 tl.to(layers[1], { opacity: 1, scale: 1, duration: 1, ease: 'power2.inOut' }, ">-0.2"); // Fade in layer 2 overlapping slightly
+                 tl.to(layers[0], { opacity: 0, duration: 1, ease: 'power1.inOut' }, "<");          // Fade out layer 1 at the same time
+             }
+             if (layers.length > 2) {
+                 tl.to(layers[2], { opacity: 1, scale: 1, duration: 1, ease: 'power2.inOut' }, ">-0.2"); // Fade in layer 3
+                 tl.to(layers[1], { opacity: 0, duration: 1, ease: 'power1.inOut' }, "<");          // Fade out layer 2
+             }
 
-            // Sequence the next images
-            if (images.length > 1) {
-                tl.to(images[0], { opacity: 0, duration: 0.5, ease: 'power1.in' }, "+=1"); // Fade out first image after a pause
-                tl.to(images[1], { opacity: 1, scale: 1, duration: 1, ease: 'power2.inOut' }, "<"); // Fade in second image simultaneously
-            }
-            if (images.length > 2) {
-                tl.to(images[1], { opacity: 0, duration: 0.5, ease: 'power1.in' }, "+=1"); // Fade out second image
-                tl.to(images[2], { opacity: 1, scale: 1, duration: 1, ease: 'power2.inOut' }, "<"); // Fade in third image
-            }
+            // --- Parallax effect for layers (independent of the main timeline) ---
+            // Moves layers at different speeds when scrolling *past* the hero section
+            layers.forEach((layer, index) => {
+                let movement = (layers.length - index) * 15; // Layer 1 moves most, layer 3 least
+                gsap.to(layer, {
+                    yPercent: movement,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: heroSection,
+                        start: "top top", // Start parallax immediately
+                        // End parallax effect after scrolling down a bit more than the pin duration
+                        end: "bottom+=100% top",
+                        scrub: true // Smooth parallax effect tied to scroll
+                    }
+                });
+            });
 
-             // Optional: Add a subtle parallax effect to the content as you scroll through the pin
+             // Optional: Parallax effect for the content as well
              gsap.to(content, {
-                yPercent: -30, // Move content up slightly
-                ease: "none",
+                 yPercent: -20, // Move content up slower than layers
+                 ease: "none",
+                 scrollTrigger: {
+                     trigger: heroSection,
+                     start: "top top",
+                     end: "bottom top",
+                     scrub: true
+                 }
+             });
+        }
+
+        // --- Initialize Philosophy Section Animations ---
+        function initPhilosophy() {
+            const section = document.querySelector('.philosophy-section');
+            const wrapper = section.querySelector('.philosophy-content-wrapper');
+            const textContent = section.querySelector('.philosophy-text-content');
+            const imageContainer = section.querySelector('.philosophy-image-container');
+
+            if (!section || !wrapper || !textContent || !imageContainer) return;
+
+            gsap.timeline({
                 scrollTrigger: {
-                    trigger: heroSection,
-                    start: "top top",
-                    end: "bottom top", // End when the bottom of the hero reaches the top
-                    scrub: true
+                    trigger: section,
+                    start: "top 65%", // Start animation earlier
+                    toggleActions: "play none none reverse"
                 }
-            });
+            })
+            .to(wrapper, { opacity: 1, duration: 0.3 }) // Fade in wrapper first
+            .to(textContent, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' }, ">-0.1") // Slide in text
+            .to(imageContainer, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' }, "<"); // Slide in image concurrently
         }
 
 
-       // --- Initialize About Section Animations ---
-        function initAbout() {
-            const aboutSection = document.querySelector('.about-section');
-            const aboutContent = document.querySelector('.about-content-wrapper');
-            if (!aboutSection || !aboutContent) return;
+       // --- Initialize Services Section Animations ---
+        function initServices() {
+            const section = document.querySelector('.services-section');
+            const title = section.querySelector('.services-title');
+            const cards = gsap.utils.toArray('.service-card');
 
-            gsap.fromTo(aboutContent,
-                { opacity: 0, y: 50 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: aboutSection,
-                        start: "top 70%", // Start animation when 70% of section is visible
-                        toggleActions: "play none none reverse" // Play on enter, reverse on leave back
-                    }
-                }
-            );
+            if (!section || !title || !cards.length) return;
+
+             // Animate Title
+             gsap.from(title, {
+                 opacity: 0,
+                 y: -30,
+                 duration: 0.8,
+                 ease: 'power2.out',
+                 scrollTrigger: {
+                     trigger: title,
+                     start: 'top 80%',
+                     toggleActions: 'play none none reverse',
+                 }
+             });
+
+            // Animate Cards
+            cards.forEach(card => {
+                 const side = card.dataset.side || 'left'; // Get side from data attribute
+                 const xStart = side === 'left' ? -50 : 50; // Start position based on side
+
+                 gsap.from(card, {
+                     opacity: 0,
+                     x: xStart,
+                     duration: 0.7,
+                     ease: 'power2.out',
+                     scrollTrigger: {
+                         trigger: card,
+                         start: 'top 85%', // Trigger cards as they enter viewport
+                         toggleActions: 'play none none reverse',
+                         // markers: true, // For debugging card triggers
+                     }
+                 });
+            });
         }
 
         // --- Initialize Portfolio Preview Animations ---
         function initPortfolio() {
-            const portfolioSection = document.querySelector('.portfolio-section');
-            const container = document.querySelector('.portfolio-preview-container');
-            const title = document.querySelector('.portfolio-title');
-            const items = gsap.utils.toArray('.portfolio-item-placeholder');
-            const cta = document.querySelector('.portfolio-cta');
+            const portfolioSection = document.querySelector('#section-3'); // Update ID
+            if (!portfolioSection) return;
 
-            if (!portfolioSection || !container || !title || !items.length || !cta) return;
+            const container = portfolioSection.querySelector('.portfolio-preview-container');
+            const title = portfolioSection.querySelector('.portfolio-title');
+            const items = gsap.utils.toArray('.portfolio-item-placeholder', portfolioSection);
+            const cta = portfolioSection.querySelector('.portfolio-cta');
+
+            if (!container || !title || !items.length || !cta) {
+                console.warn("Portfolio elements not found in #section-3");
+                return;
+            }
 
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: portfolioSection,
-                    start: "top 65%", // Start animation a bit earlier
+                    start: "top 65%",
                     toggleActions: "play none none reverse"
                 }
             });
 
-             // Animate container fade in
             tl.to(container, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
-             // Animate title (can be part of container or separate)
-             // If animating separately:
-             // tl.from(title, { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, "<"); // Start slightly after container
-
-            // Stagger animation for portfolio items
-            tl.to(items, {
+              .to(items, {
                 opacity: 1,
                 scale: 1,
                 duration: 0.6,
-                ease: 'back.out(1.4)', // Bouncier effect
-                stagger: 0.15 // Delay between each item animation
-            }, "-=0.3"); // Overlap start slightly with title animation
-
-            // Animate CTA button
-            tl.to(cta, {
+                ease: 'back.out(1.4)',
+                stagger: 0.15
+              }, "-=0.3")
+              .to(cta, {
                 opacity: 1,
                 y: 0,
                 duration: 0.7,
                 ease: 'power2.out'
-            }, "-=0.5"); // Overlap start
+              }, "-=0.5");
         }
 
 
         // --- Initialize Contact Form Animations ---
         function initContact() {
-            const contactSection = document.querySelector('.contact-section');
-            const container = document.querySelector('.contact-form-container');
-             const title = container.querySelector('.contact-title');
-             const labels = gsap.utils.toArray('.contact-form label', container);
-             const inputs = gsap.utils.toArray('.contact-form input, .contact-form textarea', container);
-             const button = container.querySelector('.contact-form button');
+            const contactSection = document.querySelector('#section-4'); // Update ID
+            if (!contactSection) return;
 
-            if (!contactSection || !container || !title || !labels.length || !inputs.length || !button) return;
+            const container = contactSection.querySelector('.contact-form-container');
+            if (!container) {
+                console.warn("Contact form container not found in #section-4");
+                return;
+            }
+            const title = container.querySelector('.contact-title');
+            const labels = gsap.utils.toArray('.contact-form label', container);
+            const inputs = gsap.utils.toArray('.contact-form input, .contact-form textarea', container);
+            const button = container.querySelector('.contact-form button');
+
+            if (!title || !labels.length || !inputs.length || !button) {
+                 console.warn("Contact form elements missing within container.");
+                 // Allow container animation even if inner elements are missing
+                 gsap.to(container, {
+                     opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+                     scrollTrigger: { trigger: contactSection, start: "top 60%", toggleActions: "play none none reverse" }
+                 });
+                 return;
+             }
 
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: contactSection,
-                    start: "top 60%", // Adjust trigger point
+                    start: "top 60%",
                     toggleActions: "play none none reverse"
                 }
             });
 
-            // Animate container fade in
-            tl.to(container, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
-
-             // Animate title (optional, could fade with container)
-            // tl.from(title, { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out' }, "<0.2"); // Slightly delayed
-
-            // Stagger labels and inputs
-            tl.to(labels, {
-                opacity: 1,
-                x: 0,
-                duration: 0.5,
-                ease: 'power2.out',
-                stagger: 0.1
-            }, "-=0.5"); // Overlap with container animation
-
-            tl.to(inputs, {
-                opacity: 1,
-                x: 0,
-                duration: 0.5,
-                ease: 'power2.out',
-                stagger: 0.1
-            }, "<0.1"); // Start shortly after labels
-
-            // Animate button
-            tl.to(button, {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: 'back.out(1.7)'
-            }, "-=0.3"); // Overlap slightly
+            tl.to(container, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+              .to(labels, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, "-=0.5")
+              .to(inputs, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, "<0.1")
+              .to(button, { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.7)' }, "-=0.3");
         }
 
 
-      // --- Initialize Header Logic (for scroll links) ---
+      // --- Initialize Header Logic ---
       function initHeader() {
           const header = document.getElementById('site-header');
-          if (!header) { console.warn("Site header not found."); return; }
+          if (!header) return;
 
           const headerLinks = document.querySelectorAll('.site-header a[href^="#"]');
           headerLinks.forEach(anchor => {
@@ -938,7 +1157,6 @@
                           const headerHeight = header.offsetHeight;
                           gsap.to(window, {
                               duration: 1.2,
-                              // Correct scrollTo syntax: use target element directly
                               scrollTo: { y: target, offsetY: headerHeight },
                               ease: "power2.inOut"
                           });
@@ -950,20 +1168,20 @@
 
       // --- Initialize Footer Animation ---
       function initFooter() {
-          // Updated selector to target footer within section-3
-          const footer = document.querySelector('#section-3 .site-footer');
+          // Updated selector to target footer within section-4
+          const footer = document.querySelector('#section-4 .site-footer');
           const copyrightYearSpan = document.getElementById('copyright-year');
 
-          if (!footer) { console.warn("Site footer inside #section-3 not found."); return; }
+          if (!footer) { console.warn("Site footer inside #section-4 not found."); return; }
           if(copyrightYearSpan) { copyrightYearSpan.textContent = new Date().getFullYear(); }
           else { console.warn("Copyright year span not found."); }
 
           gsap.to(footer, {
               opacity: 1, y: 0, duration: 1.0, ease: 'power2.out',
               scrollTrigger: {
-                  // Updated trigger to section-3
-                  trigger: '#section-3',
-                  start: "center bottom-=10%", // Trigger a bit earlier
+                  // Updated trigger to section-4
+                  trigger: '#section-4',
+                  start: "center bottom-=10%",
                   toggleActions: "play none none reverse",
                   id: "footer-reveal"
               }
@@ -977,21 +1195,18 @@
           const body = document.body;
           const header = document.getElementById('site-header');
 
-           // Filter out sections that might exist structurally but have no corresponding dot
-           const numDots = navDots.length;
-           const sectionsWithDots = Array.from(sections).filter((sec, index) => index < numDots);
-
+          const numDots = navDots.length;
+          // Ensure we only consider sections that should have a dot (0 to numDots-1)
+          const sectionsWithDots = Array.from(sections).filter((sec, index) => index < numDots);
 
           if (navDots.length === 0 || sectionsWithDots.length === 0 || !header) {
               console.warn("Nav dots, corresponding sections, or header not found."); return;
           }
-           if (navDots.length !== sectionsWithDots.length) {
-               console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sectionsWithDots.length} corresponding sections found.`);
-               // Continue cautiously, might indicate an issue
+          if (navDots.length !== sectionsWithDots.length) {
+               // This might happen if there are extra <section> tags without IDs like section-N
+               console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sectionsWithDots.length} corresponding sections (section-0 to section-${numDots - 1}) found.`);
            }
 
-
-          // Function to get the CURRENT header height (accounts for responsiveness)
           const getHeaderHeight = () => header.offsetHeight;
 
           navDots.forEach(dot => {
@@ -1002,7 +1217,7 @@
                    if (targetSection) {
                       gsap.to(window, {
                           duration: 1.2,
-                          scrollTo: { y: targetSection, offsetY: getHeaderHeight() }, // Use dynamic height
+                          scrollTo: { y: targetSection, offsetY: getHeaderHeight() },
                           ease: "power2.inOut"
                        });
                    } else { console.error(`Target section #section-${sectionIndex} not found.`); }
@@ -1010,18 +1225,15 @@
           });
 
           sectionsWithDots.forEach((section, index) => {
-              const theme = section.getAttribute('data-theme') || 'dark';
+              const theme = section.getAttribute('data-theme') || 'dark'; // Default to dark if not set
               ScrollTrigger.create({
                   trigger: section,
-                  // Use functions for start/end that calculate based on CURRENT header height
                   start: () => `top top+=${getHeaderHeight()}px`,
-                  // Use bottom bottom for the very last section only
-                   end: index === sectionsWithDots.length - 1 ? "bottom bottom" : () => `bottom top+=${getHeaderHeight()}px`,
+                  end: index === sectionsWithDots.length - 1 ? "bottom bottom" : () => `bottom top+=${getHeaderHeight()}px`,
                   id: `section-nav-${index}`,
-                 // markers: true, // Uncomment for debugging trigger positions
                   onEnter: () => updateActiveState(index, theme),
                   onEnterBack: () => updateActiveState(index, theme),
-                  invalidateOnRefresh: true // Recalculate start/end on resize/refresh
+                  invalidateOnRefresh: true
               });
           });
 
@@ -1033,10 +1245,12 @@
               const currentBodyTheme = body.classList.contains('on-light-section') ? 'light' : 'dark';
               if (activeTheme !== currentBodyTheme) {
                  body.classList.toggle('on-light-section', activeTheme === 'light');
+                 // Optional: Add a class for transition styling
+                 // body.classList.add('theme-changing');
+                 // setTimeout(() => body.classList.remove('theme-changing'), 400); // Match CSS transition duration
               }
           }
 
-          // --- Scroll Indicator Logic ---
           let scrollIndicatorState = { scrolled: window.scrollY > 50 };
           body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
           const scrollListener = () => {
@@ -1048,47 +1262,44 @@
           };
           window.addEventListener('scroll', scrollListener, { passive: true });
 
-          // --- Initial State Check ---
           setTimeout(() => {
              let initialIndex = 0;
              let initialTheme = 'dark';
              const currentHeaderHeight = getHeaderHeight();
+             const viewportCenter = currentHeaderHeight + (window.innerHeight - currentHeaderHeight) / 2;
+
              sectionsWithDots.forEach((section, index) => {
                  const rect = section.getBoundingClientRect();
-                  // Check if the section is the most visible one near the top
-                  // A section is considered active if its top is at or above the header bottom,
-                  // and its bottom is below the header top + a threshold (e.g., 1/3 viewport height)
-                  const threshold = window.innerHeight / 3;
-                 if (rect.top <= currentHeaderHeight && rect.bottom >= currentHeaderHeight + threshold) {
-                     initialIndex = index;
-                     initialTheme = section.getAttribute('data-theme') || 'dark';
-                 } else if (rect.top <= currentHeaderHeight && index === 0) { // Fallback for very top
-                    initialIndex = index;
-                    initialTheme = section.getAttribute('data-theme') || 'dark';
-                 }
+                 // Check if the section overlaps the center of the viewport below the header
+                  if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
+                       initialIndex = index;
+                       initialTheme = section.getAttribute('data-theme') || 'dark';
+                   } else if (rect.top <= currentHeaderHeight && index === 0 && initialIndex === 0) { // Fallback for very top section if center isn't matched
+                       initialIndex = index;
+                       initialTheme = section.getAttribute('data-theme') || 'dark';
+                   }
              });
              updateActiveState(initialIndex, initialTheme);
              scrollIndicatorState.scrolled = window.scrollY > 50;
              body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
-             ScrollTrigger.refresh(); // Refresh triggers after initial check
+             ScrollTrigger.refresh();
           }, 150);
         }
 
-      // --- Initialize All Animations & Functionality ---
+      // --- Initialize All ---
       function initAll() {
-        console.log("Initializing LAYA animations...");
+        console.log("Initializing laya home animations...");
         initHeader();
-        initNavigation(); // Handles dots, themes, scroll indicator, initial state
+        initNavigation(); // Must run early for calculations
         initFooter();
 
-        // Initialize new section animations
         initHero();
-        initAbout();
+        initPhilosophy();
+        initServices();
         initPortfolio();
         initContact();
 
-
-        // General smooth scroll for non-header/non-dot links (like the portfolio button)
+        // General smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
          if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots')) {
            anchor.addEventListener('click', function(e) {
@@ -1097,7 +1308,7 @@
                try {
                    const target = document.querySelector(href);
                    const header = document.getElementById('site-header');
-                   const offset = header ? header.offsetHeight : 75; // Use current header height
+                   const offset = header ? header.offsetHeight : 75;
                    if (target) {
                        e.preventDefault();
                        gsap.to(window, {
@@ -1105,37 +1316,30 @@
                            scrollTo: { y: target, offsetY: offset },
                            ease: "power2.inOut"
                         });
-                    } else {
-                        console.warn("Smooth scroll target not found:", href);
-                        // Allow default behavior if target isn't on this page (e.g., link to another page)
-                        // Or handle differently if '#portfolio-full' should open a modal etc.
-                    }
+                    } else { console.warn("Smooth scroll target not found:", href); }
                } catch (error) { console.warn("Could not find target for anchor:", href, error); }
              } else if (href === "#") { e.preventDefault(); }
            });
          }
         });
 
-        // Refresh ScrollTrigger after all setup and potential layout shifts
         setTimeout(() => {
             ScrollTrigger.refresh();
             console.log("ScrollTrigger refreshed after init.");
         }, 250);
 
-        // Handle resize: Refresh ScrollTrigger
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
                 console.log("Resizing - Refreshing ScrollTrigger...");
-                ScrollTrigger.refresh(); // This will recalculate header height dependent triggers
+                ScrollTrigger.refresh();
             }, 250);
         });
 
-        console.log("LAYA Initialization sequence complete.");
+        console.log("laya home Initialization complete.");
       }
 
-      // Start everything on window load
        window.addEventListener('load', initAll);
 
     </script>
