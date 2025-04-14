@@ -226,7 +226,9 @@
         position: relative;
         overflow: hidden;
       }
-      .hero-content { /* Container for tagline */
+
+      /* --- HERO CONTENT (Glassmorphism Update) --- */
+      .hero-content {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -234,22 +236,36 @@
         z-index: 2;
         text-align: center;
         color: var(--text-light);
-        opacity: 0;
+        /* opacity: 0;  <- Set by GSAP */
         width: 90%;
-        max-width: 650px; /* Slightly adjusted max-width */
-        background-color: rgba(0, 0, 0, 0.45);
-        padding: clamp(15px, 3vw, 25px) clamp(20px, 4vw, 35px); /* Adjusted padding */
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        max-width: 680px; /* Slightly wider */
+        background-color: rgba(25, 25, 25, 0.5); /* Adjusted transparency */
+        padding: clamp(20px, 4vw, 35px) clamp(25px, 5vw, 45px); /* Slightly more padding */
+        border-radius: 12px; /* Slightly more rounded */
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25); /* Softer shadow */
+        border: 1px solid rgba(255, 255, 255, 0.12); /* Subtle border */
+        backdrop-filter: blur(10px); /* Increased blur */
+        -webkit-backdrop-filter: blur(10px); /* Safari prefix */
+        opacity: 0; /* Initially hidden, animated by JS */
       }
-      /* .hero-title CSS rule removed */
+
       .hero-tagline {
-        font-size: clamp(1rem, 2vw, 1.5rem);
+        font-size: clamp(1.1rem, 2.2vw, 1.6rem); /* Slightly larger */
         font-weight: 300;
-        margin: 0 auto; /* Center if needed */
-        line-height: 1.6;
+        margin: 0 auto;
+        line-height: 1.7; /* Slightly increased line height */
         font-family: 'Poppins', sans-serif;
+        overflow: hidden; /* Helps contain spans during animation */
       }
+
+      /* --- TAGLINE WORD STYLES (for Animation) --- */
+      .tagline-word {
+          display: inline-block; /* Needed for transform */
+          opacity: 0; /* Initially hidden */
+          transform: translateY(25px); /* Start slightly lower */
+          margin: 0 2px; /* Tiny space between words if needed */
+      }
+
       .hero-image-stack {
           position: absolute;
           top: 0;
@@ -630,59 +646,60 @@
            .about-text-container { margin-right: 0; margin-top: 30px; text-align: center; }
            .about-portrait { max-width: 250px; margin-bottom: 20px; }
            .scroll-indicator { bottom: 8vh; }
+           .hero-content { max-width: 85%; } /* Adjust hero content width */
        }
 
-        @media (max-width: 768px) {
-            :root { --header-height: 70px; }
-            .site-header { padding: 0 20px; }
-            .logo-link img { height: 40px; }
-            .header-nav ul { gap: 20px; }
-            .header-nav a { font-size: 1rem; }
-            .nav-label { display: none; }
-            .nav-dots { right: 20px; }
-            .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
-            section { padding-left: 20px; padding-right: 20px; }
-             section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
-            .portfolio-grid { gap: 20px; }
-            .portfolio-item-placeholder { font-size: 1rem; }
-            .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
-            .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; }
-            .contact-form input, .contact-form textarea { padding: 12px 15px; font-size: 0.95rem;}
-            .contact-form button { padding: 12px 25px; font-size: 1rem; }
-            .site-footer { bottom: 20px; }
-            .site-footer .copyright { font-size: 0.75rem; }
-            .site-footer .social-icons { gap: 15px; }
-            .site-footer .social-icons a { font-size: 1.1rem; }
-            .about-portrait { max-width: 200px; }
-            .services-grid { grid-template-columns: 1fr; gap: 25px; }
-            .services-title { margin-bottom: 40px; }
-            .service-item { padding: 30px; }
-            .hero-content { max-width: 90%; padding: clamp(15px, 3vw, 25px) clamp(20px, 4vw, 30px); } /* Adjust for smaller screens */
-        }
-
-         @media (max-width: 480px) {
-             :root { --header-height: 65px; }
-             .site-header { padding: 0 15px; }
-             .logo-link img { height: 35px; }
-             .header-nav ul { gap: 15px; }
-             .header-nav a { font-size: 0.9rem; }
-             .nav-dots { right: 15px; }
-             /* Hero title removed */
-             .hero-tagline { font-size: clamp(0.9rem, 4vw, 1.1rem); }
-             .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-             .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
-             .about-portrait { max-width: 150px; }
-             .services-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-             .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-             .portfolio-grid { grid-template-columns: 1fr; gap: 15px; }
-             .portfolio-item-placeholder { font-size: 0.9rem; }
-             .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
-             .scroll-indicator { bottom: 6vh; font-size: 0.75rem;}
-             section { padding-left: 15px; padding-right: 15px; }
-             section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
-             .contact-form-container { padding: 25px 15px; }
-             .hero-content { max-width: 85%; padding: 15px 20px; }
+         @media (max-width: 768px) {
+             :root { --header-height: 70px; }
+             .site-header { padding: 0 20px; }
+             .logo-link img { height: 40px; }
+             .header-nav ul { gap: 20px; }
+             .header-nav a { font-size: 1rem; }
+             .nav-label { display: none; }
+             .nav-dots { right: 20px; }
+             .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
+             section { padding-left: 20px; padding-right: 20px; }
+               section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
+             .portfolio-grid { gap: 20px; }
+             .portfolio-item-placeholder { font-size: 1rem; }
+             .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
+             .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; }
+             .contact-form input, .contact-form textarea { padding: 12px 15px; font-size: 0.95rem;}
+             .contact-form button { padding: 12px 25px; font-size: 1rem; }
+             .site-footer { bottom: 20px; }
+             .site-footer .copyright { font-size: 0.75rem; }
+             .site-footer .social-icons { gap: 15px; }
+             .site-footer .social-icons a { font-size: 1.1rem; }
+             .about-portrait { max-width: 200px; }
+             .services-grid { grid-template-columns: 1fr; gap: 25px; }
+             .services-title { margin-bottom: 40px; }
+             .service-item { padding: 30px; }
+             .hero-content { max-width: 90%; padding: clamp(15px, 3vw, 25px) clamp(20px, 4vw, 30px); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); } /* Adjust for smaller screens */
+             .hero-tagline { font-size: clamp(1rem, 3.5vw, 1.2rem); line-height: 1.6; } /* Adjust tagline font */
          }
+
+          @media (max-width: 480px) {
+              :root { --header-height: 65px; }
+              .site-header { padding: 0 15px; }
+              .logo-link img { height: 35px; }
+              .header-nav ul { gap: 15px; }
+              .header-nav a { font-size: 0.9rem; }
+              .nav-dots { right: 15px; }
+              .hero-tagline { font-size: clamp(0.9rem, 4vw, 1.1rem); }
+              .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+              .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
+              .about-portrait { max-width: 150px; }
+              .services-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+              .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+              .portfolio-grid { grid-template-columns: 1fr; gap: 15px; }
+              .portfolio-item-placeholder { font-size: 0.9rem; }
+              .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+              .scroll-indicator { bottom: 6vh; font-size: 0.75rem;}
+              section { padding-left: 15px; padding-right: 15px; }
+              section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
+              .contact-form-container { padding: 25px 15px; }
+              .hero-content { max-width: 85%; padding: 15px 20px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); } /* Further adjustments */
+          }
     </style>
 </head>
 <body data-current-theme="dark">
@@ -718,7 +735,17 @@
             <img src="interior_3.png" alt="Innovative Interior Design 3" class="hero-image" id="hero-img-3">
         </div>
          <div class="hero-content">
-             <p class="hero-tagline">Designing spaces that inspire. Blending innovation with timeless tradition.</p>
+              <p class="hero-tagline">
+                  <span class="tagline-word">Designing</span>
+                  <span class="tagline-word">spaces</span>
+                  <span class="tagline-word">that</span>
+                  <span class="tagline-word">inspire.</span><br>
+                  <span class="tagline-word">Blending</span>
+                  <span class="tagline-word">innovation</span>
+                  <span class="tagline-word">with</span>
+                  <span class="tagline-word">timeless</span>
+                  <span class="tagline-word">tradition.</span>
+              </p>
          </div>
         <div class="scroll-indicator">
              <span>Explore</span>
@@ -815,27 +842,56 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-    <script>
-      // --- JavaScript Code (No changes needed from previous step) ---
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script> <script>
       gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
         function initHero() {
             const heroSection = document.querySelector('.hero-section');
             if (!heroSection) return;
             const images = gsap.utils.toArray('.hero-image');
-            const content = document.querySelector('.hero-content'); // Now targets the container with tagline
+            const content = document.querySelector('.hero-content'); // Container
+            const words = gsap.utils.toArray('.tagline-word', content); // Select the words
+
             let currentImageIndex = 0;
             let imageInterval;
             if (images.length === 0) { console.warn("No hero images found."); return; }
 
             gsap.set(images[0], { opacity: 1, pointerEvents: 'auto' });
             gsap.set(images.slice(1), { opacity: 0, pointerEvents: 'none' });
-            gsap.set(content, { opacity: 0, y: 30 });
+            // gsap.set(content, { opacity: 0 }); // Container initial state handled by timeline
+            // gsap.set(words, { opacity: 0, y: 20 }); // Word initial state handled by timeline/CSS
 
-             const contentTl = gsap.timeline({
-                 scrollTrigger: { trigger: heroSection, start: "top 80%", toggleActions: "play none none reverse" }
-             });
-             contentTl.to(content, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' });
+            // --- NEW: Timeline for Word Animation ---
+            const wordTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: heroSection,
+                    start: "top 75%", // Trigger when 75% of hero top hits viewport top
+                    toggleActions: "play none none reverse"
+                },
+                // delay: 0.2 // Optional small delay after trigger
+            });
+
+            // 1. Fade in the container (glassmorphism box)
+            wordTl.to(content, {
+                opacity: 1,
+                duration: 0.5, // Quick fade-in for the box
+                ease: 'none'
+            });
+
+            // 2. Animate the words sequentially
+            if (words.length > 0) {
+                wordTl.to(words, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,       // Duration of each word animation
+                    ease: 'power2.out',
+                    stagger: 0.08       // Time between start of each word animation
+                }, "-=0.2"); // Start this slightly before the container fade finishes
+            } else {
+                console.warn("No tagline words found for animation.");
+            }
+            // --- End of New Word Animation Timeline ---
+
 
             function switchImage() {
                 if (images.length <= 1) return;
@@ -856,8 +912,12 @@
             images.forEach(img => {
                 gsap.to(img, { y: -30, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1.5 } });
             });
+            // Keep parallax for the content box itself
             gsap.to(content, { yPercent: -10, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 } });
         }
+
+        // --- (Keep other init functions: initAbout, initServices, etc. as they were) ---
+
         function initAbout() {
            const aboutSection = document.querySelector('.about-section');
            const aboutContentWrapper = document.querySelector('.about-content-wrapper');
