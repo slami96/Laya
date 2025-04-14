@@ -413,12 +413,10 @@
 
       /* --- STICKY SVG CONTAINER --- */
       #sticky-svg-drawing-container {
-          position: fixed; bottom: 0; left: 0; width: 100%; height: 150px; /* Adjust height */
+          position: fixed; bottom: 0; left: 0; width: 100%; height: 150px;
           z-index: 50; opacity: 0; visibility: hidden; /* Controlled by JS autoAlpha */
-          pointer-events: none; overflow: hidden; background: transparent; /* Removed gradient */
-          /* No transition needed here as JS handles fade */
+          pointer-events: none; overflow: hidden; background: transparent;
       }
-      /* Remove .active class style */
       #sticky-svg-drawing-container svg {
           display: block; width: 100%; height: 100%; overflow: visible;
           position: absolute; bottom: 0; left: 0;
@@ -495,7 +493,7 @@
             </a>
         </div>
         <nav class="header-nav">
-            <ul>
+             <ul>
                 <li><a href="#section-0" aria-label="Home"><i class="fas fa-home"></i><span class="nav-label">Home</span></a></li>
                 <li><a href="#section-1" aria-label="About"><i class="fas fa-info-circle"></i><span class="nav-label">About</span></a></li>
                 <li><a href="#section-services" aria-label="Services"><i class="fas fa-concierge-bell"></i><span class="nav-label">Services</span></a></li>
@@ -608,7 +606,7 @@
     </section>
     <div id="sticky-svg-drawing-container">
         <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 1200 150">
-            <path class="drawing-line" d="M 100 90 L 150 50 L 200 90 L 500 100 L 560 65 L 620 100 L 900 110 L 975 70 L 1050 110" />
+            <path class="drawing-line" d="M 0 140 L 100 140 V 90 L 150 50 L 200 90 V 140 H 100 L 500 140 V 100 L 560 65 L 620 100 V 140 H 500 L 900 140 V 110 L 975 70 L 1050 110 V 140 H 900 L 1200 140" />
         </svg>
     </div>
 
@@ -809,42 +807,37 @@
             const title = textContent?.querySelector('.services-title-new');
             const items = textContent ? gsap.utils.toArray('.service-item-new', textContent) : [];
 
-            // Ensure all elements exist
             if (!triggerSection || !stickyContainer || !drawingLine || !bgImage || !textContent || !title || items.length === 0) {
                 console.warn("Services sequence elements missing. Aborting animation setup.");
-                // Optionally hide the sticky container permanently if setup fails
                 if(stickyContainer) stickyContainer.style.display = 'none';
                 return;
             }
 
             // --- Initial States (Hidden) ---
-            gsap.set(stickyContainer, { autoAlpha: 0 }); // Starts hidden
-            gsap.set(bgImage, { opacity: 0 }); // Background starts transparent
-            gsap.set(textContent, { autoAlpha: 0, y: 30 }); // Text content hidden and slightly down
-            gsap.set(title, { autoAlpha: 0, y: 20 });       // Title hidden and slightly down
-            gsap.set(items, { autoAlpha: 0, y: 20 });       // Items hidden and slightly down
+            gsap.set(stickyContainer, { autoAlpha: 0 });
+            gsap.set(bgImage, { opacity: 0 });
+            gsap.set(textContent, { autoAlpha: 0, y: 30 });
+            gsap.set(title, { autoAlpha: 0, y: 20 });
+            gsap.set(items, { autoAlpha: 0, y: 20 });
 
 
-            // --- Path Length Calculation (Delayed) ---
             let pathLength = 0;
-            let masterTl; // Define master timeline scope
+            let masterTl;
 
             const setupTimeline = () => {
                 try {
                     pathLength = drawingLine.getTotalLength();
                     if (pathLength <= 0) throw new Error("SVG path length is zero.");
 
-                    // Set initial drawing state AFTER path length is known
                     gsap.set(drawingLine, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
 
-                    // --- Master Timeline ---
                     masterTl = gsap.timeline({
                         scrollTrigger: {
                             trigger: triggerSection,
-                            start: "top center", // Start sequence when section top hits viewport center
-                            end: "bottom center", // Allow scroll duration for the sequence
-                            toggleActions: "play none none reverse", // Play sequence on enter, reverse on scroll up past start
-                            // markers: true // Uncomment for debugging
+                            start: "top center",
+                            end: "bottom center",
+                            toggleActions: "play none none reverse",
+                            // markers: true
                         }
                     });
 
@@ -853,61 +846,59 @@
                         // 1. Fade in sticky container
                         .to(stickyContainer, {
                             autoAlpha: 1,
-                            duration: 0.4,
+                            duration: 0.4, // Fade in duration
                             ease: 'power1.in'
                         })
-                        // 2. Draw the SVG line
+                        // 2. Draw the SVG line (Faster)
                         .to(drawingLine, {
                             strokeDashoffset: 0,
-                            duration: 3.5, // Duration for drawing
-                            ease: 'linear' // Linear drawing often looks good
+                            duration: 2.0, // <<< FASTER DRAWING DURATION (halved from 4.0)
+                            ease: 'linear'
                         })
-                        // 3. Fade out sticky container (starts slightly after drawing finishes)
+                        // 3. Fade out sticky container
                         .to(stickyContainer, {
                             autoAlpha: 0,
-                            duration: 0.4,
+                            duration: 0.4, // Fade out duration
                             ease: 'power1.out'
-                        }, "+=0.2") // Position parameter: starts 0.2s after previous tween ends
-                        // 4. Fade in background image (starts AFTER sticky container fades out)
+                        }, "+=0.1") // Start 0.1s after drawing finishes
+                        // 4. Fade in background image
                         .to(bgImage, {
-                            opacity: 0.7, // Adjust final opacity as needed
+                            opacity: 0.7,
                             duration: 1.5,
                             ease: 'power1.inOut'
-                        }, ">") // Position parameter: starts right after previous tween completes
-                        // 5. Fade in text content container (overlaps with bg image fade)
+                        }, ">") // Start after sticky container fade out completes
+                        // 5. Fade in text content container
                         .to(textContent, {
                             autoAlpha: 1,
                             y: 0,
                             duration: 1.0,
                             ease: 'power2.out'
-                        }, "-=1.2") // Start 1.2s before the background fade ends
-                        // 6. Fade in title (staggered slightly after text container starts)
+                        }, "-=1.2")
+                        // 6. Fade in title
                         .to(title, {
                             autoAlpha: 1,
                             y: 0,
                             duration: 0.7,
                             ease: 'power2.out'
-                        }, "<+=0.2") // Start 0.2s after the previous tween starts
-                        // 7. Fade in service items (staggered after title starts)
+                        }, "<+=0.2")
+                        // 7. Fade in service items
                         .to(items, {
                             autoAlpha: 1,
                             y: 0,
                             duration: 0.8,
                             ease: 'power2.out',
                             stagger: 0.25
-                        }, "<+=0.2"); // Start 0.2s after the previous tween starts
+                        }, "<+=0.2");
 
                 } catch (error) {
                     console.error("Error setting up services animation timeline:", error);
-                    // Hide related elements if setup fails
                     if (stickyContainer) stickyContainer.style.display = 'none';
-                    if (bgImage) bgImage.style.opacity = '0'; // Ensure bg is hidden
+                    if (bgImage) bgImage.style.opacity = '0';
                     if (textContent) textContent.style.visibility = 'hidden';
                 }
             };
 
-            // Use setTimeout to calculate path length after potential layout shifts
-            setTimeout(setupTimeline, 150); // Delay might need adjustment
+            setTimeout(setupTimeline, 150);
         }
 
 
@@ -920,8 +911,6 @@
             initHero();
             initAbout();
             initServicesSequence(); // <<< CALL NEW COMBINED SEQUENCE
-            // initStickySVG();    // <<< REMOVE OLD CALL
-            // initNewServices();  // <<< REMOVE OLD CALL
             initPortfolio();
             initContact();
 
@@ -956,6 +945,9 @@
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(() => {
                    console.log("Resizing - Refreshing ScrollTrigger...");
+                   // Note: Re-calculating path length on resize might be needed if
+                   // the SVG scales/changes significantly, but can be complex.
+                   // For now, just refresh existing triggers.
                    ScrollTrigger.refresh(true);
                 }, 250);
             });
