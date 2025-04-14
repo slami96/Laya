@@ -19,7 +19,8 @@
         box-sizing: border-box;
       }
       html {
-          scroll-behavior: smooth;
+          /* Smooth scrolling via JS now, keep this if you want native fallback */
+          /* scroll-behavior: smooth; */
       }
       body, html {
         margin: 0;
@@ -239,7 +240,6 @@
         text-align: center;
         width: 90%;
         max-width: 800px; /* << WIDER MAX WIDTH */
-        /* REMOVED: background, padding, border, shadow, blur */
         opacity: 1; /* Make sure container is visible for layout */
         pointer-events: none; /* Allow clicks through to background if needed */
        }
@@ -249,26 +249,24 @@
 
       /* --- HERO TAGLINE STYLING --- */
       .hero-tagline {
-        /* << INCREASED FONT SIZE */
-        font-size: clamp(2.2rem, 5vw, 3.5rem); /* Slightly larger base size */
-        font-weight: 600; /* Slightly bolder */
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+        font-weight: 600;
         margin: 0 auto;
-        line-height: 1.4; /* Adjust line height */
-        font-family: 'Montserrat', sans-serif; /* Match logo font maybe? */
+        line-height: 1.4;
+        font-family: 'Montserrat', sans-serif;
         color: var(--text-light);
-        /* << UPDATED TEXT SHADOW FOR READABILITY */
-        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75); /* Adjusted shadow */
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75);
         overflow: hidden;
        }
 
         /* --- TAGLINE WORD STYLES (for Pop Animation) --- */
         .tagline-word {
-           display: inline-block; /* Needed for transform */
-           opacity: 0; /* Initially hidden */
-           transform: scale(0.5); /* Start scaled down */
-           transform-origin: center center; /* Scale from center */
-           margin: 0 4px; /* Space between words */
-           will-change: transform, opacity; /* Performance hint */
+           display: inline-block;
+           opacity: 0;
+           transform: scale(0.5);
+           transform-origin: center center;
+           margin: 0 4px;
+           will-change: transform, opacity;
         }
 
       .hero-image-stack {
@@ -280,7 +278,6 @@
           overflow: hidden;
       }
 
-      /* --- SCRIM ADDED HERE --- */
       .hero-image-stack::before {
           content: '';
           position: absolute;
@@ -288,9 +285,9 @@
           left: 0;
           width: 100%;
           height: 100%;
-          background-color: rgba(0, 0, 0, 0.3); /* Dark overlay - adjust opacity (0.3 = 30%) */
-          z-index: 1; /* Place scrim between image and content */
-          pointer-events: none; /* Don't block interactions */
+          background-color: rgba(0, 0, 0, 0.3);
+          z-index: 1;
+          pointer-events: none;
       }
 
       .hero-image {
@@ -303,7 +300,7 @@
           object-position: center;
           opacity: 0;
           pointer-events: none;
-          z-index: 0; /* Ensure images are behind the scrim */
+          z-index: 0;
       }
       .hero-image.hero-image-active {
           opacity: 1;
@@ -317,19 +314,18 @@
           color: var(--text-light);
       }
       .about-content-wrapper {
-          max-width: 900px; /* Increased width slightly */
-          opacity: 0; /* Start hidden */
-          transform: translateY(50px); /* Start lower */
-          /* Added Flexbox for layout */
+          max-width: 900px;
+          opacity: 0;
+          transform: translateY(50px);
           display: flex;
           justify-content: space-between;
-          align-items: flex-start; /* Align text top, image center */
+          align-items: flex-start;
           width: 100%;
       }
       .about-text-container {
-          flex: 1; /* Allow text to take available space */
-          margin-right: 40px; /* Space between text and image */
-          text-align: left; /* Align text left */
+          flex: 1;
+          margin-right: 40px;
+          text-align: left;
       }
       .about-title {
           font-family: var(--logo-font);
@@ -339,7 +335,7 @@
           color: var(--accent-color-1);
       }
       .about-text {
-           max-width: 700px; /* Limit text width */
+           max-width: 700px;
       }
       .about-text p {
           font-size: clamp(0.9rem, 1.5vw, 1.1rem);
@@ -350,30 +346,29 @@
       }
       .about-text strong {
           font-weight: 600;
-          color: var(--accent-color-3); /* Lighter color for contrast */
+          color: var(--accent-color-3);
       }
       .about-portrait {
-          display: block; /* Ensure it behaves as a block element */
-          max-width: 350px; /* Limit image size */
+          display: block;
+          max-width: 350px;
           height: auto;
           border-radius: 10px;
           border: 3px solid var(--accent-color-1);
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-          opacity: 0; /* Start hidden */
-          transform: scale(0.8); /* Start smaller */
-          flex-shrink: 0; /* Prevent image from shrinking */
+          opacity: 0;
+          transform: scale(0.8);
+          flex-shrink: 0;
       }
 
 
-      /* --- NEW SECTION 2: Services (Replaces old .services-section) --- */
+      /* --- SECTION 2: Services --- */
       .new-services-section {
-          background-color: var(--bg-light-1); /* Base background */
+          background-color: var(--bg-light-1);
           color: var(--text-dark);
-          position: relative; /* For positioning children */
-          display: flex; /* Keep centering */
+          position: relative;
+          display: flex;
           justify-content: center;
           align-items: center;
-          /* Keep padding and margin adjustments */
           padding: 50px;
           padding-top: var(--header-height);
           margin-top: calc(-1 * var(--header-height));
@@ -381,77 +376,77 @@
           overflow: hidden;
       }
 
+      /* Background Image (appears after SVG) */
       .services-background-image {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          /* <<< MAKE SURE 'services.jpg' is in the same folder or update path */
-          background-image: url('services.jpg');
+          background-image: url('services.jpg'); /* <<< PATH TO YOUR IMAGE */
           background-size: cover;
           background-position: center center;
-          opacity: 0; /* Start hidden for dissolve */
-          z-index: 1; /* Behind SVG and content */
-          will-change: opacity; /* Performance hint */
+          opacity: 0; /* Start hidden */
+          z-index: 1; /* Behind text content */
+          will-change: opacity;
       }
 
-      /* SVG container for the drawing line */
+      /* SVG container (draws first, then dissolves) */
       .services-svg-container {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          z-index: 2; /* Above background, below text */
-          pointer-events: none; /* Allow interaction with elements below/above */
-          opacity: 0; /* Start hidden */
+          z-index: 2; /* Above background initially, below text */
+          pointer-events: none;
+          opacity: 0; /* Start hidden, fade in to draw, then fade out */
           will-change: opacity;
       }
       .services-svg-container svg {
           display: block;
           width: 100%;
           height: 100%;
-          overflow: visible; /* Important for strokes */
+          overflow: visible;
       }
-      /* The drawing line itself */
       .drawing-line {
           fill: none;
-          stroke: var(--accent-color-4); /* Dark line for contrast on light bg/image */
-          stroke-width: 3;
-          stroke-linecap: round; /* Smooth line ends */
+          stroke: var(--accent-color-4); /* Dark line */
+          stroke-width: 2.5; /* Slightly thinner maybe */
+          stroke-linecap: round;
           stroke-linejoin: round;
-          /* stroke-dasharray and stroke-dashoffset will be set by JS */
+          /* stroke-dasharray and stroke-dashoffset set by JS */
           will-change: stroke-dashoffset;
       }
 
-      /* Container for the text content, appears AFTER line draws */
+      /* Text Content (appears last) */
       .services-text-content {
-          position: relative; /* Position normally within the flex container */
-          z-index: 3; /* Above SVG line */
-          max-width: 800px; /* Adjust max width */
+          position: relative;
+          z-index: 3; /* Above background and SVG container */
+          max-width: 800px;
           width: 90%;
-          /* REMOVED background-color, padding, border-radius, box-shadow */
           text-align: center;
           opacity: 0; /* Start hidden */
-          transform: translateY(30px); /* Start slightly lower */
+          transform: translateY(30px); /* Start lower */
           will-change: transform, opacity;
-          color: var(--text-dark); /* Ensure text is dark */
-          padding: 20px 0; /* Add some vertical padding if needed */
+          color: var(--text-dark);
+          padding: 20px 0;
+          /* Add a subtle text shadow if needed for readability over the image */
+          text-shadow: 0 1px 3px rgba(255, 255, 255, 0.4);
       }
 
-      .services-title-new { /* Keep styles, but now inside .services-text-content */
+      .services-title-new {
           font-family: var(--logo-font);
           font-size: clamp(1.8rem, 4vw, 3rem);
           font-weight: 700;
           margin-bottom: 40px;
-          color: var(--accent-color-4);
-          opacity: 0; /* Start hidden */
-          transform: translateY(20px); /* Start lower */
+          color: var(--accent-color-4); /* Keep dark */
+          opacity: 0;
+          transform: translateY(20px);
           will-change: transform, opacity;
       }
 
-      .services-list-new { /* Keep styles, inside .services-text-content */
+      .services-list-new {
           margin-top: 30px;
           display: flex;
           flex-direction: column;
@@ -459,38 +454,42 @@
           align-items: center;
       }
 
-      .service-item-new { /* Keep styles, inside .services-list-new */
-          opacity: 0; /* Start hidden */
-          transform: translateY(20px); /* Start lower */
+      .service-item-new {
+          opacity: 0;
+          transform: translateY(20px);
           width: 100%;
           max-width: 450px;
           text-align: center;
           will-change: transform, opacity;
+          /* Maybe add slight transparent background for readability */
+          background-color: rgba(253, 253, 253, 0.1); /* Very subtle light bg */
+          padding: 15px;
+          border-radius: 6px;
       }
 
-      .service-icon-new { /* Keep styles */
+      .service-icon-new {
           font-size: 2.5rem;
           color: var(--accent-color-1); /* Gold icon */
           margin-bottom: 15px;
           display: inline-block;
       }
 
-      .service-item-new h3 { /* Keep styles */
+      .service-item-new h3 {
           font-family: 'Montserrat', sans-serif;
           font-size: 1.3rem;
           font-weight: 700;
           margin-bottom: 10px;
-          color: var(--accent-color-4);
+          color: var(--accent-color-4); /* Keep dark */
       }
 
-      .service-item-new p { /* Keep styles */
+      .service-item-new p {
           font-family: 'Poppins', sans-serif;
           font-size: 0.9rem;
           line-height: 1.6;
-          color: var(--accent-color-2); /* Medium gray text */
+          color: var(--accent-color-2); /* Keep medium gray */
           font-weight: 400;
       }
-      /* --- END NEW SECTION 2 STYLES --- */
+      /* --- END SECTION 2 STYLES --- */
 
 
       /* --- SECTION 3: Portfolio Preview --- */
@@ -503,9 +502,9 @@
           flex-direction: column;
           align-items: center;
           width: 100%;
-          max-width: 1200px; /* Wide container */
-          opacity: 0; /* Start hidden */
-          transform: translateY(50px); /* Start lower */
+          max-width: 1200px;
+          opacity: 0;
+          transform: translateY(50px);
       }
       .portfolio-title {
           font-family: var(--logo-font);
@@ -523,7 +522,7 @@
           margin-bottom: 50px;
       }
       .portfolio-item-placeholder {
-          aspect-ratio: 4 / 3; /* Maintain aspect ratio */
+          aspect-ratio: 4 / 3;
           background: linear-gradient(135deg, var(--accent-color-2), var(--accent-color-4));
           border-radius: 8px;
           display: flex;
@@ -534,55 +533,56 @@
           font-size: 1.1rem;
           font-weight: 700;
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-          opacity: 0; /* Start hidden for stagger */
-          transform: scale(0.9); /* Start smaller */
+          opacity: 0;
+          transform: scale(0.9);
           transition: transform 0.3s ease, box-shadow 0.3s ease;
-          padding: 15px; /* Padding inside placeholder */
+          padding: 15px;
           text-align: center;
       }
       .portfolio-item-placeholder:hover {
-          transform: scale(1.03); /* Slight scale up on hover */
+          transform: scale(1.03);
           box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
       }
       .portfolio-cta {
-          display: inline-block; /* Make it behave like a button */
+          display: inline-block;
           background-color: var(--accent-color-1);
-          color: var(--text-dark); /* Dark text on gold */
+          color: var(--text-dark);
           padding: 15px 40px;
-          border-radius: 50px; /* Pill shape */
+          border-radius: 50px;
           font-family: 'Montserrat', sans-serif;
           font-weight: 700;
           text-decoration: none;
           font-size: 1rem;
           transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
-          opacity: 0; /* Start hidden */
-          transform: translateY(20px); /* Start lower */
+          opacity: 0;
+          transform: translateY(20px);
       }
       .portfolio-cta:hover {
-          background-color: var(--accent-color-3); /* Light gray on hover */
-          color: var(--text-dark); /* Ensure text is still dark */
-          transform: translateY(0px) scale(1.05); /* Pop effect */
+          background-color: var(--accent-color-3);
+          color: var(--text-dark);
+          transform: translateY(0px) scale(1.05);
       }
 
       /* --- SECTION 4: Contact Form --- */
-       .contact-section { /* This section already has the relative positioning for the footer */
+       .contact-section {
            color: var(--text-dark);
+           background-color: var(--bg-light-1); /* Ensure light background */
        }
        .contact-form-container {
            background-color: var(--bg-light-2);
-           padding: 50px clamp(20px, 8vw, 80px); /* Responsive padding */
+           padding: 50px clamp(20px, 8vw, 80px);
            border-radius: 10px;
            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
            width: 100%;
            max-width: 700px;
-           opacity: 0; /* Start hidden */
-           transform: translateY(50px); /* Start lower */
-           z-index: 1; /* Ensure form is above section bg, but below header/dots */
+           opacity: 0;
+           transform: translateY(50px);
+           z-index: 1;
            color: var(--text-dark);
        }
        .contact-title {
            font-family: var(--logo-font);
-           font-size: clamp(1.8rem, 4vw, 3rem); /* Slightly smaller */
+           font-size: clamp(1.8rem, 4vw, 3rem);
            font-weight: 700;
            margin-bottom: 40px;
            text-align: center;
@@ -590,17 +590,17 @@
        }
        .contact-form .form-group {
            margin-bottom: 25px;
-           position: relative; /* For potential future absolute elements inside */
+           position: relative;
        }
        .contact-form label {
            display: block;
            font-family: 'Poppins', sans-serif;
            font-weight: 600;
            font-size: 0.9rem;
-           color: var(--accent-color-2); /* Medium Gray */
+           color: var(--accent-color-2);
            margin-bottom: 8px;
-           opacity: 0; /* Start hidden for animation */
-           transform: translateX(-20px); /* Start offset */
+           opacity: 0;
+           transform: translateX(-20px);
        }
        .contact-form input[type="text"],
        .contact-form input[type="email"],
@@ -613,43 +613,43 @@
            font-size: 1rem;
            font-weight: 400;
            color: var(--text-dark);
-           background-color: var(--bg-light-2); /* Ensure background matches container */
+           background-color: var(--bg-light-2);
            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-           opacity: 0; /* Start hidden for animation */
-           transform: translateX(-20px); /* Start offset */
+           opacity: 0;
+           transform: translateX(-20px);
        }
        .contact-form input[type="text"]:focus,
        .contact-form input[type="email"]:focus,
        .contact-form textarea:focus {
-           border-color: var(--accent-color-1); /* Gold focus */
-           box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3); /* Soft gold glow */
+           border-color: var(--accent-color-1);
+           box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3);
            outline: none;
        }
        .contact-form textarea {
            min-height: 150px;
-           resize: vertical; /* Allow vertical resize */
+           resize: vertical;
        }
        .contact-form button {
-           display: block; /* Take full width */
+           display: block;
            width: 100%;
            padding: 15px 30px;
-           background-color: var(--accent-color-4); /* Dark button */
-           color: var(--text-light); /* Light text */
+           background-color: var(--accent-color-4);
+           color: var(--text-light);
            border: none;
-           border-radius: 50px; /* Pill shape */
+           border-radius: 50px;
            font-family: 'Montserrat', sans-serif;
            font-size: 1.1rem;
            font-weight: 700;
            cursor: pointer;
            transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
-           margin-top: 10px; /* Space above button */
-           opacity: 0; /* Start hidden */
-           transform: translateY(20px); /* Start lower */
+           margin-top: 10px;
+           opacity: 0;
+           transform: translateY(20px);
        }
        .contact-form button:hover {
-           background-color: var(--accent-color-1); /* Gold on hover */
-           color: var(--text-dark); /* Dark text on hover */
-           transform: scale(1.03) translateY(0); /* Slight pop effect */
+           background-color: var(--accent-color-1);
+           color: var(--text-dark);
+           transform: scale(1.03) translateY(0);
        }
 
        /* --- Navigation Dots --- */
@@ -660,36 +660,36 @@
            transform: translateY(-50%);
            display: flex;
            flex-direction: column;
-           z-index: 101; /* Above header */
+           z-index: 101;
        }
        .nav-dot {
            width: 10px;
            height: 10px;
            border-radius: 50%;
-           background-color: rgba(255, 255, 255, 0.3); /* Base for dark sections */
+           background-color: rgba(255, 255, 255, 0.3);
            margin: 12px 0;
            cursor: pointer;
            transition: background-color 0.3s, transform 0.3s;
-           border: 1px solid rgba(0, 0, 0, 0.2); /* Slight border for definition */
+           border: 1px solid rgba(0, 0, 0, 0.2);
        }
        body.on-light-section .nav-dot {
-           background-color: rgba(0, 0, 0, 0.2); /* Base for light sections */
+           background-color: rgba(0, 0, 0, 0.2);
            border: 1px solid rgba(255, 255, 255, 0.2);
        }
        .nav-dot.active {
-           background-color: white; /* Active on dark sections */
+           background-color: white;
            transform: scale(1.4);
            border: 1px solid rgba(0, 0, 0, 0.3);
        }
        body.on-light-section .nav-dot.active {
-           background-color: var(--text-dark); /* Active on light sections */
+           background-color: var(--text-dark);
            border: 1px solid rgba(255, 255, 255, 0.3);
        }
 
        /* --- Scroll Indicator (First Section) --- */
       .scroll-indicator {
            position: absolute;
-           bottom: 10vh; /* Positioned higher */
+           bottom: 10vh;
            left: 50%;
            transform: translateX(-50%);
            color: rgba(255, 255, 255, 0.7);
@@ -702,7 +702,7 @@
            opacity: 0.8;
            transition: opacity 0.5s ease;
            letter-spacing: 1px;
-           background-color: transparent; /* Ensure no background interferes */
+           background-color: transparent;
        }
        .scroll-indicator span {
            font-weight: 400;
@@ -735,16 +735,16 @@
              .logo-link img { height: 45px; }
              .header-nav ul { gap: 25px; }
              section { padding-left: 30px; padding-right: 30px; }
-             section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;} /* Keep hero full bleed */
+             section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
              .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
              .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
-             .about-content-wrapper { flex-direction: column-reverse; align-items: center; } /* Stack about content */
+             .about-content-wrapper { flex-direction: column-reverse; align-items: center; }
              .about-text-container { margin-right: 0; margin-top: 30px; text-align: center; }
              .about-portrait { max-width: 250px; margin-bottom: 20px; }
              .scroll-indicator { bottom: 8vh; }
-             .hero-content { top: 68%; max-width: 90%;} /* Adjust hero position/width */
-             .hero-tagline { font-size: clamp(1.8rem, 4vw, 3rem); } /* Adjusted responsive hero font */
-             .services-text-content { max-width: 90%; } /* Make text content wider */
+             .hero-content { top: 68%; max-width: 90%;}
+             .hero-tagline { font-size: clamp(1.8rem, 4vw, 3rem); }
+             .services-text-content { max-width: 90%; }
          }
 
          @media (max-width: 768px) {
@@ -753,11 +753,11 @@
              .logo-link img { height: 40px; }
              .header-nav ul { gap: 20px; }
              .header-nav a { font-size: 1rem; }
-             .nav-label { display: none; } /* Hide labels on smaller screens */
+             .nav-label { display: none; }
              .nav-dots { right: 20px; }
              .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
              section { padding-left: 20px; padding-right: 20px; }
-              section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;} /* Keep hero full bleed */
+              section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
              .portfolio-grid { gap: 20px; }
              .portfolio-item-placeholder { font-size: 1rem; }
              .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
@@ -769,12 +769,13 @@
              .site-footer .social-icons { gap: 15px; }
              .site-footer .social-icons a { font-size: 1.1rem; }
              .about-portrait { max-width: 200px; }
-             .hero-content { top: 70%; max-width: 90%; } /* Adjust hero position/width */
-             .hero-tagline { font-size: clamp(1.6rem, 5vw, 2.5rem); line-height: 1.4; } /* Adjust tagline font */
-             .services-title-new { font-size: clamp(1.6rem, 5vw, 2.5rem); } /* Adjust new services title */
+             .hero-content { top: 70%; max-width: 90%; }
+             .hero-tagline { font-size: clamp(1.6rem, 5vw, 2.5rem); line-height: 1.4; }
+             .services-title-new { font-size: clamp(1.6rem, 5vw, 2.5rem); }
              .service-item-new h3 { font-size: 1.1rem; }
              .service-item-new p { font-size: 0.85rem; }
              .service-icon-new { font-size: 2.2rem; }
+             .service-item-new { padding: 10px; } /* Adjust padding */
          }
 
          @media (max-width: 480px) {
@@ -784,7 +785,7 @@
              .header-nav ul { gap: 15px; }
              .header-nav a { font-size: 0.9rem; }
              .nav-dots { right: 15px; }
-             .hero-tagline { font-size: clamp(1.4rem, 6vw, 2rem); line-height: 1.4; } /* Adjust tagline font */
+             .hero-tagline { font-size: clamp(1.4rem, 6vw, 2rem); line-height: 1.4; }
              .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
              .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
              .about-portrait { max-width: 150px; }
@@ -794,15 +795,17 @@
              .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
              .scroll-indicator { bottom: 6vh; font-size: 0.75rem;}
              section { padding-left: 15px; padding-right: 15px; }
-              section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;} /* Keep hero full bleed */
+              section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
               .contact-form-container { padding: 25px 15px; }
-              .hero-content { top: 72%; max-width: 95%; } /* Adjust hero position/width */
-              .tagline-word { margin: 0 2px;} /* Reduce space slightly */
-              .services-text-content { padding: 15px 0; }
-              .services-title-new { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+              .hero-content { top: 72%; max-width: 95%; }
+              .tagline-word { margin: 0 2px;}
+              .services-text-content { padding: 15px 0; width: 95%; }
+              .services-title-new { font-size: clamp(1.5rem, 6vw, 2.2rem); margin-bottom: 25px;}
               .service-item-new h3 { font-size: 1rem; }
               .service-item-new p { font-size: 0.8rem; }
-              .service-icon-new { font-size: 2rem; }
+              .service-icon-new { font-size: 2rem; margin-bottom: 10px;}
+              .services-list-new { gap: 20px; }
+              .service-item-new { padding: 8px; }
          }
     </style>
 </head>
@@ -835,7 +838,7 @@
 
     <section class="hero-section" id="section-0" data-theme="dark">
         <div class="hero-image-stack">
-             <img src="interior_1.png" alt="Modern Interior Design 1" class="hero-image hero-image-active" id="hero-img-1">
+            <img src="interior_1.png" alt="Modern Interior Design 1" class="hero-image hero-image-active" id="hero-img-1">
             <img src="interior_2.png" alt="Classic Interior Design 2" class="hero-image" id="hero-img-2">
             <img src="interior_3.png" alt="Innovative Interior Design 3" class="hero-image" id="hero-img-3">
         </div>
@@ -870,8 +873,8 @@
         <div class="services-background-image"></div>
 
         <div class="services-svg-container">
-            <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 1000">
-                <path class="drawing-line" d="M 50 950 L 450 750 L 400 700 L 900 300 L 950 350 L 980 330" />
+             <svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 800">
+                <path class="drawing-line" d="M 50 500 L 250 500 L 300 267 L 350 500 L 550 500 L 600 267 L 650 500 L 850 500 L 900 267 L 950 500 L 1150 500" />
             </svg>
         </div>
 
@@ -951,97 +954,57 @@
     <script>
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
+        // --- Hero Section Animation ---
         function initHero() {
+            // ... (Keep existing initHero function code - no changes needed here) ...
             const heroSection = document.querySelector('.hero-section');
             if (!heroSection) return;
             const images = gsap.utils.toArray('.hero-image');
-            const content = document.querySelector('.hero-content'); // Container (for positioning)
-            const words = gsap.utils.toArray('.tagline-word', content); // Select the words
-
+            const content = document.querySelector('.hero-content');
+            const words = gsap.utils.toArray('.tagline-word', content);
             let currentImageIndex = 0;
             let imageInterval;
             if (images.length === 0) { console.warn("No hero images found."); return; }
-
             gsap.set(images[0], { opacity: 1, pointerEvents: 'auto' });
             gsap.set(images.slice(1), { opacity: 0, pointerEvents: 'none' });
-            // Ensure content container is visible for layout from start
             gsap.set(content, { opacity: 1 });
-            // Initial state for words is set via CSS now (.tagline-word)
-
-            // --- Timeline for Word Pop-Up Animation ---
             const wordTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: heroSection,
-                    start: "top 65%", // Trigger animation a bit earlier as text is lower
-                    toggleActions: "play none none reverse"
-                },
-                delay: 0.1 // Tiny delay
+                scrollTrigger: { trigger: heroSection, start: "top 65%", toggleActions: "play none none reverse" },
+                delay: 0.1
             });
-
-            // Animate the words popping up sequentially
             if (words.length > 0) {
-                wordTl.to(words, {
-                    opacity: 1,
-                    scale: 1,           // Scale up to normal size
-                    duration: 0.7,      // Duration of each word pop
-                    ease: 'back.out(1.5)', // Pop effect (adjust overshoot with number)
-                    stagger: 0.1        // Time between start of each word pop (adjust timing)
-                });
-            } else {
-                console.warn("No tagline words found for animation.");
-            }
-            // --- End of Pop-Up Animation Timeline ---
-
-
-            function switchImage() {
-                if (images.length <= 1) return;
-                const nextImageIndex = (currentImageIndex + 1) % images.length;
-                const tl = gsap.timeline({ defaults: { ease: "power1.inOut" } });
-                tl.to(images[currentImageIndex], { opacity: 0, duration: 1.5 })
-                  .set(images[currentImageIndex], { pointerEvents: 'none' })
-                  .set(images[nextImageIndex], { opacity: 0 }, "<") // Start fade-in before fade-out finishes
-                  .to(images[nextImageIndex], { opacity: 1, duration: 1.5 }, "<0.3") // Adjust overlap timing
-                  .set(images[nextImageIndex], { pointerEvents: 'auto' });
-                currentImageIndex = nextImageIndex;
-            }
-            function startImageTimer() {
-                clearInterval(imageInterval);
-                if (images.length > 1) { imageInterval = setInterval(switchImage, 5000); } // 5 second interval
-            }
+                wordTl.to(words, { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.5)', stagger: 0.1 });
+            } else { console.warn("No tagline words found for animation."); }
+            function switchImage() { /* ... existing image switching logic ... */
+                 if (images.length <= 1) return;
+                 const nextImageIndex = (currentImageIndex + 1) % images.length;
+                 const tl = gsap.timeline({ defaults: { ease: "power1.inOut" } });
+                 tl.to(images[currentImageIndex], { opacity: 0, duration: 1.5 })
+                   .set(images[currentImageIndex], { pointerEvents: 'none' })
+                   .set(images[nextImageIndex], { opacity: 0 }, "<")
+                   .to(images[nextImageIndex], { opacity: 1, duration: 1.5 }, "<0.3")
+                   .set(images[nextImageIndex], { pointerEvents: 'auto' });
+                 currentImageIndex = nextImageIndex;
+             }
+            function startImageTimer() { clearInterval(imageInterval); if (images.length > 1) { imageInterval = setInterval(switchImage, 5000); } }
             startImageTimer();
-
-            // Parallax for background images
-            images.forEach(img => {
-                gsap.to(img, { y: -30, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1.5 } });
-            });
-            // Parallax for the text block itself (content container)
-            gsap.to(content, { yPercent: -15, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 } }); // Slightly increased parallax on text
+            images.forEach(img => { gsap.to(img, { y: -30, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1.5 } }); });
+            gsap.to(content, { yPercent: -15, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 } });
         }
 
-
+        // --- About Section Animation ---
         function initAbout() {
-            const aboutSection = document.querySelector('.about-section');
-            const aboutContentWrapper = document.querySelector('.about-content-wrapper');
-            const aboutPortrait = document.querySelector('.about-portrait');
-
-            if (!aboutSection || !aboutContentWrapper || !aboutPortrait) {
-                console.warn("About elements missing.");
-                return;
-            }
-
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: aboutSection,
-                    start: "top 70%", // Trigger when 70% from top enters viewport
-                    toggleActions: "play none none reverse" // Play on enter, reverse on scroll back up
-                }
-            });
-
-            tl.to(aboutContentWrapper, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
-              .to(aboutPortrait, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }, "-=0.6"); // Animate portrait slightly after/overlapping wrapper
+            // ... (Keep existing initAbout function code - no changes needed here) ...
+             const aboutSection = document.querySelector('.about-section');
+             const aboutContentWrapper = document.querySelector('.about-content-wrapper');
+             const aboutPortrait = document.querySelector('.about-portrait');
+             if (!aboutSection || !aboutContentWrapper || !aboutPortrait) { console.warn("About elements missing."); return; }
+             const tl = gsap.timeline({ scrollTrigger: { trigger: aboutSection, start: "top 70%", toggleActions: "play none none reverse" } });
+             tl.to(aboutContentWrapper, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
+               .to(aboutPortrait, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }, "-=0.6");
         }
 
-        // ==== MODIFIED initNewServices ====
+        // --- REVISED Services Section Animation ---
         function initNewServices() {
             const servicesSection = document.querySelector('.new-services-section');
             const bgImage = servicesSection.querySelector('.services-background-image');
@@ -1049,7 +1012,7 @@
             const drawingLine = servicesSection.querySelector('.drawing-line');
             const textContent = servicesSection.querySelector('.services-text-content');
             const title = servicesSection.querySelector('.services-title-new');
-            const items = gsap.utils.toArray('.service-item-new', textContent); // Select items within textContent
+            const items = gsap.utils.toArray('.service-item-new', textContent);
 
             if (!servicesSection || !bgImage || !svgContainer || !drawingLine || !textContent || !title || items.length === 0) {
                 console.warn("New Services elements missing for animation.");
@@ -1057,384 +1020,225 @@
             }
 
             // --- Calculate Path Length ---
-            let pathLength;
+            let pathLength = 0; // Initialize
             try {
                 pathLength = drawingLine.getTotalLength();
-                if (pathLength <= 0) {
-                    throw new Error("Path length is zero or negative.");
-                }
-                 // --- Set Initial SVG Line State (Hidden) ---
-                gsap.set(drawingLine, {
-                    strokeDasharray: pathLength,
-                    strokeDashoffset: pathLength
-                });
+                if (pathLength <= 0) { throw new Error("Path length is zero or negative."); }
+                // --- Set Initial SVG Line State (Hidden & Ready to Draw) ---
+                gsap.set(drawingLine, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
             } catch (error) {
                 console.error("Error getting or setting SVG path length:", error);
-                // Optionally hide the SVG container if path length fails
-                 gsap.set(svgContainer, { display: 'none' });
-                 // Fallback: Just animate the text content without the line
-                 pathLength = 0; // Set to 0 to prevent line animation attempt later
+                // Hide the SVG container if path length fails, animation will skip drawing
+                gsap.set(svgContainer, { display: 'none' });
+                pathLength = 0; // Ensure drawing step is skipped
             }
-
 
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: servicesSection,
-                    start: "top 65%", // Start animation a bit earlier
-                    end: "bottom 80%", // Optional: define an end point
+                    start: "top 60%", // Trigger slightly earlier/later as needed
+                    end: "bottom 70%", // Optional end
                     toggleActions: "play none none reverse",
                     // markers: true, // Uncomment for debugging
                 }
             });
 
-            // 1. Dissolve in the background image
-            tl.to(bgImage, {
-                opacity: 1,
-                duration: 1.5,
-                ease: 'none'
-            });
+            // 1. Fade in SVG Container (to prepare for drawing)
+            if (pathLength > 0) { // Only fade in if we can draw
+                tl.to(svgContainer, {
+                    opacity: 1,
+                    duration: 0.4,
+                    ease: 'power1.in'
+                });
 
-             // 2. Fade in SVG container (subtly, before line draws)
-             tl.to(svgContainer, {
-                opacity: 1,
-                duration: 0.5,
-                ease: 'power1.in'
-            }, "-=1.0"); // Start slightly after bg starts fading
-
-            // 3. Draw the SVG line (only if pathLength is valid)
-            if (pathLength > 0) {
+                // 2. Draw the SVG line
                 tl.to(drawingLine, {
                     strokeDashoffset: 0,
                     duration: 2.5, // Adjust duration for drawing speed
-                    ease: 'power1.inOut' // Smooth start and end
-                }, "-=0.2"); // Start drawing slightly after SVG container fades in
+                    ease: 'power1.inOut'
+                }); // Default position: starts right after previous tween ends
+
+                // 3. Dissolve (Fade Out) SVG Container *after* drawing
+                tl.to(svgContainer, {
+                    opacity: 0,
+                    duration: 0.8, // Dissolve speed
+                    ease: 'power1.out'
+                }, "+=0.1"); // Start dissolve shortly after drawing finishes
             }
 
-             // 4. Fade in the text content container
-             //    Start this slightly before the line finishes drawing for overlap
-             tl.to(textContent, {
+            // 4. Fade in Background Image (starts *after* SVG dissolves)
+            // Use absolute position '+=0' if path exists, otherwise start earlier
+            const bgFadeInPosition = pathLength > 0 ? '+=0' : '+=0.2';
+            tl.to(bgImage, {
                 opacity: 1,
-                y: 0, // Move from translateY(30px) to 0
+                duration: 1.8, // Slower fade-in for background
+                ease: 'power1.inOut' // Use a smoother ease
+            }, bgFadeInPosition);
+
+            // 5. Fade in the text content container (starts *during* background fade)
+            tl.to(textContent, {
+                opacity: 1,
+                y: 0, // Slide up from translateY(30px)
                 duration: 0.8,
                 ease: 'power2.out'
-            }, pathLength > 0 ? "-=0.8" : "-=0.5"); // Adjust timing based on whether line draws
+            }, "-=1.2"); // Overlap with background fade significantly
 
-            // 5. Fade in the title
+            // 6. Fade in the title (starts after text container is visible)
             tl.to(title, {
-                opacity: 1,
-                y: 0, // Move from translateY(20px) to 0
-                duration: 0.6,
-                ease: 'power2.out'
-            }, "-=0.5"); // Start title fade after text container starts
-
-            // 6. Fade in service items one by one
-            tl.to(items, {
-                opacity: 1,
-                y: 0, // Move from translateY(20px) to 0
-                duration: 0.7,
-                ease: 'power2.out',
-                stagger: 0.25 // Time between each item animation start
-            }, "-=0.3"); // Start items slightly after title starts
-        }
-        // ==== END MODIFIED initNewServices ====
-
-
-        function initPortfolio() {
-            const portfolioSection = document.querySelector('.portfolio-section');
-            const container = document.querySelector('.portfolio-preview-container');
-
-            if (!portfolioSection || !container) {
-                console.warn("Portfolio elements missing.");
-                return;
-            }
-            const items = gsap.utils.toArray('.portfolio-item-placeholder', container);
-            const cta = document.querySelector('.portfolio-cta', container);
-
-            if (!items.length || !cta) {
-                 console.warn("Portfolio items/CTA missing.");
-                 return;
-            }
-
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: portfolioSection,
-                    start: "top 65%", // Trigger animation slightly earlier
-                    toggleActions: "play none none reverse"
-                }
-            });
-
-            tl.to(container, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }) // Fade in container first
-              .to(items, {
-                  opacity: 1,
-                  scale: 1,
-                  duration: 0.6,
-                  ease: 'back.out(1.4)', // Pop effect
-                  stagger: 0.15 // Stagger items
-               }, "-=0.3") // Start items slightly after container
-              .to(cta, {
-                  opacity: 1,
-                  y: 0,
-                  duration: 0.7,
-                  ease: 'power2.out' // Smooth fade up
-               }, "-=0.5"); // Start CTA during item animation
-        }
-
-        function initContact() {
-            const contactSection = document.querySelector('.contact-section');
-            const container = document.querySelector('.contact-form-container');
-
-            if (!contactSection || !container) {
-                console.warn("Contact elements missing.");
-                return;
-            }
-            const labels = gsap.utils.toArray('.contact-form label', container);
-            const inputs = gsap.utils.toArray('.contact-form input, .contact-form textarea', container);
-            const button = container.querySelector('.contact-form button');
-
-            if (!labels.length || !inputs.length || !button) {
-                console.warn("Contact form elements missing.");
-                return;
-            }
-
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: contactSection,
-                    start: "top 60%", // Trigger point
-                    toggleActions: "play none none reverse"
-                }
-            });
-
-            // Animate container fade-in and slide-up
-            tl.to(container, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
-
-            // Staggered animation for labels and inputs
-            tl.to(labels, {
-                opacity: 1,
-                x: 0, // Slide in from left
-                duration: 0.5,
-                ease: 'power2.out',
-                stagger: 0.1 // Stagger labels
-             }, "-=0.5"); // Start slightly after container
-
-            tl.to(inputs, {
-                opacity: 1,
-                x: 0, // Slide in from left
-                duration: 0.5,
-                ease: 'power2.out',
-                stagger: 0.1 // Stagger inputs, slightly after labels
-             }, "<0.1"); // Start just after labels start
-
-            // Animate button fade-in and pop-up
-            tl.to(button, {
                 opacity: 1,
                 y: 0, // Slide up
                 duration: 0.6,
-                ease: 'back.out(1.7)' // Pop effect
-             }, "-=0.3"); // Start during input animations
-        }
+                ease: 'power2.out'
+            }, "-=0.4"); // Start slightly after container animation starts
 
-        function initHeader() {
-            const header = document.getElementById('site-header');
-            if (!header) {
-                console.warn("Site header not found.");
-                return;
-            }
-            const headerLinks = document.querySelectorAll('.header-nav a[href^="#"]');
-
-            headerLinks.forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    const href = this.getAttribute('href');
-                    // Basic check for valid hash links
-                    if (href && href.startsWith('#') && href.length > 1) {
-                         try {
-                            const target = document.querySelector(href);
-                            if (target) {
-                                e.preventDefault();
-                                const headerHeight = header.offsetHeight;
-                                // Use GSAP ScrollTo plugin for smooth scroll
-                                gsap.to(window, {
-                                    duration: 1.2,
-                                    scrollTo: {
-                                        y: target,
-                                        offsetY: (target.id === 'section-0' ? 0 : headerHeight) // No offset for hero
-                                    },
-                                    ease: "power2.inOut"
-                                });
-                            } else {
-                                console.warn(`Scroll target '${href}' not found.`);
-                            }
-                         } catch (error) {
-                             console.error(`Error selecting scroll target '${href}':`, error);
-                         }
-                    }
-                });
-            });
-
-            // Smooth scroll for Logo link to top
-            const logoLink = document.querySelector('.logo-link');
-             if (logoLink) {
-                 logoLink.addEventListener('click', function (e) {
-                      const href = this.getAttribute('href');
-                      if (href === '#section-0') {
-                           e.preventDefault();
-                           const target = document.getElementById('section-0');
-                            if(target){
-                                gsap.to(window, { duration: 1.2, scrollTo: { y: target }, ease: "power2.inOut" });
-                            }
-                      }
-                 });
-             }
-        }
-
-        function initFooter() {
-            const footer = document.querySelector('#section-4 .site-footer'); // Target footer within section-4
-            const copyrightYearSpan = document.getElementById('copyright-year');
-
-            if (!footer) {
-                console.warn("Site footer missing.");
-                return;
-            }
-            if(copyrightYearSpan) {
-                copyrightYearSpan.textContent = new Date().getFullYear();
-            } else {
-                console.warn("Copyright year span missing.");
-            }
-
-            // Animate footer visibility when near the bottom of section-4
-            gsap.to(footer, {
+            // 7. Fade in service items one by one
+            tl.to(items, {
                 opacity: 1,
-                y: 0, // Move from translateY(30px) to 0
-                duration: 1.0,
+                y: 0, // Slide up
+                duration: 0.7,
                 ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: '#section-4', // Trigger based on the contact section
-                    start: "center bottom-=10%", // Start when center of section-4 is 10% from bottom of viewport
-                    toggleActions: "play none none reverse", // Play on enter, reverse on leave back
-                    id: "footer-reveal" // Optional ID for debugging
-                }
-            });
+                stagger: 0.25 // Stagger items
+            }, "-=0.3"); // Start items slightly after title animation starts
         }
 
+        // --- Portfolio Section Animation ---
+        function initPortfolio() {
+            // ... (Keep existing initPortfolio function code - no changes needed here) ...
+            const portfolioSection = document.querySelector('.portfolio-section');
+            const container = document.querySelector('.portfolio-preview-container');
+            if (!portfolioSection || !container) { console.warn("Portfolio elements missing."); return; }
+            const items = gsap.utils.toArray('.portfolio-item-placeholder', container);
+            const cta = document.querySelector('.portfolio-cta', container);
+            if (!items.length || !cta) { console.warn("Portfolio items/CTA missing."); return; }
+            const tl = gsap.timeline({ scrollTrigger: { trigger: portfolioSection, start: "top 65%", toggleActions: "play none none reverse" } });
+            tl.to(container, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
+              .to(items, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.4)', stagger: 0.15 }, "-=0.3")
+              .to(cta, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, "-=0.5");
+        }
 
+        // --- Contact Section Animation ---
+        function initContact() {
+            // ... (Keep existing initContact function code - no changes needed here) ...
+            const contactSection = document.querySelector('.contact-section');
+            const container = document.querySelector('.contact-form-container');
+            if (!contactSection || !container) { console.warn("Contact elements missing."); return; }
+            const labels = gsap.utils.toArray('.contact-form label', container);
+            const inputs = gsap.utils.toArray('.contact-form input, .contact-form textarea', container);
+            const button = container.querySelector('.contact-form button');
+            if (!labels.length || !inputs.length || !button) { console.warn("Contact form elements missing."); return; }
+            const tl = gsap.timeline({ scrollTrigger: { trigger: contactSection, start: "top 60%", toggleActions: "play none none reverse" } });
+            tl.to(container, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+              .to(labels, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, "-=0.5")
+              .to(inputs, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, "<0.1")
+              .to(button, { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.7)' }, "-=0.3");
+        }
+
+        // --- Header Setup ---
+        function initHeader() {
+            // ... (Keep existing initHeader function code - no changes needed here) ...
+             const header = document.getElementById('site-header');
+             if (!header) { console.warn("Site header not found."); return; }
+             const headerLinks = document.querySelectorAll('.header-nav a[href^="#"]');
+             headerLinks.forEach(anchor => { /* ... existing link click logic ... */
+                 anchor.addEventListener('click', function (e) {
+                     const href = this.getAttribute('href');
+                     if (href && href.startsWith('#') && href.length > 1) {
+                          try {
+                             const target = document.querySelector(href);
+                             if (target) {
+                                 e.preventDefault();
+                                 const headerHeight = header.offsetHeight;
+                                 gsap.to(window, { duration: 1.2, scrollTo: { y: target, offsetY: (target.id === 'section-0' ? 0 : headerHeight) }, ease: "power2.inOut" });
+                             } else { console.warn(`Scroll target '${href}' not found.`); }
+                          } catch (error) { console.error(`Error selecting scroll target '${href}':`, error); }
+                     }
+                 });
+              });
+             const logoLink = document.querySelector('.logo-link');
+              if (logoLink) { /* ... existing logo click logic ... */
+                  logoLink.addEventListener('click', function (e) {
+                       const href = this.getAttribute('href');
+                       if (href === '#section-0') {
+                            e.preventDefault();
+                            const target = document.getElementById('section-0');
+                             if(target){ gsap.to(window, { duration: 1.2, scrollTo: { y: target }, ease: "power2.inOut" }); }
+                       }
+                  });
+              }
+        }
+
+        // --- Footer Setup ---
+        function initFooter() {
+            // ... (Keep existing initFooter function code - no changes needed here) ...
+            const footer = document.querySelector('#section-4 .site-footer');
+            const copyrightYearSpan = document.getElementById('copyright-year');
+            if (!footer) { console.warn("Site footer missing."); return; }
+            if(copyrightYearSpan) { copyrightYearSpan.textContent = new Date().getFullYear(); }
+            else { console.warn("Copyright year span missing."); }
+            gsap.to(footer, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', scrollTrigger: { trigger: '#section-4', start: "center bottom-=10%", toggleActions: "play none none reverse", id: "footer-reveal" } });
+        }
+
+        // --- Navigation Setup ---
         function initNavigation() {
-            const sectionsNodeList = document.querySelectorAll('section[id^="section-"]'); // Select all sections with IDs starting "section-"
-            const sections = Array.from(sectionsNodeList);
-            const navDots = document.querySelectorAll('.nav-dot');
-            const body = document.body;
-            const header = document.getElementById('site-header');
-
-            if (navDots.length === 0 || sections.length === 0 || !header) {
-                console.warn("Navigation elements missing (dots, sections, or header).");
-                return;
-            }
-
-            // Verify dot/section correspondence based on data-section/id
-            if (navDots.length !== sections.length) {
-                 console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sections.length} sections. Navigation might be inaccurate.`);
-            }
-
-            const getHeaderHeight = () => header.offsetHeight; // Function to get current header height
-
-            // Dot click handling
-            navDots.forEach(dot => {
-                dot.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const sectionIdSuffix = dot.getAttribute('data-section');
-                    const targetSection = document.getElementById(`section-${sectionIdSuffix}`);
-
-                    if (targetSection) {
-                        gsap.to(window, {
-                            duration: 1.2,
-                            scrollTo: {
-                                y: targetSection,
-                                offsetY: (targetSection.id === 'section-0' ? 0 : getHeaderHeight()) // No offset for hero
-                            },
-                            ease: "power2.inOut"
-                        });
-                    } else {
-                        console.error(`Target section #section-${sectionIdSuffix} not found for dot click.`);
-                    }
-                });
-            });
-
-            // ScrollTrigger for updating active dot and body theme
-            sections.forEach((section) => {
-                const sectionIdSuffix = section.id.replace('section-', ''); // e.g., '0', '1', 'services', '3', '4'
-                const theme = section.getAttribute('data-theme') || 'dark'; // Default to dark if not specified
-
+             // ... (Keep existing initNavigation function code - no changes needed here) ...
+             const sectionsNodeList = document.querySelectorAll('section[id^="section-"]');
+             const sections = Array.from(sectionsNodeList);
+             const navDots = document.querySelectorAll('.nav-dot');
+             const body = document.body;
+             const header = document.getElementById('site-header');
+             if (navDots.length === 0 || sections.length === 0 || !header) { console.warn("Navigation elements missing (dots, sections, or header)."); return; }
+             if (navDots.length !== sections.length) { console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sections.length} sections. Navigation might be inaccurate.`); }
+             const getHeaderHeight = () => header.offsetHeight;
+             navDots.forEach(dot => { /* ... existing dot click logic ... */
+                 dot.addEventListener('click', (e) => {
+                     e.preventDefault();
+                     const sectionIdSuffix = dot.getAttribute('data-section');
+                     const targetSection = document.getElementById(`section-${sectionIdSuffix}`);
+                     if (targetSection) { gsap.to(window, { duration: 1.2, scrollTo: { y: targetSection, offsetY: (targetSection.id === 'section-0' ? 0 : getHeaderHeight()) }, ease: "power2.inOut" }); }
+                     else { console.error(`Target section #section-${sectionIdSuffix} not found for dot click.`); }
+                 });
+             });
+             function updateActiveState(activeSectionIdSuffix, activeTheme) { /* ... existing dot/theme update logic ... */
+                 navDots.forEach((dot) => { dot.classList.toggle('active', dot.getAttribute('data-section') === activeSectionIdSuffix); });
+                 const currentBodyTheme = body.classList.contains('on-light-section') ? 'light' : 'dark';
+                 if (activeTheme !== currentBodyTheme) { body.classList.toggle('on-light-section', activeTheme === 'light'); }
+             }
+             sections.forEach((section) => { /* ... existing ScrollTrigger creation for each section ... */
+                 const sectionIdSuffix = section.id.replace('section-', '');
+                 const theme = section.getAttribute('data-theme') || 'dark';
                  ScrollTrigger.create({
                      trigger: section,
-                     // Adjust start based on header height, except for the hero section
                      start: () => section.id === 'section-0' ? `top top` : `top top+=${getHeaderHeight()}px`,
-                     // End trigger needs to be reliable, use bottom for last section
-                     end: () => {
-                          const isLastSection = section === sections[sections.length - 1];
-                          return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight()}px`;
-                      },
-                     id: `section-nav-${sectionIdSuffix}`, // Unique ID for debugging
+                     end: () => { const isLastSection = section === sections[sections.length - 1]; return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight()}px`; },
+                     id: `section-nav-${sectionIdSuffix}`,
                      onEnter: () => updateActiveState(sectionIdSuffix, theme),
                      onEnterBack: () => updateActiveState(sectionIdSuffix, theme),
-                     invalidateOnRefresh: true // Recalculate triggers on resize/refresh
+                     invalidateOnRefresh: true
                  });
-            });
-
-            // Function to update active dot and body class
-            function updateActiveState(activeSectionIdSuffix, activeTheme) {
-                // Update dots
-                navDots.forEach((dot) => {
-                    dot.classList.toggle('active', dot.getAttribute('data-section') === activeSectionIdSuffix);
-                });
-
-                // Update body theme class
-                const currentBodyTheme = body.classList.contains('on-light-section') ? 'light' : 'dark';
-                if (activeTheme !== currentBodyTheme) {
-                    body.classList.toggle('on-light-section', activeTheme === 'light');
-                }
-             }
-
-
-             // --- Scroll Indicator Visibility ---
-            let scrollIndicatorState = { scrolled: window.scrollY > 50 }; // Initial check
-            body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
-
-            const scrollListener = () => {
-                const isScrolled = window.scrollY > 50; // Check if scrolled past 50px
-                if (isScrolled !== scrollIndicatorState.scrolled) {
-                    body.classList.toggle('scrolled', isScrolled);
-                    scrollIndicatorState.scrolled = isScrolled;
-                }
-            };
-            window.addEventListener('scroll', scrollListener, { passive: true }); // Use passive listener
-
-             // Initial state check after slight delay for layout settling
-             setTimeout(() => {
-                  let initialSectionIdSuffix = '0'; // Default to first section
-                  let initialTheme = 'dark'; // Default theme
-                  const currentScrollY = window.scrollY;
-                  const currentHeaderHeight = getHeaderHeight();
-                  // Adjust threshold: Consider a point slightly below the header as the activation point
-                  const threshold = currentHeaderHeight + 20; // e.g., 20px below the header
-
-                  // Determine the currently visible section based on scroll position
-                  for (let i = sections.length - 1; i >= 0; i--) {
-                      const section = sections[i];
-                      const sectionTopScrollY = section.offsetTop; // Use offsetTop for consistent position relative to document top
-
-                      // Check if the top of the section is above the threshold point in the viewport
-                      // (Viewport top + threshold > Section top relative to document)
-                      if (currentScrollY + threshold >= sectionTopScrollY) {
-                          initialSectionIdSuffix = section.id.replace('section-', '');
-                          initialTheme = section.getAttribute('data-theme') || 'dark';
-                          break; // Found the active section
-                      }
-                  }
-
-                  updateActiveState(initialSectionIdSuffix, initialTheme);
-                  // Re-check scroll indicator state
-                  scrollIndicatorState.scrolled = window.scrollY > 50;
-                  body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
-                  ScrollTrigger.refresh(); // Refresh ScrollTrigger after setting initial state
-             }, 150); // Delay to ensure layout is stable
+             });
+              let scrollIndicatorState = { scrolled: window.scrollY > 50 };
+              body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
+              const scrollListener = () => { /* ... existing scroll listener logic ... */
+                 const isScrolled = window.scrollY > 50;
+                 if (isScrolled !== scrollIndicatorState.scrolled) { body.classList.toggle('scrolled', isScrolled); scrollIndicatorState.scrolled = isScrolled; }
+             };
+              window.addEventListener('scroll', scrollListener, { passive: true });
+              setTimeout(() => { /* ... existing initial state check logic ... */
+                   let initialSectionIdSuffix = '0';
+                   let initialTheme = 'dark';
+                   const currentScrollY = window.scrollY;
+                   const currentHeaderHeight = getHeaderHeight();
+                   const threshold = currentHeaderHeight + 20;
+                   for (let i = sections.length - 1; i >= 0; i--) {
+                       const section = sections[i];
+                       const sectionTopScrollY = section.offsetTop;
+                       if (currentScrollY + threshold >= sectionTopScrollY) { initialSectionIdSuffix = section.id.replace('section-', ''); initialTheme = section.getAttribute('data-theme') || 'dark'; break; }
+                   }
+                   updateActiveState(initialSectionIdSuffix, initialTheme);
+                   scrollIndicatorState.scrolled = window.scrollY > 50;
+                   body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
+                   ScrollTrigger.refresh();
+              }, 150);
         }
 
         // --- Main Initialization Function ---
@@ -1446,51 +1250,31 @@
             initFooter();      // Setup footer animation
             initHero();        // Animate Hero section elements
             initAbout();       // Animate About section elements
-            initNewServices(); // Animate NEW Services section elements <<<<< THIS IS THE MODIFIED ONE
+            initNewServices(); // Animate REVISED Services section elements <<<<<
             initPortfolio();   // Animate Portfolio section elements
             initContact();     // Animate Contact section elements
 
-            // Generic smooth scroll for other anchors (e.g., portfolio CTA if it pointed to an ID)
+            // Generic smooth scroll for other anchors
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                // Exclude header and nav dots links as they have specific handlers
-                if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots')) {
-                    anchor.addEventListener('click', function (e) {
-                        const href = this.getAttribute('href');
+                 // ... (Keep existing generic scroll logic - no changes needed here) ...
+                 if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots')) {
+                     anchor.addEventListener('click', function (e) {
+                         const href = this.getAttribute('href');
+                         if (href === '#portfolio-full') { e.preventDefault(); console.log("Portfolio CTA clicked - Implement desired action."); return; }
+                         if (href && href.startsWith('#') && href.length > 1) {
+                             try {
+                                 const target = document.querySelector(href);
+                                 const header = document.getElementById('site-header');
+                                 const offset = header ? header.offsetHeight : 75;
+                                 if (target) { e.preventDefault(); gsap.to(window, { duration: 1, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" }); }
+                                 else { console.warn("Smooth scroll target not found:", href); }
+                             } catch (error) { console.warn("Could not find target for anchor:", href, error); }
+                         } else if (href === "#") { e.preventDefault(); }
+                     });
+                 }
+             });
 
-                        // Specific handling for portfolio CTA or similar links
-                        if (href === '#portfolio-full') {
-                            e.preventDefault();
-                            // Add logic here if you want it to scroll somewhere specific,
-                            // or maybe open a modal, or navigate to a different page.
-                            console.log("Portfolio CTA clicked - Implement desired action.");
-                            return; // Stop further processing for this link
-                        }
-
-                        // General smooth scroll for other internal links
-                        if (href && href.startsWith('#') && href.length > 1) {
-                            try {
-                                const target = document.querySelector(href);
-                                const header = document.getElementById('site-header');
-                                const offset = header ? header.offsetHeight : 75; // Default offset
-
-                                if (target) {
-                                    e.preventDefault();
-                                    gsap.to(window, { duration: 1, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" });
-                                } else {
-                                    console.warn("Smooth scroll target not found:", href);
-                                }
-                            } catch (error) {
-                                // Catch potential errors from invalid selectors
-                                console.warn("Could not find target for anchor:", href, error);
-                            }
-                        } else if (href === "#") {
-                             e.preventDefault(); // Prevent jumping for href="#" links
-                        }
-                    });
-                }
-            });
-
-            // Final refresh after a slightly longer delay, ensure everything is rendered and calculated
+            // Final refresh after a slightly longer delay
             setTimeout(() => {
                  ScrollTrigger.refresh();
                  console.log("ScrollTrigger refreshed after init.");
@@ -1502,8 +1286,8 @@
                  clearTimeout(resizeTimer);
                  resizeTimer = setTimeout(() => {
                     console.log("Resizing - Refreshing ScrollTrigger...");
-                    ScrollTrigger.refresh(true); // Use true to invalidate labels/positions
-                 }, 250); // Debounce resize events
+                    ScrollTrigger.refresh(true);
+                 }, 250);
             });
 
             console.log("LAYA Initialization sequence complete.");
@@ -1513,8 +1297,7 @@
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initAll);
         } else {
-            // DOMContentLoaded has already fired
-            initAll();
+            initAll(); // DOMContentLoaded has already fired
         }
     </script>
 </body>
