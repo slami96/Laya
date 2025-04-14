@@ -15,6 +15,10 @@
         box-sizing: border-box;
       }
 
+      html {
+         scroll-behavior: smooth; /* Add native smooth scrolling as a fallback */
+      }
+
       body, html {
         margin: 0;
         padding: 0;
@@ -49,7 +53,7 @@
           --logo-font: 'Montserrat', sans-serif; /* Architect font */
       }
 
-      /* --- HEADER STYLES (MODIFIED) --- */
+      /* --- HEADER STYLES --- */
       .site-header {
           position: fixed;
           top: 0;
@@ -167,20 +171,20 @@
 
 
       /* --- FOOTER STYLES --- */
-      /* Parent section needs position relative */
-      section#section-4 { /* Footer will be placed within the *last* content section (now section 4 - Contact) */
+      /* Footer styling is applied within the last section's context */
+      section#section-4 {
           position: relative;
           background-color: var(--bg-light-1);
           color: var(--text-dark);
-          min-height: 100vh; /* Ensure it takes full height */
-          height: auto; /* Allow content to define height */
+          min-height: 100vh;
+          height: auto;
           padding-top: calc(var(--header-height) + 10vh);
           padding-bottom: 20vh; /* Space for footer */
-          display: flex; /* Use flex for centering */
-          justify-content: center; /* Center horizontally */
-          align-items: center; /* Center vertically */
-          margin-top: calc(-1 * var(--header-height));
-          overflow: hidden; /* Hide overflow */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          /* margin-top handled by generic section rule */
+          overflow: hidden;
       }
 
       .site-footer {
@@ -194,8 +198,8 @@
           align-items: center;
           gap: 15px;
           z-index: 5;
-          opacity: 0;
-          transform: translateY(30px);
+          opacity: 0; /* Initial state for animation */
+          transform: translateY(30px); /* Initial state for animation */
       }
 
       .site-footer .copyright {
@@ -239,6 +243,12 @@
         padding-top: var(--header-height); /* Default top padding */
         margin-top: calc(-1 * var(--header-height)); /* Pull up */
       }
+      /* Override pull-up for first section */
+      section:first-of-type {
+          margin-top: 0;
+          padding-top: 0; /* No top padding for hero */
+      }
+
 
       /* --- SECTION 0: Hero Image Stack --- */
       .hero-section {
@@ -246,9 +256,6 @@
         color: var(--text-light);
         display: block; /* Override flex for specific layout */
         padding: 0; /* Remove default padding */
-        /* Ensure it's pulled up correctly */
-        margin-top: 0;
-        padding-top: 0;
         min-height: 100vh;
         height: 100vh; /* Force full height */
       }
@@ -285,7 +292,7 @@
           top: 0;
           left: 0;
           width: 100%;
-          height: 100vh; /* Full viewport height */
+          height: 100%; /* Cover the section height */
           overflow: hidden; /* Keep images contained */
       }
 
@@ -332,14 +339,17 @@
           color: var(--accent-color-1); /* Use accent color */
       }
 
+      .about-text {
+         max-width: 700px; /* Limit text width */
+         margin-left: auto;
+         margin-right: auto;
+      }
+
       .about-text p {
           font-size: clamp(0.9rem, 1.5vw, 1.1rem);
           line-height: 1.8;
           margin-bottom: 20px;
           font-weight: 300;
-          max-width: 700px; /* Limit text width */
-          margin-left: auto;
-          margin-right: auto;
       }
 
       .about-text strong {
@@ -428,7 +438,7 @@
           color: var(--accent-color-2); /* Dark Grey text */
       }
 
-      /* --- SECTION 2 (Now 3): Portfolio Preview --- */
+      /* --- SECTION 3: Portfolio Preview --- */
       .portfolio-section {
         background-color: var(--bg-dark-2); /* Dark background again */
         color: var(--text-light); /* Light text */
@@ -503,8 +513,8 @@
           transform: translateY(15px) scale(1.05); /* Adjust transform slightly */
       }
 
-      /* --- SECTION 3 (Now 4): Contact Form --- */
-      /* Container styles are handled by section#section-4 rule above */
+      /* --- SECTION 4: Contact Form --- */
+      /* Container styles are applied within the section#section-4 rule */
       .contact-form-container {
          background-color: var(--bg-light-2); /* White container on light background */
          padding: 50px clamp(20px, 8vw, 80px); /* Responsive padding */
@@ -765,7 +775,7 @@
             <ul>
                 <li><a href="#section-0" aria-label="Home"><i class="fas fa-home"></i><span class="nav-label">Home</span></a></li>
                 <li><a href="#section-1" aria-label="About"><i class="fas fa-info-circle"></i><span class="nav-label">About</span></a></li>
-                <li><a href="#section-services" aria-label="Services"><i class="fas fa-concierge-bell"></i><span class="nav-label">Services</span></a></li> {/* New Services Link */}
+                <li><a href="#section-services" aria-label="Services"><i class="fas fa-concierge-bell"></i><span class="nav-label">Services</span></a></li>
                 <li><a href="#section-3" aria-label="Portfolio"><i class="fas fa-drafting-compass"></i><span class="nav-label">Portfolio</span></a></li>
                 <li><a href="#section-4" aria-label="Contact"><i class="fas fa-envelope"></i><span class="nav-label">Contact</span></a></li>
             </ul>
@@ -775,14 +785,14 @@
     <div class="nav-dots">
         <div class="nav-dot active" data-section="0"></div>
         <div class="nav-dot" data-section="1"></div>
-        <div class="nav-dot" data-section="services"></div> {/* New Services Dot */}
+        <div class="nav-dot" data-section="services"></div>
         <div class="nav-dot" data-section="3"></div>
         <div class="nav-dot" data-section="4"></div>
     </div>
 
     <section class="hero-section" id="section-0" data-theme="dark">
         <div class="hero-image-stack">
-            <img src="interior_1.png" alt="Modern Interior Design 1" class="hero-image hero-image-active" id="hero-img-1"> {/* Added active class */}
+            <img src="interior_1.png" alt="Modern Interior Design 1" class="hero-image hero-image-active" id="hero-img-1">
             <img src="interior_2.png" alt="Classic Interior Design 2" class="hero-image" id="hero-img-2">
             <img src="interior_3.png" alt="Innovative Interior Design 3" class="hero-image" id="hero-img-3">
         </div>
@@ -799,7 +809,7 @@
     <section class="about-section" id="section-1" data-theme="dark">
         <div class="about-content-wrapper">
             <h2 class="about-title">Our Philosophy</h2>
-            <img src="portrait.jpg" alt="Architect Portrait LAYA Studio" class="about-portrait"> {/* Added Portrait Image */}
+            <img src="portrait.jpg" alt="Architect Portrait LAYA Studio" class="about-portrait">
             <div class="about-text">
                 <p>At LAYA, we believe architecture is more than just buildings; it's about crafting experiences and shaping environments. Our approach is rooted in a deep respect for <strong>tradition and context</strong>, while constantly pushing the boundaries of <strong>design innovation</strong>.</p>
                 <p>We work closely with our clients, understanding their vision and needs to create spaces that are not only aesthetically stunning but also functional, sustainable, and enduring. From initial concept to final construction, <strong>collaboration and meticulous attention to detail</strong> are at the heart of everything we do.</p>
@@ -808,7 +818,6 @@
         </div>
     </section>
 
-    {/* */}
     <section class="services-section" id="section-services" data-theme="light">
         <div class="services-container">
             <h2 class="services-title">What We Offer</h2>
@@ -832,7 +841,7 @@
         </div>
     </section>
 
-    <section class="portfolio-section" id="section-3" data-theme="dark"> {/* Section ID updated */}
+    <section class="portfolio-section" id="section-3" data-theme="dark">
         <div class="portfolio-preview-container">
             <h2 class="portfolio-title">Featured Work</h2>
             <div class="portfolio-grid">
@@ -847,7 +856,7 @@
             </div>
     </section>
 
-    <section class="contact-section" id="section-4" data-theme="light"> {/* Section ID updated */}
+    <section class="contact-section" id="section-4" data-theme="light">
          <div class="contact-form-container">
              <h2 class="contact-title">Get In Touch</h2>
              <form class="contact-form" action="#" method="POST">
@@ -890,7 +899,7 @@
       // --- JavaScript Code ---
       gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-        // --- Initialize Hero Section Animations (MODIFIED for Timed Auto-Switch) ---
+        // --- Initialize Hero Section Animations (Timed Auto-Switch) ---
         function initHero() {
             const heroSection = document.querySelector('.hero-section');
             if (!heroSection) return;
@@ -898,12 +907,20 @@
             const images = gsap.utils.toArray('.hero-image');
             const content = document.querySelector('.hero-content');
             let currentImageIndex = 0;
+            let imageInterval; // Define interval variable
 
-            // Initial setup - only set opacity/scale for non-active images
-            gsap.set(images.filter((img, index) => index !== 0), { opacity: 0, scale: 1.1 });
+            // Ensure images array is not empty
+            if (images.length === 0) {
+                console.warn("No hero images found for slider.");
+                return;
+            }
+
+            // Initial setup - set first image active, others hidden
+            gsap.set(images[0], { opacity: 1, scale: 1, pointerEvents: 'auto' });
+            gsap.set(images.slice(1), { opacity: 0, scale: 1.1, pointerEvents: 'none' }); // Hide others
             gsap.set(content, { opacity: 0, y: 30 });
 
-            // Timeline for initial content reveal (can still be triggered by scroll)
+            // Timeline for initial content reveal (triggered by scroll)
             const contentTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: heroSection,
@@ -913,28 +930,38 @@
             });
             contentTl.to(content, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' });
 
-            // Timeline for automatic image switching
+            // Function for automatic image switching
             function switchImage() {
+                // Ensure there's more than one image to switch
+                 if (images.length <= 1) return;
+
                 const nextImageIndex = (currentImageIndex + 1) % images.length;
 
                 // Animate out current image and animate in next image
                 gsap.timeline()
                     .to(images[currentImageIndex], { opacity: 0, duration: 1, ease: 'power1.in' })
-                    .set(images[currentImageIndex], { scale: 1.1 }) // Reset scale for next time
-                    .to(images[nextImageIndex], { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' }, "<0.2"); // Overlap slightly
+                    .set(images[currentImageIndex], { scale: 1.1, pointerEvents: 'none' }) // Reset scale & disable pointer events
+                    .set(images[nextImageIndex], { opacity: 0, scale: 1.1 }) // Prepare next image before animating in
+                    .to(images[nextImageIndex], { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' }, "<0.2") // Overlap slightly
+                    .set(images[nextImageIndex], { pointerEvents: 'auto' }); // Enable pointer events for new active image
 
                 currentImageIndex = nextImageIndex;
             }
 
-            // Start the timer after a brief delay (e.g., after initial load)
-            let imageInterval = setInterval(switchImage, 3000); // 3000ms = 3 seconds
+            // Start the timer
+            function startImageTimer() {
+                clearInterval(imageInterval); // Clear existing interval first
+                if (images.length > 1) { // Only start if there's more than one image
+                    imageInterval = setInterval(switchImage, 3000); // 3000ms = 3 seconds
+                }
+            }
 
-            // Optional: Pause on hover (requires wrapping stack or using section hover)
-             heroSection.addEventListener('mouseenter', () => clearInterval(imageInterval));
-             heroSection.addEventListener('mouseleave', () => {
-                 clearInterval(imageInterval); // Clear existing just in case
-                 imageInterval = setInterval(switchImage, 3000);
-             });
+            // Initial timer start
+            startImageTimer();
+
+            // Optional: Pause on hover
+            heroSection.addEventListener('mouseenter', () => clearInterval(imageInterval));
+            heroSection.addEventListener('mouseleave', startImageTimer); // Restart timer on mouse leave
 
              // Optional: Add subtle parallax to content (independent of image switching)
               gsap.to(content, {
@@ -953,9 +980,12 @@
        // --- Initialize About Section Animations ---
        function initAbout() {
            const aboutSection = document.querySelector('.about-section');
-           const aboutContent = document.querySelector('.about-content-wrapper');
-           const aboutPortrait = document.querySelector('.about-portrait'); // Select portrait
-           if (!aboutSection || !aboutContent || !aboutPortrait) return;
+           const aboutContentWrapper = document.querySelector('.about-content-wrapper');
+           const aboutPortrait = document.querySelector('.about-portrait');
+           if (!aboutSection || !aboutContentWrapper || !aboutPortrait) {
+                console.warn("Elements missing for About section animation.");
+                return;
+           }
 
            const tl = gsap.timeline({
                scrollTrigger: {
@@ -965,19 +995,26 @@
                }
            });
 
-           tl.to(aboutContent, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
-             // Animate portrait slightly after content starts fading in
-             .to(aboutPortrait, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }, "-=0.6");
+           // Animate wrapper first (contains title and text)
+           tl.to(aboutContentWrapper, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
+             // Then animate portrait
+             .to(aboutPortrait, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }, "-=0.6"); // Overlap slightly
        }
 
        // --- Initialize Services Section Animations ---
        function initServices() {
             const servicesSection = document.querySelector('.services-section');
             const container = document.querySelector('.services-container');
-            const title = container.querySelector('.services-title');
+            if (!servicesSection || !container) {
+                console.warn("Services section or container not found for animation.");
+                return;
+            }
             const items = gsap.utils.toArray('.service-item', container);
 
-            if (!servicesSection || !container || !title || items.length === 0) return;
+            if (items.length === 0) {
+                 console.warn("No service items found for animation.");
+                 return;
+            }
 
             const tl = gsap.timeline({
                 scrollTrigger: {
@@ -987,7 +1024,7 @@
                 }
             });
 
-            // Animate container fade in
+            // Animate container fade in (includes title)
             tl.to(container, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
 
             // Stagger animation for service items
@@ -1006,11 +1043,17 @@
        function initPortfolio() {
            const portfolioSection = document.querySelector('.portfolio-section');
            const container = document.querySelector('.portfolio-preview-container');
-           const title = document.querySelector('.portfolio-title');
-           const items = gsap.utils.toArray('.portfolio-item-placeholder');
-           const cta = document.querySelector('.portfolio-cta');
+            if (!portfolioSection || !container) {
+                 console.warn("Portfolio section or container not found for animation.");
+                 return;
+            }
+           const items = gsap.utils.toArray('.portfolio-item-placeholder', container);
+           const cta = document.querySelector('.portfolio-cta', container);
 
-           if (!portfolioSection || !container || !title || !items.length || !cta) return;
+           if (!items.length || !cta) {
+                console.warn("Portfolio items or CTA not found for animation.");
+                return; // Don't proceed if essential elements are missing
+           }
 
            const tl = gsap.timeline({
                scrollTrigger: {
@@ -1020,7 +1063,7 @@
                }
            });
 
-            // Animate container fade in
+            // Animate container fade in (includes title)
            tl.to(container, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
 
            // Stagger animation for portfolio items
@@ -1046,12 +1089,18 @@
        function initContact() {
            const contactSection = document.querySelector('.contact-section');
            const container = document.querySelector('.contact-form-container');
-            const title = container.querySelector('.contact-title');
+           if (!contactSection || !container) {
+                console.warn("Contact section or container not found for animation.");
+                return;
+           }
             const labels = gsap.utils.toArray('.contact-form label', container);
             const inputs = gsap.utils.toArray('.contact-form input, .contact-form textarea', container);
             const button = container.querySelector('.contact-form button');
 
-           if (!contactSection || !container || !title || !labels.length || !inputs.length || !button) return;
+           if (!labels.length || !inputs.length || !button) {
+               console.warn("Contact form elements (labels, inputs, button) missing for animation.");
+               return;
+           }
 
            const tl = gsap.timeline({
                scrollTrigger: {
@@ -1061,7 +1110,7 @@
                }
            });
 
-           // Animate container fade in
+           // Animate container fade in (includes title)
            tl.to(container, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
 
            // Stagger labels and inputs
@@ -1107,6 +1156,7 @@
                          if (target) {
                              e.preventDefault();
                              const headerHeight = header.offsetHeight;
+                             // Use GSAP ScrollToPlugin for smooth scrolling
                              gsap.to(window, {
                                  duration: 1.2,
                                  scrollTo: { y: target, offsetY: headerHeight },
@@ -1115,6 +1165,7 @@
                          } else { console.warn(`Scroll target '${href}' not found.`); }
                      } catch (error) {
                          console.error(`Error selecting scroll target '${href}':`, error);
+                         // Allow default behavior if selector is invalid
                      }
                  }
              });
@@ -1123,7 +1174,7 @@
 
      // --- Initialize Footer Animation ---
      function initFooter() {
-         const footer = document.querySelector('#section-4 .site-footer'); // Target footer in last section
+         const footer = document.querySelector('#section-4 .site-footer'); // Target footer in last section (section-4)
          const copyrightYearSpan = document.getElementById('copyright-year');
 
          if (!footer) { console.warn("Site footer inside #section-4 not found."); return; }
@@ -1144,7 +1195,8 @@
      // --- Navigation Dots & Theme Switching ---
      function initNavigation() {
          // Select all sections that should correspond to a dot/link
-         const sections = document.querySelectorAll('section[id^="section-"]');
+         const sectionsNodeList = document.querySelectorAll('section[id^="section-"]');
+         const sections = Array.from(sectionsNodeList); // Convert to array for easier indexing
          const navDots = document.querySelectorAll('.nav-dot');
          const body = document.body;
          const header = document.getElementById('site-header');
@@ -1165,8 +1217,8 @@
          navDots.forEach(dot => {
              dot.addEventListener('click', (e) => {
                  e.preventDefault();
-                 const sectionId = dot.getAttribute('data-section'); // Use the section ID directly
-                  const targetSection = document.getElementById(`section-${sectionId}`); // Find by ID
+                 const sectionIdSuffix = dot.getAttribute('data-section'); // Use the section ID suffix (0, 1, services, 3, 4)
+                 const targetSection = document.getElementById(`section-${sectionIdSuffix}`); // Find by ID
 
                  if (targetSection) {
                       gsap.to(window, {
@@ -1174,38 +1226,38 @@
                           scrollTo: { y: targetSection, offsetY: getHeaderHeight() }, // Use dynamic height
                           ease: "power2.inOut"
                       });
-                 } else { console.error(`Target section #section-${sectionId} not found for dot click.`); }
+                 } else { console.error(`Target section #section-${sectionIdSuffix} not found for dot click.`); }
              });
          });
 
-         sections.forEach((section) => {
-             const sectionId = section.id.replace('section-', ''); // Get the ID suffix (0, 1, services, 3, 4)
+         // Create ScrollTriggers for each section
+         sections.forEach((section, index) => {
+             const sectionIdSuffix = section.id.replace('section-', '');
              const theme = section.getAttribute('data-theme') || 'dark'; // Default to dark if not set
 
              ScrollTrigger.create({
                  trigger: section,
                  start: () => `top top+=${getHeaderHeight()}px`,
-                  // End trigger logic needs adjustment for the last section
                  end: () => {
-                     // Check if this is the last section in the NodeList
-                     const isLastSection = section === sections[sections.length - 1];
-                     // For the last section, trigger ends when its bottom hits the bottom of the viewport
-                     // For others, trigger ends when its bottom hits the header top
+                     const isLastSection = index === sections.length - 1;
+                     // End when bottom hits viewport bottom for last section, otherwise when bottom hits header top
                      return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight()}px`;
                  },
-                 id: `section-nav-${sectionId}`,
+                 id: `section-nav-${sectionIdSuffix}`,
                  // markers: true, // Uncomment for debugging trigger positions
-                 onEnter: () => updateActiveState(sectionId, theme),
-                 onEnterBack: () => updateActiveState(sectionId, theme),
+                 onEnter: () => updateActiveState(sectionIdSuffix, theme),
+                 onEnterBack: () => updateActiveState(sectionIdSuffix, theme),
                  invalidateOnRefresh: true // Recalculate start/end on resize/refresh
              });
          });
 
-         function updateActiveState(activeSectionId, activeTheme) {
+         function updateActiveState(activeSectionIdSuffix, activeTheme) {
+             // Update dots
              navDots.forEach((dot) => {
-                 const dotSecId = dot.getAttribute('data-section');
-                 dot.classList.toggle('active', dotSecId === activeSectionId);
+                 const dotSecIdSuffix = dot.getAttribute('data-section');
+                 dot.classList.toggle('active', dotSecIdSuffix === activeSectionIdSuffix);
              });
+             // Update body theme class
              const currentBodyTheme = body.classList.contains('on-light-section') ? 'light' : 'dark';
              if (activeTheme !== currentBodyTheme) {
                 body.classList.toggle('on-light-section', activeTheme === 'light');
@@ -1224,32 +1276,29 @@
          };
          window.addEventListener('scroll', scrollListener, { passive: true });
 
-         // --- Initial State Check (Improved) ---
+         // --- Initial State Check (Robust) ---
           setTimeout(() => {
-              let initialSectionId = '0'; // Default to first section ID
+              let initialSectionIdSuffix = '0'; // Default to first section ID suffix
               let initialTheme = 'dark';
               const currentScrollY = window.scrollY;
               const currentHeaderHeight = getHeaderHeight();
-              const viewTop = currentScrollY + currentHeaderHeight; // Effective top of viewport below header
-              const viewBottom = currentScrollY + window.innerHeight;
+              const viewThreshold = currentHeaderHeight + 100; // Point below header to consider active
 
-              sections.forEach(section => {
+              for (let i = sections.length - 1; i >= 0; i--) {
+                   const section = sections[i];
                    const rect = section.getBoundingClientRect();
                    const sectionTop = currentScrollY + rect.top;
-                   const sectionBottom = sectionTop + rect.height;
 
-                   // Check if the section is significantly visible within the viewport below the header
-                   // Consider a section active if its top edge is above the halfway point of the screen OR
-                   // if the viewport's top edge (below header) is within the section
-                   if ((sectionTop < viewTop + (window.innerHeight - currentHeaderHeight) / 2 && sectionBottom > viewTop + 100) ||
-                       (viewTop >= sectionTop && viewTop < sectionBottom)) {
-                         initialSectionId = section.id.replace('section-', '');
-                         initialTheme = section.getAttribute('data-theme') || 'dark';
+                  // If the top of the section is above the threshold point, it's the active one (or potentially active)
+                   if (sectionTop <= viewThreshold) {
+                       initialSectionIdSuffix = section.id.replace('section-', '');
+                       initialTheme = section.getAttribute('data-theme') || 'dark';
+                       break; // Found the topmost section currently in view
                    }
-              });
+              }
 
-              console.log(`Initial Active Section Detected: ${initialSectionId}`);
-              updateActiveState(initialSectionId, initialTheme);
+              console.log(`Initial Active Section Detected: ${initialSectionIdSuffix}`);
+              updateActiveState(initialSectionIdSuffix, initialTheme);
               scrollIndicatorState.scrolled = window.scrollY > 50;
               body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
               ScrollTrigger.refresh(); // Refresh triggers after initial check
@@ -1263,10 +1312,10 @@
        initNavigation(); // Handles dots, themes, scroll indicator, initial state
        initFooter();
 
-       // Initialize new section animations
+       // Initialize section animations
        initHero();
        initAbout();
-       initServices(); // Initialize new Services section
+       initServices();
        initPortfolio();
        initContact();
 
@@ -1278,9 +1327,10 @@
             const href = this.getAttribute('href');
             // Special handling for the portfolio CTA if it doesn't point to a section ID
             if (href === '#portfolio-full') {
-                console.log("Portfolio CTA clicked - implement full portfolio view/link.");
-                // e.preventDefault(); // Prevent default only if you handle it here (e.g., modal)
-                // return; // Stop further processing for this specific link
+                console.log("Portfolio CTA clicked - implement full portfolio view/link here.");
+                // Example: window.location.href = '/portfolio'; // Or open a modal
+                // e.preventDefault(); // Prevent default only if you handle it differently
+                return; // Stop further processing for this specific link
             }
 
             if (href && href.startsWith('#') && href.length > 1) {
@@ -1297,9 +1347,16 @@
                       });
                   } else {
                       console.warn("Smooth scroll target not found:", href);
+                      // Allow default browser behavior if target isn't found on page
                   }
-              } catch (error) { console.warn("Could not find target for anchor:", href, error); }
-            } else if (href === "#") { e.preventDefault(); }
+              } catch (error) {
+                  console.warn("Could not find target for anchor:", href, error);
+                  // Allow default browser behavior if selector is invalid
+              }
+            } else if (href === "#") {
+                e.preventDefault(); // Prevent jump for empty hash links
+                console.log("Empty hash link clicked.");
+            }
           });
         }
        });
@@ -1323,8 +1380,16 @@
        console.log("LAYA Initialization sequence complete.");
      }
 
-     // Start everything on window load
-      window.addEventListener('load', initAll);
+     // Start everything on DOMContentLoaded or load
+     // Using DOMContentLoaded is often slightly faster as it doesn't wait for images
+     if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAll);
+     } else {
+        // DOMContentLoaded has already fired
+        initAll();
+     }
+     // Alternatively, use load if waiting for images is critical for layout:
+     // window.addEventListener('load', initAll);
 
     </script>
 </body>
