@@ -8,7 +8,10 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Halimun&family=Montserrat:wght@400;700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Halimun&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
       *, *::before, *::after {
@@ -48,7 +51,7 @@
           --header-hover-color: var(--accent-color-1);
           --header-bg-dark: rgba(26, 26, 26, 0.8); /* Darker semi-transparent bg */
           --header-bg-light: rgba(253, 253, 253, 0.85); /* Lighter semi-transparent bg */
-          --logo-font: 'Halimun', sans-serif; /* Changed to Halimun */
+          --logo-font: 'Halimun', sans-serif; /* Use Halimun */
       }
       /* --- HEADER STYLES --- */
       .site-header {
@@ -252,10 +255,11 @@
       }
       .hero-tagline {
         font-size: clamp(1rem, 2vw, 1.5rem);
-        font-weight: 300;
+        font-weight: 300; /* Use Poppins light */
         max-width: 600px;
         margin: 0 auto;
         line-height: 1.6;
+        font-family: 'Poppins', sans-serif; /* Explicitly Poppins */
       }
       .hero-image-stack {
           position: absolute; /* Changed from relative */
@@ -316,10 +320,11 @@
           font-size: clamp(0.9rem, 1.5vw, 1.1rem);
           line-height: 1.8;
           margin-bottom: 20px;
-          font-weight: 300;
+          font-weight: 300; /* Use Poppins Light */
+          font-family: 'Poppins', sans-serif; /* Explicitly Poppins */
       }
       .about-text strong {
-          font-weight: 600;
+          font-weight: 600; /* Use Poppins SemiBold */
           color: var(--accent-color-3); /* Light grey for emphasis */
       }
       .about-portrait {
@@ -371,7 +376,7 @@
           transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
       .service-item:hover {
-          transform: translateY(25px) scale(1.02); /* Slight lift on hover */
+          transform: translateY(-5px) scale(1.02); /* Adjusted hover lift */
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       }
       .service-icon {
@@ -381,16 +386,18 @@
           display: inline-block; /* Needed for margin */
       }
       .service-item h3 {
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Montserrat', sans-serif; /* Explicitly Montserrat */
           font-size: 1.4rem;
-          font-weight: 700;
+          font-weight: 700; /* Use Montserrat Bold */
           margin-bottom: 15px;
           color: var(--accent-color-4);
       }
       .service-item p {
+          font-family: 'Poppins', sans-serif; /* Explicitly Poppins */
           font-size: 0.95rem;
           line-height: 1.7;
           color: var(--accent-color-2); /* Dark Grey text */
+          font-weight: 400; /* Use Poppins Regular */
       }
       /* --- SECTION 3: Portfolio Preview --- */
       .portfolio-section {
@@ -431,13 +438,15 @@
           justify-content: center;
           align-items: center;
           color: var(--text-light); /* Light text */
-          font-family: var(--logo-font); /* Using logo font here too */
-          font-size: 1rem;
-          font-weight: 600; /* May need adjustment for Halimun */
+          font-family: 'Montserrat', sans-serif; /* Using Montserrat here */
+          font-size: 1.1rem; /* Slightly larger */
+          font-weight: 700; /* Use Montserrat Bold */
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on dark */
           opacity: 0; /* Start hidden for stagger */
           transform: scale(0.9); /* Start small for stagger */
           transition: transform 0.3s ease, box-shadow 0.3s ease;
+          padding: 15px; /* Add padding */
+          text-align: center;
       }
       .portfolio-item-placeholder:hover {
           transform: scale(1.03);
@@ -449,8 +458,8 @@
           color: var(--text-dark); /* Dark text on accent */
           padding: 15px 40px;
           border-radius: 50px; /* Pill shape */
-          font-family: var(--logo-font); /* Using logo font here too */
-          font-weight: 600; /* May need adjustment for Halimun */
+          font-family: 'Montserrat', sans-serif; /* Explicitly Montserrat for CTA */
+          font-weight: 700; /* Use Montserrat Bold */
           text-decoration: none;
           font-size: 1rem;
           transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
@@ -460,7 +469,7 @@
       .portfolio-cta:hover {
           background-color: var(--accent-color-3); /* Light grey on hover */
           color: var(--text-dark);
-          transform: translateY(15px) scale(1.05); /* Adjust transform slightly */
+          transform: translateY(0px) scale(1.05); /* Adjusted hover transform */
       }
       /* --- SECTION 4: Contact Form --- */
       /* Container styles are applied within the section#section-4 rule */
@@ -491,8 +500,8 @@
       }
       .contact-form label {
           display: block;
-          font-family: 'Poppins', sans-serif;
-          font-weight: 600;
+          font-family: 'Poppins', sans-serif; /* Explicitly Poppins */
+          font-weight: 600; /* Use Poppins SemiBold */
           font-size: 0.9rem;
           color: var(--accent-color-2);
           margin-bottom: 8px;
@@ -506,8 +515,9 @@
           padding: 15px 20px;
           border: 1px solid #ccc;
           border-radius: 6px;
-          font-family: 'Poppins', sans-serif;
+          font-family: 'Poppins', sans-serif; /* Explicitly Poppins */
           font-size: 1rem;
+          font-weight: 400; /* Use Poppins Regular */
           color: var(--text-dark);
           background-color: var(--bg-light-2);
           transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -533,9 +543,9 @@
           color: var(--text-light);
           border: none;
           border-radius: 50px;
-          font-family: var(--logo-font); /* Using logo font here too */
+          font-family: 'Montserrat', sans-serif; /* Explicitly Montserrat for button */
           font-size: 1.1rem;
-          font-weight: 600; /* May need adjustment for Halimun */
+          font-weight: 700; /* Use Montserrat Bold */
           cursor: pointer;
           transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
           margin-top: 10px;
@@ -545,7 +555,7 @@
       .contact-form button:hover {
           background-color: var(--accent-color-1);
           color: var(--text-dark);
-          transform: scale(1.03);
+          transform: scale(1.03) translateY(0); /* Adjusted Hover */
       }
       /* --- Navigation Dots --- */
       .nav-dots {
@@ -588,7 +598,7 @@
         transform: translateX(-50%);
         color: rgba(255, 255, 255, 0.7);
         font-size: 0.8rem; /* Smaller text */
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Poppins', sans-serif; /* Explicitly Poppins */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -598,34 +608,36 @@
         letter-spacing: 1px;
         background-color: transparent; /* Transparent background */
       }
+      .scroll-indicator span {
+          font-weight: 400; /* Use Poppins Regular */
+      }
       .scroll-indicator i {
         font-size: 1.2rem;
         margin-top: 8px;
         color: #fff; /* White icon */
       }
-      .scroll-arrow {
-        margin-top: 12px;
-        width: 18px;
-        height: 18px;
-        border-right: 2px solid rgba(255, 255, 255, 0.7);
-        border-bottom: 2px solid rgba(255, 255, 255, 0.7);
-        transform: rotate(45deg);
-        animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncier animation */
-      }
+      /* Removed .scroll-arrow style as FontAwesome icon is used */
       @keyframes scrollArrow {
-        0% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; }
-        50% { transform: rotate(45deg) translate(8px, 8px); opacity: 1; } /* Smaller movement */
-        100% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; }
+        /* Animation not needed if using FA icon */
+        0% { transform: translateY(0); opacity: 0.3; }
+        50% { transform: translateY(8px); opacity: 1; }
+        100% { transform: translateY(0); opacity: 0.3; }
+      }
+      .scroll-indicator i {
+          /* Add animation to the FontAwesome icon */
+          animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
       }
       body.scrolled .scroll-indicator {
           opacity: 0;
           pointer-events: none;
       }
+
       /* --- RESPONSIVE STYLES --- */
+      /* Media queries remain largely the same, ensure logo font size adjustments work with Halimun */
       @media (max-width: 992px) {
           /* Header */
           .site-header { padding: 0 25px; }
-          .logo-link { font-size: 1.8rem; } /* Adjusted size for Halimun */
+          .logo-link { font-size: 2rem; } /* Adjusted size for Halimun */
           .header-nav ul { gap: 25px; }
           /* Sections */
           section { padding-left: 30px; padding-right: 30px; } /* Adjust side padding */
@@ -651,14 +663,14 @@
        @media (max-width: 768px) {
           :root { --header-height: 70px; } /* Adjust header height */
           .site-header { padding: 0 20px; }
-          .logo-link { font-size: 1.6rem; } /* Adjusted size for Halimun */
+          .logo-link { font-size: 1.8rem; } /* Adjusted size for Halimun */
           .header-nav ul { gap: 20px; }
           .header-nav a { font-size: 1rem; }
           .nav-label { display: none; } /* Hide labels on smaller screens */
           .nav-dots { right: 20px; }
           .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
           .portfolio-grid { gap: 20px; }
-          .portfolio-item-placeholder { font-size: 0.9rem; }
+          .portfolio-item-placeholder { font-size: 1rem; } /* Keep consistent */
           .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
           .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; }
           .contact-form input, .contact-form textarea { padding: 12px 15px; font-size: 0.95rem;}
@@ -679,7 +691,7 @@
        @media (max-width: 480px) {
           :root { --header-height: 65px; }
           .site-header { padding: 0 15px; }
-          .logo-link { font-size: 1.4rem; } /* Adjusted size for Halimun */
+          .logo-link { font-size: 1.6rem; } /* Adjusted size for Halimun */
           .header-nav ul { gap: 15px; } /* Reduce gap further */
           .header-nav a { font-size: 0.9rem; }
           .nav-dots { right: 15px; }
@@ -691,9 +703,9 @@
           .services-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
           .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
           .portfolio-grid { grid-template-columns: 1fr; gap: 15px; } /* Stack items */
+          .portfolio-item-placeholder { font-size: 0.9rem; } /* Smaller placeholder text */
           .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
           .scroll-indicator { bottom: 25px; font-size: 0.75rem;}
-          .scroll-indicator i { color: #fff; } /* Ensure icon is white on dark bg */
           section:not(.hero-section) { padding-left: 15px; padding-right: 15px; padding-top: var(--header-height); }
           .services-container { padding: 30px 15px; }
           .contact-form-container { padding: 25px 15px; }
@@ -734,8 +746,7 @@
          </div>
         <div class="scroll-indicator">
             <span>Explore LAYA</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
+            <i class="fas fa-chevron-down"></i> </div>
     </section>
     <section class="about-section" id="section-1" data-theme="dark">
         <div class="about-content-wrapper">
@@ -747,7 +758,7 @@
                     <p>Let us help you bring your vision to life.</p>
                 </div>
             </div>
-            <img src="portrait.jpg" alt="Architect Portrait LAYA Studio" class="about-portrait">
+             <img src="portrait.jpg" alt="Architect Portrait LAYA Studio" class="about-portrait">
         </div>
     </section>
     <section class="services-section" id="section-services" data-theme="light">
@@ -819,6 +830,7 @@
             <p class="copyright">&copy; <span id="copyright-year"></span> LAYA Architecture Studio. All rights reserved.</p>
         </footer>
     </section>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
@@ -851,49 +863,49 @@
                 }
             });
             contentTl.to(content, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' });
-            
+
             // Improved cinematic image switching function
             function switchImage() {
                 // Ensure there's more than one image to switch
                 if (images.length <= 1) return;
                 const nextImageIndex = (currentImageIndex + 1) % images.length;
-                
+
                 // Create a more cinematic timeline for transitions
                 const tl = gsap.timeline({
                     defaults: { ease: "power2.inOut" } // Smoother easing
                 });
-                
+
                 // Cinematic fade out current image
-                tl.to(images[currentImageIndex], { 
-                    opacity: 0, 
+                tl.to(images[currentImageIndex], {
+                    opacity: 0,
                     duration: 1.5,
                     scale: 1.05 // Subtle zoom out effect
                 })
                 // Reset and prepare next image
-                .set(images[currentImageIndex], { 
-                    scale: 1.1, 
-                    pointerEvents: 'none' 
+                .set(images[currentImageIndex], {
+                    scale: 1.1,
+                    pointerEvents: 'none'
                 })
                 // Prepare next image with initial state
-                .set(images[nextImageIndex], { 
-                    opacity: 0, 
+                .set(images[nextImageIndex], {
+                    opacity: 0,
                     scale: 1.05 // Start slightly zoomed for more dramatic entry
                 }, "<")
                 // Cinematic fade in of next image
-                .to(images[nextImageIndex], { 
-                    opacity: 1, 
-                    scale: 1, 
+                .to(images[nextImageIndex], {
+                    opacity: 1,
+                    scale: 1,
                     duration: 2, // Longer duration for smoother transition
                     ease: "power2.out" // More cinematic easing
                 }, "<0.3") // Slight overlap for smoother transition
                 // Enable pointer events for new active image
-                .set(images[nextImageIndex], { 
-                    pointerEvents: 'auto' 
+                .set(images[nextImageIndex], {
+                    pointerEvents: 'auto'
                 });
-                
+
                 currentImageIndex = nextImageIndex;
             }
-            
+
             // Start the timer with longer interval for better viewing
             function startImageTimer() {
                 clearInterval(imageInterval); // Clear existing interval first
@@ -901,14 +913,14 @@
                     imageInterval = setInterval(switchImage, 5000); // 5000ms = 5 seconds, longer for better viewing
                 }
             }
-            
+
             // Initial timer start
             startImageTimer();
-            
+
             // Optional: Pause on hover
             heroSection.addEventListener('mouseenter', () => clearInterval(imageInterval));
             heroSection.addEventListener('mouseleave', startImageTimer); // Restart timer on mouse leave
-            
+
             // Add cinematic parallax to hero images
             images.forEach(img => {
                 gsap.to(img, {
@@ -923,7 +935,7 @@
                     }
                 });
             });
-            
+
             // Add subtle parallax to content (independent of image switching)
             gsap.to(content, {
                 yPercent: -10, // More subtle movement for text
@@ -936,7 +948,7 @@
                 }
             });
         }
-        
+
        // --- Initialize About Section Animations ---
        function initAbout() {
            const aboutSection = document.querySelector('.about-section');
