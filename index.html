@@ -233,7 +233,7 @@
         top: 65%; /* << POSITION LOWER */
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 2;
+        z-index: 2; /* Ensure content is above scrim */
         text-align: center;
         width: 90%;
         max-width: 800px; /* << WIDER MAX WIDTH */
@@ -245,17 +245,17 @@
            pointer-events: auto; /* Allow interaction with text if needed */
        }
 
-
+      /* --- HERO TAGLINE STYLING --- */
       .hero-tagline {
         /* << INCREASED FONT SIZE */
-        font-size: clamp(1.8rem, 4vw, 2.8rem);
-        font-weight: 400; /* Normal weight might look better large */
+        font-size: clamp(2.2rem, 5vw, 3.5rem); /* Slightly larger base size */
+        font-weight: 600; /* Slightly bolder */
         margin: 0 auto;
-        line-height: 1.5; /* Adjust line height for larger font */
-        font-family: 'Poppins', sans-serif;
+        line-height: 1.4; /* Adjust line height */
+        font-family: 'Montserrat', sans-serif; /* Match logo font maybe? */
         color: var(--text-light);
-        /* << ADDED TEXT SHADOW FOR READABILITY */
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        /* << UPDATED TEXT SHADOW FOR READABILITY */
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75); /* Adjusted shadow */
         overflow: hidden;
       }
 
@@ -265,7 +265,7 @@
           opacity: 0; /* Initially hidden */
           transform: scale(0.5); /* Start scaled down */
           transform-origin: center center; /* Scale from center */
-          margin: 0 3px; /* Space between words */
+          margin: 0 4px; /* Space between words */
           will-change: transform, opacity; /* Performance hint */
       }
 
@@ -277,6 +277,20 @@
           height: 100%;
           overflow: hidden;
       }
+
+      /* --- SCRIM ADDED HERE --- */
+      .hero-image-stack::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3); /* Dark overlay - adjust opacity (0.3 = 30%) */
+        z-index: 1; /* Place scrim between image and content */
+        pointer-events: none; /* Don't block interactions */
+      }
+
       .hero-image {
           position: absolute;
           top: 0;
@@ -287,11 +301,13 @@
           object-position: center;
           opacity: 0;
           pointer-events: none;
+          z-index: 0; /* Ensure images are behind the scrim */
       }
       .hero-image.hero-image-active {
           opacity: 1;
           pointer-events: auto;
       }
+
       /* --- SECTION 1: About Me --- */
       .about-section {
         background-color: var(--bg-dark-2);
@@ -611,7 +627,7 @@
         background-color: transparent;
       }
        .scroll-indicator span {
-         font-weight: 400;
+        font-weight: 400;
        }
        .scroll-indicator i {
          font-size: 1.2rem;
@@ -626,12 +642,12 @@
       }
 
       .scroll-indicator i {
-          animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+         animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
       }
 
       body.scrolled .scroll-indicator {
-          opacity: 0;
-          pointer-events: none;
+         opacity: 0;
+         pointer-events: none;
       }
 
 
@@ -650,10 +666,10 @@
            .about-portrait { max-width: 250px; margin-bottom: 20px; }
            .scroll-indicator { bottom: 8vh; }
            .hero-content { top: 68%; max-width: 90%;} /* Adjust hero position/width */
-           .hero-tagline { font-size: clamp(1.6rem, 3.5vw, 2.5rem); }
+           .hero-tagline { font-size: clamp(1.8rem, 4vw, 3rem); } /* Adjusted responsive hero font */
        }
 
-         @media (max-width: 768px) {
+        @media (max-width: 768px) {
              :root { --header-height: 70px; }
              .site-header { padding: 0 20px; }
              .logo-link img { height: 40px; }
@@ -663,7 +679,7 @@
              .nav-dots { right: 20px; }
              .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
              section { padding-left: 20px; padding-right: 20px; }
-               section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
+              section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
              .portfolio-grid { gap: 20px; }
              .portfolio-item-placeholder { font-size: 1rem; }
              .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
@@ -679,32 +695,32 @@
              .services-title { margin-bottom: 40px; }
              .service-item { padding: 30px; }
              .hero-content { top: 70%; max-width: 90%; } /* Adjust hero position/width */
-             .hero-tagline { font-size: clamp(1.4rem, 5vw, 2rem); line-height: 1.4; } /* Adjust tagline font */
+             .hero-tagline { font-size: clamp(1.6rem, 5vw, 2.5rem); line-height: 1.4; } /* Adjust tagline font */
          }
 
-          @media (max-width: 480px) {
-              :root { --header-height: 65px; }
-              .site-header { padding: 0 15px; }
-              .logo-link img { height: 35px; }
-              .header-nav ul { gap: 15px; }
-              .header-nav a { font-size: 0.9rem; }
-              .nav-dots { right: 15px; }
-              .hero-tagline { font-size: clamp(1.2rem, 6vw, 1.6rem); line-height: 1.4; } /* Adjust tagline font */
-              .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-              .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
-              .about-portrait { max-width: 150px; }
-              .services-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-              .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-              .portfolio-grid { grid-template-columns: 1fr; gap: 15px; }
-              .portfolio-item-placeholder { font-size: 0.9rem; }
-              .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
-              .scroll-indicator { bottom: 6vh; font-size: 0.75rem;}
-              section { padding-left: 15px; padding-right: 15px; }
-              section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
-              .contact-form-container { padding: 25px 15px; }
-              .hero-content { top: 72%; max-width: 95%; } /* Adjust hero position/width */
-              .tagline-word { margin: 0 1px;} /* Reduce space slightly */
-          }
+         @media (max-width: 480px) {
+             :root { --header-height: 65px; }
+             .site-header { padding: 0 15px; }
+             .logo-link img { height: 35px; }
+             .header-nav ul { gap: 15px; }
+             .header-nav a { font-size: 0.9rem; }
+             .nav-dots { right: 15px; }
+             .hero-tagline { font-size: clamp(1.4rem, 6vw, 2rem); line-height: 1.4; } /* Adjust tagline font */
+             .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+             .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
+             .about-portrait { max-width: 150px; }
+             .services-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+             .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+             .portfolio-grid { grid-template-columns: 1fr; gap: 15px; }
+             .portfolio-item-placeholder { font-size: 0.9rem; }
+             .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+             .scroll-indicator { bottom: 6vh; font-size: 0.75rem;}
+             section { padding-left: 15px; padding-right: 15px; }
+             section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
+             .contact-form-container { padding: 25px 15px; }
+             .hero-content { top: 72%; max-width: 95%; } /* Adjust hero position/width */
+             .tagline-word { margin: 0 2px;} /* Reduce space slightly */
+         }
     </style>
 </head>
 <body data-current-theme="dark">
@@ -734,22 +750,15 @@
     </div>
 
     <section class="hero-section" id="section-0" data-theme="dark">
-        <div class="hero-image-stack">
-            <img src="interior_1.png" alt="Modern Interior Design 1" class="hero-image hero-image-active" id="hero-img-1">
+        <div class="hero-image-stack"> <img src="interior_1.png" alt="Modern Interior Design 1" class="hero-image hero-image-active" id="hero-img-1">
             <img src="interior_2.png" alt="Classic Interior Design 2" class="hero-image" id="hero-img-2">
             <img src="interior_3.png" alt="Innovative Interior Design 3" class="hero-image" id="hero-img-3">
         </div>
          <div class="hero-content">
               <p class="hero-tagline">
-                  <span class="tagline-word">Designing</span>
-                  <span class="tagline-word">spaces</span>
+                  <span class="tagline-word">Design</span>
                   <span class="tagline-word">that</span>
-                  <span class="tagline-word">inspire.</span><br>
-                  <span class="tagline-word">Blending</span>
-                  <span class="tagline-word">innovation</span>
-                  <span class="tagline-word">with</span>
-                  <span class="tagline-word">timeless</span>
-                  <span class="tagline-word">tradition.</span>
+                  <span class="tagline-word">inspires</span>
               </p>
          </div>
         <div class="scroll-indicator">
@@ -884,7 +893,7 @@
                     scale: 1,           // Scale up to normal size
                     duration: 0.7,      // Duration of each word pop
                     ease: 'back.out(1.5)', // Pop effect (adjust overshoot with number)
-                    stagger: 0.08       // Time between start of each word pop
+                    stagger: 0.1        // Time between start of each word pop (adjust timing)
                 });
             } else {
                 console.warn("No tagline words found for animation.");
@@ -898,8 +907,8 @@
                 const tl = gsap.timeline({ defaults: { ease: "power1.inOut" } });
                 tl.to(images[currentImageIndex], { opacity: 0, duration: 1.5 })
                   .set(images[currentImageIndex], { pointerEvents: 'none' })
-                  .set(images[nextImageIndex], { opacity: 0 }, "<")
-                  .to(images[nextImageIndex], { opacity: 1, duration: 1.5 }, "<0.3")
+                  .set(images[nextImageIndex], { opacity: 0 }, "<") // Start fade-in before fade-out finishes
+                  .to(images[nextImageIndex], { opacity: 1, duration: 1.5 }, "<0.3") // Adjust overlap timing
                   .set(images[nextImageIndex], { pointerEvents: 'auto' });
                 currentImageIndex = nextImageIndex;
             }
@@ -982,7 +991,7 @@
                    }
                });
            });
-            const logoLink = document.querySelector('.logo-link');
+           const logoLink = document.querySelector('.logo-link');
            if (logoLink) {
                logoLink.addEventListener('click', function(e) {
                    const href = this.getAttribute('href');
@@ -1008,8 +1017,10 @@
             const body = document.body;
             const header = document.getElementById('site-header');
             if (navDots.length === 0 || sections.length === 0 || !header) { console.warn("Navigation elements missing."); return; }
-            if (navDots.length !== sections.length) { console.warn(`Dot/Section mismatch: ${navDots.length}/${sections.length}.`); }
+            if (navDots.length !== sections.length) { console.warn(`Dot/Section mismatch: ${navDots.length}/${sections.length}. Adjusting logic based on data-section attributes.`); }
+
             const getHeaderHeight = () => header.offsetHeight;
+
             navDots.forEach(dot => {
                 dot.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1019,24 +1030,39 @@
                     else { console.error(`Target section #section-${sectionIdSuffix} not found.`); }
                 });
             });
+
+            // Function to find the corresponding section for a dot's data-section value
+            const findSectionBySuffix = (suffix) => {
+                return sections.find(sec => sec.id === `section-${suffix}`);
+            };
+
             sections.forEach((section, index) => {
                 const sectionIdSuffix = section.id.replace('section-', '');
                 const theme = section.getAttribute('data-theme') || 'dark';
+
                 ScrollTrigger.create({
                     trigger: section,
                     start: () => section.id === 'section-0' ? `top top` : `top top+=${getHeaderHeight()}px`,
-                     end: () => { const isLastSection = index === sections.length - 1; return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight()}px`; },
+                     end: () => {
+                         // For the last section, ensure it triggers even if shorter than viewport
+                         const isLastSection = index === sections.length - 1;
+                         return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight()}px`;
+                     },
                     id: `section-nav-${sectionIdSuffix}`,
                     onEnter: () => updateActiveState(sectionIdSuffix, theme),
                     onEnterBack: () => updateActiveState(sectionIdSuffix, theme),
+                    // Consider onLeave/onLeaveBack if you want dots to deactivate immediately
                     invalidateOnRefresh: true
                 });
             });
+
             function updateActiveState(activeSectionIdSuffix, activeTheme) {
                 navDots.forEach((dot) => { dot.classList.toggle('active', dot.getAttribute('data-section') === activeSectionIdSuffix); });
                 const currentBodyTheme = body.classList.contains('on-light-section') ? 'light' : 'dark';
                 if (activeTheme !== currentBodyTheme) { body.classList.toggle('on-light-section', activeTheme === 'light'); }
             }
+
+            // Scroll indicator visibility logic
             let scrollIndicatorState = { scrolled: window.scrollY > 50 };
             body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
             const scrollListener = () => {
@@ -1044,37 +1070,72 @@
                 if (isScrolled !== scrollIndicatorState.scrolled) { body.classList.toggle('scrolled', isScrolled); scrollIndicatorState.scrolled = isScrolled; }
             };
             window.addEventListener('scroll', scrollListener, { passive: true });
+
+             // Initial state check after slight delay for layout settling
              setTimeout(() => {
-                let initialSectionIdSuffix = '0'; let initialTheme = 'dark'; const currentScrollY = window.scrollY; const currentHeaderHeight = getHeaderHeight(); const threshold = currentHeaderHeight / 2;
-                for (let i = sections.length - 1; i >= 0; i--) {
-                    const section = sections[i]; const rect = section.getBoundingClientRect(); const sectionTopScrollY = currentScrollY + rect.top;
-                    if (sectionTopScrollY <= currentScrollY + threshold) { initialSectionIdSuffix = section.id.replace('section-', ''); initialTheme = section.getAttribute('data-theme') || 'dark'; break; }
-                }
-                updateActiveState(initialSectionIdSuffix, initialTheme); scrollIndicatorState.scrolled = window.scrollY > 50; body.classList.toggle('scrolled', scrollIndicatorState.scrolled); ScrollTrigger.refresh();
+                 let initialSectionIdSuffix = '0'; let initialTheme = 'dark'; const currentScrollY = window.scrollY; const currentHeaderHeight = getHeaderHeight(); const threshold = currentHeaderHeight / 2;
+
+                 // Determine the currently visible section based on scroll position
+                 for (let i = sections.length - 1; i >= 0; i--) {
+                     const section = sections[i];
+                     const rect = section.getBoundingClientRect();
+                     const sectionTopScrollY = currentScrollY + rect.top;
+                     // Check if the top of the section is above the threshold point (header height / 2)
+                     if (sectionTopScrollY <= currentScrollY + threshold) {
+                         initialSectionIdSuffix = section.id.replace('section-', '');
+                         initialTheme = section.getAttribute('data-theme') || 'dark';
+                         break; // Found the active section
+                     }
+                 }
+                 updateActiveState(initialSectionIdSuffix, initialTheme);
+                 scrollIndicatorState.scrolled = window.scrollY > 50; body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
+                 ScrollTrigger.refresh(); // Refresh ScrollTrigger after setting initial state
              }, 150);
        }
        function initAll() {
          console.log("Initializing LAYA animations...");
          initHeader(); initNavigation(); initFooter(); initHero(); initAbout(); initServices(); initPortfolio(); initContact();
+
+         // Generic smooth scroll for other anchors (if any)
          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+           // Exclude header and nav dots links as they have specific handlers
            if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots')) {
              anchor.addEventListener('click', function(e) {
                const href = this.getAttribute('href');
-               if (href === '#portfolio-full') { e.preventDefault(); console.log("Portfolio CTA clicked."); return; }
+               // Specific handling for portfolio CTA if needed
+               if (href === '#portfolio-full') { e.preventDefault(); console.log("Portfolio CTA clicked - Add navigation logic here."); return; }
+
                if (href && href.startsWith('#') && href.length > 1) {
                  try {
-                   const target = document.querySelector(href); const header = document.getElementById('site-header'); const offset = header ? header.offsetHeight : 75;
-                   if (target) { e.preventDefault(); gsap.to(window, { duration: 1, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" }); }
-                   else { console.warn("Smooth scroll target not found:", href); }
-                 } catch (error) { console.warn("Could not find target for anchor:", href, error); }
-               } else if (href === "#") { e.preventDefault(); }
+                   const target = document.querySelector(href);
+                   const header = document.getElementById('site-header');
+                   const offset = header ? header.offsetHeight : 75; // Default offset if header not found
+                   if (target) {
+                     e.preventDefault();
+                     gsap.to(window, { duration: 1, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" });
+                   } else {
+                     console.warn("Smooth scroll target not found:", href);
+                   }
+                 } catch (error) {
+                   console.warn("Could not find target for anchor:", href, error);
+                 }
+               } else if (href === "#") {
+                 e.preventDefault(); // Prevent jumping for href="#" links
+               }
              });
            }
          });
+
+         // Final refresh after a slightly longer delay, ensure everything is rendered
          setTimeout(() => { ScrollTrigger.refresh(); console.log("ScrollTrigger refreshed after init."); }, 250);
+
+         // Refresh ScrollTrigger on resize (debounced)
          let resizeTimer; window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { console.log("Resizing - Refreshing ScrollTrigger..."); ScrollTrigger.refresh(true); }, 250); });
+
          console.log("LAYA Initialization sequence complete.");
        }
+
+       // Run initialization when DOM is ready
        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initAll); } else { initAll(); }
     </script>
 </body>
