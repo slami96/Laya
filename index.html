@@ -61,7 +61,7 @@
           width: 100%;
           height: var(--header-height);
           padding: 0 40px;
-          z-index: 100; /* Above intro animation */
+          z-index: 100; /* Above section content */
           display: flex;
           align-items: center;
           background-color: var(--header-bg-dark);
@@ -202,6 +202,7 @@
         height: auto;
         width: 100%;
         display: flex;
+        /* Default: center align items */
         justify-content: center;
         align-items: center;
         position: relative;
@@ -226,84 +227,43 @@
         position: relative;
         overflow: hidden;
       }
-
-      /* --- HERO CONTENT (Positioning Only) --- */
       .hero-content {
         position: absolute;
-        top: 65%; /* << POSITION LOWER */
+        top: 65%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 2; /* Ensure content is above scrim */
+        z-index: 2;
         text-align: center;
         width: 90%;
-        max-width: 800px; /* << WIDER MAX WIDTH */
-        opacity: 1; /* Make sure container is visible for layout */
-        pointer-events: none; /* Allow clicks through to background if needed */
+        max-width: 800px;
+        opacity: 1;
+        pointer-events: none;
       }
-       .hero-content > * {
-           pointer-events: auto; /* Allow interaction with text if needed */
-       }
-
-      /* --- HERO TAGLINE STYLING --- */
+       .hero-content > * { pointer-events: auto; }
       .hero-tagline {
-        font-size: clamp(2.2rem, 5vw, 3.5rem); /* Slightly larger base size */
-        font-weight: 600; /* Slightly bolder */
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+        font-weight: 600;
         margin: 0 auto;
-        line-height: 1.4; /* Adjust line height */
-        font-family: 'Montserrat', sans-serif; /* Match logo font maybe? */
+        line-height: 1.4;
+        font-family: 'Montserrat', sans-serif;
         color: var(--text-light);
-        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75); /* Adjusted shadow */
-        overflow: hidden; /* Helps contain animating words */
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75);
+        overflow: hidden;
       }
-
-      /* --- TAGLINE WORD STYLES (for Pop Animation) --- */
       .tagline-word {
-          display: inline-block; /* Needed for transform */
-          opacity: 0; /* Initially hidden */
-          transform: scale(0.5); /* Start scaled down */
-          transform-origin: center center; /* Scale from center */
-          margin: 0 4px; /* Space between words */
-          will-change: transform, opacity; /* Performance hint */
+          display: inline-block; opacity: 0; transform: scale(0.5);
+          transform-origin: center center; margin: 0 4px; will-change: transform, opacity;
       }
-
-      .hero-image-stack {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-      }
-
-      /* --- SCRIM ADDED HERE --- */
+      .hero-image-stack { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
       .hero-image-stack::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.3); /* Dark overlay */
-        z-index: 1; /* Place scrim between image and content */
-        pointer-events: none; /* Don't block interactions */
+        content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.3); z-index: 1; pointer-events: none;
       }
-
       .hero-image {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-          opacity: 0; /* Controlled by JS */
-          pointer-events: none; /* Controlled by JS */
-          z-index: 0; /* Ensure images are behind the scrim */
+          position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+          object-fit: cover; object-position: center; opacity: 0; pointer-events: none; z-index: 0;
       }
-      .hero-image.hero-image-active {
-          opacity: 1;
-          pointer-events: auto;
-      }
+      .hero-image.hero-image-active { opacity: 1; pointer-events: auto; }
 
       /* --- SECTION 1: About Me --- */
       .about-section {
@@ -312,219 +272,144 @@
       }
       .about-content-wrapper {
         max-width: 900px;
-        opacity: 0; /* Initial state for GSAP */
-        transform: translateY(50px); /* Initial state for GSAP */
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start; /* Align items to the top */
-        width: 100%;
+        opacity: 0; transform: translateY(50px);
+        display: flex; justify-content: space-between; align-items: flex-start; width: 100%;
       }
-      .about-text-container {
-        flex: 1; /* Take remaining space */
-        margin-right: 40px; /* Space between text and image */
-        text-align: left; /* Align text left */
-      }
+      .about-text-container { flex: 1; margin-right: 40px; text-align: left; }
       .about-title {
-          font-family: var(--logo-font);
-          font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 700;
-          margin-bottom: 30px;
-          color: var(--accent-color-1);
+          font-family: var(--logo-font); font-size: clamp(2rem, 5vw, 3.5rem);
+          font-weight: 700; margin-bottom: 30px; color: var(--accent-color-1);
       }
-      .about-text {
-          max-width: 700px; /* Limit text width if needed */
-      }
+      .about-text { max-width: 700px; }
       .about-text p {
-          font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-          line-height: 1.8;
-          margin-bottom: 20px;
-          font-weight: 300;
-          font-family: 'Poppins', sans-serif;
+          font-size: clamp(0.9rem, 1.5vw, 1.1rem); line-height: 1.8;
+          margin-bottom: 20px; font-weight: 300; font-family: 'Poppins', sans-serif;
       }
-      .about-text strong {
-          font-weight: 600;
-          color: var(--accent-color-3);
-      }
+      .about-text strong { font-weight: 600; color: var(--accent-color-3); }
       .about-portrait {
-          display: block;
-          max-width: 350px; /* Control image size */
-          width: 100%; /* Responsive width */
-          height: auto;
-          border-radius: 10px;
-          border: 3px solid var(--accent-color-1);
+          display: block; max-width: 350px; width: 100%; height: auto;
+          border-radius: 10px; border: 3px solid var(--accent-color-1);
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-          opacity: 0; /* Initial state for GSAP */
-          transform: scale(0.8); /* Initial state for GSAP */
-          flex-shrink: 0; /* Prevent image from shrinking */
+          opacity: 0; transform: scale(0.8); flex-shrink: 0;
       }
 
-      /* --- SECTION: Services --- */
+      /* --- SECTION: Services (NEW LAYOUT & INTRO) --- */
       .services-section {
           background-color: var(--bg-light-1);
           color: var(--text-dark);
-          position: relative; /* Needed for z-index stacking */
-          /* No overflow hidden here, allow fixed intro to show */
+          position: relative; /* Needed for overlay and positioning */
+          display: flex; /* Override section default */
+          flex-direction: column; /* Stack title and panels */
+          justify-content: center; /* Center content vertically */
+          align-items: center; /* Center content horizontally */
+          padding-top: calc(var(--header-height) + 50px); /* Ensure space below header */
       }
 
-      /* UPDATED: Intro Animation Container - Full Screen */
-      .services-intro-animation {
-          position: fixed; /* Cover the whole screen */
+      /* NEW Intro Icon Animation Overlay */
+      .services-intro-icons-overlay {
+          position: absolute;
           top: 0;
           left: 0;
-          width: 100vw;
-          height: 100vh;
-          z-index: 90; /* Below header (100) & nav dots (101), above section content */
-          opacity: 0; /* Initially hidden */
-          pointer-events: none; /* Don't block interactions */
-          background-color: var(--bg-light-1); /* Match section bg to hide content */
-          overflow: hidden; /* Hide shapes drawing outside bounds */
-      }
-      .services-intro-animation svg {
-         width: 100%;
-         height: 100%;
-         display: block;
-         /* preserveAspectRatio: none; */ /* Option: Stretch shapes */
-         preserveAspectRatio: xMidYMid meet; /* Option: Scale proportionally */
-         position: absolute;
-         top: 0; left: 0;
-      }
-      /* UPDATED: Intro Rect Styles */
-      .intro-rect {
-        stroke: var(--accent-color-4); /* Dark color for light background */
-        stroke-width: 1.5; /* Thinner lines maybe */
-        fill: none; /* Outline only */
-        opacity: 0; /* Initially hidden - controlled by GSAP */
-        transform-origin: center center; /* Scale/rotate from center */
-        /* Initial transform set by GSAP */
-      }
-      /* END UPDATED */
-
-      .services-container {
-          max-width: 1100px;
           width: 100%;
-          text-align: center;
-          /* Initial state for GSAP - Content animates after intro */
-          opacity: 0;
-          transform: translateY(30px);
-          position: relative; /* To ensure it's above the intro animation's potential remnants if z-index fails */
-          z-index: 2; /* Above potential intro remnants */
-          display: flex; /* Use flex for title + flow */
-          flex-direction: column;
-          align-items: center; /* Center content horizontally */
+          height: 100%;
+          background-color: var(--bg-light-1); /* Match section background */
+          z-index: 95; /* Below header (100), above main content (initially) */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          opacity: 0; /* Initially hidden */
+          pointer-events: none; /* Non-interactive */
       }
+      .intro-icon {
+          position: absolute; /* Allow positioning for animation */
+          font-size: clamp(4rem, 10vw, 6rem); /* Responsive icon size */
+          color: var(--accent-color-1); /* Use accent color */
+          opacity: 0; /* Initially hidden */
+          transform: scale(0.5); /* Start small */
+          text-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      }
+      /* END Intro Icon Animation */
+
+
+      /* Main Services Content Container */
+      .services-content-container {
+          max-width: 1200px; /* Max width for the overall content */
+          width: 100%;
+          text-align: center; /* Center the title */
+          opacity: 1; /* Container itself is always visible */
+          position: relative; /* Ensure content is layerable */
+          z-index: 10; /* Above intro overlay when it fades */
+          padding: 0 20px; /* Padding for smaller screens */
+      }
+
       .services-title {
           font-family: var(--logo-font);
           font-size: clamp(2rem, 5vw, 3.5rem);
           font-weight: 700;
-          margin-bottom: 60px; /* Space above the flow */
+          margin-bottom: 60px; /* Space between title and panels */
           color: var(--accent-color-4);
-           /* Initial state for individual animation */
-          opacity: 0;
+          opacity: 0; /* Fade in with panels */
           transform: translateY(20px);
       }
 
-      /* --- NEW: Service Flow Layout --- */
-      .services-flow {
+      /* NEW Panel Layout */
+      .service-panels-wrapper {
+          display: flex;
+          justify-content: center; /* Center panels horizontally */
+          align-items: stretch; /* Make panels same height */
+          gap: 30px; /* Space between panels */
+          width: 100%;
+          opacity: 0; /* Wrapper fades in */
+          transform: translateY(30px); /* Wrapper slides up */
+      }
+
+      .service-panel {
+          flex: 1; /* Each panel takes equal space */
+          max-width: 350px; /* Max width per panel */
+          background-color: var(--bg-light-2);
+          border-radius: 10px;
+          padding: 35px 30px;
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+          text-align: center;
           display: flex;
           flex-direction: column;
-          gap: 40px; /* Space between service items */
-          width: 100%;
-          max-width: 850px; /* Control max width of the flow container */
-      }
-
-      .service-flow-item {
-          background-color: var(--bg-light-2);
-          padding: 35px 40px;
-          border-radius: 8px;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-          text-align: left; /* Align text left */
-          display: flex;
-          align-items: flex-start; /* Align icon top with text block */
-          gap: 30px; /* Space between icon and text */
-          border-left: 5px solid var(--accent-color-1); /* Elegant left border */
-          /* Initial state for GSAP stagger animation */
-          opacity: 0;
-          transform: translateY(30px) scale(0.98);
-          transition: transform 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
-      }
-
-      .service-flow-item:hover {
-          transform: translateY(0px) scale(1.0); /* Subtle lift */
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-          border-left-color: var(--accent-color-4); /* Darker border on hover */
-      }
-
-      .service-flow-icon {
-          font-size: 2.5rem; /* Slightly smaller icon */
-          color: var(--accent-color-1);
-          margin-top: 5px; /* Align icon better with first line of text */
-          flex-shrink: 0; /* Prevent icon shrinking */
-      }
-
-      .service-flow-text {
-          flex-grow: 1; /* Allow text block to take remaining space */
-      }
-
-      .service-flow-item h3 {
-          font-family: 'Montserrat', sans-serif;
-          font-size: 1.5rem; /* Clearer heading */
-          font-weight: 700;
-          margin-bottom: 12px;
-          color: var(--accent-color-4);
-      }
-
-      .service-flow-item p {
-          font-family: 'Poppins', sans-serif;
-          font-size: 1rem; /* Slightly larger text */
-          line-height: 1.75;
-          color: var(--accent-color-2);
-          font-weight: 400;
-      }
-      /* --- END: Service Flow Layout --- */
-
-
-      /* --- REMOVED/COMMENTED OUT OLD GRID STYLES ---
-      .services-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 40px;
-          width: 100%;
-      }
-      .service-item {
-          background-color: var(--bg-light-2);
-          padding: 35px;
-          border-radius: 8px;
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
-          text-align: center;
-          opacity: 0;
-          transform: translateY(30px) scale(0.95);
+          align-items: center;
+          border-top: 5px solid var(--accent-color-1); /* Top accent border */
           transition: transform 0.3s ease, box-shadow 0.3s ease;
+          /* Initial state for individual panel animation */
+          /* opacity: 0; -> Handled by wrapper now */
+          /* transform: translateY(30px); -> Handled by wrapper now */
       }
-      .service-item:hover {
-          transform: translateY(-5px) scale(1.02);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+      .service-panel:hover {
+         transform: translateY(-10px) scale(1.03);
+         box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
       }
-      .service-icon {
+
+      .panel-icon {
           font-size: 2.8rem;
           color: var(--accent-color-1);
           margin-bottom: 25px;
           display: inline-block;
       }
-      .service-item h3 {
+
+      .service-panel h3 {
           font-family: 'Montserrat', sans-serif;
-          font-size: 1.4rem;
+          font-size: 1.4rem; /* Match old style */
           font-weight: 700;
           margin-bottom: 15px;
           color: var(--accent-color-4);
       }
-      .service-item p {
+
+      .service-panel p {
           font-family: 'Poppins', sans-serif;
-          font-size: 0.95rem;
+          font-size: 0.95rem; /* Match old style */
           line-height: 1.7;
           color: var(--accent-color-2);
           font-weight: 400;
+          flex-grow: 1; /* Allows description to push footer elements down if needed */
       }
-      --- END REMOVED --- */
+      /* END Panel Layout */
 
       /* --- SECTION 3: Portfolio Preview --- */
       .portfolio-section {
@@ -532,235 +417,105 @@
         color: var(--text-light);
       }
       .portfolio-preview-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        max-width: 1200px;
-        opacity: 0; /* Initial state for GSAP */
-        transform: translateY(50px); /* Initial state for GSAP */
+        display: flex; flex-direction: column; align-items: center;
+        width: 100%; max-width: 1200px;
+        opacity: 0; transform: translateY(50px);
       }
       .portfolio-title {
-          font-family: var(--logo-font);
-          font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 700;
-          margin-bottom: 50px;
-          text-align: center;
-          color: var(--accent-color-1);
+          font-family: var(--logo-font); font-size: clamp(2rem, 5vw, 3.5rem);
+          font-weight: 700; margin-bottom: 50px; text-align: center; color: var(--accent-color-1);
       }
       .portfolio-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 30px;
-          width: 100%;
-          margin-bottom: 50px;
+          display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 30px; width: 100%; margin-bottom: 50px;
       }
       .portfolio-item-placeholder {
-          aspect-ratio: 4 / 3;
-          background: linear-gradient(135deg, var(--accent-color-2), var(--accent-color-4));
-          border-radius: 8px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: var(--text-light);
-          font-family: 'Montserrat', sans-serif;
-          font-size: 1.1rem;
-          font-weight: 700;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-          opacity: 0; /* Initial state for GSAP */
-          transform: scale(0.9); /* Initial state for GSAP */
+          aspect-ratio: 4 / 3; background: linear-gradient(135deg, var(--accent-color-2), var(--accent-color-4));
+          border-radius: 8px; display: flex; justify-content: center; align-items: center;
+          color: var(--text-light); font-family: 'Montserrat', sans-serif;
+          font-size: 1.1rem; font-weight: 700; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          opacity: 0; transform: scale(0.9);
           transition: transform 0.3s ease, box-shadow 0.3s ease;
-          padding: 15px;
-          text-align: center;
+          padding: 15px; text-align: center;
       }
-      .portfolio-item-placeholder:hover {
-          transform: scale(1.03);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-      }
+      .portfolio-item-placeholder:hover { transform: scale(1.03); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); }
       .portfolio-cta {
-          display: inline-block;
-          background-color: var(--accent-color-1);
-          color: var(--text-dark);
-          padding: 15px 40px;
-          border-radius: 50px;
-          font-family: 'Montserrat', sans-serif;
-          font-weight: 700;
-          text-decoration: none;
-          font-size: 1rem;
+          display: inline-block; background-color: var(--accent-color-1); color: var(--text-dark);
+          padding: 15px 40px; border-radius: 50px; font-family: 'Montserrat', sans-serif;
+          font-weight: 700; text-decoration: none; font-size: 1rem;
           transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
-          opacity: 0; /* Initial state for GSAP */
-          transform: translateY(20px); /* Initial state for GSAP */
+          opacity: 0; transform: translateY(20px);
       }
-      .portfolio-cta:hover {
-          background-color: var(--accent-color-3);
-          color: var(--text-dark);
-          transform: translateY(0px) scale(1.05); /* Keep hover transform */
-      }
+      .portfolio-cta:hover { background-color: var(--accent-color-3); color: var(--text-dark); transform: translateY(0px) scale(1.05); }
 
       /* --- SECTION 4: Contact Form --- */
-      .contact-section {
-          /* Combined with #section-4 styling above */
-          color: var(--text-dark);
-      }
+      .contact-section { color: var(--text-dark); }
       .contact-form-container {
-         background-color: var(--bg-light-2);
-         padding: 50px clamp(20px, 8vw, 80px); /* Responsive padding */
-         border-radius: 10px;
-         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-         width: 100%;
-         max-width: 700px;
-         opacity: 0; /* Initial state for GSAP */
-         transform: translateY(50px); /* Initial state for GSAP */
-         z-index: 1; /* Ensure form is above footer initially */
-         color: var(--text-dark); /* Explicitly set text color */
+         background-color: var(--bg-light-2); padding: 50px clamp(20px, 8vw, 80px);
+         border-radius: 10px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+         width: 100%; max-width: 700px;
+         opacity: 0; transform: translateY(50px); z-index: 1; color: var(--text-dark);
       }
       .contact-title {
-          font-family: var(--logo-font);
-          font-size: clamp(1.8rem, 4vw, 3rem);
-          font-weight: 700;
-          margin-bottom: 40px;
-          text-align: center;
-          color: var(--accent-color-4);
+          font-family: var(--logo-font); font-size: clamp(1.8rem, 4vw, 3rem);
+          font-weight: 700; margin-bottom: 40px; text-align: center; color: var(--accent-color-4);
       }
-      .contact-form .form-group {
-          margin-bottom: 25px;
-          position: relative;
-      }
+      .contact-form .form-group { margin-bottom: 25px; position: relative; }
       .contact-form label {
-          display: block;
-          font-family: 'Poppins', sans-serif;
-          font-weight: 600;
-          font-size: 0.9rem;
-          color: var(--accent-color-2);
-          margin-bottom: 8px;
-          opacity: 0; /* Initial state for GSAP */
-          transform: translateX(-20px); /* Initial state for GSAP */
+          display: block; font-family: 'Poppins', sans-serif; font-weight: 600;
+          font-size: 0.9rem; color: var(--accent-color-2); margin-bottom: 8px;
+          opacity: 0; transform: translateX(-20px);
       }
       .contact-form input[type="text"],
       .contact-form input[type="email"],
       .contact-form textarea {
-          width: 100%;
-          padding: 15px 20px;
-          border: 1px solid #ccc;
-          border-radius: 6px;
-          font-family: 'Poppins', sans-serif;
-          font-size: 1rem;
-          font-weight: 400;
-          color: var(--text-dark);
-          background-color: var(--bg-light-2); /* Ensure background matches */
+          width: 100%; padding: 15px 20px; border: 1px solid #ccc; border-radius: 6px;
+          font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 400;
+          color: var(--text-dark); background-color: var(--bg-light-2);
           transition: border-color 0.3s ease, box-shadow 0.3s ease;
-          opacity: 0; /* Initial state for GSAP */
-          transform: translateX(-20px); /* Initial state for GSAP */
+          opacity: 0; transform: translateX(-20px);
       }
       .contact-form input[type="text"]:focus,
       .contact-form input[type="email"]:focus,
       .contact-form textarea:focus {
-          border-color: var(--accent-color-1);
-          box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3);
-          outline: none;
+          border-color: var(--accent-color-1); box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3); outline: none;
       }
-      .contact-form textarea {
-          min-height: 150px;
-          resize: vertical;
-      }
+      .contact-form textarea { min-height: 150px; resize: vertical; }
       .contact-form button {
-          display: block;
-          width: 100%;
-          padding: 15px 30px;
-          background-color: var(--accent-color-4);
-          color: var(--text-light);
-          border: none;
-          border-radius: 50px;
-          font-family: 'Montserrat', sans-serif;
-          font-size: 1.1rem;
-          font-weight: 700;
-          cursor: pointer;
-          transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
-          margin-top: 10px;
-          opacity: 0; /* Initial state for GSAP */
-          transform: translateY(20px); /* Initial state for GSAP */
+          display: block; width: 100%; padding: 15px 30px; background-color: var(--accent-color-4);
+          color: var(--text-light); border: none; border-radius: 50px;
+          font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 700;
+          cursor: pointer; transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+          margin-top: 10px; opacity: 0; transform: translateY(20px);
       }
-      .contact-form button:hover {
-          background-color: var(--accent-color-1);
-          color: var(--text-dark);
-          transform: scale(1.03) translateY(0); /* Adjust hover transform */
-      }
+      .contact-form button:hover { background-color: var(--accent-color-1); color: var(--text-dark); transform: scale(1.03) translateY(0); }
 
       /* --- Navigation Dots --- */
       .nav-dots {
-        position: fixed;
-        top: 50%;
-        right: 30px;
-        transform: translateY(-50%);
-        display: flex;
-        flex-direction: column;
-        z-index: 101; /* Above header and intro */
+        position: fixed; top: 50%; right: 30px; transform: translateY(-50%);
+        display: flex; flex-direction: column; z-index: 101;
       }
       .nav-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.3); /* Base color for dark */
-        margin: 12px 0;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.3s;
-        border: 1px solid rgba(0, 0, 0, 0.2); /* Subtle border */
+        width: 10px; height: 10px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.3);
+        margin: 12px 0; cursor: pointer; transition: background-color 0.3s, transform 0.3s;
+        border: 1px solid rgba(0, 0, 0, 0.2);
       }
-      body.on-light-section .nav-dot {
-         background-color: rgba(0, 0, 0, 0.2); /* Base color for light */
-         border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
-      }
-      .nav-dot.active {
-        background-color: white; /* Active color for dark */
-        transform: scale(1.4);
-        border: 1px solid rgba(0, 0, 0, 0.3);
-      }
-       body.on-light-section .nav-dot.active {
-         background-color: var(--text-dark); /* Active color for light */
-         border: 1px solid rgba(255, 255, 255, 0.3);
-       }
+      body.on-light-section .nav-dot { background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.2); }
+      .nav-dot.active { background-color: white; transform: scale(1.4); border: 1px solid rgba(0, 0, 0, 0.3); }
+      body.on-light-section .nav-dot.active { background-color: var(--text-dark); border: 1px solid rgba(255, 255, 255, 0.3); }
 
       /* --- Scroll Indicator (First Section) --- */
       .scroll-indicator {
-        position: absolute;
-        bottom: 10vh; /* Positioned higher */
-        left: 50%;
-        transform: translateX(-50%);
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 0.8rem;
-        font-family: 'Poppins', sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        z-index: 5;
-        opacity: 0.8;
-        transition: opacity 0.5s ease;
-        letter-spacing: 1px;
-        background-color: transparent; /* Ensure no bg interferes */
+        position: absolute; bottom: 10vh; left: 50%; transform: translateX(-50%);
+        color: rgba(255, 255, 255, 0.7); font-size: 0.8rem; font-family: 'Poppins', sans-serif;
+        display: flex; flex-direction: column; align-items: center; z-index: 5;
+        opacity: 0.8; transition: opacity 0.5s ease; letter-spacing: 1px; background-color: transparent;
       }
-       .scroll-indicator span {
-        font-weight: 400;
-       }
-       .scroll-indicator i {
-         font-size: 1.2rem;
-         margin-top: 8px;
-         color: #fff; /* Ensure arrow is white */
-       }
-
-      @keyframes scrollArrow {
-        0% { transform: translateY(0); opacity: 0.3; }
-        50% { transform: translateY(8px); opacity: 1; }
-        100% { transform: translateY(0); opacity: 0.3; }
-      }
-
-      .scroll-indicator i {
-         animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
-      }
-
-      body.scrolled .scroll-indicator {
-         opacity: 0;
-         pointer-events: none;
-      }
+      .scroll-indicator span { font-weight: 400; }
+      .scroll-indicator i { font-size: 1.2rem; margin-top: 8px; color: #fff; }
+      @keyframes scrollArrow { 0% { transform: translateY(0); opacity: 0.3; } 50% { transform: translateY(8px); opacity: 1; } 100% { transform: translateY(0); opacity: 0.3; } }
+      .scroll-indicator i { animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); }
+      body.scrolled .scroll-indicator { opacity: 0; pointer-events: none; }
 
 
       /* --- RESPONSIVE STYLES --- */
@@ -772,16 +527,15 @@
            section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
            .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
            .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
-           .services-flow { max-width: 90%; gap: 30px; } /* Adjust flow width */
-           .service-flow-item { padding: 30px; gap: 20px; }
+           /* Service Panels Responsive */
+           .service-panels-wrapper { flex-direction: column; align-items: center; gap: 35px; }
+           .service-panel { max-width: 450px; width: 90%; } /* Allow panels to be wider when stacked */
            .about-content-wrapper { flex-direction: column-reverse; align-items: center; }
            .about-text-container { margin-right: 0; margin-top: 30px; text-align: center; }
            .about-portrait { max-width: 250px; margin-bottom: 20px; }
            .scroll-indicator { bottom: 8vh; }
-           .hero-content { top: 68%; max-width: 90%;} /* Adjust hero position/width */
-           .hero-tagline { font-size: clamp(1.8rem, 4vw, 3rem); } /* Adjusted responsive hero font */
-           /* Adjust intro rect stroke width for smaller screens if needed */
-           .intro-rect { stroke-width: 1.2; }
+           .hero-content { top: 68%; max-width: 90%;}
+           .hero-tagline { font-size: clamp(1.8rem, 4vw, 3rem); }
        }
 
         @media (max-width: 768px) {
@@ -790,7 +544,7 @@
             .logo-link img { height: 40px; }
             .header-nav ul { gap: 20px; }
             .header-nav a { font-size: 1rem; }
-            .nav-label { display: none; } /* Hide labels on smaller screens */
+            .nav-label { display: none; }
             .nav-dots { right: 20px; }
             .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
             section { padding-left: 20px; padding-right: 20px; }
@@ -806,15 +560,15 @@
             .site-footer .social-icons { gap: 15px; }
             .site-footer .social-icons a { font-size: 1.1rem; }
             .about-portrait { max-width: 200px; }
-            .services-flow { max-width: 100%; gap: 25px; } /* Full width on smaller screens */
-            .services-title { margin-bottom: 40px; }
-            .service-flow-item { padding: 25px; flex-direction: column; align-items: flex-start; text-align: left; gap: 15px; border-left-width: 4px; } /* Stack icon above text */
-            .service-flow-icon { font-size: 2.2rem; margin-top: 0; margin-bottom: 5px; }
-            .service-flow-item h3 { font-size: 1.3rem; }
-            .service-flow-item p { font-size: 0.95rem; }
-            .hero-content { top: 70%; max-width: 90%; } /* Adjust hero position/width */
-            .hero-tagline { font-size: clamp(1.6rem, 5vw, 2.5rem); line-height: 1.4; } /* Adjust tagline font */
-            .intro-rect { stroke-width: 1; } /* Thinner lines on mobile */
+            .services-title { margin-bottom: 50px; }
+            .service-panels-wrapper { gap: 30px; }
+            .service-panel { padding: 30px 25px; width: 90%; max-width: 400px; } /* Adjust padding/width */
+            .panel-icon { font-size: 2.5rem; margin-bottom: 20px; }
+            .service-panel h3 { font-size: 1.3rem; }
+            .service-panel p { font-size: 0.9rem; line-height: 1.65; }
+            .hero-content { top: 70%; max-width: 90%; }
+            .hero-tagline { font-size: clamp(1.6rem, 5vw, 2.5rem); line-height: 1.4; }
+            .intro-icon { font-size: clamp(3.5rem, 8vw, 5rem); } /* Smaller intro icons on mobile */
         }
 
          @media (max-width: 480px) {
@@ -824,7 +578,7 @@
             .header-nav ul { gap: 15px; }
             .header-nav a { font-size: 0.9rem; }
             .nav-dots { right: 15px; }
-            .hero-tagline { font-size: clamp(1.4rem, 6vw, 2rem); line-height: 1.4; } /* Adjust tagline font */
+            .hero-tagline { font-size: clamp(1.4rem, 6vw, 2rem); line-height: 1.4; }
             .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
             .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
             .about-portrait { max-width: 150px; }
@@ -837,12 +591,10 @@
             section { padding-left: 15px; padding-right: 15px; }
             section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
             .contact-form-container { padding: 25px 15px; }
-            .hero-content { top: 72%; max-width: 95%; } /* Adjust hero position/width */
-            .tagline-word { margin: 0 2px;} /* Reduce space slightly */
-            .service-flow-item { padding: 20px; gap: 10px; }
-            .service-flow-icon { font-size: 2rem; }
-            .service-flow-item h3 { font-size: 1.2rem; }
-            .service-flow-item p { font-size: 0.9rem; line-height: 1.7; }
+            .hero-content { top: 72%; max-width: 95%; }
+            .tagline-word { margin: 0 2px;}
+            .service-panels-wrapper { gap: 25px; }
+            .service-panel { width: 95%; max-width: none; padding: 25px 20px; }
          }
     </style>
 </head>
@@ -867,7 +619,8 @@
     <div class="nav-dots">
         <div class="nav-dot active" data-section="0"></div>
         <div class="nav-dot" data-section="1"></div>
-        <div class="nav-dot" data-section="services"></div> <div class="nav-dot" data-section="3"></div>
+        <div class="nav-dot" data-section="services"></div>
+        <div class="nav-dot" data-section="3"></div>
         <div class="nav-dot" data-section="4"></div>
     </div>
 
@@ -905,57 +658,36 @@
     </section>
 
     <section class="services-section" id="section-services" data-theme="light">
-        <div class="services-intro-animation">
-            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-                <rect class="intro-rect" x="10" y="10" width="30" height="20" />
-                <rect class="intro-rect" x="60" y="25" width="25" height="40" />
-                <rect class="intro-rect" x="20" y="55" width="50" height="15" />
-                <rect class="intro-rect" x="75" y="70" width="15" height="20" />
-                <rect class="intro-rect" x="5" y="40" width="10" height="30" />
-                <rect class="intro-rect" x="45" y="5" width="20" height="25" />
-                 <rect class="intro-rect" x="30" y="75" width="35" height="10" />
-                 <rect class="intro-rect" x="85" y="5" width="10" height="50" />
-            </svg>
-        </div>
-        <div class="services-container">
-            <h2 class="services-title">What We Offer</h2>
-            <div class="services-flow">
-                <div class="service-flow-item">
-                    <div class="service-flow-icon">
-                        <i class="fas fa-lightbulb"></i> </div>
-                    <div class="service-flow-text">
-                        <h3>Project Visioning & Feasibility</h3>
-                        <p>Collaborating from the earliest stages to define your project's goals, explore potential, and establish a clear conceptual direction and feasibility assessment.</p>
-                    </div>
-                </div>
-                <div class="service-flow-item">
-                     <div class="service-flow-icon">
-                        <i class="fas fa-pencil-ruler"></i> </div>
-                    <div class="service-flow-text">
-                        <h3>Architectural & Blueprint Design</h3>
-                        <p>Translating vision into reality by creating bespoke blueprints for residential, commercial, or public spaces that perfectly balance aesthetic form and practical function.</p>
-                    </div>
-                </div>
-                <div class="service-flow-item">
-                    <div class="service-flow-icon">
-                        <i class="fas fa-couch"></i> </div>
-                    <div class="service-flow-text">
-                        <h3>Interior Space Curation</h3>
-                        <p>Designing thoughtful, elegant, and cohesive interiors that reflect your unique style, enhance daily living or productivity, and harmonize with the architecture.</p>
-                    </div>
-                </div>
-                 <div class="service-flow-item">
-                    <div class="service-flow-icon">
-                        <i class="fas fa-hard-hat"></i> </div>
-                    <div class="service-flow-text">
-                        <h3>Construction Oversight</h3>
-                        <p>Providing expert guidance and oversight during the construction phase to ensure design integrity, quality craftsmanship, and adherence to the approved plans.</p>
-                    </div>
-                </div>
-            </div>
-            </div>
-    </section>
 
+        <div class="services-intro-icons-overlay">
+            <i class="fas fa-lightbulb intro-icon" id="intro-icon-vision"></i>
+             <i class="fas fa-pencil-ruler intro-icon" id="intro-icon-design"></i>
+             <i class="fas fa-couch intro-icon" id="intro-icon-spaces"></i>
+        </div>
+        <div class="services-content-container">
+            <h2 class="services-title">What We Offer</h2>
+
+            <div class="service-panels-wrapper">
+                <div class="service-panel" id="panel-visioning">
+                    <i class="fas fa-lightbulb panel-icon"></i>
+                    <h3>Project Visioning</h3>
+                    <p>Collaborating from the earliest stages to define project goals, feasibility, and conceptual direction.</p>
+                </div>
+
+                <div class="service-panel" id="panel-design">
+                    <i class="fas fa-pencil-ruler panel-icon"></i>
+                    <h3>Architectural Design</h3>
+                    <p>Creating bespoke blueprints for residential, commercial, and public spaces that balance form and function.</p>
+                </div>
+
+                <div class="service-panel" id="panel-spaces">
+                    <i class="fas fa-couch panel-icon"></i>
+                    <h3>Interior Spaces</h3>
+                     <p>Designing thoughtful and elegant interiors that reflect your style and enhance daily living or working.</p>
+                </div>
+            </div>
+             </div>
+        </section>
     <section class="portfolio-section" id="section-3" data-theme="dark">
         <div class="portfolio-preview-container">
             <h2 class="portfolio-title">Featured Work</h2>
@@ -1013,29 +745,23 @@
 
         function initHero() {
             // ... (Hero initialization code remains the same) ...
-            const heroSection = document.querySelector('.hero-section');
+             const heroSection = document.querySelector('.hero-section');
             if (!heroSection) return;
             const images = gsap.utils.toArray('.hero-image');
-            const content = document.querySelector('.hero-content'); // Container (for positioning)
-            const words = gsap.utils.toArray('.tagline-word', content); // Select the words
-
+            const content = document.querySelector('.hero-content');
+            const words = gsap.utils.toArray('.tagline-word', content);
             let currentImageIndex = 0;
             let imageInterval;
             if (images.length === 0) { console.warn("No hero images found."); return; }
-
             gsap.set(images[0], { opacity: 1, pointerEvents: 'auto' });
             gsap.set(images.slice(1), { opacity: 0, pointerEvents: 'none' });
             gsap.set(content, { opacity: 1 });
-
             const wordTl = gsap.timeline({
                 scrollTrigger: { trigger: heroSection, start: "top 65%", toggleActions: "play none none reverse" },
                 delay: 0.1
             });
-
-            if (words.length > 0) {
-                wordTl.to(words, { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.5)', stagger: 0.1 });
+            if (words.length > 0) { wordTl.to(words, { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.5)', stagger: 0.1 });
             } else { console.warn("No tagline words found for animation."); }
-
             function switchImage() {
                 if (images.length <= 1) return;
                 const nextImageIndex = (currentImageIndex + 1) % images.length;
@@ -1047,21 +773,15 @@
                   .set(images[nextImageIndex], { pointerEvents: 'auto' });
                 currentImageIndex = nextImageIndex;
             }
-            function startImageTimer() {
-                clearInterval(imageInterval);
-                if (images.length > 1) { imageInterval = setInterval(switchImage, 5000); }
-            }
+            function startImageTimer() { clearInterval(imageInterval); if (images.length > 1) { imageInterval = setInterval(switchImage, 5000); } }
             startImageTimer();
-
-            images.forEach(img => {
-                gsap.to(img, { y: -30, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1.5 } });
-            });
+            images.forEach(img => { gsap.to(img, { y: -30, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1.5 } }); });
             gsap.to(content, { yPercent: -15, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 } });
         }
 
         function initAbout() {
            // ... (About initialization code remains the same) ...
-           const aboutSection = document.querySelector('.about-section');
+            const aboutSection = document.querySelector('.about-section');
            const aboutContentWrapper = document.querySelector('.about-content-wrapper');
            const aboutPortrait = document.querySelector('.about-portrait');
            if (!aboutSection || !aboutContentWrapper || !aboutPortrait) { console.warn("About elements missing."); return; }
@@ -1073,115 +793,124 @@
         // --- UPDATED initServices Function ---
         function initServices() {
             const servicesSection = document.querySelector('.services-section');
-            const introAnimationContainer = servicesSection.querySelector('.services-intro-animation');
-            const introRects = gsap.utils.toArray('.intro-rect', introAnimationContainer);
-            const container = servicesSection.querySelector('.services-container');
-            const title = servicesSection.querySelector('.services-title');
-            // *** CHANGE: Target new service items ***
-            const items = gsap.utils.toArray('.service-flow-item', container);
+            // NEW: Get references for icon intro
+            const introOverlay = servicesSection.querySelector('.services-intro-icons-overlay');
+            const introIcons = gsap.utils.toArray('.intro-icon', introOverlay);
+            // Get references for main content
+            const contentContainer = servicesSection.querySelector('.services-content-container');
+            const title = contentContainer.querySelector('.services-title');
+            const panelsWrapper = contentContainer.querySelector('.service-panels-wrapper');
+            // const servicePanels = gsap.utils.toArray('.service-panel', panelsWrapper); // Use wrapper for stagger trigger
 
-            if (!servicesSection || !introAnimationContainer || !container || !title || items.length === 0 || introRects.length === 0) {
-                console.warn("Services section elements missing for full animation. Check intro SVG, container, title, items.");
+            if (!servicesSection || !introOverlay || introIcons.length < 3 || !contentContainer || !title || !panelsWrapper) {
+                console.warn("Services section elements missing for NEW animation. Check intro overlay, icons, content container, title, panels wrapper.");
                 // Fallback: Ensure content is visible if intro fails
-                gsap.set(container, { opacity: 1, y: 0 });
-                 gsap.set(title, { opacity: 1, y: 0 });
-                 gsap.set(items, { opacity: 1, y: 0, scale: 1 });
+                gsap.set(contentContainer, { opacity: 1 });
+                gsap.set(title, { opacity: 1, y: 0 });
+                gsap.set(panelsWrapper, { opacity: 1, y: 0 });
+                // Optionally hide the broken overlay
+                if (introOverlay) gsap.set(introOverlay, { opacity: 0, display: 'none'});
                 return;
             }
 
             // --- Initial States ---
-            gsap.set(introAnimationContainer, { opacity: 0, pointerEvents: 'none' }); // Start hidden and non-interactive
-            // Set initial random transforms for each rectangle
-            introRects.forEach(rect => {
-                gsap.set(rect, {
-                    opacity: 0,
-                    scale: gsap.utils.random(0.1, 0.5), // Start small
-                    rotation: gsap.utils.random(-60, 60),
-                    x: gsap.utils.random(-50, 50), // Random offset from original SVG position
-                    y: gsap.utils.random(-50, 50),
-                    transformOrigin: "center center"
-                });
-            });
-            gsap.set(container, { opacity: 0, y: 30 });
-            gsap.set(title, { opacity: 0, y: 20 });
-            // *** CHANGE: Update initial state for new items if needed (scale matches new CSS) ***
-            gsap.set(items, { opacity: 0, y: 30, scale: 0.98 });
+            gsap.set(introOverlay, { opacity: 0 }); // Overlay starts hidden
+            gsap.set(introIcons, { opacity: 0, scale: 0.5, y: '20px' }); // Icons start hidden and small
+            gsap.set(title, { opacity: 0, y: 20 }); // Title starts hidden
+            gsap.set(panelsWrapper, { opacity: 0, y: 30 }); // Panels wrapper starts hidden
+
 
             // --- Animation Timeline ---
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: servicesSection,
-                    start: "top 70%", // Adjust trigger point as needed
+                    start: "top 65%", // Start animation a bit earlier/later?
                     toggleActions: "play none none reverse", // Play on enter, reverse on scroll back up
                     // markers: true, // For debugging
-                    onEnter: () => gsap.set(introAnimationContainer, { pointerEvents: 'auto' }), // Enable pointer events only when active
-                    onLeave: () => gsap.set(introAnimationContainer, { pointerEvents: 'none' }),
-                    onEnterBack: () => gsap.set(introAnimationContainer, { pointerEvents: 'auto' }),
-                    onLeaveBack: () => gsap.set(introAnimationContainer, { pointerEvents: 'none' })
                 }
             });
 
-            // 1. Fade in the Full Screen Intro Container
-            tl.to(introAnimationContainer, {
+            // 1. Fade in the Icon Intro Overlay
+            tl.to(introOverlay, {
                 opacity: 1,
-                duration: 0.2, // Quick fade-in for the background
+                duration: 0.3,
                 ease: 'power1.inOut'
             });
 
-            // 2. Animate Rectangles (*** SHORTER SEQUENCE ***)
-            tl.to(introRects, {
-                opacity: gsap.utils.random(0.5, 0.8, 0.1), // Slightly reduced opacity maybe
-                scale: gsap.utils.random(0.7, 1.5, 0.1),   // Reduced max scale slightly
-                rotation: gsap.utils.random(-120, 120, 5),
-                x: 0, // Move back towards original position
-                y: 0,
-                duration: 0.9, // *** REDUCED DURATION ***
-                stagger: {
-                    each: 0.04, // Slightly faster stagger
-                    from: "random" // Start from random rects
-                },
-                ease: 'power2.inOut'
-            }, "-=0.1"); // Start slightly after container fades in
-
-            // Add another short animation phase for more dynamism
-            tl.to(introRects, {
-                opacity: 0, // Fade out
-                scale: gsap.utils.random(0.2, 0.6), // Scale down again
-                rotation: "+=" + gsap.utils.random(-70, 70), // Add more rotation
-                duration: 0.5, // *** REDUCED DURATION ***
-                stagger: {
-                    each: 0.03,
-                    from: "random"
-                },
+            // 2. Animate Icons Sequentially
+            tl.to(introIcons[0], { // Vision Icon (Lightbulb)
+                opacity: 1,
+                scale: 1,
+                y: '0px',
+                duration: 0.5,
+                ease: 'back.out(1.7)'
+            }, ">-0.1") // Start slightly after overlay fades in
+            .to(introIcons[0], { // Hold briefly
+                opacity: 0, // Fade out first icon
+                scale: 0.7,
+                duration: 0.3,
                 ease: 'power1.in'
-            }, "-=0.4"); // Overlap more
+            }, ">0.4") // Hold for 0.4s before fading
 
-            // 3. Fade Out the Full Screen Intro Container
-            // Ensure this starts relatively soon after the main rectangle animation
-            tl.to(introAnimationContainer, {
+            .to(introIcons[1], { // Design Icon (Ruler)
+                opacity: 1,
+                scale: 1,
+                 y: '0px',
+                duration: 0.5,
+                ease: 'back.out(1.7)'
+            }, "<0.1") // Start slightly before previous icon fades out completely
+             .to(introIcons[1], { // Hold briefly
+                opacity: 0, // Fade out second icon
+                scale: 0.7,
+                duration: 0.3,
+                ease: 'power1.in'
+            }, ">0.4") // Hold
+
+             .to(introIcons[2], { // Spaces Icon (Couch)
+                opacity: 1,
+                scale: 1,
+                 y: '0px',
+                duration: 0.5,
+                ease: 'back.out(1.7)'
+            }, "<0.1")
+             .to(introIcons[2], { // Hold briefly
+                opacity: 0, // Fade out third icon
+                scale: 0.7,
+                duration: 0.3,
+                ease: 'power1.in'
+            }, ">0.4"); // Hold
+
+            // 3. Fade Out the Icon Intro Overlay
+            tl.to(introOverlay, {
                 opacity: 0,
-                duration: 0.4, // Faster fade out
-                ease: 'power1.inOut'
-            }, ">-0.2"); // Start slightly before the last rect animation ends
+                duration: 0.4,
+                ease: 'power1.out',
+                onComplete: () => {
+                     // Optional: Set display none after fade out to prevent interference
+                     // gsap.set(introOverlay, { display: 'none' });
+                }
+            }, ">-0.2"); // Start fading overlay slightly before last icon fades out
 
             // 4. Animate the Main Content In (After Intro Fades Out)
-             tl.to(container, { opacity: 1, y: 0, duration: 0.01 }, "-=0.3") // Make container 'visible' during intro fade out
-               .to(title, {
-                  opacity: 1,
-                  y: 0,
-                  duration: 0.6,
-                  ease: 'power2.out'
-               }, "-=0.1") // Start title slightly overlapping intro fade out
-               .to(items, {
-                  opacity: 1,
-                  y: 0,
-                  scale: 1, // *** Ensure scale animates to 1 ***
-                  duration: 0.5,
-                  ease: 'power2.out',
-                  stagger: 0.15 // Service items cascade in
-               }, "-=0.4"); // Start items animation shortly after title starts
+            tl.to(title, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: 'power2.out'
+            }, "-=0.3") // Start title reveal slightly overlapping overlay fade
+            .to(panelsWrapper, {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                ease: 'power2.out',
+                // Stagger individual panels within the wrapper if desired
+                // (currently animating wrapper as a whole)
+                 // stagger: 0.15 // Example if you wanted panels to stagger in
+            }, "-=0.4"); // Start panels shortly after title starts
+
         }
         // --- END UPDATED initServices Function ---
+
 
         function initPortfolio() {
             // ... (Portfolio initialization code remains the same) ...
@@ -1199,7 +928,7 @@
 
         function initContact() {
             // ... (Contact initialization code remains the same) ...
-            const contactSection = document.querySelector('.contact-section');
+             const contactSection = document.querySelector('.contact-section');
             const container = document.querySelector('.contact-form-container');
             if (!contactSection || !container) { console.warn("Contact elements missing."); return; }
             const labels = gsap.utils.toArray('.contact-form label', container);
@@ -1215,7 +944,7 @@
 
         function initHeader() {
            // ... (Header initialization code remains the same) ...
-           const header = document.getElementById('site-header');
+            const header = document.getElementById('site-header');
            if (!header) { console.warn("Site header not found."); return; }
            const headerLinks = document.querySelectorAll('.header-nav a[href^="#"]');
            headerLinks.forEach(anchor => {
@@ -1249,7 +978,7 @@
 
         function initFooter() {
             // ... (Footer initialization code remains the same) ...
-            const footer = document.querySelector('#section-4 .site-footer');
+             const footer = document.querySelector('#section-4 .site-footer');
             const copyrightYearSpan = document.getElementById('copyright-year');
             if (!footer) { console.warn("Site footer missing."); return; }
             if(copyrightYearSpan) { copyrightYearSpan.textContent = new Date().getFullYear(); } else { console.warn("Copyright year span missing."); }
@@ -1316,7 +1045,7 @@
          initFooter();
          initHero();
          initAbout();
-         initServices(); // Our UPDATED function with new layout + shorter animation
+         initServices(); // Initializes NEW service section layout and animation
          initPortfolio();
          initContact();
 
