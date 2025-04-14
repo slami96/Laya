@@ -19,38 +19,38 @@
         box-sizing: border-box;
       }
       html {
-          scroll-behavior: smooth; /* Add native smooth scrolling as a fallback */
+          scroll-behavior: smooth;
       }
       body, html {
         margin: 0;
         padding: 0;
-        font-family: 'Poppins', sans-serif; /* Default body font */
+        font-family: 'Poppins', sans-serif;
         color: #333;
-        overflow-x: hidden; /* Prevent horizontal scroll */
-        background-color: #000; /* Default background */
+        overflow-x: hidden;
+        background-color: #000;
       }
       body {
           overflow-y: auto;
       }
       /* --- BASE STYLES --- */
       :root {
-          --header-height: 75px; /* Slightly taller for architect feel */
-          --accent-color-1: #C0A080; /* Muted Gold/Bronze */
-          --accent-color-2: #5A5A5A; /* Dark Grey */
-          --accent-color-3: #EAEAEA; /* Light Grey */
-          --accent-color-4: #333333; /* Near Black */
+          --header-height: 75px;
+          --accent-color-1: #C0A080;
+          --accent-color-2: #5A5A5A;
+          --accent-color-3: #EAEAEA;
+          --accent-color-4: #333333;
           --text-light: #f1f1f1;
-          --text-dark: #2d2d2d; /* Slightly softer black */
-          --bg-dark-1: #1a1a1a; /* Dark background */
-          --bg-dark-2: #252525; /* Slightly lighter dark */
-          --bg-light-1: #fdfdfd; /* Very light grey */
-          --bg-light-2: #ffffff; /* White */
+          --text-dark: #2d2d2d;
+          --bg-dark-1: #1a1a1a;
+          --bg-dark-2: #252525;
+          --bg-light-1: #fdfdfd;
+          --bg-light-2: #ffffff;
           --header-icon-color-dark: var(--text-light);
           --header-icon-color-light: var(--text-dark);
           --header-hover-color: var(--accent-color-1);
-          --header-bg-dark: rgba(26, 26, 26, 0.8); /* Darker semi-transparent bg */
-          --header-bg-light: rgba(253, 253, 253, 0.85); /* Lighter semi-transparent bg */
-          --logo-font: 'Montserrat', sans-serif; /* Font for titles etc. */
+          --header-bg-dark: rgba(26, 26, 26, 0.8);
+          --header-bg-light: rgba(253, 253, 253, 0.85);
+          --logo-font: 'Montserrat', sans-serif;
       }
       /* --- HEADER STYLES --- */
       .site-header {
@@ -60,7 +60,7 @@
           right: 0;
           width: 100%;
           height: var(--header-height);
-          padding: 0 40px; /* More padding */
+          padding: 0 40px;
           z-index: 100;
           display: flex;
           align-items: center;
@@ -206,64 +206,56 @@
         align-items: center;
         position: relative;
         overflow: hidden;
-        padding: 50px; /* General padding */
-        padding-top: var(--header-height); /* Space for header */
-        margin-top: calc(-1 * var(--header-height)); /* Pull up for scroll trigger */
+        padding: 50px;
+        padding-top: var(--header-height);
+        margin-top: calc(-1 * var(--header-height));
       }
-      section:first-of-type { /* Reverted: Hero has no top margin/padding */
+      section:first-of-type { /* Hero has no top margin/padding */
         margin-top: 0;
         padding-top: 0;
       }
 
-      /* --- SECTION 0: Hero Image Stack (Reverted Layout) --- */
+      /* --- SECTION 0: Hero Image Stack --- */
       .hero-section {
         background-color: var(--bg-dark-1);
         color: var(--text-light);
-        display: block; /* Reverted */
-        padding: 0; /* Reverted */
+        display: block;
+        padding: 0;
         min-height: 100vh;
-        height: 100vh; /* Reverted: Force full height */
+        height: 100vh;
         position: relative;
         overflow: hidden;
       }
-      .hero-content {
+      .hero-content { /* Container for tagline */
         position: absolute;
-        top: 50%; /* Reverted: Center based on full section */
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 2;
         text-align: center;
         color: var(--text-light);
-        opacity: 0; /* Start hidden for GSAP */
+        opacity: 0;
         width: 90%;
-        max-width: 700px;
-        /* MODIFIED: Added background, padding, border-radius */
-        background-color: rgba(0, 0, 0, 0.45); /* Dark semi-transparent bg */
-        padding: clamp(15px, 3vw, 30px) clamp(20px, 4vw, 40px); /* Responsive padding */
-        border-radius: 8px; /* Soft corners */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+        max-width: 650px; /* Slightly adjusted max-width */
+        background-color: rgba(0, 0, 0, 0.45);
+        padding: clamp(15px, 3vw, 25px) clamp(20px, 4vw, 35px); /* Adjusted padding */
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
       }
-      .hero-title {
-        font-family: var(--logo-font);
-        font-size: clamp(2.5rem, 6vw, 5rem);
-        /* MODIFIED: Changed font weight */
-        font-weight: 400; /* Regular weight */
-        margin-bottom: 15px;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Adjusted shadow */
-      }
+      /* .hero-title CSS rule removed */
       .hero-tagline {
         font-size: clamp(1rem, 2vw, 1.5rem);
         font-weight: 300;
-        margin: 0 auto;
+        margin: 0 auto; /* Center if needed */
         line-height: 1.6;
         font-family: 'Poppins', sans-serif;
       }
       .hero-image-stack {
           position: absolute;
-          top: 0; /* Reverted */
+          top: 0;
           left: 0;
           width: 100%;
-          height: 100%; /* Reverted */
+          height: 100%;
           overflow: hidden;
       }
       .hero-image {
@@ -463,7 +455,6 @@
       }
       /* --- SECTION 4: Contact Form --- */
       .contact-section {
-         /* Styles inherited from #section-4 */
          color: var(--text-dark);
       }
       .contact-form-container {
@@ -585,8 +576,7 @@
       /* --- Scroll Indicator (First Section) --- */
       .scroll-indicator {
         position: absolute;
-        /* MODIFIED: Positioned higher */
-        bottom: 10vh; /* Changed from 40px */
+        bottom: 10vh; /* Positioned higher */
         left: 50%;
         transform: translateX(-50%);
         color: rgba(255, 255, 255, 0.7);
@@ -631,15 +621,15 @@
            .site-header { padding: 0 25px; }
            .logo-link img { height: 45px; }
            .header-nav ul { gap: 25px; }
-           section { padding-left: 30px; padding-right: 30px; } /* General padding */
-           section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;} /* Hero full width */
+           section { padding-left: 30px; padding-right: 30px; }
+           section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
            .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
            .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
            .services-grid { gap: 30px; }
            .about-content-wrapper { flex-direction: column-reverse; align-items: center; }
            .about-text-container { margin-right: 0; margin-top: 30px; text-align: center; }
            .about-portrait { max-width: 250px; margin-bottom: 20px; }
-           .scroll-indicator { bottom: 8vh; } /* Adjust for tablet */
+           .scroll-indicator { bottom: 8vh; }
        }
 
         @media (max-width: 768px) {
@@ -651,8 +641,8 @@
             .nav-label { display: none; }
             .nav-dots { right: 20px; }
             .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
-            section { padding-left: 20px; padding-right: 20px; } /* General padding */
-             section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;} /* Hero full width */
+            section { padding-left: 20px; padding-right: 20px; }
+             section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
             .portfolio-grid { gap: 20px; }
             .portfolio-item-placeholder { font-size: 1rem; }
             .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
@@ -667,7 +657,7 @@
             .services-grid { grid-template-columns: 1fr; gap: 25px; }
             .services-title { margin-bottom: 40px; }
             .service-item { padding: 30px; }
-            .hero-content { padding: clamp(15px, 3vw, 25px) clamp(20px, 4vw, 30px); } /* Adjust padding slightly */
+            .hero-content { max-width: 90%; padding: clamp(15px, 3vw, 25px) clamp(20px, 4vw, 30px); } /* Adjust for smaller screens */
         }
 
          @media (max-width: 480px) {
@@ -677,7 +667,7 @@
              .header-nav ul { gap: 15px; }
              .header-nav a { font-size: 0.9rem; }
              .nav-dots { right: 15px; }
-             .hero-title { font-size: clamp(2rem, 8vw, 3rem); }
+             /* Hero title removed */
              .hero-tagline { font-size: clamp(0.9rem, 4vw, 1.1rem); }
              .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
              .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
@@ -687,11 +677,11 @@
              .portfolio-grid { grid-template-columns: 1fr; gap: 15px; }
              .portfolio-item-placeholder { font-size: 0.9rem; }
              .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
-             .scroll-indicator { bottom: 6vh; font-size: 0.75rem;} /* Adjust for mobile */
-             section { padding-left: 15px; padding-right: 15px; } /* General padding */
-             section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;} /* Hero full width */
+             .scroll-indicator { bottom: 6vh; font-size: 0.75rem;}
+             section { padding-left: 15px; padding-right: 15px; }
+             section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
              .contact-form-container { padding: 25px 15px; }
-             .hero-content { padding: 15px 20px; } /* Smaller padding on mobile */
+             .hero-content { max-width: 85%; padding: 15px 20px; }
          }
     </style>
 </head>
@@ -723,14 +713,15 @@
 
     <section class="hero-section" id="section-0" data-theme="dark">
         <div class="hero-image-stack">
-             <img src="interior_1.png" alt="Modern Interior Design 1" class="hero-image hero-image-active" id="hero-img-1">
+            <img src="interior_1.png" alt="Modern Interior Design 1" class="hero-image hero-image-active" id="hero-img-1">
             <img src="interior_2.png" alt="Classic Interior Design 2" class="hero-image" id="hero-img-2">
             <img src="interior_3.png" alt="Innovative Interior Design 3" class="hero-image" id="hero-img-3">
         </div>
-         <div class="hero-content"> <h1 class="hero-title">LAYA Architecture</h1>
+         <div class="hero-content">
              <p class="hero-tagline">Designing spaces that inspire. Blending innovation with timeless tradition.</p>
          </div>
-        <div class="scroll-indicator"> <span>Explore LAYA</span>
+        <div class="scroll-indicator">
+             <span>Explore</span>
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
@@ -745,7 +736,7 @@
                     <p>Let us help you bring your vision to life.</p>
                 </div>
             </div>
-             <img src="portrait.jpg" alt="Architect Portrait LAYA Studio" class="about-portrait">
+            <img src="portrait.jpg" alt="Architect Portrait LAYA Studio" class="about-portrait">
         </div>
     </section>
 
@@ -825,41 +816,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
     <script>
-      // --- JavaScript Code (Original logic restored, compatible with reverted layout) ---
+      // --- JavaScript Code (No changes needed from previous step) ---
       gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-        // --- Initialize Hero Section Animations (Original logic) ---
         function initHero() {
             const heroSection = document.querySelector('.hero-section');
             if (!heroSection) return;
             const images = gsap.utils.toArray('.hero-image');
-            const content = document.querySelector('.hero-content');
+            const content = document.querySelector('.hero-content'); // Now targets the container with tagline
             let currentImageIndex = 0;
             let imageInterval;
+            if (images.length === 0) { console.warn("No hero images found."); return; }
 
-            if (images.length === 0) {
-                console.warn("No hero images found for slider.");
-                return;
-            }
-
-            // Initial setup
             gsap.set(images[0], { opacity: 1, pointerEvents: 'auto' });
             gsap.set(images.slice(1), { opacity: 0, pointerEvents: 'none' });
-            gsap.set(content, { opacity: 0, y: 30 }); // Start content slightly lower
+            gsap.set(content, { opacity: 0, y: 30 });
 
-            // Animate content entrance
              const contentTl = gsap.timeline({
-                 scrollTrigger: {
-                     trigger: heroSection,
-                     start: "top 80%", // Trigger when top hits 80% of viewport height
-                     toggleActions: "play none none reverse"
-                 }
+                 scrollTrigger: { trigger: heroSection, start: "top 80%", toggleActions: "play none none reverse" }
              });
-             // Note: The hero content now animates in its semi-transparent container
              contentTl.to(content, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' });
 
-
-            // Image switching function
             function switchImage() {
                 if (images.length <= 1) return;
                 const nextImageIndex = (currentImageIndex + 1) % images.length;
@@ -871,175 +848,65 @@
                   .set(images[nextImageIndex], { pointerEvents: 'auto' });
                 currentImageIndex = nextImageIndex;
             }
-
             function startImageTimer() {
                 clearInterval(imageInterval);
-                if (images.length > 1) {
-                    imageInterval = setInterval(switchImage, 5000);
-                }
+                if (images.length > 1) { imageInterval = setInterval(switchImage, 5000); }
             }
             startImageTimer();
-
-            // Parallax effects (relative to original layout)
             images.forEach(img => {
-                gsap.to(img, {
-                    y: -30,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: heroSection,
-                        start: "top top",
-                        end: "bottom top",
-                        scrub: 1.5,
-                    }
-                });
+                gsap.to(img, { y: -30, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1.5 } });
             });
-            gsap.to(content, { // Content parallax works on the container now
-                yPercent: -10,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: heroSection,
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: 1
-                }
-            });
+            gsap.to(content, { yPercent: -10, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 } });
         }
-
-        // --- Initialize About Section Animations ---
         function initAbout() {
            const aboutSection = document.querySelector('.about-section');
            const aboutContentWrapper = document.querySelector('.about-content-wrapper');
            const aboutPortrait = document.querySelector('.about-portrait');
-           if (!aboutSection || !aboutContentWrapper || !aboutPortrait) {
-               console.warn("Elements missing for About section animation.");
-               return;
-           }
-           const tl = gsap.timeline({
-               scrollTrigger: {
-                   trigger: aboutSection,
-                   start: "top 70%",
-                   toggleActions: "play none none reverse"
-               }
-           });
+           if (!aboutSection || !aboutContentWrapper || !aboutPortrait) { console.warn("About elements missing."); return; }
+           const tl = gsap.timeline({ scrollTrigger: { trigger: aboutSection, start: "top 70%", toggleActions: "play none none reverse" } });
            tl.to(aboutContentWrapper, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
              .to(aboutPortrait, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }, "-=0.6");
         }
-        // --- Initialize Services Section Animations ---
         function initServices() {
             const servicesSection = document.querySelector('.services-section');
             const container = document.querySelector('.services-container');
-            if (!servicesSection || !container) {
-                console.warn("Services section or container not found for animation.");
-                return;
-            }
+            if (!servicesSection || !container) { console.warn("Services elements missing."); return; }
             const items = gsap.utils.toArray('.service-item', container);
-            if (items.length === 0) {
-                 console.warn("No service items found for animation.");
-                 return;
-            }
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: servicesSection,
-                    start: "top 70%",
-                    toggleActions: "play none none reverse"
-                }
-            });
+            if (items.length === 0) { console.warn("No service items found."); return; }
+            const tl = gsap.timeline({ scrollTrigger: { trigger: servicesSection, start: "top 70%", toggleActions: "play none none reverse" } });
             tl.to(container, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-            tl.to(items, {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.5,
-                ease: 'power2.out',
-                stagger: 0.15
-            }, "-=0.3");
+            tl.to(items, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'power2.out', stagger: 0.15 }, "-=0.3");
         }
-        // --- Initialize Portfolio Preview Animations ---
         function initPortfolio() {
             const portfolioSection = document.querySelector('.portfolio-section');
             const container = document.querySelector('.portfolio-preview-container');
-             if (!portfolioSection || !container) {
-                 console.warn("Portfolio section or container not found for animation.");
-                 return;
-             }
+            if (!portfolioSection || !container) { console.warn("Portfolio elements missing."); return; }
             const items = gsap.utils.toArray('.portfolio-item-placeholder', container);
             const cta = document.querySelector('.portfolio-cta', container);
-            if (!items.length || !cta) {
-                console.warn("Portfolio items or CTA not found for animation.");
-                return;
-            }
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: portfolioSection,
-                    start: "top 65%",
-                    toggleActions: "play none none reverse"
-                }
-            });
+            if (!items.length || !cta) { console.warn("Portfolio items/CTA missing."); return; }
+            const tl = gsap.timeline({ scrollTrigger: { trigger: portfolioSection, start: "top 65%", toggleActions: "play none none reverse" } });
             tl.to(container, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
-            tl.to(items, {
-                opacity: 1,
-                scale: 1,
-                duration: 0.6,
-                ease: 'back.out(1.4)',
-                stagger: 0.15
-            }, "-=0.3");
-            tl.to(cta, {
-                opacity: 1,
-                y: 0,
-                duration: 0.7,
-                ease: 'power2.out'
-            }, "-=0.5");
+            tl.to(items, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.4)', stagger: 0.15 }, "-=0.3");
+            tl.to(cta, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, "-=0.5");
         }
-        // --- Initialize Contact Form Animations ---
         function initContact() {
             const contactSection = document.querySelector('.contact-section');
             const container = document.querySelector('.contact-form-container');
-            if (!contactSection || !container) {
-                console.warn("Contact section or container not found for animation.");
-                return;
-            }
+            if (!contactSection || !container) { console.warn("Contact elements missing."); return; }
             const labels = gsap.utils.toArray('.contact-form label', container);
             const inputs = gsap.utils.toArray('.contact-form input, .contact-form textarea', container);
             const button = container.querySelector('.contact-form button');
-            if (!labels.length || !inputs.length || !button) {
-               console.warn("Contact form elements (labels, inputs, button) missing for animation.");
-               return;
-            }
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: contactSection,
-                    start: "top 60%",
-                    toggleActions: "play none none reverse"
-                }
-            });
+            if (!labels.length || !inputs.length || !button) { console.warn("Contact form elements missing."); return; }
+            const tl = gsap.timeline({ scrollTrigger: { trigger: contactSection, start: "top 60%", toggleActions: "play none none reverse" } });
             tl.to(container, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
-            tl.to(labels, {
-                opacity: 1,
-                x: 0,
-                duration: 0.5,
-                ease: 'power2.out',
-                stagger: 0.1
-            }, "-=0.5");
-            tl.to(inputs, {
-                opacity: 1,
-                x: 0,
-                duration: 0.5,
-                ease: 'power2.out',
-                stagger: 0.1
-            }, "<0.1");
-            tl.to(button, {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: 'back.out(1.7)'
-            }, "-=0.3");
+            tl.to(labels, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, "-=0.5");
+            tl.to(inputs, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, "<0.1");
+            tl.to(button, { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.7)' }, "-=0.3");
         }
-       // --- Initialize Header Logic (Original logic compatible with reverted layout) ---
        function initHeader() {
            const header = document.getElementById('site-header');
            if (!header) { console.warn("Site header not found."); return; }
            const headerLinks = document.querySelectorAll('.header-nav a[href^="#"]');
-
            headerLinks.forEach(anchor => {
                anchor.addEventListener('click', function(e) {
                    const href = this.getAttribute('href');
@@ -1049,16 +916,9 @@
                            if (target) {
                                e.preventDefault();
                                const headerHeight = header.offsetHeight;
-                               gsap.to(window, {
-                                   duration: 1.2,
-                                   // Offset all sections except the very first one (#section-0)
-                                   scrollTo: { y: target, offsetY: (target.id === 'section-0' ? 0 : headerHeight) },
-                                   ease: "power2.inOut"
-                               });
+                               gsap.to(window, { duration: 1.2, scrollTo: { y: target, offsetY: (target.id === 'section-0' ? 0 : headerHeight) }, ease: "power2.inOut" });
                            } else { console.warn(`Scroll target '${href}' not found.`); }
-                       } catch (error) {
-                           console.error(`Error selecting scroll target '${href}':`, error);
-                       }
+                       } catch (error) { console.error(`Error selecting scroll target '${href}':`, error); }
                    }
                });
            });
@@ -1069,193 +929,93 @@
                     if (href === '#section-0') {
                         e.preventDefault();
                          const target = document.getElementById('section-0');
-                         if(target){
-                            gsap.to(window, {
-                                duration: 1.2,
-                                scrollTo: { y: target }, // Scroll to top of section 0
-                                ease: "power2.inOut"
-                            });
-                         }
+                         if(target){ gsap.to(window, { duration: 1.2, scrollTo: { y: target }, ease: "power2.inOut" }); }
                     }
                });
            }
        }
-       // --- Initialize Footer Animation ---
        function initFooter() {
            const footer = document.querySelector('#section-4 .site-footer');
            const copyrightYearSpan = document.getElementById('copyright-year');
-           if (!footer) { console.warn("Site footer inside #section-4 not found."); return; }
-           if(copyrightYearSpan) { copyrightYearSpan.textContent = new Date().getFullYear(); }
-           else { console.warn("Copyright year span not found."); }
-           gsap.to(footer, {
-               opacity: 1, y: 0, duration: 1.0, ease: 'power2.out',
-               scrollTrigger: {
-                   trigger: '#section-4',
-                   start: "center bottom-=10%",
-                   toggleActions: "play none none reverse",
-                   id: "footer-reveal"
-               }
-           });
+           if (!footer) { console.warn("Site footer missing."); return; }
+           if(copyrightYearSpan) { copyrightYearSpan.textContent = new Date().getFullYear(); } else { console.warn("Copyright year span missing."); }
+           gsap.to(footer, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', scrollTrigger: { trigger: '#section-4', start: "center bottom-=10%", toggleActions: "play none none reverse", id: "footer-reveal" } });
        }
-       // --- Navigation Dots & Theme Switching (Original logic) ---
        function initNavigation() {
             const sectionsNodeList = document.querySelectorAll('section[id^="section-"]');
             const sections = Array.from(sectionsNodeList);
             const navDots = document.querySelectorAll('.nav-dot');
             const body = document.body;
             const header = document.getElementById('site-header');
-            if (navDots.length === 0 || sections.length === 0 || !header) {
-                console.warn("Nav dots, sections, or header not found."); return;
-            }
-             if (navDots.length !== sections.length) {
-                console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sections.length} sections found.`);
-             }
+            if (navDots.length === 0 || sections.length === 0 || !header) { console.warn("Navigation elements missing."); return; }
+            if (navDots.length !== sections.length) { console.warn(`Dot/Section mismatch: ${navDots.length}/${sections.length}.`); }
             const getHeaderHeight = () => header.offsetHeight;
-
             navDots.forEach(dot => {
                 dot.addEventListener('click', (e) => {
                     e.preventDefault();
                     const sectionIdSuffix = dot.getAttribute('data-section');
                     const targetSection = document.getElementById(`section-${sectionIdSuffix}`);
-                    if (targetSection) {
-                         gsap.to(window, {
-                             duration: 1.2,
-                             // Offset correctly based on original layout
-                             scrollTo: { y: targetSection, offsetY: (targetSection.id === 'section-0' ? 0 : getHeaderHeight()) },
-                             ease: "power2.inOut"
-                         });
-                    } else { console.error(`Target section #section-${sectionIdSuffix} not found.`); }
+                    if (targetSection) { gsap.to(window, { duration: 1.2, scrollTo: { y: targetSection, offsetY: (targetSection.id === 'section-0' ? 0 : getHeaderHeight()) }, ease: "power2.inOut" }); }
+                    else { console.error(`Target section #section-${sectionIdSuffix} not found.`); }
                 });
             });
-
             sections.forEach((section, index) => {
                 const sectionIdSuffix = section.id.replace('section-', '');
                 const theme = section.getAttribute('data-theme') || 'dark';
                 ScrollTrigger.create({
                     trigger: section,
-                    // Use original start/end logic
                     start: () => section.id === 'section-0' ? `top top` : `top top+=${getHeaderHeight()}px`,
-                     end: () => {
-                         const isLastSection = index === sections.length - 1;
-                         return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight()}px`;
-                     },
+                     end: () => { const isLastSection = index === sections.length - 1; return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight()}px`; },
                     id: `section-nav-${sectionIdSuffix}`,
                     onEnter: () => updateActiveState(sectionIdSuffix, theme),
                     onEnterBack: () => updateActiveState(sectionIdSuffix, theme),
                     invalidateOnRefresh: true
                 });
             });
-
             function updateActiveState(activeSectionIdSuffix, activeTheme) {
-                navDots.forEach((dot) => {
-                    const dotSecIdSuffix = dot.getAttribute('data-section');
-                    dot.classList.toggle('active', dotSecIdSuffix === activeSectionIdSuffix);
-                });
+                navDots.forEach((dot) => { dot.classList.toggle('active', dot.getAttribute('data-section') === activeSectionIdSuffix); });
                 const currentBodyTheme = body.classList.contains('on-light-section') ? 'light' : 'dark';
-                if (activeTheme !== currentBodyTheme) {
-                  body.classList.toggle('on-light-section', activeTheme === 'light');
-                }
+                if (activeTheme !== currentBodyTheme) { body.classList.toggle('on-light-section', activeTheme === 'light'); }
             }
-
             let scrollIndicatorState = { scrolled: window.scrollY > 50 };
             body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
             const scrollListener = () => {
                 const isScrolled = window.scrollY > 50;
-                if (isScrolled !== scrollIndicatorState.scrolled) {
-                    body.classList.toggle('scrolled', isScrolled);
-                    scrollIndicatorState.scrolled = isScrolled;
-                }
+                if (isScrolled !== scrollIndicatorState.scrolled) { body.classList.toggle('scrolled', isScrolled); scrollIndicatorState.scrolled = isScrolled; }
             };
             window.addEventListener('scroll', scrollListener, { passive: true });
-
              setTimeout(() => {
-                let initialSectionIdSuffix = '0';
-                let initialTheme = 'dark';
-                const currentScrollY = window.scrollY;
-                const currentHeaderHeight = getHeaderHeight();
-                 const threshold = currentHeaderHeight / 2; // Simpler threshold logic for original layout
-
+                let initialSectionIdSuffix = '0'; let initialTheme = 'dark'; const currentScrollY = window.scrollY; const currentHeaderHeight = getHeaderHeight(); const threshold = currentHeaderHeight / 2;
                 for (let i = sections.length - 1; i >= 0; i--) {
-                    const section = sections[i];
-                    const rect = section.getBoundingClientRect();
-                    const sectionTopScrollY = currentScrollY + rect.top;
-
-                    // If the top of the section is above the threshold point in the viewport
-                    if (sectionTopScrollY <= currentScrollY + threshold) {
-                        initialSectionIdSuffix = section.id.replace('section-', '');
-                        initialTheme = section.getAttribute('data-theme') || 'dark';
-                        break;
-                    }
+                    const section = sections[i]; const rect = section.getBoundingClientRect(); const sectionTopScrollY = currentScrollY + rect.top;
+                    if (sectionTopScrollY <= currentScrollY + threshold) { initialSectionIdSuffix = section.id.replace('section-', ''); initialTheme = section.getAttribute('data-theme') || 'dark'; break; }
                 }
-                updateActiveState(initialSectionIdSuffix, initialTheme);
-                scrollIndicatorState.scrolled = window.scrollY > 50;
-                body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
-                ScrollTrigger.refresh();
+                updateActiveState(initialSectionIdSuffix, initialTheme); scrollIndicatorState.scrolled = window.scrollY > 50; body.classList.toggle('scrolled', scrollIndicatorState.scrolled); ScrollTrigger.refresh();
              }, 150);
        }
-       // --- Initialize All Animations & Functionality ---
        function initAll() {
          console.log("Initializing LAYA animations...");
-         initHeader();
-         initNavigation();
-         initFooter();
-         initHero();
-         initAbout();
-         initServices();
-         initPortfolio();
-         initContact();
-
+         initHeader(); initNavigation(); initFooter(); initHero(); initAbout(); initServices(); initPortfolio(); initContact();
          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
            if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots')) {
              anchor.addEventListener('click', function(e) {
                const href = this.getAttribute('href');
-               if (href === '#portfolio-full') {
-                   e.preventDefault();
-                   console.log("Portfolio CTA clicked - implement full portfolio view/link here.");
-                   return;
-               }
+               if (href === '#portfolio-full') { e.preventDefault(); console.log("Portfolio CTA clicked."); return; }
                if (href && href.startsWith('#') && href.length > 1) {
                  try {
-                   const target = document.querySelector(href);
-                   const header = document.getElementById('site-header');
-                   const offset = header ? header.offsetHeight : 75;
-                   if (target) {
-                     e.preventDefault();
-                     gsap.to(window, {
-                       duration: 1,
-                       scrollTo: { y: target, offsetY: offset }, // Always offset non-nav links
-                       ease: "power2.inOut"
-                     });
-                   } else { console.warn("Smooth scroll target not found:", href); }
+                   const target = document.querySelector(href); const header = document.getElementById('site-header'); const offset = header ? header.offsetHeight : 75;
+                   if (target) { e.preventDefault(); gsap.to(window, { duration: 1, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" }); }
+                   else { console.warn("Smooth scroll target not found:", href); }
                  } catch (error) { console.warn("Could not find target for anchor:", href, error); }
-               } else if (href === "#") {
-                   e.preventDefault();
-               }
+               } else if (href === "#") { e.preventDefault(); }
              });
            }
          });
-
-         setTimeout(() => {
-           ScrollTrigger.refresh();
-           console.log("ScrollTrigger refreshed after init.");
-         }, 250);
-
-         let resizeTimer;
-         window.addEventListener('resize', () => {
-           clearTimeout(resizeTimer);
-           resizeTimer = setTimeout(() => {
-             console.log("Resizing - Refreshing ScrollTrigger...");
-             ScrollTrigger.refresh(true);
-           }, 250);
-         });
+         setTimeout(() => { ScrollTrigger.refresh(); console.log("ScrollTrigger refreshed after init."); }, 250);
+         let resizeTimer; window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { console.log("Resizing - Refreshing ScrollTrigger..."); ScrollTrigger.refresh(true); }, 250); });
          console.log("LAYA Initialization sequence complete.");
        }
-
-       if (document.readyState === 'loading') {
-         document.addEventListener('DOMContentLoaded', initAll);
-       } else {
-         initAll();
-       }
+       if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initAll); } else { initAll(); }
     </script>
 </body>
 </html>
