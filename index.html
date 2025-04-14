@@ -78,30 +78,26 @@
           top: 50%;
           transform: translate(-50%, -50%);
       }
-      /* Styles for the logo link containing the image */
       .logo-link {
           text-decoration: none;
-          display: inline-block; /* Good practice for links wrapping images */
+          display: inline-block;
       }
-      /* Styles for the logo image itself */
       .logo-link img {
-          height: 50px; /* << ADJUST THIS VALUE to change logo size */
-          width: auto; /* Maintain aspect ratio */
-          display: block; /* Prevents potential extra space below image */
+          height: 50px;
+          width: auto;
+          display: block;
           transition: transform 0.3s ease;
       }
-      /* Hover effect for the logo image */
       .logo-link:hover img {
-          transform: scale(1.08); /* Slightly scale the image on hover */
+           transform: scale(1.08);
       }
-
       .header-nav {
-          margin-left: auto; /* Pushes nav to the right */
+          margin-left: auto;
       }
       .header-nav ul {
           list-style: none;
           display: flex;
-          gap: 35px; /* Increased spacing */
+          gap: 35px;
           padding: 0;
           margin: 0;
           align-items: center;
@@ -112,7 +108,7 @@
       .header-nav a {
           text-decoration: none;
           color: var(--header-icon-color-dark);
-          font-size: 1.1rem; /* Adjusted icon size */
+          font-size: 1.1rem;
           transition: transform 0.3s ease, color 0.3s ease;
           display: flex;
           flex-direction: column;
@@ -126,16 +122,15 @@
           transform: scale(1.15);
           color: var(--header-hover-color);
       }
-      /* Label Styles - uses --logo-font (Montserrat) */
       .nav-label {
           position: absolute;
           top: 100%;
           margin-top: 6px;
           background-color: transparent;
-          color: inherit; /* Inherit color from parent link (<a>) */
-          font-family: var(--logo-font); /* Use Montserrat */
-          font-weight: 500; /* Original weight */
-          font-size: 0.75rem; /* Smaller label */
+          color: inherit;
+          font-family: var(--logo-font);
+          font-weight: 500;
+          font-size: 0.75rem;
           padding: 2px 4px;
           border-radius: 4px;
           white-space: nowrap;
@@ -153,18 +148,17 @@
           transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0s;
       }
       /* --- FOOTER STYLES --- */
-      section#section-4 { /* Target specifically for footer context */
+      section#section-4 {
           position: relative;
-          background-color: var(--bg-light-1); /* Light background for contact */
+          background-color: var(--bg-light-1);
           color: var(--text-dark);
           min-height: 100vh;
           height: auto;
-          /* padding-top adjusted by general section rule or hero rule */
-          padding-bottom: 20vh; /* Space for footer */
+          padding-bottom: 20vh;
           display: flex;
           justify-content: center;
           align-items: center;
-          overflow: hidden; /* Keep overflow hidden for form */
+          overflow: hidden;
       }
       .site-footer {
           position: absolute;
@@ -177,8 +171,8 @@
           align-items: center;
           gap: 15px;
           z-index: 5;
-          opacity: 0; /* Initial state for animation */
-          transform: translateY(30px); /* Initial state for animation */
+          opacity: 0;
+          transform: translateY(30px);
       }
       .site-footer .copyright {
           font-size: 0.85rem;
@@ -200,7 +194,7 @@
       }
       .site-footer .social-icons a:hover {
           transform: scale(1.15);
-          color: var(--accent-color-2); /* Dark grey hover for footer */
+          color: var(--accent-color-2);
       }
       /* --- SECTION STYLES --- */
       section {
@@ -212,69 +206,64 @@
         align-items: center;
         position: relative;
         overflow: hidden;
-        padding: 50px; /* General padding for content */
-        padding-top: var(--header-height); /* Add space for fixed header */
-        margin-top: calc(-1 * var(--header-height)); /* Pull section up for scroll trigger */
+        padding: 50px; /* General padding */
+        padding-top: var(--header-height); /* Space for header */
+        margin-top: calc(-1 * var(--header-height)); /* Pull up for scroll trigger */
       }
-      /* --- Specific rule for the FIRST section (Hero) --- */
-      section:first-of-type { /* Or target #section-0 or .hero-section */
-        margin-top: 0; /* Don't pull the first section up */
-        padding: 0; /* Override general padding */
-        padding-top: var(--header-height); /* Add space specifically for header */
-        /* Height is set specifically on .hero-section */
+      section:first-of-type { /* Reverted: Hero has no top margin/padding */
+        margin-top: 0;
+        padding-top: 0;
       }
 
-      /* --- SECTION 0: Hero Image Stack --- */
-      .hero-section { /* Specific styles for the hero section itself */
-        background-color: var(--bg-dark-1); /* Fallback background */
+      /* --- SECTION 0: Hero Image Stack (Reverted Layout) --- */
+      .hero-section {
+        background-color: var(--bg-dark-1);
         color: var(--text-light);
-        /* display: block; /* Removed, using flex from general 'section' now might be ok, or override if needed */
-        /* padding is handled by section:first-of-type rule */
-        min-height: 100vh; /* Ensure it takes at least viewport height */
-        height: 100vh; /* Force full viewport height */
-        position: relative; /* Needed for absolute children */
-        overflow: hidden; /* Ensure image doesn't overflow */
-        /* Explicitly ensure alignment if needed, though should inherit flex from 'section' */
-        /* display: flex; already in section rule */
-        /* align-items: center; already in section rule */
-        /* justify-content: center; already in section rule */
+        display: block; /* Reverted */
+        padding: 0; /* Reverted */
+        min-height: 100vh;
+        height: 100vh; /* Reverted: Force full height */
+        position: relative;
+        overflow: hidden;
       }
       .hero-content {
         position: absolute;
-        /* MODIFIED: Center vertically within the visible area below header */
-        top: calc(var(--header-height) + (100vh - var(--header-height)) / 2);
+        top: 50%; /* Reverted: Center based on full section */
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 2;
         text-align: center;
         color: var(--text-light);
         opacity: 0; /* Start hidden for GSAP */
-        width: 90%; /* Prevent text becoming too wide */
-        max-width: 700px; /* Max width for readability */
+        width: 90%;
+        max-width: 700px;
+        /* MODIFIED: Added background, padding, border-radius */
+        background-color: rgba(0, 0, 0, 0.45); /* Dark semi-transparent bg */
+        padding: clamp(15px, 3vw, 30px) clamp(20px, 4vw, 40px); /* Responsive padding */
+        border-radius: 8px; /* Soft corners */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow */
       }
-      /* Hero title uses --logo-font (Montserrat) */
       .hero-title {
         font-family: var(--logo-font);
-        font-size: clamp(2.5rem, 6vw, 5rem); /* Responsive font size */
-        font-weight: 700; /* Reverted to original weight for Montserrat */
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        /* MODIFIED: Changed font weight */
+        font-weight: 400; /* Regular weight */
         margin-bottom: 15px;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Adjusted shadow */
       }
       .hero-tagline {
         font-size: clamp(1rem, 2vw, 1.5rem);
-        font-weight: 300; /* Use Poppins light */
+        font-weight: 300;
         margin: 0 auto;
         line-height: 1.6;
-        font-family: 'Poppins', sans-serif; /* Explicitly Poppins */
+        font-family: 'Poppins', sans-serif;
       }
       .hero-image-stack {
           position: absolute;
-          /* MODIFIED: Start below the header's space (padding) */
-          top: var(--header-height);
+          top: 0; /* Reverted */
           left: 0;
           width: 100%;
-          /* MODIFIED: Fill height minus the header's space */
-          height: calc(100% - var(--header-height));
+          height: 100%; /* Reverted */
           overflow: hidden;
       }
       .hero-image {
@@ -283,14 +272,14 @@
           left: 0;
           width: 100%;
           height: 100%;
-          object-fit: cover; /* Cover the area, may crop */
-          object-position: center; /* Center the image */
-          opacity: 0; /* Start hidden */
-          pointer-events: none; /* Prevent interaction when hidden */
+          object-fit: cover;
+          object-position: center;
+          opacity: 0;
+          pointer-events: none;
       }
       .hero-image.hero-image-active {
           opacity: 1;
-          pointer-events: auto; /* Allow interaction for active image */
+          pointer-events: auto;
       }
       /* --- SECTION 1: About Me --- */
       .about-section {
@@ -299,24 +288,22 @@
       }
       .about-content-wrapper {
         max-width: 900px;
-        /* Padding is handled by the general 'section' rule */
         opacity: 0;
         transform: translateY(50px);
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        width: 100%; /* Ensure it takes width within section padding */
+        width: 100%;
       }
       .about-text-container {
         flex: 1;
         margin-right: 40px;
         text-align: left;
       }
-      /* About title uses --logo-font (Montserrat) */
       .about-title {
           font-family: var(--logo-font);
           font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 700; /* Reverted weight */
+          font-weight: 700;
           margin-bottom: 30px;
           color: var(--accent-color-1);
       }
@@ -352,17 +339,15 @@
       }
       .services-container {
           max-width: 1100px;
-          width: 100%; /* Takes width within section padding */
+          width: 100%;
           text-align: center;
-          /* Padding is handled by the general 'section' rule */
           opacity: 0;
           transform: translateY(50px);
       }
-      /* Services title uses --logo-font (Montserrat) */
       .services-title {
           font-family: var(--logo-font);
           font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 700; /* Reverted weight */
+          font-weight: 700;
           margin-bottom: 60px;
           color: var(--accent-color-4);
       }
@@ -415,17 +400,15 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 100%; /* Takes width within section padding */
+        width: 100%;
         max-width: 1200px;
-        /* Padding handled by general 'section' rule */
         opacity: 0;
         transform: translateY(50px);
       }
-      /* Portfolio title uses --logo-font (Montserrat) */
       .portfolio-title {
           font-family: var(--logo-font);
           font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 700; /* Reverted weight */
+          font-weight: 700;
           margin-bottom: 50px;
           text-align: center;
           color: var(--accent-color-1);
@@ -476,38 +459,36 @@
       .portfolio-cta:hover {
           background-color: var(--accent-color-3);
           color: var(--text-dark);
-          transform: translateY(0px) scale(1.05); /* Keep Y transform 0 on hover */
+          transform: translateY(0px) scale(1.05);
       }
       /* --- SECTION 4: Contact Form --- */
-      .contact-section { /* Use class selector for clarity */
-         /* Background color is set in #section-4 specific rule above */
-         color: var(--text-dark); /* Ensure text color contrasts with light bg */
-         /* Other section styles (min-height, display, etc.) apply from general rule */
+      .contact-section {
+         /* Styles inherited from #section-4 */
+         color: var(--text-dark);
       }
       .contact-form-container {
          background-color: var(--bg-light-2);
-         padding: 50px clamp(20px, 8vw, 80px); /* Generous padding */
+         padding: 50px clamp(20px, 8vw, 80px);
          border-radius: 10px;
          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-         width: 100%; /* Takes width within section padding */
-         max-width: 700px; /* Limit form width */
+         width: 100%;
+         max-width: 700px;
          opacity: 0;
          transform: translateY(50px);
-         z-index: 1; /* Ensure form is above footer initially if overlap occurs */
-         color: var(--text-dark); /* Override potential inheritance */
+         z-index: 1;
+         color: var(--text-dark);
       }
-      /* Contact title uses --logo-font (Montserrat) */
       .contact-title {
           font-family: var(--logo-font);
           font-size: clamp(1.8rem, 4vw, 3rem);
-          font-weight: 700; /* Reverted weight */
+          font-weight: 700;
           margin-bottom: 40px;
           text-align: center;
           color: var(--accent-color-4);
       }
       .contact-form .form-group {
           margin-bottom: 25px;
-          position: relative; /* For potential future label animations */
+          position: relative;
       }
       .contact-form label {
           display: block;
@@ -530,7 +511,7 @@
           font-size: 1rem;
           font-weight: 400;
           color: var(--text-dark);
-          background-color: var(--bg-light-2); /* Ensure bg matches container */
+          background-color: var(--bg-light-2);
           transition: border-color 0.3s ease, box-shadow 0.3s ease;
           opacity: 0;
           transform: translateX(-20px);
@@ -539,7 +520,7 @@
       .contact-form input[type="email"]:focus,
       .contact-form textarea:focus {
           border-color: var(--accent-color-1);
-          box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3); /* Muted gold focus ring */
+          box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3);
           outline: none;
       }
       .contact-form textarea {
@@ -550,23 +531,23 @@
           display: block;
           width: 100%;
           padding: 15px 30px;
-          background-color: var(--accent-color-4); /* Dark button */
+          background-color: var(--accent-color-4);
           color: var(--text-light);
           border: none;
-          border-radius: 50px; /* Pill shape */
+          border-radius: 50px;
           font-family: 'Montserrat', sans-serif;
           font-size: 1.1rem;
           font-weight: 700;
           cursor: pointer;
           transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
-          margin-top: 10px; /* Space above button */
+          margin-top: 10px;
           opacity: 0;
           transform: translateY(20px);
       }
       .contact-form button:hover {
-          background-color: var(--accent-color-1); /* Gold hover */
+          background-color: var(--accent-color-1);
           color: var(--text-dark);
-          transform: scale(1.03) translateY(0); /* Slight scale up */
+          transform: scale(1.03) translateY(0);
       }
       /* --- Navigation Dots --- */
       .nav-dots {
@@ -576,35 +557,36 @@
         transform: translateY(-50%);
         display: flex;
         flex-direction: column;
-        z-index: 101; /* Above header */
+        z-index: 101;
       }
       .nav-dot {
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.3); /* Default for dark sections */
+        background-color: rgba(255, 255, 255, 0.3);
         margin: 12px 0;
         cursor: pointer;
         transition: background-color 0.3s, transform 0.3s;
         border: 1px solid rgba(0, 0, 0, 0.2);
       }
       body.on-light-section .nav-dot {
-         background-color: rgba(0, 0, 0, 0.2); /* For light sections */
+         background-color: rgba(0, 0, 0, 0.2);
          border: 1px solid rgba(255, 255, 255, 0.2);
       }
       .nav-dot.active {
-        background-color: white; /* Active on dark */
+        background-color: white;
         transform: scale(1.4);
         border: 1px solid rgba(0, 0, 0, 0.3);
       }
       body.on-light-section .nav-dot.active {
-         background-color: var(--text-dark); /* Active on light */
+         background-color: var(--text-dark);
          border: 1px solid rgba(255, 255, 255, 0.3);
       }
       /* --- Scroll Indicator (First Section) --- */
       .scroll-indicator {
         position: absolute;
-        bottom: 40px;
+        /* MODIFIED: Positioned higher */
+        bottom: 10vh; /* Changed from 40px */
         left: 50%;
         transform: translateX(-50%);
         color: rgba(255, 255, 255, 0.7);
@@ -613,11 +595,11 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        z-index: 5; /* Above image stack, below content/header */
+        z-index: 5;
         opacity: 0.8;
         transition: opacity 0.5s ease;
         letter-spacing: 1px;
-        background-color: transparent; /* Ensure no bg interferes */
+        background-color: transparent;
       }
        .scroll-indicator span {
          font-weight: 400;
@@ -625,7 +607,7 @@
        .scroll-indicator i {
          font-size: 1.2rem;
          margin-top: 8px;
-         color: #fff; /* Ensure visible */
+         color: #fff;
        }
 
       @keyframes scrollArrow {
@@ -649,15 +631,15 @@
            .site-header { padding: 0 25px; }
            .logo-link img { height: 45px; }
            .header-nav ul { gap: 25px; }
-           section { padding-left: 30px; padding-right: 30px; } /* Adjust general padding */
-           section:first-of-type { padding-left: 0; padding-right: 0; } /* Keep hero full width */
+           section { padding-left: 30px; padding-right: 30px; } /* General padding */
+           section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;} /* Hero full width */
            .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
            .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
            .services-grid { gap: 30px; }
-           /* .services-container padding adjusted by general 'section' rule */
            .about-content-wrapper { flex-direction: column-reverse; align-items: center; }
            .about-text-container { margin-right: 0; margin-top: 30px; text-align: center; }
            .about-portrait { max-width: 250px; margin-bottom: 20px; }
+           .scroll-indicator { bottom: 8vh; } /* Adjust for tablet */
        }
 
         @media (max-width: 768px) {
@@ -666,11 +648,11 @@
             .logo-link img { height: 40px; }
             .header-nav ul { gap: 20px; }
             .header-nav a { font-size: 1rem; }
-            .nav-label { display: none; } /* Hide labels on smaller screens */
+            .nav-label { display: none; }
             .nav-dots { right: 20px; }
             .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
-            section { padding-left: 20px; padding-right: 20px; } /* Adjust general padding */
-            section:first-of-type { padding-left: 0; padding-right: 0; } /* Keep hero full width */
+            section { padding-left: 20px; padding-right: 20px; } /* General padding */
+             section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;} /* Hero full width */
             .portfolio-grid { gap: 20px; }
             .portfolio-item-placeholder { font-size: 1rem; }
             .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
@@ -681,12 +663,11 @@
             .site-footer .copyright { font-size: 0.75rem; }
             .site-footer .social-icons { gap: 15px; }
             .site-footer .social-icons a { font-size: 1.1rem; }
-            /* .about-content-wrapper padding adjusted by general 'section' rule */
             .about-portrait { max-width: 200px; }
-            .services-grid { grid-template-columns: 1fr; gap: 25px; } /* Stack services */
-            /* .services-container padding adjusted by general 'section' rule */
+            .services-grid { grid-template-columns: 1fr; gap: 25px; }
             .services-title { margin-bottom: 40px; }
             .service-item { padding: 30px; }
+            .hero-content { padding: clamp(15px, 3vw, 25px) clamp(20px, 4vw, 30px); } /* Adjust padding slightly */
         }
 
          @media (max-width: 480px) {
@@ -703,14 +684,14 @@
              .about-portrait { max-width: 150px; }
              .services-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
              .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-             .portfolio-grid { grid-template-columns: 1fr; gap: 15px; } /* Stack portfolio */
+             .portfolio-grid { grid-template-columns: 1fr; gap: 15px; }
              .portfolio-item-placeholder { font-size: 0.9rem; }
              .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
-             .scroll-indicator { bottom: 25px; font-size: 0.75rem;}
-             section { padding-left: 15px; padding-right: 15px; } /* Adjust general padding */
-             section:first-of-type { padding-left: 0; padding-right: 0; } /* Keep hero full width */
-             /* .services-container padding adjusted by general 'section' rule */
+             .scroll-indicator { bottom: 6vh; font-size: 0.75rem;} /* Adjust for mobile */
+             section { padding-left: 15px; padding-right: 15px; } /* General padding */
+             section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;} /* Hero full width */
              .contact-form-container { padding: 25px 15px; }
+             .hero-content { padding: 15px 20px; } /* Smaller padding on mobile */
          }
     </style>
 </head>
@@ -746,12 +727,10 @@
             <img src="interior_2.png" alt="Classic Interior Design 2" class="hero-image" id="hero-img-2">
             <img src="interior_3.png" alt="Innovative Interior Design 3" class="hero-image" id="hero-img-3">
         </div>
-         <div class="hero-content">
-             <h1 class="hero-title">LAYA Architecture</h1>
+         <div class="hero-content"> <h1 class="hero-title">LAYA Architecture</h1>
              <p class="hero-tagline">Designing spaces that inspire. Blending innovation with timeless tradition.</p>
          </div>
-        <div class="scroll-indicator">
-            <span>Explore LAYA</span>
+        <div class="scroll-indicator"> <span>Explore LAYA</span>
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
@@ -846,10 +825,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
     <script>
-      // --- JavaScript Code (No changes needed here for the layout fix) ---
+      // --- JavaScript Code (Original logic restored, compatible with reverted layout) ---
       gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-        // --- Initialize Hero Section Animations (Improved Cinematic Transitions) ---
+        // --- Initialize Hero Section Animations (Original logic) ---
         function initHero() {
             const heroSection = document.querySelector('.hero-section');
             if (!heroSection) return;
@@ -864,83 +843,64 @@
             }
 
             // Initial setup
-            gsap.set(images[0], { opacity: 1, pointerEvents: 'auto' }); // Active image
-            gsap.set(images.slice(1), { opacity: 0, pointerEvents: 'none' }); // Inactive images
-            gsap.set(content, { opacity: 0, y: 30 }); // Content initially hidden
+            gsap.set(images[0], { opacity: 1, pointerEvents: 'auto' });
+            gsap.set(images.slice(1), { opacity: 0, pointerEvents: 'none' });
+            gsap.set(content, { opacity: 0, y: 30 }); // Start content slightly lower
 
-            // Animate content entrance (consider triggering slightly earlier if needed)
-            const contentTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: heroSection,
-                    start: "top 70%", // Adjust if content appears too late
-                    toggleActions: "play none none reverse"
-                }
-            });
-            contentTl.to(content, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' });
+            // Animate content entrance
+             const contentTl = gsap.timeline({
+                 scrollTrigger: {
+                     trigger: heroSection,
+                     start: "top 80%", // Trigger when top hits 80% of viewport height
+                     toggleActions: "play none none reverse"
+                 }
+             });
+             // Note: The hero content now animates in its semi-transparent container
+             contentTl.to(content, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' });
+
 
             // Image switching function
             function switchImage() {
                 if (images.length <= 1) return;
                 const nextImageIndex = (currentImageIndex + 1) % images.length;
-
-                const tl = gsap.timeline({ defaults: { ease: "power1.inOut" } }); // Smooth fade
-
-                tl.to(images[currentImageIndex], {
-                    opacity: 0,
-                    duration: 1.5 // Fade out duration
-                })
-                .set(images[currentImageIndex], {
-                    pointerEvents: 'none'
-                })
-                .set(images[nextImageIndex], {
-                    opacity: 0 // Prepare next image
-                }, "<") // Start preparing next image at the same time fade out starts
-                .to(images[nextImageIndex], {
-                    opacity: 1,
-                    duration: 1.5 // Fade in duration
-                }, "<0.3") // Start fade in slightly after fade out starts
-                .set(images[nextImageIndex], {
-                    pointerEvents: 'auto'
-                });
-
+                const tl = gsap.timeline({ defaults: { ease: "power1.inOut" } });
+                tl.to(images[currentImageIndex], { opacity: 0, duration: 1.5 })
+                  .set(images[currentImageIndex], { pointerEvents: 'none' })
+                  .set(images[nextImageIndex], { opacity: 0 }, "<")
+                  .to(images[nextImageIndex], { opacity: 1, duration: 1.5 }, "<0.3")
+                  .set(images[nextImageIndex], { pointerEvents: 'auto' });
                 currentImageIndex = nextImageIndex;
             }
 
             function startImageTimer() {
                 clearInterval(imageInterval);
                 if (images.length > 1) {
-                    imageInterval = setInterval(switchImage, 5000); // Change image every 5 seconds
+                    imageInterval = setInterval(switchImage, 5000);
                 }
             }
+            startImageTimer();
 
-            startImageTimer(); // Start the timer initially
-            // Optional: Pause on hover
-            // heroSection.addEventListener('mouseenter', () => clearInterval(imageInterval));
-            // heroSection.addEventListener('mouseleave', startImageTimer);
-
-            // Parallax effect for images (subtle vertical move)
+            // Parallax effects (relative to original layout)
             images.forEach(img => {
                 gsap.to(img, {
-                    y: -30, // Adjust value for desired parallax intensity
+                    y: -30,
                     ease: "none",
                     scrollTrigger: {
                         trigger: heroSection,
-                        start: "top top", // Start parallax when section hits top
-                        end: "bottom top", // End parallax when section bottom hits top
-                        scrub: 1.5, // Smooth scrubbing effect
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: 1.5,
                     }
                 });
             });
-
-            // Parallax effect for content (moves slightly faster)
-            gsap.to(content, {
-                yPercent: -10, // Adjust value for desired parallax intensity
+            gsap.to(content, { // Content parallax works on the container now
+                yPercent: -10,
                 ease: "none",
                 scrollTrigger: {
                     trigger: heroSection,
                     start: "top top",
                     end: "bottom top",
-                    scrub: 1 // Make content move a bit faster than images
+                    scrub: 1
                 }
             });
         }
@@ -957,12 +917,12 @@
            const tl = gsap.timeline({
                scrollTrigger: {
                    trigger: aboutSection,
-                   start: "top 70%", // Trigger animation when 70% from top enters view
-                   toggleActions: "play none none reverse" // Play on enter, reverse on leave
+                   start: "top 70%",
+                   toggleActions: "play none none reverse"
                }
            });
            tl.to(aboutContentWrapper, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
-             .to(aboutPortrait, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }, "-=0.6"); // Portrait animates slightly after text starts
+             .to(aboutPortrait, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }, "-=0.6");
         }
         // --- Initialize Services Section Animations ---
         function initServices() {
@@ -984,15 +944,15 @@
                     toggleActions: "play none none reverse"
                 }
             });
-            tl.to(container, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }); // Fade in container first
+            tl.to(container, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
             tl.to(items, {
                 opacity: 1,
                 y: 0,
                 scale: 1,
                 duration: 0.5,
                 ease: 'power2.out',
-                stagger: 0.15 // Stagger the animation of each item
-            }, "-=0.3"); // Start item animation slightly before container finishes
+                stagger: 0.15
+            }, "-=0.3");
         }
         // --- Initialize Portfolio Preview Animations ---
         function initPortfolio() {
@@ -1011,28 +971,28 @@
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: portfolioSection,
-                    start: "top 65%", // Trigger slightly earlier
+                    start: "top 65%",
                     toggleActions: "play none none reverse"
                 }
             });
-            tl.to(container, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }) // Container fades in
+            tl.to(container, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
             tl.to(items, {
                 opacity: 1,
                 scale: 1,
                 duration: 0.6,
-                ease: 'back.out(1.4)', // Bounce effect
+                ease: 'back.out(1.4)',
                 stagger: 0.15
-            }, "-=0.3"); // Staggered items
+            }, "-=0.3");
             tl.to(cta, {
                 opacity: 1,
                 y: 0,
                 duration: 0.7,
                 ease: 'power2.out'
-            }, "-=0.5"); // CTA fades in towards the end
+            }, "-=0.5");
         }
         // --- Initialize Contact Form Animations ---
         function initContact() {
-            const contactSection = document.querySelector('.contact-section'); // Use class
+            const contactSection = document.querySelector('.contact-section');
             const container = document.querySelector('.contact-form-container');
             if (!contactSection || !container) {
                 console.warn("Contact section or container not found for animation.");
@@ -1047,38 +1007,38 @@
             }
             const tl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: contactSection, // Trigger based on the section
-                    start: "top 60%", // Start when 60% from top enters view
+                    trigger: contactSection,
+                    start: "top 60%",
                     toggleActions: "play none none reverse"
                 }
             });
-            tl.to(container, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }); // Form container fades/slides in
-            tl.to(labels, { // Labels animate
+            tl.to(container, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+            tl.to(labels, {
                 opacity: 1,
                 x: 0,
                 duration: 0.5,
                 ease: 'power2.out',
                 stagger: 0.1
-            }, "-=0.5"); // Start slightly after container
-            tl.to(inputs, { // Inputs animate
+            }, "-=0.5");
+            tl.to(inputs, {
                 opacity: 1,
                 x: 0,
                 duration: 0.5,
                 ease: 'power2.out',
                 stagger: 0.1
-            }, "<0.1"); // Start slightly after labels
-            tl.to(button, { // Button animates
+            }, "<0.1");
+            tl.to(button, {
                 opacity: 1,
                 y: 0,
                 duration: 0.6,
-                ease: 'back.out(1.7)' // Bounce effect
-            }, "-=0.3"); // Start towards the end
+                ease: 'back.out(1.7)'
+            }, "-=0.3");
         }
-       // --- Initialize Header Logic (for smooth scroll links) ---
+       // --- Initialize Header Logic (Original logic compatible with reverted layout) ---
        function initHeader() {
            const header = document.getElementById('site-header');
            if (!header) { console.warn("Site header not found."); return; }
-           const headerLinks = document.querySelectorAll('.header-nav a[href^="#"]'); // Select only nav links
+           const headerLinks = document.querySelectorAll('.header-nav a[href^="#"]');
 
            headerLinks.forEach(anchor => {
                anchor.addEventListener('click', function(e) {
@@ -1089,12 +1049,10 @@
                            if (target) {
                                e.preventDefault();
                                const headerHeight = header.offsetHeight;
-                               // Check if it's the hero section link
-                               const isHeroLink = (href === '#section-0');
                                gsap.to(window, {
                                    duration: 1.2,
-                                   // Scroll target directly for hero, offset others by header height
-                                   scrollTo: { y: target, offsetY: isHeroLink ? 0 : headerHeight },
+                                   // Offset all sections except the very first one (#section-0)
+                                   scrollTo: { y: target, offsetY: (target.id === 'section-0' ? 0 : headerHeight) },
                                    ease: "power2.inOut"
                                });
                            } else { console.warn(`Scroll target '${href}' not found.`); }
@@ -1104,60 +1062,55 @@
                    }
                });
            });
-           // Special handling for logo link to scroll smoothly to top (section-0)
-           const logoLink = document.querySelector('.logo-link');
+            const logoLink = document.querySelector('.logo-link');
            if (logoLink) {
                logoLink.addEventListener('click', function(e) {
                    const href = this.getAttribute('href');
-                    if (href === '#section-0') { // Target the top of section-0
+                    if (href === '#section-0') {
                         e.preventDefault();
-                        const target = document.getElementById('section-0');
-                        if (target) {
+                         const target = document.getElementById('section-0');
+                         if(target){
                             gsap.to(window, {
                                 duration: 1.2,
-                                scrollTo: { y: target }, // Scroll to the top of the target section
+                                scrollTo: { y: target }, // Scroll to top of section 0
                                 ease: "power2.inOut"
                             });
-                        }
+                         }
                     }
                });
            }
        }
        // --- Initialize Footer Animation ---
        function initFooter() {
-           const footer = document.querySelector('#section-4 .site-footer'); // Ensure footer is inside contact section
+           const footer = document.querySelector('#section-4 .site-footer');
            const copyrightYearSpan = document.getElementById('copyright-year');
            if (!footer) { console.warn("Site footer inside #section-4 not found."); return; }
            if(copyrightYearSpan) { copyrightYearSpan.textContent = new Date().getFullYear(); }
            else { console.warn("Copyright year span not found."); }
-
            gsap.to(footer, {
                opacity: 1, y: 0, duration: 1.0, ease: 'power2.out',
                scrollTrigger: {
-                   trigger: '#section-4', // Trigger based on the contact section
-                   start: "center bottom-=10%", // Start when center hits 10% from bottom
+                   trigger: '#section-4',
+                   start: "center bottom-=10%",
                    toggleActions: "play none none reverse",
-                   id: "footer-reveal" // Add ID for debugging
+                   id: "footer-reveal"
                }
            });
        }
-       // --- Navigation Dots & Theme Switching ---
+       // --- Navigation Dots & Theme Switching (Original logic) ---
        function initNavigation() {
-            const sectionsNodeList = document.querySelectorAll('section[id^="section-"]'); // Find all sections with ID starting "section-"
+            const sectionsNodeList = document.querySelectorAll('section[id^="section-"]');
             const sections = Array.from(sectionsNodeList);
             const navDots = document.querySelectorAll('.nav-dot');
             const body = document.body;
             const header = document.getElementById('site-header');
-
             if (navDots.length === 0 || sections.length === 0 || !header) {
-                console.warn("Nav dots, sections, or header not found. Navigation/Theme switching disabled."); return;
+                console.warn("Nav dots, sections, or header not found."); return;
             }
              if (navDots.length !== sections.length) {
-                // Warn if mismatch, but proceed - might be intentional or an error
                 console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sections.length} sections found.`);
              }
-
-            const getHeaderHeight = () => header.offsetHeight; // Function to get current header height
+            const getHeaderHeight = () => header.offsetHeight;
 
             navDots.forEach(dot => {
                 dot.addEventListener('click', (e) => {
@@ -1165,55 +1118,47 @@
                     const sectionIdSuffix = dot.getAttribute('data-section');
                     const targetSection = document.getElementById(`section-${sectionIdSuffix}`);
                     if (targetSection) {
-                        const isHeroSection = targetSection.id === 'section-0';
-                        gsap.to(window, {
-                            duration: 1.2,
-                            // Scroll to top of hero, offset others by header height
-                            scrollTo: { y: targetSection, offsetY: isHeroSection ? 0 : getHeaderHeight() },
-                            ease: "power2.inOut"
-                        });
+                         gsap.to(window, {
+                             duration: 1.2,
+                             // Offset correctly based on original layout
+                             scrollTo: { y: targetSection, offsetY: (targetSection.id === 'section-0' ? 0 : getHeaderHeight()) },
+                             ease: "power2.inOut"
+                         });
                     } else { console.error(`Target section #section-${sectionIdSuffix} not found.`); }
                 });
             });
 
-            // ScrollTrigger for each section to update dots and theme
             sections.forEach((section, index) => {
                 const sectionIdSuffix = section.id.replace('section-', '');
-                const theme = section.getAttribute('data-theme') || 'dark'; // Default to dark theme
-
+                const theme = section.getAttribute('data-theme') || 'dark';
                 ScrollTrigger.create({
                     trigger: section,
-                    // Adjust start/end based on whether it's the hero section
+                    // Use original start/end logic
                     start: () => section.id === 'section-0' ? `top top` : `top top+=${getHeaderHeight()}px`,
-                    end: () => {
-                        const isLastSection = index === sections.length - 1;
-                        // Use bottom of viewport for last section, otherwise top + offset for others
-                        return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight()}px`;
-                    },
-                    id: `section-nav-${sectionIdSuffix}`, // ID for debugging
+                     end: () => {
+                         const isLastSection = index === sections.length - 1;
+                         return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight()}px`;
+                     },
+                    id: `section-nav-${sectionIdSuffix}`,
                     onEnter: () => updateActiveState(sectionIdSuffix, theme),
                     onEnterBack: () => updateActiveState(sectionIdSuffix, theme),
-                    invalidateOnRefresh: true // Recalculate triggers on resize
+                    invalidateOnRefresh: true
                 });
             });
 
             function updateActiveState(activeSectionIdSuffix, activeTheme) {
-                // Update active dot
                 navDots.forEach((dot) => {
                     const dotSecIdSuffix = dot.getAttribute('data-section');
                     dot.classList.toggle('active', dotSecIdSuffix === activeSectionIdSuffix);
                 });
-                // Update body theme class
                 const currentBodyTheme = body.classList.contains('on-light-section') ? 'light' : 'dark';
                 if (activeTheme !== currentBodyTheme) {
                   body.classList.toggle('on-light-section', activeTheme === 'light');
                 }
             }
 
-            // Handle scroll indicator visibility
             let scrollIndicatorState = { scrolled: window.scrollY > 50 };
-            body.classList.toggle('scrolled', scrollIndicatorState.scrolled); // Initial check
-
+            body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
             const scrollListener = () => {
                 const isScrolled = window.scrollY > 50;
                 if (isScrolled !== scrollIndicatorState.scrolled) {
@@ -1223,22 +1168,19 @@
             };
             window.addEventListener('scroll', scrollListener, { passive: true });
 
-             // Initial state setup after slight delay for layout calculation
              setTimeout(() => {
                 let initialSectionIdSuffix = '0';
                 let initialTheme = 'dark';
                 const currentScrollY = window.scrollY;
                 const currentHeaderHeight = getHeaderHeight();
-                // Threshold slightly below header for non-hero sections, or top for hero
-                const heroThreshold = 10; // Pixels below top for hero
-                const otherThreshold = currentHeaderHeight + 10; // Pixels below header for others
+                 const threshold = currentHeaderHeight / 2; // Simpler threshold logic for original layout
 
                 for (let i = sections.length - 1; i >= 0; i--) {
                     const section = sections[i];
                     const rect = section.getBoundingClientRect();
                     const sectionTopScrollY = currentScrollY + rect.top;
-                    const threshold = (section.id === 'section-0') ? heroThreshold : otherThreshold;
 
+                    // If the top of the section is above the threshold point in the viewport
                     if (sectionTopScrollY <= currentScrollY + threshold) {
                         initialSectionIdSuffix = section.id.replace('section-', '');
                         initialTheme = section.getAttribute('data-theme') || 'dark';
@@ -1246,85 +1188,72 @@
                     }
                 }
                 updateActiveState(initialSectionIdSuffix, initialTheme);
-                // Update scroll indicator state again after potential scroll position changes
                 scrollIndicatorState.scrolled = window.scrollY > 50;
                 body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
-                ScrollTrigger.refresh(); // Refresh triggers after initial setup
-             }, 150); // Delay ensures layout is stable
+                ScrollTrigger.refresh();
+             }, 150);
        }
        // --- Initialize All Animations & Functionality ---
        function initAll() {
          console.log("Initializing LAYA animations...");
-         initHeader();       // Handle header link scrolling
-         initNavigation();   // Handle nav dots, theme switching, scroll indicator
-         initFooter();       // Handle footer appearance
-         initHero();         // Handle hero image slider and parallax
-         initAbout();        // Handle about section animation
-         initServices();     // Handle services section animation
-         initPortfolio();    // Handle portfolio section animation
-         initContact();      // Handle contact form animation
+         initHeader();
+         initNavigation();
+         initFooter();
+         initHero();
+         initAbout();
+         initServices();
+         initPortfolio();
+         initContact();
 
-         // General smooth scroll for any other # links (e.g., portfolio CTA if it points to a section)
          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-           // Exclude links already handled by header nav or nav dots
            if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots')) {
              anchor.addEventListener('click', function(e) {
                const href = this.getAttribute('href');
-
-               // Special case for placeholder CTA - prevent scroll, maybe open modal later
                if (href === '#portfolio-full') {
-                   e.preventDefault(); // Prevent jumping to top
+                   e.preventDefault();
                    console.log("Portfolio CTA clicked - implement full portfolio view/link here.");
-                   return; // Stop further processing for this link
+                   return;
                }
-
                if (href && href.startsWith('#') && href.length > 1) {
                  try {
                    const target = document.querySelector(href);
                    const header = document.getElementById('site-header');
-                   const offset = header ? header.offsetHeight : 75; // Use default if header fails
+                   const offset = header ? header.offsetHeight : 75;
                    if (target) {
                      e.preventDefault();
                      gsap.to(window, {
-                       duration: 1, // Slightly faster scroll for these links
-                       scrollTo: { y: target, offsetY: offset }, // Always offset these
+                       duration: 1,
+                       scrollTo: { y: target, offsetY: offset }, // Always offset non-nav links
                        ease: "power2.inOut"
                      });
                    } else { console.warn("Smooth scroll target not found:", href); }
                  } catch (error) { console.warn("Could not find target for anchor:", href, error); }
                } else if (href === "#") {
-                   // Prevent default for links like href="#"
                    e.preventDefault();
                }
              });
            }
          });
 
-         // Refresh ScrollTrigger after a short delay to ensure all elements are rendered
          setTimeout(() => {
            ScrollTrigger.refresh();
            console.log("ScrollTrigger refreshed after init.");
-         }, 250); // Increased delay slightly
+         }, 250);
 
-         // Debounced resize handler
          let resizeTimer;
          window.addEventListener('resize', () => {
            clearTimeout(resizeTimer);
            resizeTimer = setTimeout(() => {
              console.log("Resizing - Refreshing ScrollTrigger...");
-             ScrollTrigger.refresh(true); // Force recalculation of all values
-           }, 250); // Debounce interval
+             ScrollTrigger.refresh(true);
+           }, 250);
          });
-
          console.log("LAYA Initialization sequence complete.");
        }
 
-       // --- DOMContentLoaded Listener ---
        if (document.readyState === 'loading') {
-         // Loading hasn't finished yet
          document.addEventListener('DOMContentLoaded', initAll);
        } else {
-         // `DOMContentLoaded` has already fired
          initAll();
        }
     </script>
