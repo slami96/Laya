@@ -35,10 +35,10 @@
       /* --- BASE STYLES --- */
       :root {
           --header-height: 75px;
-          --accent-color-1: #C0A080;
-          --accent-color-2: #5A5A5A;
-          --accent-color-3: #EAEAEA;
-          --accent-color-4: #333333;
+          --accent-color-1: #C0A080; /* Warm beige/gold */
+          --accent-color-2: #5A5A5A; /* Mid-grey */
+          --accent-color-3: #EAEAEA; /* Light grey */
+          --accent-color-4: #333333; /* Dark grey/near black */
           --text-light: #f1f1f1;
           --text-dark: #2d2d2d;
           --bg-dark-1: #1a1a1a;
@@ -408,17 +408,82 @@
           transform: translateY(30px);
           position: relative; /* To ensure it's above the intro animation's potential remnants if z-index fails */
           z-index: 2; /* Above potential intro remnants */
+          display: flex; /* Use flex for title + flow */
+          flex-direction: column;
+          align-items: center; /* Center content horizontally */
       }
       .services-title {
           font-family: var(--logo-font);
           font-size: clamp(2rem, 5vw, 3.5rem);
           font-weight: 700;
-          margin-bottom: 60px;
+          margin-bottom: 60px; /* Space above the flow */
           color: var(--accent-color-4);
            /* Initial state for individual animation */
           opacity: 0;
           transform: translateY(20px);
       }
+
+      /* --- NEW: Service Flow Layout --- */
+      .services-flow {
+          display: flex;
+          flex-direction: column;
+          gap: 40px; /* Space between service items */
+          width: 100%;
+          max-width: 850px; /* Control max width of the flow container */
+      }
+
+      .service-flow-item {
+          background-color: var(--bg-light-2);
+          padding: 35px 40px;
+          border-radius: 8px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+          text-align: left; /* Align text left */
+          display: flex;
+          align-items: flex-start; /* Align icon top with text block */
+          gap: 30px; /* Space between icon and text */
+          border-left: 5px solid var(--accent-color-1); /* Elegant left border */
+          /* Initial state for GSAP stagger animation */
+          opacity: 0;
+          transform: translateY(30px) scale(0.98);
+          transition: transform 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
+      }
+
+      .service-flow-item:hover {
+          transform: translateY(0px) scale(1.0); /* Subtle lift */
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+          border-left-color: var(--accent-color-4); /* Darker border on hover */
+      }
+
+      .service-flow-icon {
+          font-size: 2.5rem; /* Slightly smaller icon */
+          color: var(--accent-color-1);
+          margin-top: 5px; /* Align icon better with first line of text */
+          flex-shrink: 0; /* Prevent icon shrinking */
+      }
+
+      .service-flow-text {
+          flex-grow: 1; /* Allow text block to take remaining space */
+      }
+
+      .service-flow-item h3 {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 1.5rem; /* Clearer heading */
+          font-weight: 700;
+          margin-bottom: 12px;
+          color: var(--accent-color-4);
+      }
+
+      .service-flow-item p {
+          font-family: 'Poppins', sans-serif;
+          font-size: 1rem; /* Slightly larger text */
+          line-height: 1.75;
+          color: var(--accent-color-2);
+          font-weight: 400;
+      }
+      /* --- END: Service Flow Layout --- */
+
+
+      /* --- REMOVED/COMMENTED OUT OLD GRID STYLES ---
       .services-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -431,13 +496,12 @@
           border-radius: 8px;
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
           text-align: center;
-          /* Initial state for GSAP stagger animation */
           opacity: 0;
           transform: translateY(30px) scale(0.95);
-          transition: transform 0.3s ease, box-shadow 0.3s ease; /* Keep hover transitions */
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
       .service-item:hover {
-          transform: translateY(-5px) scale(1.02); /* Adjust hover transform */
+          transform: translateY(-5px) scale(1.02);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       }
       .service-icon {
@@ -460,6 +524,7 @@
           color: var(--accent-color-2);
           font-weight: 400;
       }
+      --- END REMOVED --- */
 
       /* --- SECTION 3: Portfolio Preview --- */
       .portfolio-section {
@@ -707,7 +772,8 @@
            section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
            .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
            .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
-           .services-grid { gap: 30px; }
+           .services-flow { max-width: 90%; gap: 30px; } /* Adjust flow width */
+           .service-flow-item { padding: 30px; gap: 20px; }
            .about-content-wrapper { flex-direction: column-reverse; align-items: center; }
            .about-text-container { margin-right: 0; margin-top: 30px; text-align: center; }
            .about-portrait { max-width: 250px; margin-bottom: 20px; }
@@ -728,7 +794,7 @@
             .nav-dots { right: 20px; }
             .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
             section { padding-left: 20px; padding-right: 20px; }
-             section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
+            section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
             .portfolio-grid { gap: 20px; }
             .portfolio-item-placeholder { font-size: 1rem; }
             .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
@@ -740,15 +806,18 @@
             .site-footer .social-icons { gap: 15px; }
             .site-footer .social-icons a { font-size: 1.1rem; }
             .about-portrait { max-width: 200px; }
-            .services-grid { grid-template-columns: 1fr; gap: 25px; } /* Stack services */
+            .services-flow { max-width: 100%; gap: 25px; } /* Full width on smaller screens */
             .services-title { margin-bottom: 40px; }
-            .service-item { padding: 30px; }
+            .service-flow-item { padding: 25px; flex-direction: column; align-items: flex-start; text-align: left; gap: 15px; border-left-width: 4px; } /* Stack icon above text */
+            .service-flow-icon { font-size: 2.2rem; margin-top: 0; margin-bottom: 5px; }
+            .service-flow-item h3 { font-size: 1.3rem; }
+            .service-flow-item p { font-size: 0.95rem; }
             .hero-content { top: 70%; max-width: 90%; } /* Adjust hero position/width */
             .hero-tagline { font-size: clamp(1.6rem, 5vw, 2.5rem); line-height: 1.4; } /* Adjust tagline font */
             .intro-rect { stroke-width: 1; } /* Thinner lines on mobile */
-       }
+        }
 
-        @media (max-width: 480px) {
+         @media (max-width: 480px) {
             :root { --header-height: 65px; }
             .site-header { padding: 0 15px; }
             .logo-link img { height: 35px; }
@@ -770,7 +839,11 @@
             .contact-form-container { padding: 25px 15px; }
             .hero-content { top: 72%; max-width: 95%; } /* Adjust hero position/width */
             .tagline-word { margin: 0 2px;} /* Reduce space slightly */
-        }
+            .service-flow-item { padding: 20px; gap: 10px; }
+            .service-flow-icon { font-size: 2rem; }
+            .service-flow-item h3 { font-size: 1.2rem; }
+            .service-flow-item p { font-size: 0.9rem; line-height: 1.7; }
+         }
     </style>
 </head>
 <body data-current-theme="dark">
@@ -805,12 +878,12 @@
             <img src="interior_3.png" alt="Innovative Interior Design 3" class="hero-image" id="hero-img-3">
         </div>
          <div class="hero-content">
-              <p class="hero-tagline">
-                  <span class="tagline-word">Design</span>
-                  <span class="tagline-word">that</span>
-                  <span class="tagline-word">inspires</span>
-              </p>
-         </div>
+             <p class="hero-tagline">
+                 <span class="tagline-word">Design</span>
+                 <span class="tagline-word">that</span>
+                 <span class="tagline-word">inspires</span>
+             </p>
+        </div>
         <div class="scroll-indicator">
              <span>Explore</span>
             <i class="fas fa-chevron-down"></i>
@@ -846,24 +919,41 @@
         </div>
         <div class="services-container">
             <h2 class="services-title">What We Offer</h2>
-            <div class="services-grid">
-                <div class="service-item">
-                    <i class="fas fa-pencil-ruler service-icon"></i>
-                    <h3>Architectural Design</h3>
-                    <p>Creating bespoke blueprints for residential, commercial, and public spaces that balance form and function.</p>
+            <div class="services-flow">
+                <div class="service-flow-item">
+                    <div class="service-flow-icon">
+                        <i class="fas fa-lightbulb"></i> </div>
+                    <div class="service-flow-text">
+                        <h3>Project Visioning & Feasibility</h3>
+                        <p>Collaborating from the earliest stages to define your project's goals, explore potential, and establish a clear conceptual direction and feasibility assessment.</p>
+                    </div>
                 </div>
-                <div class="service-item">
-                    <i class="fas fa-couch service-icon"></i>
-                    <h3>Interior Spaces</h3>
-                    <p>Designing thoughtful and elegant interiors that reflect your style and enhance daily living or working.</p>
+                <div class="service-flow-item">
+                     <div class="service-flow-icon">
+                        <i class="fas fa-pencil-ruler"></i> </div>
+                    <div class="service-flow-text">
+                        <h3>Architectural & Blueprint Design</h3>
+                        <p>Translating vision into reality by creating bespoke blueprints for residential, commercial, or public spaces that perfectly balance aesthetic form and practical function.</p>
+                    </div>
                 </div>
-                <div class="service-item">
-                    <i class="fas fa-lightbulb service-icon"></i>
-                    <h3>Project Visioning</h3>
-                    <p>Collaborating from the earliest stages to define project goals, feasibility, and conceptual direction.</p>
+                <div class="service-flow-item">
+                    <div class="service-flow-icon">
+                        <i class="fas fa-couch"></i> </div>
+                    <div class="service-flow-text">
+                        <h3>Interior Space Curation</h3>
+                        <p>Designing thoughtful, elegant, and cohesive interiors that reflect your unique style, enhance daily living or productivity, and harmonize with the architecture.</p>
+                    </div>
+                </div>
+                 <div class="service-flow-item">
+                    <div class="service-flow-icon">
+                        <i class="fas fa-hard-hat"></i> </div>
+                    <div class="service-flow-text">
+                        <h3>Construction Oversight</h3>
+                        <p>Providing expert guidance and oversight during the construction phase to ensure design integrity, quality craftsmanship, and adherence to the approved plans.</p>
+                    </div>
                 </div>
             </div>
-        </div>
+            </div>
     </section>
 
     <section class="portfolio-section" id="section-3" data-theme="dark">
@@ -987,7 +1077,8 @@
             const introRects = gsap.utils.toArray('.intro-rect', introAnimationContainer);
             const container = servicesSection.querySelector('.services-container');
             const title = servicesSection.querySelector('.services-title');
-            const items = gsap.utils.toArray('.service-item', container);
+            // *** CHANGE: Target new service items ***
+            const items = gsap.utils.toArray('.service-flow-item', container);
 
             if (!servicesSection || !introAnimationContainer || !container || !title || items.length === 0 || introRects.length === 0) {
                 console.warn("Services section elements missing for full animation. Check intro SVG, container, title, items.");
@@ -995,13 +1086,6 @@
                 gsap.set(container, { opacity: 1, y: 0 });
                  gsap.set(title, { opacity: 1, y: 0 });
                  gsap.set(items, { opacity: 1, y: 0, scale: 1 });
-                // Optionally, just animate the container simply
-                // if(container) {
-                //     gsap.to(container, {
-                //         opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
-                //         scrollTrigger: { trigger: servicesSection, start: "top 75%", toggleActions: "play none none reverse" }
-                //     });
-                // }
                 return;
             }
 
@@ -1020,7 +1104,8 @@
             });
             gsap.set(container, { opacity: 0, y: 30 });
             gsap.set(title, { opacity: 0, y: 20 });
-            gsap.set(items, { opacity: 0, y: 30, scale: 0.95 });
+            // *** CHANGE: Update initial state for new items if needed (scale matches new CSS) ***
+            gsap.set(items, { opacity: 0, y: 30, scale: 0.98 });
 
             // --- Animation Timeline ---
             const tl = gsap.timeline({
@@ -1043,59 +1128,58 @@
                 ease: 'power1.inOut'
             });
 
-            // 2. Animate Rectangles (Longer Sequence >= 2 seconds)
-            // Animate ALL rects simultaneously with variations
+            // 2. Animate Rectangles (*** SHORTER SEQUENCE ***)
             tl.to(introRects, {
-                opacity: gsap.utils.random(0.5, 0.9, 0.1), // Random final opacity (slightly transparent)
-                scale: gsap.utils.random(0.8, 1.8, 0.1),   // Random final scale
-                rotation: gsap.utils.random(-180, 180, 5), // Random final rotation
+                opacity: gsap.utils.random(0.5, 0.8, 0.1), // Slightly reduced opacity maybe
+                scale: gsap.utils.random(0.7, 1.5, 0.1),   // Reduced max scale slightly
+                rotation: gsap.utils.random(-120, 120, 5),
                 x: 0, // Move back towards original position
                 y: 0,
-                duration: 1.5, // Longer duration for the main animation
+                duration: 0.9, // *** REDUCED DURATION ***
                 stagger: {
-                    each: 0.05, // Slight stagger between rects starting
+                    each: 0.04, // Slightly faster stagger
                     from: "random" // Start from random rects
                 },
                 ease: 'power2.inOut'
             }, "-=0.1"); // Start slightly after container fades in
 
-            // Add another short animation phase for more dynamism within the 2s+ window
+            // Add another short animation phase for more dynamism
             tl.to(introRects, {
                 opacity: 0, // Fade out
-                scale: gsap.utils.random(0.2, 0.7), // Scale down again
-                rotation: "+=" + gsap.utils.random(-90, 90), // Add more rotation
-                duration: 0.8, // Duration for fade out phase
+                scale: gsap.utils.random(0.2, 0.6), // Scale down again
+                rotation: "+=" + gsap.utils.random(-70, 70), // Add more rotation
+                duration: 0.5, // *** REDUCED DURATION ***
                 stagger: {
-                    each: 0.04,
+                    each: 0.03,
                     from: "random"
                 },
                 ease: 'power1.in'
-            }, "-=0.5"); // Overlap with the end of the previous phase
+            }, "-=0.4"); // Overlap more
 
             // 3. Fade Out the Full Screen Intro Container
-            // Ensure this starts AFTER the rectangle animations have had time (~2 seconds total)
+            // Ensure this starts relatively soon after the main rectangle animation
             tl.to(introAnimationContainer, {
                 opacity: 0,
-                duration: 0.5, // Fade out duration
+                duration: 0.4, // Faster fade out
                 ease: 'power1.inOut'
             }, ">-0.2"); // Start slightly before the last rect animation ends
 
             // 4. Animate the Main Content In (After Intro Fades Out)
              tl.to(container, { opacity: 1, y: 0, duration: 0.01 }, "-=0.3") // Make container 'visible' during intro fade out
-              .to(title, {
+               .to(title, {
                   opacity: 1,
                   y: 0,
                   duration: 0.6,
                   ease: 'power2.out'
-              }, "-=0.1") // Start title slightly overlapping intro fade out
-              .to(items, {
+               }, "-=0.1") // Start title slightly overlapping intro fade out
+               .to(items, {
                   opacity: 1,
                   y: 0,
-                  scale: 1,
+                  scale: 1, // *** Ensure scale animates to 1 ***
                   duration: 0.5,
                   ease: 'power2.out',
                   stagger: 0.15 // Service items cascade in
-              }, "-=0.4"); // Start items animation shortly after title starts
+               }, "-=0.4"); // Start items animation shortly after title starts
         }
         // --- END UPDATED initServices Function ---
 
@@ -1135,20 +1219,20 @@
            if (!header) { console.warn("Site header not found."); return; }
            const headerLinks = document.querySelectorAll('.header-nav a[href^="#"]');
            headerLinks.forEach(anchor => {
-               anchor.addEventListener('click', function(e) {
-                   const href = this.getAttribute('href');
-                   if (href && href.startsWith('#') && href.length > 1) {
-                       try {
-                           const target = document.querySelector(href);
-                           if (target) {
-                               e.preventDefault();
-                               const headerHeight = header.offsetHeight;
-                               const offset = (target.id === 'section-0' ? 0 : headerHeight);
-                               gsap.to(window, { duration: 1.2, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" });
-                           } else { console.warn(`Scroll target '${href}' not found.`); }
-                       } catch (error) { console.error(`Error selecting scroll target '${href}':`, error); }
-                   }
-               });
+              anchor.addEventListener('click', function(e) {
+                  const href = this.getAttribute('href');
+                  if (href && href.startsWith('#') && href.length > 1) {
+                      try {
+                          const target = document.querySelector(href);
+                          if (target) {
+                              e.preventDefault();
+                              const headerHeight = header.offsetHeight;
+                              const offset = (target.id === 'section-0' ? 0 : headerHeight);
+                              gsap.to(window, { duration: 1.2, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" });
+                          } else { console.warn(`Scroll target '${href}' not found.`); }
+                      } catch (error) { console.error(`Error selecting scroll target '${href}':`, error); }
+                  }
+              });
            });
            const logoLink = document.querySelector('.logo-link');
            if (logoLink) {
@@ -1173,56 +1257,56 @@
         }
 
         function initNavigation() {
-            // ... (Navigation initialization code remains the same) ...
+            // ... (Navigation initialization code remains the same, handles dot updates) ...
              const sectionsNodeList = document.querySelectorAll('section[id^="section-"]');
-            const sections = Array.from(sectionsNodeList);
-            const navDots = document.querySelectorAll('.nav-dot');
-            const body = document.body;
-            const header = document.getElementById('site-header');
-            if (navDots.length === 0 || sections.length === 0 || !header) { console.warn("Navigation elements missing. Skipping nav dot logic."); return; }
-            if (navDots.length !== sections.length) { console.warn(`Dot/Section mismatch: Found ${navDots.length} dots and ${sections.length} sections. Ensure 'data-section' attributes on dots match section ID suffixes (e.g., data-section="services" for id="section-services").`); }
-            const getHeaderHeight = () => header.offsetHeight;
-            navDots.forEach(dot => {
-                dot.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const sectionIdSuffix = dot.getAttribute('data-section');
-                    const targetSection = document.getElementById(`section-${sectionIdSuffix}`);
-                    if (targetSection) {
-                        const offset = (targetSection.id === 'section-0' ? 0 : getHeaderHeight());
-                        gsap.to(window, { duration: 1.2, scrollTo: { y: targetSection, offsetY: offset }, ease: "power2.inOut" });
-                    } else { console.error(`Target section #section-${sectionIdSuffix} not found for dot click.`); }
-                });
-            });
-             sections.forEach((section) => {
-                 const sectionIdSuffix = section.id.replace('section-', '');
-                 const theme = section.getAttribute('data-theme') || 'dark';
-                 ScrollTrigger.create({
-                     trigger: section,
-                     start: () => section.id === 'section-0' ? `top top` : `top top+=${getHeaderHeight()}px`,
-                     end: () => `bottom top+=${getHeaderHeight() + 1}px`,
-                     id: `section-nav-${sectionIdSuffix}`,
-                     onEnter: () => updateActiveState(sectionIdSuffix, theme),
-                     onEnterBack: () => updateActiveState(sectionIdSuffix, theme),
-                     onLeave: (self) => { if (section.id === `section-${navDots[navDots.length - 1].getAttribute('data-section')}` && self.direction === -1) { const prevSuffix = navDots[navDots.length - 2].getAttribute('data-section'); const prevSection = document.getElementById(`section-${prevSuffix}`); if(prevSection) updateActiveState(prevSuffix, prevSection.getAttribute('data-theme') || 'dark'); } },
-                     onLeaveBack: (self) => { if (section.id === 'section-0' && self.direction === 1) { const nextSuffix = navDots[1].getAttribute('data-section'); const nextSection = document.getElementById(`section-${nextSuffix}`); if(nextSection) updateActiveState(nextSuffix, nextSection.getAttribute('data-theme') || 'dark'); } },
-                     invalidateOnRefresh: true
+             const sections = Array.from(sectionsNodeList);
+             const navDots = document.querySelectorAll('.nav-dot');
+             const body = document.body;
+             const header = document.getElementById('site-header');
+             if (navDots.length === 0 || sections.length === 0 || !header) { console.warn("Navigation elements missing. Skipping nav dot logic."); return; }
+             if (navDots.length !== sections.length) { console.warn(`Dot/Section mismatch: Found ${navDots.length} dots and ${sections.length} sections. Ensure 'data-section' attributes on dots match section ID suffixes (e.g., data-section="services" for id="section-services").`); }
+             const getHeaderHeight = () => header.offsetHeight;
+             navDots.forEach(dot => {
+                 dot.addEventListener('click', (e) => {
+                     e.preventDefault();
+                     const sectionIdSuffix = dot.getAttribute('data-section');
+                     const targetSection = document.getElementById(`section-${sectionIdSuffix}`);
+                     if (targetSection) {
+                         const offset = (targetSection.id === 'section-0' ? 0 : getHeaderHeight());
+                         gsap.to(window, { duration: 1.2, scrollTo: { y: targetSection, offsetY: offset }, ease: "power2.inOut" });
+                     } else { console.error(`Target section #section-${sectionIdSuffix} not found for dot click.`); }
                  });
              });
-            function updateActiveState(activeSectionIdSuffix, activeTheme) {
-                navDots.forEach((dot) => { dot.classList.toggle('active', dot.getAttribute('data-section') === activeSectionIdSuffix); });
-                body.classList.toggle('on-light-section', activeTheme === 'light');
-            }
-             let scrollIndicatorState = { scrolled: window.scrollY > 50 };
-             body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
-             const scrollListener = () => { const isScrolled = window.scrollY > 50; if (isScrolled !== scrollIndicatorState.scrolled) { body.classList.toggle('scrolled', isScrolled); scrollIndicatorState.scrolled = isScrolled; } };
-             window.addEventListener('scroll', scrollListener, { passive: true });
-              setTimeout(() => {
+              sections.forEach((section) => {
+                  const sectionIdSuffix = section.id.replace('section-', '');
+                  const theme = section.getAttribute('data-theme') || 'dark';
+                  ScrollTrigger.create({
+                      trigger: section,
+                      start: () => section.id === 'section-0' ? `top top` : `top top+=${getHeaderHeight()}px`,
+                      end: () => `bottom top+=${getHeaderHeight() + 1}px`,
+                      id: `section-nav-${sectionIdSuffix}`,
+                      onEnter: () => updateActiveState(sectionIdSuffix, theme),
+                      onEnterBack: () => updateActiveState(sectionIdSuffix, theme),
+                      onLeave: (self) => { if (section.id === `section-${navDots[navDots.length - 1].getAttribute('data-section')}` && self.direction === -1) { const prevSuffix = navDots[navDots.length - 2].getAttribute('data-section'); const prevSection = document.getElementById(`section-${prevSuffix}`); if(prevSection) updateActiveState(prevSuffix, prevSection.getAttribute('data-theme') || 'dark'); } },
+                      onLeaveBack: (self) => { if (section.id === 'section-0' && self.direction === 1) { const nextSuffix = navDots[1].getAttribute('data-section'); const nextSection = document.getElementById(`section-${nextSuffix}`); if(nextSection) updateActiveState(nextSuffix, nextSection.getAttribute('data-theme') || 'dark'); } },
+                      invalidateOnRefresh: true
+                  });
+              });
+             function updateActiveState(activeSectionIdSuffix, activeTheme) {
+                 navDots.forEach((dot) => { dot.classList.toggle('active', dot.getAttribute('data-section') === activeSectionIdSuffix); });
+                 body.classList.toggle('on-light-section', activeTheme === 'light');
+             }
+              let scrollIndicatorState = { scrolled: window.scrollY > 50 };
+              body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
+              const scrollListener = () => { const isScrolled = window.scrollY > 50; if (isScrolled !== scrollIndicatorState.scrolled) { body.classList.toggle('scrolled', isScrolled); scrollIndicatorState.scrolled = isScrolled; } };
+              window.addEventListener('scroll', scrollListener, { passive: true });
+               setTimeout(() => {
                   ScrollTrigger.refresh();
                   let initialSectionIdSuffix = '0'; let initialTheme = 'dark'; const scrollY = window.scrollY; const triggerPoint = getHeaderHeight() / 2;
                   for (let i = sections.length - 1; i >= 0; i--) { const section = sections[i]; const rect = section.getBoundingClientRect(); const sectionTopDoc = scrollY + rect.top; if (sectionTopDoc <= scrollY + triggerPoint) { initialSectionIdSuffix = section.id.replace('section-', ''); initialTheme = section.getAttribute('data-theme') || 'dark'; break; } }
                   updateActiveState(initialSectionIdSuffix, initialTheme); scrollIndicatorState.scrolled = window.scrollY > 50; body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
                   console.log(`Initial section detected: ${initialSectionIdSuffix}, theme: ${initialTheme}`);
-              }, 200);
+               }, 200);
         }
 
         function initAll() {
@@ -1232,26 +1316,26 @@
          initFooter();
          initHero();
          initAbout();
-         initServices(); // Our UPDATED function
+         initServices(); // Our UPDATED function with new layout + shorter animation
          initPortfolio();
          initContact();
 
          // Generic smooth scroll for other anchors
          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
              if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots')) {
-               anchor.addEventListener('click', function(e) {
-                 const href = this.getAttribute('href');
-                 if (href === '#portfolio-full') { e.preventDefault(); console.log("Portfolio CTA clicked - Implement navigation."); return; }
-                 if (href && href.startsWith('#') && href.length > 1) {
-                   try {
-                     const target = document.querySelector(href);
-                     const header = document.getElementById('site-header');
-                     const offset = header ? header.offsetHeight : 75;
-                     if (target) { e.preventDefault(); gsap.to(window, { duration: 1, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" }); }
-                     else { console.warn("Smooth scroll target not found:", href); }
-                   } catch (error) { console.warn("Could not find target for anchor:", href, error); }
-                 } else if (href === "#") { e.preventDefault(); }
-               });
+              anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#portfolio-full') { e.preventDefault(); console.log("Portfolio CTA clicked - Implement navigation."); return; }
+                if (href && href.startsWith('#') && href.length > 1) {
+                 try {
+                  const target = document.querySelector(href);
+                  const header = document.getElementById('site-header');
+                  const offset = header ? header.offsetHeight : 75;
+                  if (target) { e.preventDefault(); gsap.to(window, { duration: 1, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" }); }
+                  else { console.warn("Smooth scroll target not found:", href); }
+                 } catch (error) { console.warn("Could not find target for anchor:", href, error); }
+                } else if (href === "#") { e.preventDefault(); }
+              });
              }
          });
 
