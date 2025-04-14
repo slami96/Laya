@@ -227,43 +227,46 @@
         overflow: hidden;
       }
 
-      /* --- HERO CONTENT (Glassmorphism Update) --- */
+      /* --- HERO CONTENT (Positioning Only) --- */
       .hero-content {
         position: absolute;
-        top: 50%;
+        top: 65%; /* << POSITION LOWER */
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 2;
         text-align: center;
-        color: var(--text-light);
-        /* opacity: 0;  <- Set by GSAP */
         width: 90%;
-        max-width: 680px; /* Slightly wider */
-        background-color: rgba(25, 25, 25, 0.5); /* Adjusted transparency */
-        padding: clamp(20px, 4vw, 35px) clamp(25px, 5vw, 45px); /* Slightly more padding */
-        border-radius: 12px; /* Slightly more rounded */
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25); /* Softer shadow */
-        border: 1px solid rgba(255, 255, 255, 0.12); /* Subtle border */
-        backdrop-filter: blur(10px); /* Increased blur */
-        -webkit-backdrop-filter: blur(10px); /* Safari prefix */
-        opacity: 0; /* Initially hidden, animated by JS */
+        max-width: 800px; /* << WIDER MAX WIDTH */
+        /* REMOVED: background, padding, border, shadow, blur */
+        opacity: 1; /* Make sure container is visible for layout */
+        pointer-events: none; /* Allow clicks through to background if needed */
       }
+       .hero-content > * {
+           pointer-events: auto; /* Allow interaction with text if needed */
+       }
+
 
       .hero-tagline {
-        font-size: clamp(1.1rem, 2.2vw, 1.6rem); /* Slightly larger */
-        font-weight: 300;
+        /* << INCREASED FONT SIZE */
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 400; /* Normal weight might look better large */
         margin: 0 auto;
-        line-height: 1.7; /* Slightly increased line height */
+        line-height: 1.5; /* Adjust line height for larger font */
         font-family: 'Poppins', sans-serif;
-        overflow: hidden; /* Helps contain spans during animation */
+        color: var(--text-light);
+        /* << ADDED TEXT SHADOW FOR READABILITY */
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
       }
 
-      /* --- TAGLINE WORD STYLES (for Animation) --- */
+      /* --- TAGLINE WORD STYLES (for Pop Animation) --- */
       .tagline-word {
           display: inline-block; /* Needed for transform */
           opacity: 0; /* Initially hidden */
-          transform: translateY(25px); /* Start slightly lower */
-          margin: 0 2px; /* Tiny space between words if needed */
+          transform: scale(0.5); /* Start scaled down */
+          transform-origin: center center; /* Scale from center */
+          margin: 0 3px; /* Space between words */
+          will-change: transform, opacity; /* Performance hint */
       }
 
       .hero-image-stack {
@@ -646,7 +649,8 @@
            .about-text-container { margin-right: 0; margin-top: 30px; text-align: center; }
            .about-portrait { max-width: 250px; margin-bottom: 20px; }
            .scroll-indicator { bottom: 8vh; }
-           .hero-content { max-width: 85%; } /* Adjust hero content width */
+           .hero-content { top: 68%; max-width: 90%;} /* Adjust hero position/width */
+           .hero-tagline { font-size: clamp(1.6rem, 3.5vw, 2.5rem); }
        }
 
          @media (max-width: 768px) {
@@ -674,8 +678,8 @@
              .services-grid { grid-template-columns: 1fr; gap: 25px; }
              .services-title { margin-bottom: 40px; }
              .service-item { padding: 30px; }
-             .hero-content { max-width: 90%; padding: clamp(15px, 3vw, 25px) clamp(20px, 4vw, 30px); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); } /* Adjust for smaller screens */
-             .hero-tagline { font-size: clamp(1rem, 3.5vw, 1.2rem); line-height: 1.6; } /* Adjust tagline font */
+             .hero-content { top: 70%; max-width: 90%; } /* Adjust hero position/width */
+             .hero-tagline { font-size: clamp(1.4rem, 5vw, 2rem); line-height: 1.4; } /* Adjust tagline font */
          }
 
           @media (max-width: 480px) {
@@ -685,7 +689,7 @@
               .header-nav ul { gap: 15px; }
               .header-nav a { font-size: 0.9rem; }
               .nav-dots { right: 15px; }
-              .hero-tagline { font-size: clamp(0.9rem, 4vw, 1.1rem); }
+              .hero-tagline { font-size: clamp(1.2rem, 6vw, 1.6rem); line-height: 1.4; } /* Adjust tagline font */
               .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
               .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
               .about-portrait { max-width: 150px; }
@@ -698,7 +702,8 @@
               section { padding-left: 15px; padding-right: 15px; }
               section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
               .contact-form-container { padding: 25px 15px; }
-              .hero-content { max-width: 85%; padding: 15px 20px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); } /* Further adjustments */
+              .hero-content { top: 72%; max-width: 95%; } /* Adjust hero position/width */
+              .tagline-word { margin: 0 1px;} /* Reduce space slightly */
           }
     </style>
 </head>
@@ -842,14 +847,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script> <script>
+    <script>
       gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
         function initHero() {
             const heroSection = document.querySelector('.hero-section');
             if (!heroSection) return;
             const images = gsap.utils.toArray('.hero-image');
-            const content = document.querySelector('.hero-content'); // Container
+            const content = document.querySelector('.hero-content'); // Container (for positioning)
             const words = gsap.utils.toArray('.tagline-word', content); // Select the words
 
             let currentImageIndex = 0;
@@ -858,39 +863,33 @@
 
             gsap.set(images[0], { opacity: 1, pointerEvents: 'auto' });
             gsap.set(images.slice(1), { opacity: 0, pointerEvents: 'none' });
-            // gsap.set(content, { opacity: 0 }); // Container initial state handled by timeline
-            // gsap.set(words, { opacity: 0, y: 20 }); // Word initial state handled by timeline/CSS
+            // Ensure content container is visible for layout from start
+            gsap.set(content, { opacity: 1 });
+            // Initial state for words is set via CSS now (.tagline-word)
 
-            // --- NEW: Timeline for Word Animation ---
+            // --- Timeline for Word Pop-Up Animation ---
             const wordTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: heroSection,
-                    start: "top 75%", // Trigger when 75% of hero top hits viewport top
+                    start: "top 65%", // Trigger animation a bit earlier as text is lower
                     toggleActions: "play none none reverse"
                 },
-                // delay: 0.2 // Optional small delay after trigger
+                delay: 0.1 // Tiny delay
             });
 
-            // 1. Fade in the container (glassmorphism box)
-            wordTl.to(content, {
-                opacity: 1,
-                duration: 0.5, // Quick fade-in for the box
-                ease: 'none'
-            });
-
-            // 2. Animate the words sequentially
+            // Animate the words popping up sequentially
             if (words.length > 0) {
                 wordTl.to(words, {
                     opacity: 1,
-                    y: 0,
-                    duration: 0.6,       // Duration of each word animation
-                    ease: 'power2.out',
-                    stagger: 0.08       // Time between start of each word animation
-                }, "-=0.2"); // Start this slightly before the container fade finishes
+                    scale: 1,           // Scale up to normal size
+                    duration: 0.7,      // Duration of each word pop
+                    ease: 'back.out(1.5)', // Pop effect (adjust overshoot with number)
+                    stagger: 0.08       // Time between start of each word pop
+                });
             } else {
                 console.warn("No tagline words found for animation.");
             }
-            // --- End of New Word Animation Timeline ---
+            // --- End of Pop-Up Animation Timeline ---
 
 
             function switchImage() {
@@ -909,15 +908,16 @@
                 if (images.length > 1) { imageInterval = setInterval(switchImage, 5000); }
             }
             startImageTimer();
+
+            // Parallax for background images
             images.forEach(img => {
                 gsap.to(img, { y: -30, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1.5 } });
             });
-            // Keep parallax for the content box itself
-            gsap.to(content, { yPercent: -10, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 } });
+            // Parallax for the text block itself (content container)
+            gsap.to(content, { yPercent: -15, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 } }); // Slightly increased parallax on text
         }
 
         // --- (Keep other init functions: initAbout, initServices, etc. as they were) ---
-
         function initAbout() {
            const aboutSection = document.querySelector('.about-section');
            const aboutContentWrapper = document.querySelector('.about-content-wrapper');
