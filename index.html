@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LAYA Architecture Studio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Halimun&family=Montserrat:wght@400;700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
       *, *::before, *::after {
         margin: 0;
@@ -15,7 +17,7 @@
         box-sizing: border-box;
       }
       html {
-         scroll-behavior: smooth; /* Add native smooth scrolling as a fallback */
+          scroll-behavior: smooth; /* Add native smooth scrolling as a fallback */
       }
       body, html {
         margin: 0;
@@ -46,7 +48,7 @@
           --header-hover-color: var(--accent-color-1);
           --header-bg-dark: rgba(26, 26, 26, 0.8); /* Darker semi-transparent bg */
           --header-bg-light: rgba(253, 253, 253, 0.85); /* Lighter semi-transparent bg */
-          --logo-font: 'Montserrat', sans-serif; /* Architect font */
+          --logo-font: 'Halimun', sans-serif; /* Changed to Halimun */
       }
       /* --- HEADER STYLES --- */
       .site-header {
@@ -74,12 +76,13 @@
           top: 50%;
           transform: translate(-50%, -50%);
       }
+      /* Updated logo styles for Halimun font */
       .logo-link {
           text-decoration: none;
           font-family: var(--logo-font);
-          font-size: 2.0rem; /* Slightly larger logo */
-          font-weight: 700;
-          letter-spacing: 2px; /* More spacing */
+          font-size: 2.2rem; /* Adjusted size for Halimun */
+          font-weight: 400; /* Halimun may look better without heavy weight */
+          letter-spacing: 2px;
           color: var(--header-icon-color-dark);
           transition: color 0.3s ease, transform 0.3s ease;
       }
@@ -123,7 +126,7 @@
           transform: scale(1.15);
           color: var(--header-hover-color);
       }
-      /* Label Styles */
+      /* Label Styles - uses --logo-font automatically */
       .nav-label {
           position: absolute;
           top: 100%;
@@ -131,7 +134,7 @@
           background-color: transparent;
           color: inherit; /* Inherit color from parent link (<a>) */
           font-family: var(--logo-font); /* Use architect font */
-          font-weight: 500;
+          font-weight: 500; /* Keeping original weight unless specified otherwise */
           font-size: 0.75rem; /* Smaller label */
           padding: 2px 4px;
           border-radius: 4px;
@@ -239,10 +242,11 @@
         color: var(--text-light);
         opacity: 0; /* Start hidden for GSAP */
       }
+      /* Updated hero title styles for Halimun */
       .hero-title {
         font-family: var(--logo-font);
         font-size: clamp(2.5rem, 6vw, 5rem); /* Responsive font size */
-        font-weight: 800;
+        font-weight: 400; /* Adjusted for Halimun */
         margin-bottom: 15px;
         text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
       }
@@ -297,10 +301,11 @@
         margin-right: 40px; /* Space between text and image */
         text-align: left; /* Left-align text */
       }
+      /* Updated about title styles for Halimun */
       .about-title {
           font-family: var(--logo-font);
           font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 700;
+          font-weight: 400; /* Adjusted for Halimun */
           margin-bottom: 30px;
           color: var(--accent-color-1); /* Use accent color */
       }
@@ -341,10 +346,11 @@
           opacity: 0; /* Start hidden */
           transform: translateY(50px); /* Start slightly down */
       }
+      /* Updated services title styles for Halimun */
       .services-title {
           font-family: var(--logo-font);
           font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 700;
+          font-weight: 400; /* Adjusted for Halimun */
           margin-bottom: 60px;
           color: var(--accent-color-4); /* Near black title */
       }
@@ -401,10 +407,11 @@
         opacity: 0; /* Start hidden */
         transform: translateY(50px); /* Start slightly down */
       }
+      /* Updated portfolio title styles for Halimun */
       .portfolio-title {
           font-family: var(--logo-font);
           font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 700;
+          font-weight: 400; /* Adjusted for Halimun */
           margin-bottom: 50px;
           text-align: center;
           color: var(--accent-color-1); /* Accent color title */
@@ -424,9 +431,9 @@
           justify-content: center;
           align-items: center;
           color: var(--text-light); /* Light text */
-          font-family: var(--logo-font);
+          font-family: var(--logo-font); /* Using logo font here too */
           font-size: 1rem;
-          font-weight: 600;
+          font-weight: 600; /* May need adjustment for Halimun */
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on dark */
           opacity: 0; /* Start hidden for stagger */
           transform: scale(0.9); /* Start small for stagger */
@@ -442,8 +449,8 @@
           color: var(--text-dark); /* Dark text on accent */
           padding: 15px 40px;
           border-radius: 50px; /* Pill shape */
-          font-family: var(--logo-font);
-          font-weight: 600;
+          font-family: var(--logo-font); /* Using logo font here too */
+          font-weight: 600; /* May need adjustment for Halimun */
           text-decoration: none;
           font-size: 1rem;
           transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
@@ -469,10 +476,11 @@
          z-index: 1; /* Above footer */
          color: var(--text-dark); /* Ensure text inside is dark */
       }
+      /* Updated contact title styles for Halimun */
       .contact-title {
           font-family: var(--logo-font);
           font-size: clamp(1.8rem, 4vw, 3rem);
-          font-weight: 700;
+          font-weight: 400; /* Adjusted for Halimun */
           margin-bottom: 40px;
           text-align: center;
           color: var(--accent-color-4);
@@ -525,9 +533,9 @@
           color: var(--text-light);
           border: none;
           border-radius: 50px;
-          font-family: var(--logo-font);
+          font-family: var(--logo-font); /* Using logo font here too */
           font-size: 1.1rem;
-          font-weight: 600;
+          font-weight: 600; /* May need adjustment for Halimun */
           cursor: pointer;
           transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
           margin-top: 10px;
@@ -593,7 +601,7 @@
       .scroll-indicator i {
         font-size: 1.2rem;
         margin-top: 8px;
-        color: #000; /* Black icons */
+        color: #fff; /* White icon */
       }
       .scroll-arrow {
         margin-top: 12px;
@@ -610,14 +618,14 @@
         100% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; }
       }
       body.scrolled .scroll-indicator {
-         opacity: 0;
-         pointer-events: none;
+          opacity: 0;
+          pointer-events: none;
       }
       /* --- RESPONSIVE STYLES --- */
       @media (max-width: 992px) {
           /* Header */
           .site-header { padding: 0 25px; }
-          .logo-link { font-size: 1.8rem; }
+          .logo-link { font-size: 1.8rem; } /* Adjusted size for Halimun */
           .header-nav ul { gap: 25px; }
           /* Sections */
           section { padding-left: 30px; padding-right: 30px; } /* Adjust side padding */
@@ -641,53 +649,54 @@
           }
       }
        @media (max-width: 768px) {
-           :root { --header-height: 70px; } /* Adjust header height */
-           .site-header { padding: 0 20px; }
-           .logo-link { font-size: 1.6rem; }
-           .header-nav ul { gap: 20px; }
-           .header-nav a { font-size: 1rem; }
-           .nav-label { display: none; } /* Hide labels on smaller screens */
-           .nav-dots { right: 20px; }
-           .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
-           .portfolio-grid { gap: 20px; }
-           .portfolio-item-placeholder { font-size: 0.9rem; }
-           .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
-           .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; }
-           .contact-form input, .contact-form textarea { padding: 12px 15px; font-size: 0.95rem;}
-           .contact-form button { padding: 12px 25px; font-size: 1rem; }
-           .site-footer { bottom: 20px; }
-           .site-footer .copyright { font-size: 0.75rem; }
-           .site-footer .social-icons { gap: 15px; }
-           .site-footer .social-icons a { font-size: 1.1rem; }
-           .about-content-wrapper { padding: 30px; }
-           .about-portrait { max-width: 200px; } /* Even smaller on mobile */
-           .services-grid { grid-template-columns: 1fr; gap: 25px; } /* Stack services */
-           .services-container { padding: 40px 20px; }
-           .services-title { margin-bottom: 40px; }
-           .service-item { padding: 30px; }
-           /* Ensure sections still clear the header */
-           section:not(.hero-section) { padding-top: var(--header-height); }
+          :root { --header-height: 70px; } /* Adjust header height */
+          .site-header { padding: 0 20px; }
+          .logo-link { font-size: 1.6rem; } /* Adjusted size for Halimun */
+          .header-nav ul { gap: 20px; }
+          .header-nav a { font-size: 1rem; }
+          .nav-label { display: none; } /* Hide labels on smaller screens */
+          .nav-dots { right: 20px; }
+          .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
+          .portfolio-grid { gap: 20px; }
+          .portfolio-item-placeholder { font-size: 0.9rem; }
+          .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
+          .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; }
+          .contact-form input, .contact-form textarea { padding: 12px 15px; font-size: 0.95rem;}
+          .contact-form button { padding: 12px 25px; font-size: 1rem; }
+          .site-footer { bottom: 20px; }
+          .site-footer .copyright { font-size: 0.75rem; }
+          .site-footer .social-icons { gap: 15px; }
+          .site-footer .social-icons a { font-size: 1.1rem; }
+          .about-content-wrapper { padding: 30px; }
+          .about-portrait { max-width: 200px; } /* Even smaller on mobile */
+          .services-grid { grid-template-columns: 1fr; gap: 25px; } /* Stack services */
+          .services-container { padding: 40px 20px; }
+          .services-title { margin-bottom: 40px; }
+          .service-item { padding: 30px; }
+          /* Ensure sections still clear the header */
+          section:not(.hero-section) { padding-top: var(--header-height); }
        }
        @media (max-width: 480px) {
-           :root { --header-height: 65px; }
-           .site-header { padding: 0 15px; }
-           .logo-link { font-size: 1.4rem; }
-           .header-nav ul { gap: 15px; } /* Reduce gap further */
-           .header-nav a { font-size: 0.9rem; }
-           .nav-dots { right: 15px; }
-           .hero-title { font-size: clamp(2rem, 8vw, 3rem); }
-           .hero-tagline { font-size: clamp(0.9rem, 4vw, 1.1rem); }
-           .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-           .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
-           .about-portrait { max-width: 150px; }
-           .services-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-           .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-           .portfolio-grid { grid-template-columns: 1fr; gap: 15px; } /* Stack items */
-           .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
-           .scroll-indicator { bottom: 25px; font-size: 0.75rem;}
-           section:not(.hero-section) { padding-left: 15px; padding-right: 15px; padding-top: var(--header-height); }
-           .services-container { padding: 30px 15px; }
-           .contact-form-container { padding: 25px 15px; }
+          :root { --header-height: 65px; }
+          .site-header { padding: 0 15px; }
+          .logo-link { font-size: 1.4rem; } /* Adjusted size for Halimun */
+          .header-nav ul { gap: 15px; } /* Reduce gap further */
+          .header-nav a { font-size: 0.9rem; }
+          .nav-dots { right: 15px; }
+          .hero-title { font-size: clamp(2rem, 8vw, 3rem); }
+          .hero-tagline { font-size: clamp(0.9rem, 4vw, 1.1rem); }
+          .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+          .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
+          .about-portrait { max-width: 150px; }
+          .services-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+          .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+          .portfolio-grid { grid-template-columns: 1fr; gap: 15px; } /* Stack items */
+          .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+          .scroll-indicator { bottom: 25px; font-size: 0.75rem;}
+          .scroll-indicator i { color: #fff; } /* Ensure icon is white on dark bg */
+          section:not(.hero-section) { padding-left: 15px; padding-right: 15px; padding-top: var(--header-height); }
+          .services-container { padding: 30px 15px; }
+          .contact-form-container { padding: 25px 15px; }
        }
     </style>
 </head>
@@ -934,8 +943,8 @@
            const aboutContentWrapper = document.querySelector('.about-content-wrapper');
            const aboutPortrait = document.querySelector('.about-portrait');
            if (!aboutSection || !aboutContentWrapper || !aboutPortrait) {
-                console.warn("Elements missing for About section animation.");
-                return;
+               console.warn("Elements missing for About section animation.");
+               return;
            }
            const tl = gsap.timeline({
                scrollTrigger: {
@@ -992,8 +1001,8 @@
            const items = gsap.utils.toArray('.portfolio-item-placeholder', container);
            const cta = document.querySelector('.portfolio-cta', container);
            if (!items.length || !cta) {
-                console.warn("Portfolio items or CTA not found for animation.");
-                return; // Don't proceed if essential elements are missing
+               console.warn("Portfolio items or CTA not found for animation.");
+               return; // Don't proceed if essential elements are missing
            }
            const tl = gsap.timeline({
                scrollTrigger: {
@@ -1025,15 +1034,15 @@
            const contactSection = document.querySelector('.contact-section');
            const container = document.querySelector('.contact-form-container');
            if (!contactSection || !container) {
-                console.warn("Contact section or container not found for animation.");
-                return;
+               console.warn("Contact section or container not found for animation.");
+               return;
            }
             const labels = gsap.utils.toArray('.contact-form label', container);
             const inputs = gsap.utils.toArray('.contact-form input, .contact-form textarea', container);
             const button = container.querySelector('.contact-form button');
            if (!labels.length || !inputs.length || !button) {
-               console.warn("Contact form elements (labels, inputs, button) missing for animation.");
-               return;
+              console.warn("Contact form elements (labels, inputs, button) missing for animation.");
+              return;
            }
            const tl = gsap.timeline({
                scrollTrigger: {
@@ -1096,7 +1105,7 @@
                  }
              });
          });
-       }
+     }
      // --- Initialize Footer Animation ---
      function initFooter() {
          const footer = document.querySelector('#section-4 .site-footer'); // Target footer in last section (section-4)
@@ -1128,8 +1137,8 @@
          }
           // Basic check - should have same number of dots and sections
           if (navDots.length !== sections.length) {
-               console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sections.length} sections found. Check HTML structure.`);
-               // Attempt to continue, but results might be unpredictable
+             console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sections.length} sections found. Check HTML structure.`);
+             // Attempt to continue, but results might be unpredictable
           }
          // Function to get the CURRENT header height (accounts for responsiveness)
          const getHeaderHeight = () => header.offsetHeight;
@@ -1139,11 +1148,11 @@
                  const sectionIdSuffix = dot.getAttribute('data-section'); // Use the section ID suffix (0, 1, services, 3, 4)
                  const targetSection = document.getElementById(`section-${sectionIdSuffix}`); // Find by ID
                  if (targetSection) {
-                      gsap.to(window, {
-                          duration: 1.2,
-                          scrollTo: { y: targetSection, offsetY: getHeaderHeight() }, // Use dynamic height
-                          ease: "power2.inOut"
-                      });
+                       gsap.to(window, {
+                           duration: 1.2,
+                           scrollTo: { y: targetSection, offsetY: getHeaderHeight() }, // Use dynamic height
+                           ease: "power2.inOut"
+                       });
                  } else { console.error(`Target section #section-${sectionIdSuffix} not found for dot click.`); }
              });
          });
@@ -1191,29 +1200,31 @@
          window.addEventListener('scroll', scrollListener, { passive: true });
          // --- Initial State Check (Robust) ---
           setTimeout(() => {
-              let initialSectionIdSuffix = '0'; // Default to first section ID suffix
-              let initialTheme = 'dark';
-              const currentScrollY = window.scrollY;
-              const currentHeaderHeight = getHeaderHeight();
-              const viewThreshold = currentHeaderHeight + 100; // Point below header to consider active
-              for (let i = sections.length - 1; i >= 0; i--) {
-                   const section = sections[i];
-                   const rect = section.getBoundingClientRect();
-                   const sectionTop = currentScrollY + rect.top;
-                  // If the top of the section is above the threshold point, it's the active one (or potentially active)
-                   if (sectionTop <= viewThreshold) {
-                       initialSectionIdSuffix = section.id.replace('section-', '');
-                       initialTheme = section.getAttribute('data-theme') || 'dark';
-                       break; // Found the topmost section currently in view
-                   }
-              }
-              console.log(`Initial Active Section Detected: ${initialSectionIdSuffix}`);
-              updateActiveState(initialSectionIdSuffix, initialTheme);
-              scrollIndicatorState.scrolled = window.scrollY > 50;
-              body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
-              ScrollTrigger.refresh(); // Refresh triggers after initial check
+             let initialSectionIdSuffix = '0'; // Default to first section ID suffix
+             let initialTheme = 'dark';
+             const currentScrollY = window.scrollY;
+             const currentHeaderHeight = getHeaderHeight();
+             const viewThreshold = currentScrollY + currentHeaderHeight + 10; // Consider active if section top is slightly below header bottom
+
+             for (let i = sections.length - 1; i >= 0; i--) {
+                 const section = sections[i];
+                 const rect = section.getBoundingClientRect();
+                 const sectionTopScrollY = currentScrollY + rect.top;
+
+                 // If the section's top edge is above our threshold point in the viewport, it's the active one
+                 if (sectionTopScrollY <= viewThreshold) {
+                     initialSectionIdSuffix = section.id.replace('section-', '');
+                     initialTheme = section.getAttribute('data-theme') || 'dark';
+                     break; // Found the topmost section currently in view
+                 }
+             }
+             console.log(`Initial Active Section Detected: ${initialSectionIdSuffix}`);
+             updateActiveState(initialSectionIdSuffix, initialTheme);
+             scrollIndicatorState.scrolled = window.scrollY > 50;
+             body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
+             ScrollTrigger.refresh(); // Refresh triggers after initial check
           }, 150); // Delay allows layout to stabilize
-       }
+     }
      // --- Initialize All Animations & Functionality ---
      function initAll() {
        console.log("Initializing LAYA animations...");
@@ -1267,27 +1278,27 @@
        });
        // Refresh ScrollTrigger after all setup and potential layout shifts
        setTimeout(() => {
-           ScrollTrigger.refresh();
-           console.log("ScrollTrigger refreshed after init.");
+          ScrollTrigger.refresh();
+          console.log("ScrollTrigger refreshed after init.");
        }, 250);
        // Handle resize: Refresh ScrollTrigger
        let resizeTimer;
        window.addEventListener('resize', () => {
-           clearTimeout(resizeTimer);
-           resizeTimer = setTimeout(() => {
-               console.log("Resizing - Refreshing ScrollTrigger...");
-               ScrollTrigger.refresh(true); // Pass true to invalidate and recalculate immediately
-           }, 250);
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+              console.log("Resizing - Refreshing ScrollTrigger...");
+              ScrollTrigger.refresh(true); // Pass true to invalidate and recalculate immediately
+          }, 250);
        });
        console.log("LAYA Initialization sequence complete.");
      }
      // Start everything on DOMContentLoaded or load
      // Using DOMContentLoaded is often slightly faster as it doesn't wait for images
      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAll);
+       document.addEventListener('DOMContentLoaded', initAll);
      } else {
-        // DOMContentLoaded has already fired
-        initAll();
+       // DOMContentLoaded has already fired
+       initAll();
      }
      // Alternatively, use load if waiting for images is critical for layout:
      // window.addEventListener('load', initAll);
