@@ -50,7 +50,7 @@
           --header-hover-color: var(--accent-color-1);
           --header-bg-dark: rgba(26, 26, 26, 0.8); /* Darker semi-transparent bg */
           --header-bg-light: rgba(253, 253, 253, 0.85); /* Lighter semi-transparent bg */
-          --logo-font: 'Montserrat', sans-serif; /* Font for titles etc. Reverted from Halimun */
+          --logo-font: 'Montserrat', sans-serif; /* Font for titles etc. */
       }
       /* --- HEADER STYLES --- */
       .site-header {
@@ -94,7 +94,6 @@
       .logo-link:hover img {
            transform: scale(1.08); /* Slightly scale the image on hover */
       }
-      /* Removed body.on-light-section .logo-link color change as it's an image now */
 
       .header-nav {
           margin-left: auto; /* Pushes nav to the right */
@@ -127,7 +126,7 @@
           transform: scale(1.15);
           color: var(--header-hover-color);
       }
-      /* Label Styles - uses --logo-font (now Montserrat) */
+      /* Label Styles - uses --logo-font (Montserrat) */
       .nav-label {
           position: absolute;
           top: 100%;
@@ -154,7 +153,6 @@
           transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0s;
       }
       /* --- FOOTER STYLES --- */
-      /* Footer styling is applied within the last section's context */
       section#section-4 {
           position: relative;
           background-color: var(--bg-light-1);
@@ -166,7 +164,6 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          /* margin-top handled by generic section rule */
           overflow: hidden;
       }
       .site-footer {
@@ -207,31 +204,32 @@
       }
       /* --- SECTION STYLES --- */
       section {
-        min-height: 100vh; /* Ensure sections take at least viewport height */
-        height: auto; /* Allow sections to grow if content requires */
+        min-height: 100vh;
+        height: auto;
         width: 100%;
-        display: flex; /* Use flex for default centering */
+        display: flex;
         justify-content: center;
         align-items: center;
         position: relative;
-        overflow: hidden; /* Crucial for many GSAP effects */
-        padding: 50px; /* Add some default padding */
-        padding-top: var(--header-height); /* Default top padding */
-        margin-top: calc(-1 * var(--header-height)); /* Pull up */
+        overflow: hidden;
+        padding: 50px;
+        padding-top: var(--header-height);
+        margin-top: calc(-1 * var(--header-height));
       }
-      /* Override pull-up for first section */
       section:first-of-type {
           margin-top: 0;
           padding-top: 0; /* No top padding for hero */
       }
       /* --- SECTION 0: Hero Image Stack --- */
       .hero-section {
-        background-color: var(--bg-dark-1);
+        background-color: var(--bg-dark-1); /* Fallback background */
         color: var(--text-light);
-        display: block; /* Override flex for specific layout */
-        padding: 0; /* Remove default padding */
+        display: block;
+        padding: 0;
         min-height: 100vh;
         height: 100vh; /* Force full height */
+        position: relative; /* Needed for absolute children */
+        overflow: hidden; /* Ensure image doesn't overflow */
       }
       .hero-content {
         position: absolute;
@@ -242,6 +240,8 @@
         text-align: center;
         color: var(--text-light);
         opacity: 0; /* Start hidden for GSAP */
+        width: 90%; /* Prevent text becoming too wide */
+        max-width: 700px; /* Max width for readability */
       }
       /* Hero title uses --logo-font (Montserrat) */
       .hero-title {
@@ -254,18 +254,18 @@
       .hero-tagline {
         font-size: clamp(1rem, 2vw, 1.5rem);
         font-weight: 300; /* Use Poppins light */
-        max-width: 600px;
+        /* max-width: 600px; */ /* Removed max-width here, handled by .hero-content */
         margin: 0 auto;
         line-height: 1.6;
         font-family: 'Poppins', sans-serif; /* Explicitly Poppins */
       }
       .hero-image-stack {
-          position: absolute; /* Changed from relative */
+          position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%; /* Cover the section height */
-          overflow: hidden; /* Keep images contained */
+          overflow: hidden;
       }
       .hero-image {
           position: absolute;
@@ -274,71 +274,71 @@
           width: 100%;
           height: 100%;
           object-fit: cover; /* Cover the area, may crop */
-          object-position: center;
+          object-position: center; /* Center the image */
           opacity: 0; /* Start hidden */
-          scale: 1.1; /* Start slightly zoomed for effect */
+          /* Removed initial scale from here */
           pointer-events: none; /* Prevent interaction when hidden */
       }
       .hero-image.hero-image-active {
           opacity: 1;
-          scale: 1;
+          /* Removed scale: 1 from here, rely on default */
           pointer-events: auto; /* Allow interaction for active image */
       }
       /* --- SECTION 1: About Me --- */
       .about-section {
-        background-color: var(--bg-dark-2); /* Slightly lighter dark */
+        background-color: var(--bg-dark-2);
         color: var(--text-light);
       }
       .about-content-wrapper {
         max-width: 900px;
         padding: 40px;
-        opacity: 0; /* Start hidden */
-        transform: translateY(50px); /* Start slightly down */
-        display: flex; /* Enable flex for layout */
-        justify-content: space-between; /* Space between text and image */
-        align-items: flex-start; /* Align items at the top */
+        opacity: 0;
+        transform: translateY(50px);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
       }
       .about-text-container {
         flex: 1;
-        margin-right: 40px; /* Space between text and image */
-        text-align: left; /* Left-align text */
+        margin-right: 40px;
+        text-align: left;
       }
       /* About title uses --logo-font (Montserrat) */
       .about-title {
           font-family: var(--logo-font);
           font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 700; /* Reverted to original weight for Montserrat */
+          font-weight: 700; /* Reverted weight */
           margin-bottom: 30px;
-          color: var(--accent-color-1); /* Use accent color */
+          color: var(--accent-color-1);
       }
       .about-text {
-         max-width: 700px; /* Limit text width */
+         max-width: 700px;
       }
       .about-text p {
           font-size: clamp(0.9rem, 1.5vw, 1.1rem);
           line-height: 1.8;
           margin-bottom: 20px;
-          font-weight: 300; /* Use Poppins Light */
-          font-family: 'Poppins', sans-serif; /* Explicitly Poppins */
+          font-weight: 300;
+          font-family: 'Poppins', sans-serif;
       }
       .about-text strong {
-          font-weight: 600; /* Use Poppins SemiBold */
-          color: var(--accent-color-3); /* Light grey for emphasis */
+          font-weight: 600;
+          color: var(--accent-color-3);
       }
       .about-portrait {
-          display: block; /* Make it a block element */
-          max-width: 350px; /* Increased max width */
-          height: auto; /* Maintain aspect ratio */
-          border-radius: 10px; /* Changed from circular to slightly rounded */
-          border: 3px solid var(--accent-color-1); /* Accent border */
+          display: block;
+          max-width: 350px;
+          height: auto;
+          border-radius: 10px;
+          border: 3px solid var(--accent-color-1);
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-          opacity: 0; /* Start hidden for animation */
-          transform: scale(0.8); /* Start smaller */
-          flex-shrink: 0; /* Prevent image from shrinking */
+          opacity: 0;
+          transform: scale(0.8);
+          flex-shrink: 0;
       }
       /* --- NEW SECTION: Services --- */
       .services-section {
-          background-color: var(--bg-light-1); /* Light background */
+          background-color: var(--bg-light-1);
           color: var(--text-dark);
       }
       .services-container {
@@ -346,16 +346,16 @@
           width: 100%;
           text-align: center;
           padding: 60px 40px;
-          opacity: 0; /* Start hidden */
-          transform: translateY(50px); /* Start slightly down */
+          opacity: 0;
+          transform: translateY(50px);
       }
       /* Services title uses --logo-font (Montserrat) */
       .services-title {
           font-family: var(--logo-font);
           font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 700; /* Reverted to original weight for Montserrat */
+          font-weight: 700; /* Reverted weight */
           margin-bottom: 60px;
-          color: var(--accent-color-4); /* Near black title */
+          color: var(--accent-color-4);
       }
       .services-grid {
           display: grid;
@@ -369,38 +369,38 @@
           border-radius: 8px;
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
           text-align: center;
-          opacity: 0; /* Start hidden for stagger */
-          transform: translateY(30px) scale(0.95); /* Start slightly down and smaller */
+          opacity: 0;
+          transform: translateY(30px) scale(0.95);
           transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
       .service-item:hover {
-          transform: translateY(-5px) scale(1.02); /* Adjusted hover lift */
+          transform: translateY(-5px) scale(1.02);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       }
       .service-icon {
           font-size: 2.8rem;
-          color: var(--accent-color-1); /* Muted Gold */
+          color: var(--accent-color-1);
           margin-bottom: 25px;
-          display: inline-block; /* Needed for margin */
+          display: inline-block;
       }
       .service-item h3 {
-          font-family: 'Montserrat', sans-serif; /* Explicitly Montserrat */
+          font-family: 'Montserrat', sans-serif;
           font-size: 1.4rem;
-          font-weight: 700; /* Use Montserrat Bold */
+          font-weight: 700;
           margin-bottom: 15px;
           color: var(--accent-color-4);
       }
       .service-item p {
-          font-family: 'Poppins', sans-serif; /* Explicitly Poppins */
+          font-family: 'Poppins', sans-serif;
           font-size: 0.95rem;
           line-height: 1.7;
-          color: var(--accent-color-2); /* Dark Grey text */
-          font-weight: 400; /* Use Poppins Regular */
+          color: var(--accent-color-2);
+          font-weight: 400;
       }
       /* --- SECTION 3: Portfolio Preview --- */
       .portfolio-section {
-        background-color: var(--bg-dark-2); /* Dark background again */
-        color: var(--text-light); /* Light text */
+        background-color: var(--bg-dark-2);
+        color: var(--text-light);
       }
       .portfolio-preview-container {
         display: flex;
@@ -409,17 +409,17 @@
         width: 100%;
         max-width: 1200px;
         padding: 40px 0;
-        opacity: 0; /* Start hidden */
-        transform: translateY(50px); /* Start slightly down */
+        opacity: 0;
+        transform: translateY(50px);
       }
       /* Portfolio title uses --logo-font (Montserrat) */
       .portfolio-title {
           font-family: var(--logo-font);
           font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 700; /* Reverted to original weight for Montserrat */
+          font-weight: 700; /* Reverted weight */
           margin-bottom: 50px;
           text-align: center;
-          color: var(--accent-color-1); /* Accent color title */
+          color: var(--accent-color-1);
       }
       .portfolio-grid {
           display: grid;
@@ -429,21 +429,21 @@
           margin-bottom: 50px;
       }
       .portfolio-item-placeholder {
-          aspect-ratio: 4 / 3; /* Common aspect ratio */
-          background: linear-gradient(135deg, var(--accent-color-2), var(--accent-color-4)); /* Darker gradient */
+          aspect-ratio: 4 / 3;
+          background: linear-gradient(135deg, var(--accent-color-2), var(--accent-color-4));
           border-radius: 8px;
           display: flex;
           justify-content: center;
           align-items: center;
-          color: var(--text-light); /* Light text */
-          font-family: 'Montserrat', sans-serif; /* Using Montserrat here */
-          font-size: 1.1rem; /* Slightly larger */
-          font-weight: 700; /* Use Montserrat Bold */
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on dark */
-          opacity: 0; /* Start hidden for stagger */
-          transform: scale(0.9); /* Start small for stagger */
+          color: var(--text-light);
+          font-family: 'Montserrat', sans-serif;
+          font-size: 1.1rem;
+          font-weight: 700;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          opacity: 0;
+          transform: scale(0.9);
           transition: transform 0.3s ease, box-shadow 0.3s ease;
-          padding: 15px; /* Add padding */
+          padding: 15px;
           text-align: center;
       }
       .portfolio-item-placeholder:hover {
@@ -452,42 +452,41 @@
       }
       .portfolio-cta {
           display: inline-block;
-          background-color: var(--accent-color-1); /* Accent color button */
-          color: var(--text-dark); /* Dark text on accent */
+          background-color: var(--accent-color-1);
+          color: var(--text-dark);
           padding: 15px 40px;
-          border-radius: 50px; /* Pill shape */
-          font-family: 'Montserrat', sans-serif; /* Explicitly Montserrat for CTA */
-          font-weight: 700; /* Use Montserrat Bold */
+          border-radius: 50px;
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 700;
           text-decoration: none;
           font-size: 1rem;
           transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
-          opacity: 0; /* Start hidden */
-          transform: translateY(20px); /* Start slightly down */
+          opacity: 0;
+          transform: translateY(20px);
       }
       .portfolio-cta:hover {
-          background-color: var(--accent-color-3); /* Light grey on hover */
+          background-color: var(--accent-color-3);
           color: var(--text-dark);
-          transform: translateY(0px) scale(1.05); /* Adjusted hover transform */
+          transform: translateY(0px) scale(1.05);
       }
       /* --- SECTION 4: Contact Form --- */
-      /* Container styles are applied within the section#section-4 rule */
       .contact-form-container {
-         background-color: var(--bg-light-2); /* White container on light background */
-         padding: 50px clamp(20px, 8vw, 80px); /* Responsive padding */
+         background-color: var(--bg-light-2);
+         padding: 50px clamp(20px, 8vw, 80px);
          border-radius: 10px;
          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
          width: 100%;
          max-width: 700px;
-         opacity: 0; /* Start hidden */
-         transform: translateY(50px); /* Start slightly down */
-         z-index: 1; /* Above footer */
-         color: var(--text-dark); /* Ensure text inside is dark */
+         opacity: 0;
+         transform: translateY(50px);
+         z-index: 1;
+         color: var(--text-dark);
       }
       /* Contact title uses --logo-font (Montserrat) */
       .contact-title {
           font-family: var(--logo-font);
           font-size: clamp(1.8rem, 4vw, 3rem);
-          font-weight: 700; /* Reverted to original weight for Montserrat */
+          font-weight: 700; /* Reverted weight */
           margin-bottom: 40px;
           text-align: center;
           color: var(--accent-color-4);
@@ -498,13 +497,13 @@
       }
       .contact-form label {
           display: block;
-          font-family: 'Poppins', sans-serif; /* Explicitly Poppins */
-          font-weight: 600; /* Use Poppins SemiBold */
+          font-family: 'Poppins', sans-serif;
+          font-weight: 600;
           font-size: 0.9rem;
           color: var(--accent-color-2);
           margin-bottom: 8px;
-          opacity: 0; /* GSAP animation */
-          transform: translateX(-20px); /* GSAP animation */
+          opacity: 0;
+          transform: translateX(-20px);
       }
       .contact-form input[type="text"],
       .contact-form input[type="email"],
@@ -513,20 +512,20 @@
           padding: 15px 20px;
           border: 1px solid #ccc;
           border-radius: 6px;
-          font-family: 'Poppins', sans-serif; /* Explicitly Poppins */
+          font-family: 'Poppins', sans-serif;
           font-size: 1rem;
-          font-weight: 400; /* Use Poppins Regular */
+          font-weight: 400;
           color: var(--text-dark);
           background-color: var(--bg-light-2);
           transition: border-color 0.3s ease, box-shadow 0.3s ease;
-          opacity: 0; /* GSAP animation */
-          transform: translateX(-20px); /* GSAP animation */
+          opacity: 0;
+          transform: translateX(-20px);
       }
       .contact-form input[type="text"]:focus,
       .contact-form input[type="email"]:focus,
       .contact-form textarea:focus {
           border-color: var(--accent-color-1);
-          box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3); /* Muted gold focus ring */
+          box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3);
           outline: none;
       }
       .contact-form textarea {
@@ -541,19 +540,19 @@
           color: var(--text-light);
           border: none;
           border-radius: 50px;
-          font-family: 'Montserrat', sans-serif; /* Explicitly Montserrat for button */
+          font-family: 'Montserrat', sans-serif;
           font-size: 1.1rem;
-          font-weight: 700; /* Use Montserrat Bold */
+          font-weight: 700;
           cursor: pointer;
           transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
           margin-top: 10px;
-          opacity: 0; /* GSAP animation */
-          transform: translateY(20px); /* GSAP animation */
+          opacity: 0;
+          transform: translateY(20px);
       }
       .contact-form button:hover {
           background-color: var(--accent-color-1);
           color: var(--text-dark);
-          transform: scale(1.03) translateY(0); /* Adjusted Hover */
+          transform: scale(1.03) translateY(0);
       }
       /* --- Navigation Dots --- */
       .nav-dots {
@@ -566,11 +565,11 @@
         z-index: 101;
       }
       .nav-dot {
-        width: 10px; /* Smaller dots */
+        width: 10px;
         height: 10px;
         border-radius: 50%;
         background-color: rgba(255, 255, 255, 0.3);
-        margin: 12px 0; /* More spacing */
+        margin: 12px 0;
         cursor: pointer;
         transition: background-color 0.3s, transform 0.3s;
         border: 1px solid rgba(0, 0, 0, 0.2);
@@ -581,22 +580,22 @@
       }
       .nav-dot.active {
         background-color: white;
-        transform: scale(1.4); /* Larger active dot */
+        transform: scale(1.4);
         border: 1px solid rgba(0, 0, 0, 0.3);
       }
       body.on-light-section .nav-dot.active {
-         background-color: var(--text-dark); /* Dark active dot on light bg */
+         background-color: var(--text-dark);
          border: 1px solid rgba(255, 255, 255, 0.3);
       }
       /* --- Scroll Indicator (First Section) --- */
       .scroll-indicator {
         position: absolute;
-        bottom: 40px; /* Higher position */
+        bottom: 40px;
         left: 50%;
         transform: translateX(-50%);
         color: rgba(255, 255, 255, 0.7);
-        font-size: 0.8rem; /* Smaller text */
-        font-family: 'Poppins', sans-serif; /* Explicitly Poppins */
+        font-size: 0.8rem;
+        font-family: 'Poppins', sans-serif;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -604,24 +603,22 @@
         opacity: 0.8;
         transition: opacity 0.5s ease;
         letter-spacing: 1px;
-        background-color: transparent; /* Transparent background */
+        background-color: transparent;
       }
       .scroll-indicator span {
-          font-weight: 400; /* Use Poppins Regular */
+          font-weight: 400;
       }
       .scroll-indicator i {
         font-size: 1.2rem;
         margin-top: 8px;
-        color: #fff; /* White icon */
+        color: #fff;
       }
       @keyframes scrollArrow {
-        /* Animation not needed if using FA icon */
         0% { transform: translateY(0); opacity: 0.3; }
         50% { transform: translateY(8px); opacity: 1; }
         100% { transform: translateY(0); opacity: 0.3; }
       }
       .scroll-indicator i {
-          /* Add animation to the FontAwesome icon */
           animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
       }
       body.scrolled .scroll-indicator {
@@ -631,17 +628,14 @@
 
       /* --- RESPONSIVE STYLES --- */
        @media (max-width: 992px) {
-           /* Header */
            .site-header { padding: 0 25px; }
-           .logo-link img { height: 45px; } /* Adjust image size */
+           .logo-link img { height: 45px; }
            .header-nav ul { gap: 25px; }
-           /* Sections */
            section { padding-left: 30px; padding-right: 30px; }
            .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
            .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
            .services-grid { gap: 30px; }
            .services-container { padding: 50px 30px; }
-           /* About section responsive */
            .about-content-wrapper { flex-direction: column-reverse; align-items: center; }
            .about-text-container { margin-right: 0; margin-top: 30px; text-align: center; }
            .about-portrait { max-width: 250px; margin-bottom: 20px; }
@@ -649,7 +643,7 @@
         @media (max-width: 768px) {
            :root { --header-height: 70px; }
            .site-header { padding: 0 20px; }
-           .logo-link img { height: 40px; } /* Adjust image size */
+           .logo-link img { height: 40px; }
            .header-nav ul { gap: 20px; }
            .header-nav a { font-size: 1rem; }
            .nav-label { display: none; }
@@ -676,7 +670,7 @@
         @media (max-width: 480px) {
            :root { --header-height: 65px; }
            .site-header { padding: 0 15px; }
-           .logo-link img { height: 35px; } /* Adjust image size */
+           .logo-link img { height: 35px; }
            .header-nav ul { gap: 15px; }
            .header-nav a { font-size: 0.9rem; }
            .nav-dots { right: 15px; }
@@ -823,140 +817,121 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
     <script>
       // --- JavaScript Code ---
-      // (JavaScript remains the same as in the previous version)
-       gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-         // --- Initialize Hero Section Animations (Improved Cinematic Transitions) ---
-         function initHero() {
-             const heroSection = document.querySelector('.hero-section');
-             if (!heroSection) return;
-             const images = gsap.utils.toArray('.hero-image');
-             const content = document.querySelector('.hero-content');
-             let currentImageIndex = 0;
-             let imageInterval; // Define interval variable
-             // Ensure images array is not empty
-             if (images.length === 0) {
-                 console.warn("No hero images found for slider.");
-                 return;
-             }
-             // Initial setup - set first image active, others hidden
-             gsap.set(images[0], { opacity: 1, scale: 1, pointerEvents: 'auto' });
-             gsap.set(images.slice(1), { opacity: 0, scale: 1.1, pointerEvents: 'none' }); // Hide others
-             gsap.set(content, { opacity: 0, y: 30 });
-             // Timeline for initial content reveal (triggered by scroll)
-             const contentTl = gsap.timeline({
-                 scrollTrigger: {
-                     trigger: heroSection,
-                     start: "top 80%", // Reveal content sooner
-                     toggleActions: "play none none reverse"
-                 }
-             });
-             contentTl.to(content, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' });
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-             // Improved cinematic image switching function
-             function switchImage() {
-                 // Ensure there's more than one image to switch
-                 if (images.length <= 1) return;
-                 const nextImageIndex = (currentImageIndex + 1) % images.length;
+        // --- Initialize Hero Section Animations (Improved Cinematic Transitions) ---
+        function initHero() {
+            const heroSection = document.querySelector('.hero-section');
+            if (!heroSection) return;
+            const images = gsap.utils.toArray('.hero-image');
+            const content = document.querySelector('.hero-content');
+            let currentImageIndex = 0;
+            let imageInterval;
 
-                 // Create a more cinematic timeline for transitions
-                 const tl = gsap.timeline({
-                     defaults: { ease: "power2.inOut" } // Smoother easing
-                 });
-
-                 // Cinematic fade out current image
-                 tl.to(images[currentImageIndex], {
-                     opacity: 0,
-                     duration: 1.5,
-                     scale: 1.05 // Subtle zoom out effect
-                 })
-                 // Reset and prepare next image
-                 .set(images[currentImageIndex], {
-                     scale: 1.1,
-                     pointerEvents: 'none'
-                 })
-                 // Prepare next image with initial state
-                 .set(images[nextImageIndex], {
-                     opacity: 0,
-                     scale: 1.05 // Start slightly zoomed for more dramatic entry
-                 }, "<")
-                 // Cinematic fade in of next image
-                 .to(images[nextImageIndex], {
-                     opacity: 1,
-                     scale: 1,
-                     duration: 2, // Longer duration for smoother transition
-                     ease: "power2.out" // More cinematic easing
-                 }, "<0.3") // Slight overlap for smoother transition
-                 // Enable pointer events for new active image
-                 .set(images[nextImageIndex], {
-                     pointerEvents: 'auto'
-                 });
-
-                 currentImageIndex = nextImageIndex;
-             }
-
-             // Start the timer with longer interval for better viewing
-             function startImageTimer() {
-                 clearInterval(imageInterval); // Clear existing interval first
-                 if (images.length > 1) { // Only start if there's more than one image
-                     imageInterval = setInterval(switchImage, 5000); // 5000ms = 5 seconds, longer for better viewing
-                 }
-             }
-
-             // Initial timer start
-             startImageTimer();
-
-             // Optional: Pause on hover
-             heroSection.addEventListener('mouseenter', () => clearInterval(imageInterval));
-             heroSection.addEventListener('mouseleave', startImageTimer); // Restart timer on mouse leave
-
-             // Add cinematic parallax to hero images
-             images.forEach(img => {
-                 gsap.to(img, {
-                     y: -30, // Subtle movement
-                     scale: 1.05, // Subtle zoom
-                     scrollTrigger: {
-                         trigger: heroSection,
-                         start: "top top",
-                         end: "bottom top",
-                         scrub: 1.5, // Smoother scrub with delay
-                         toggleActions: "play none none reverse"
-                     }
-                 });
-             });
-
-             // Add subtle parallax to content (independent of image switching)
-             gsap.to(content, {
-                 yPercent: -10, // More subtle movement for text
-                 ease: "none",
-                 scrollTrigger: {
-                     trigger: heroSection,
-                     start: "top top",
-                     end: "bottom top",
-                     scrub: 1 // Smoother scrub
-                 }
-             });
-         }
-
-        // --- Initialize About Section Animations ---
-        function initAbout() {
-            const aboutSection = document.querySelector('.about-section');
-            const aboutContentWrapper = document.querySelector('.about-content-wrapper');
-            const aboutPortrait = document.querySelector('.about-portrait');
-            if (!aboutSection || !aboutContentWrapper || !aboutPortrait) {
-                console.warn("Elements missing for About section animation.");
+            if (images.length === 0) {
+                console.warn("No hero images found for slider.");
                 return;
             }
-            const tl = gsap.timeline({
+
+            // Initial setup - REMOVED SCALE from images
+            gsap.set(images[0], { opacity: 1, pointerEvents: 'auto' }); // Active image
+            gsap.set(images.slice(1), { opacity: 0, pointerEvents: 'none' }); // Inactive images
+            gsap.set(content, { opacity: 0, y: 30 });
+
+            const contentTl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: aboutSection,
-                    start: "top 70%",
+                    trigger: heroSection,
+                    start: "top 80%",
                     toggleActions: "play none none reverse"
                 }
             });
-            // Animate wrapper first (contains title and text)
-            tl.to(aboutContentWrapper, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
-              // Then animate portrait
-              .to(aboutPortrait, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }, "-=0.6"); // Overlap slightly
+            contentTl.to(content, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' });
+
+            // Image switching function - REMOVED SCALE animations
+            function switchImage() {
+                if (images.length <= 1) return;
+                const nextImageIndex = (currentImageIndex + 1) % images.length;
+
+                const tl = gsap.timeline({ defaults: { ease: "power1.inOut" } }); // Adjusted ease
+
+                tl.to(images[currentImageIndex], {
+                    opacity: 0,
+                    duration: 1.5 // Keep fade duration
+                })
+                .set(images[currentImageIndex], {
+                    pointerEvents: 'none'
+                })
+                .set(images[nextImageIndex], {
+                    opacity: 0 // Prepare next image
+                }, "<")
+                .to(images[nextImageIndex], {
+                    opacity: 1,
+                    duration: 1.5 // Keep fade duration
+                }, "<0.3") // Slight overlap
+                .set(images[nextImageIndex], {
+                    pointerEvents: 'auto'
+                });
+
+                currentImageIndex = nextImageIndex;
+            }
+
+            function startImageTimer() {
+                clearInterval(imageInterval);
+                if (images.length > 1) {
+                    imageInterval = setInterval(switchImage, 5000);
+                }
+            }
+
+            startImageTimer();
+            heroSection.addEventListener('mouseenter', () => clearInterval(imageInterval));
+            heroSection.addEventListener('mouseleave', startImageTimer);
+
+            // Parallax effect - REMOVED SCALE, only vertical movement
+            images.forEach(img => {
+                gsap.to(img, {
+                    y: -30, // Subtle vertical movement on scroll
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: heroSection,
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: 1.5,
+                        toggleActions: "play none none reverse"
+                    }
+                });
+            });
+
+            // Content parallax remains the same
+            gsap.to(content, {
+                yPercent: -10,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: heroSection,
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1
+                }
+            });
+        }
+
+        // --- Initialize About Section Animations ---
+        function initAbout() {
+           const aboutSection = document.querySelector('.about-section');
+           const aboutContentWrapper = document.querySelector('.about-content-wrapper');
+           const aboutPortrait = document.querySelector('.about-portrait');
+           if (!aboutSection || !aboutContentWrapper || !aboutPortrait) {
+               console.warn("Elements missing for About section animation.");
+               return;
+           }
+           const tl = gsap.timeline({
+               scrollTrigger: {
+                   trigger: aboutSection,
+                   start: "top 70%",
+                   toggleActions: "play none none reverse"
+               }
+           });
+           tl.to(aboutContentWrapper, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
+             .to(aboutPortrait, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }, "-=0.6");
         }
         // --- Initialize Services Section Animations ---
         function initServices() {
@@ -974,21 +949,19 @@
              const tl = gsap.timeline({
                  scrollTrigger: {
                      trigger: servicesSection,
-                     start: "top 70%", // Adjust as needed
+                     start: "top 70%",
                      toggleActions: "play none none reverse"
                  }
              });
-             // Animate container fade in (includes title)
              tl.to(container, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-             // Stagger animation for service items
              tl.to(items, {
                  opacity: 1,
                  y: 0,
                  scale: 1,
                  duration: 0.5,
                  ease: 'power2.out',
-                 stagger: 0.15 // Delay between each item animation
-             }, "-=0.3"); // Overlap start slightly with container animation
+                 stagger: 0.15
+             }, "-=0.3");
         }
         // --- Initialize Portfolio Preview Animations ---
         function initPortfolio() {
@@ -1002,32 +975,29 @@
             const cta = document.querySelector('.portfolio-cta', container);
             if (!items.length || !cta) {
                 console.warn("Portfolio items or CTA not found for animation.");
-                return; // Don't proceed if essential elements are missing
+                return;
             }
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: portfolioSection,
-                    start: "top 65%", // Start animation a bit earlier
+                    start: "top 65%",
                     toggleActions: "play none none reverse"
                 }
             });
-             // Animate container fade in (includes title)
-            tl.to(container, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
-            // Stagger animation for portfolio items
-            tl.to(items, {
-                opacity: 1,
-                scale: 1,
-                duration: 0.6,
-                ease: 'back.out(1.4)', // Bouncier effect
-                stagger: 0.15 // Delay between each item animation
-            }, "-=0.3"); // Overlap start slightly with title animation
-            // Animate CTA button
-            tl.to(cta, {
-                opacity: 1,
-                y: 0,
-                duration: 0.7,
-                ease: 'power2.out'
-            }, "-=0.5"); // Overlap start
+             tl.to(container, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
+             tl.to(items, {
+                 opacity: 1,
+                 scale: 1,
+                 duration: 0.6,
+                 ease: 'back.out(1.4)',
+                 stagger: 0.15
+             }, "-=0.3");
+             tl.to(cta, {
+                 opacity: 1,
+                 y: 0,
+                 duration: 0.7,
+                 ease: 'power2.out'
+             }, "-=0.5");
         }
         // --- Initialize Contact Form Animations ---
         function initContact() {
@@ -1047,279 +1017,238 @@
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: contactSection,
-                    start: "top 60%", // Adjust trigger point
+                    start: "top 60%",
                     toggleActions: "play none none reverse"
                 }
             });
-            // Animate container fade in (includes title)
             tl.to(container, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
-            // Stagger labels and inputs
             tl.to(labels, {
                 opacity: 1,
                 x: 0,
                 duration: 0.5,
                 ease: 'power2.out',
                 stagger: 0.1
-            }, "-=0.5"); // Overlap with container animation
+            }, "-=0.5");
             tl.to(inputs, {
                 opacity: 1,
                 x: 0,
                 duration: 0.5,
                 ease: 'power2.out',
                 stagger: 0.1
-            }, "<0.1"); // Start shortly after labels
-            // Animate button
+            }, "<0.1");
             tl.to(button, {
                 opacity: 1,
                 y: 0,
                 duration: 0.6,
                 ease: 'back.out(1.7)'
-            }, "-=0.3"); // Overlap slightly
+            }, "-=0.3");
         }
-      // --- Initialize Header Logic (for scroll links) ---
-      function initHeader() {
-          const header = document.getElementById('site-header');
-          if (!header) { console.warn("Site header not found."); return; }
-          const headerLinks = document.querySelectorAll('.site-header a[href^="#"]');
-          headerLinks.forEach(anchor => {
-              // Exclude the logo link if it's just linking to top section
-              if(anchor.classList.contains('logo-link')) return;
+       // --- Initialize Header Logic (for scroll links) ---
+       function initHeader() {
+           const header = document.getElementById('site-header');
+           if (!header) { console.warn("Site header not found."); return; }
+           const headerLinks = document.querySelectorAll('.header-nav a[href^="#"]'); // Select only nav links
 
-              anchor.addEventListener('click', function(e) {
-                  const href = this.getAttribute('href');
-                  if (href && href.startsWith('#') && href.length > 1) {
-                      // Use try-catch for robust target selection
-                      try {
-                          const target = document.querySelector(href);
-                          if (target) {
-                              e.preventDefault();
-                              const headerHeight = header.offsetHeight;
-                              // Use GSAP ScrollToPlugin for smooth scrolling
-                              gsap.to(window, {
-                                  duration: 1.2,
-                                  scrollTo: { y: target, offsetY: headerHeight },
-                                  ease: "power2.inOut"
-                              });
-                          } else { console.warn(`Scroll target '${href}' not found.`); }
-                      } catch (error) {
-                          console.error(`Error selecting scroll target '${href}':`, error);
-                          // Allow default behavior if selector is invalid
-                      }
-                  }
-              });
-          });
-           // Special handling for logo link to scroll smoothly to top
-           const logoLink = document.querySelector('.logo-link');
-           if (logoLink) {
-               logoLink.addEventListener('click', function(e) {
+           headerLinks.forEach(anchor => {
+               anchor.addEventListener('click', function(e) {
                    const href = this.getAttribute('href');
-                    if (href === '#section-0') { // Or just "#" if it should go to very top
-                       e.preventDefault();
-                       gsap.to(window, {
-                           duration: 1.2,
-                           scrollTo: { y: 0 }, // Scroll to top
-                           ease: "power2.inOut"
-                       });
+                   if (href && href.startsWith('#') && href.length > 1) {
+                       try {
+                           const target = document.querySelector(href);
+                           if (target) {
+                               e.preventDefault();
+                               const headerHeight = header.offsetHeight;
+                               gsap.to(window, {
+                                   duration: 1.2,
+                                   scrollTo: { y: target, offsetY: headerHeight },
+                                   ease: "power2.inOut"
+                               });
+                           } else { console.warn(`Scroll target '${href}' not found.`); }
+                       } catch (error) {
+                           console.error(`Error selecting scroll target '${href}':`, error);
+                       }
                    }
                });
-           }
-      }
-      // --- Initialize Footer Animation ---
-      function initFooter() {
-          const footer = document.querySelector('#section-4 .site-footer'); // Target footer in last section (section-4)
-          const copyrightYearSpan = document.getElementById('copyright-year');
-          if (!footer) { console.warn("Site footer inside #section-4 not found."); return; }
-          if(copyrightYearSpan) { copyrightYearSpan.textContent = new Date().getFullYear(); }
-          else { console.warn("Copyright year span not found."); }
-          gsap.to(footer, {
-              opacity: 1, y: 0, duration: 1.0, ease: 'power2.out',
-              scrollTrigger: {
-                  trigger: '#section-4', // Trigger based on last section
-                  start: "center bottom-=10%", // Trigger a bit earlier
-                  toggleActions: "play none none reverse",
-                  id: "footer-reveal"
-              }
-          });
-      }
-      // --- Navigation Dots & Theme Switching ---
-      function initNavigation() {
-          // Select all sections that should correspond to a dot/link
-          const sectionsNodeList = document.querySelectorAll('section[id^="section-"]');
-          const sections = Array.from(sectionsNodeList); // Convert to array for easier indexing
-          const navDots = document.querySelectorAll('.nav-dot');
-          const body = document.body;
-          const header = document.getElementById('site-header');
-          if (navDots.length === 0 || sections.length === 0 || !header) {
-              console.warn("Nav dots, sections, or header not found. Navigation might be incomplete.");
-              return;
-          }
-           // Basic check - should have same number of dots and sections
-           if (navDots.length !== sections.length) {
-              console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sections.length} sections found. Check HTML structure.`);
-              // Attempt to continue, but results might be unpredictable
-           }
-          // Function to get the CURRENT header height (accounts for responsiveness)
-          const getHeaderHeight = () => header.offsetHeight;
-          navDots.forEach(dot => {
-              dot.addEventListener('click', (e) => {
-                  e.preventDefault();
-                  const sectionIdSuffix = dot.getAttribute('data-section'); // Use the section ID suffix (0, 1, services, 3, 4)
-                  const targetSection = document.getElementById(`section-${sectionIdSuffix}`); // Find by ID
-                  if (targetSection) {
+           });
+            // Special handling for logo link to scroll smoothly to top
+            const logoLink = document.querySelector('.logo-link');
+            if (logoLink) {
+                logoLink.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                     if (href === '#section-0') { // Or just "#" if it should go to very top
+                        e.preventDefault();
                         gsap.to(window, {
                             duration: 1.2,
-                            scrollTo: { y: targetSection, offsetY: getHeaderHeight() }, // Use dynamic height
+                            scrollTo: { y: 0 }, // Scroll to top
                             ease: "power2.inOut"
                         });
-                  } else { console.error(`Target section #section-${sectionIdSuffix} not found for dot click.`); }
-              });
-          });
-          // Create ScrollTriggers for each section
-          sections.forEach((section, index) => {
-              const sectionIdSuffix = section.id.replace('section-', '');
-              const theme = section.getAttribute('data-theme') || 'dark'; // Default to dark if not set
-              ScrollTrigger.create({
-                  trigger: section,
-                  start: () => `top top+=${getHeaderHeight()}px`,
-                  end: () => {
-                      const isLastSection = index === sections.length - 1;
-                      // End when bottom hits viewport bottom for last section, otherwise when bottom hits header top
-                      return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight()}px`;
-                  },
-                  id: `section-nav-${sectionIdSuffix}`,
-                  // markers: true, // Uncomment for debugging trigger positions
-                  onEnter: () => updateActiveState(sectionIdSuffix, theme),
-                  onEnterBack: () => updateActiveState(sectionIdSuffix, theme),
-                  invalidateOnRefresh: true // Recalculate start/end on resize/refresh
-              });
-          });
-          function updateActiveState(activeSectionIdSuffix, activeTheme) {
-              // Update dots
-              navDots.forEach((dot) => {
-                  const dotSecIdSuffix = dot.getAttribute('data-section');
-                  dot.classList.toggle('active', dotSecIdSuffix === activeSectionIdSuffix);
-              });
-              // Update body theme class
-              const currentBodyTheme = body.classList.contains('on-light-section') ? 'light' : 'dark';
-              if (activeTheme !== currentBodyTheme) {
-                 body.classList.toggle('on-light-section', activeTheme === 'light');
-              }
-          }
-          // --- Scroll Indicator Logic ---
-          let scrollIndicatorState = { scrolled: window.scrollY > 50 };
-          body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
-          const scrollListener = () => {
-              const isScrolled = window.scrollY > 50;
-              if (isScrolled !== scrollIndicatorState.scrolled) {
-                  body.classList.toggle('scrolled', isScrolled);
-                  scrollIndicatorState.scrolled = isScrolled;
-              }
-          };
-          window.addEventListener('scroll', scrollListener, { passive: true });
-          // --- Initial State Check (Robust) ---
-           setTimeout(() => {
-              let initialSectionIdSuffix = '0'; // Default to first section ID suffix
-              let initialTheme = 'dark';
-              const currentScrollY = window.scrollY;
-              const currentHeaderHeight = getHeaderHeight();
-              const viewThreshold = currentScrollY + currentHeaderHeight + 10; // Consider active if section top is slightly below header bottom
-
-              for (let i = sections.length - 1; i >= 0; i--) {
-                  const section = sections[i];
-                  const rect = section.getBoundingClientRect();
-                  const sectionTopScrollY = currentScrollY + rect.top;
-
-                  // If the section's top edge is above our threshold point in the viewport, it's the active one
-                  if (sectionTopScrollY <= viewThreshold) {
-                      initialSectionIdSuffix = section.id.replace('section-', '');
-                      initialTheme = section.getAttribute('data-theme') || 'dark';
-                      break; // Found the topmost section currently in view
-                  }
-              }
-              console.log(`Initial Active Section Detected: ${initialSectionIdSuffix}`);
-              updateActiveState(initialSectionIdSuffix, initialTheme);
-              scrollIndicatorState.scrolled = window.scrollY > 50;
-              body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
-              ScrollTrigger.refresh(); // Refresh triggers after initial check
-           }, 150); // Delay allows layout to stabilize
-      }
-      // --- Initialize All Animations & Functionality ---
-      function initAll() {
-        console.log("Initializing LAYA animations...");
-        initHeader();
-        initNavigation(); // Handles dots, themes, scroll indicator, initial state
-        initFooter();
-        // Initialize section animations
-        initHero();
-        initAbout();
-        initServices();
-        initPortfolio();
-        initContact();
-        // General smooth scroll for non-header/non-dot links (like the portfolio button)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-         if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots') && !anchor.classList.contains('logo-link')) { // Also exclude logo link here
-           anchor.addEventListener('click', function(e) {
-             const href = this.getAttribute('href');
-             // Special handling for the portfolio CTA if it doesn't point to a section ID
-             if (href === '#portfolio-full') {
-                 console.log("Portfolio CTA clicked - implement full portfolio view/link here.");
-                 // Example: window.location.href = '/portfolio'; // Or open a modal
-                 // e.preventDefault(); // Prevent default only if you handle it differently
-                 return; // Stop further processing for this specific link
-             }
-             if (href && href.startsWith('#') && href.length > 1) {
-               try {
-                   const target = document.querySelector(href);
-                   const header = document.getElementById('site-header');
-                   const offset = header ? header.offsetHeight : 75; // Use current header height
-                   if (target) {
-                       e.preventDefault();
-                       gsap.to(window, {
-                           duration: 1,
-                           scrollTo: { y: target, offsetY: offset },
-                           ease: "power2.inOut"
-                       });
-                   } else {
-                       console.warn("Smooth scroll target not found:", href);
-                       // Allow default browser behavior if target isn't found on page
-                   }
-               } catch (error) {
-                   console.warn("Could not find target for anchor:", href, error);
-                   // Allow default browser behavior if selector is invalid
+                    }
+                });
+            }
+       }
+       // --- Initialize Footer Animation ---
+       function initFooter() {
+           const footer = document.querySelector('#section-4 .site-footer');
+           const copyrightYearSpan = document.getElementById('copyright-year');
+           if (!footer) { console.warn("Site footer inside #section-4 not found."); return; }
+           if(copyrightYearSpan) { copyrightYearSpan.textContent = new Date().getFullYear(); }
+           else { console.warn("Copyright year span not found."); }
+           gsap.to(footer, {
+               opacity: 1, y: 0, duration: 1.0, ease: 'power2.out',
+               scrollTrigger: {
+                   trigger: '#section-4',
+                   start: "center bottom-=10%",
+                   toggleActions: "play none none reverse",
+                   id: "footer-reveal"
                }
-             } else if (href === "#") {
-                 e.preventDefault(); // Prevent jump for empty hash links
-                 console.log("Empty hash link clicked.");
-             }
            });
-         }
-        });
-        // Refresh ScrollTrigger after all setup and potential layout shifts
-        setTimeout(() => {
-           ScrollTrigger.refresh();
-           console.log("ScrollTrigger refreshed after init.");
-        }, 250);
-        // Handle resize: Refresh ScrollTrigger
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-           clearTimeout(resizeTimer);
-           resizeTimer = setTimeout(() => {
-               console.log("Resizing - Refreshing ScrollTrigger...");
-               ScrollTrigger.refresh(true); // Pass true to invalidate and recalculate immediately
-           }, 250);
-        });
-        console.log("LAYA Initialization sequence complete.");
-      }
-      // Start everything on DOMContentLoaded or load
-      // Using DOMContentLoaded is often slightly faster as it doesn't wait for images
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAll);
-      } else {
-        // DOMContentLoaded has already fired
-        initAll();
-      }
-      // Alternatively, use load if waiting for images is critical for layout:
-      // window.addEventListener('load', initAll);
+       }
+       // --- Navigation Dots & Theme Switching ---
+       function initNavigation() {
+           const sectionsNodeList = document.querySelectorAll('section[id^="section-"]');
+           const sections = Array.from(sectionsNodeList);
+           const navDots = document.querySelectorAll('.nav-dot');
+           const body = document.body;
+           const header = document.getElementById('site-header');
+           if (navDots.length === 0 || sections.length === 0 || !header) {
+               console.warn("Nav dots, sections, or header not found."); return;
+           }
+            if (navDots.length !== sections.length) {
+               console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sections.length} sections found.`);
+            }
+           const getHeaderHeight = () => header.offsetHeight;
+           navDots.forEach(dot => {
+               dot.addEventListener('click', (e) => {
+                   e.preventDefault();
+                   const sectionIdSuffix = dot.getAttribute('data-section');
+                   const targetSection = document.getElementById(`section-${sectionIdSuffix}`);
+                   if (targetSection) {
+                         gsap.to(window, {
+                             duration: 1.2,
+                             scrollTo: { y: targetSection, offsetY: getHeaderHeight() },
+                             ease: "power2.inOut"
+                         });
+                   } else { console.error(`Target section #section-${sectionIdSuffix} not found.`); }
+               });
+           });
+           sections.forEach((section, index) => {
+               const sectionIdSuffix = section.id.replace('section-', '');
+               const theme = section.getAttribute('data-theme') || 'dark';
+               ScrollTrigger.create({
+                   trigger: section,
+                   start: () => `top top+=${getHeaderHeight()}px`,
+                   end: () => {
+                       const isLastSection = index === sections.length - 1;
+                       return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight()}px`;
+                   },
+                   id: `section-nav-${sectionIdSuffix}`,
+                   onEnter: () => updateActiveState(sectionIdSuffix, theme),
+                   onEnterBack: () => updateActiveState(sectionIdSuffix, theme),
+                   invalidateOnRefresh: true
+               });
+           });
+           function updateActiveState(activeSectionIdSuffix, activeTheme) {
+               navDots.forEach((dot) => {
+                   const dotSecIdSuffix = dot.getAttribute('data-section');
+                   dot.classList.toggle('active', dotSecIdSuffix === activeSectionIdSuffix);
+               });
+               const currentBodyTheme = body.classList.contains('on-light-section') ? 'light' : 'dark';
+               if (activeTheme !== currentBodyTheme) {
+                  body.classList.toggle('on-light-section', activeTheme === 'light');
+               }
+           }
+           let scrollIndicatorState = { scrolled: window.scrollY > 50 };
+           body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
+           const scrollListener = () => {
+               const isScrolled = window.scrollY > 50;
+               if (isScrolled !== scrollIndicatorState.scrolled) {
+                   body.classList.toggle('scrolled', isScrolled);
+                   scrollIndicatorState.scrolled = isScrolled;
+               }
+           };
+           window.addEventListener('scroll', scrollListener, { passive: true });
+            setTimeout(() => {
+               let initialSectionIdSuffix = '0';
+               let initialTheme = 'dark';
+               const currentScrollY = window.scrollY;
+               const currentHeaderHeight = getHeaderHeight();
+               const viewThreshold = currentScrollY + currentHeaderHeight + 10;
+               for (let i = sections.length - 1; i >= 0; i--) {
+                   const section = sections[i];
+                   const rect = section.getBoundingClientRect();
+                   const sectionTopScrollY = currentScrollY + rect.top;
+                   if (sectionTopScrollY <= viewThreshold) {
+                       initialSectionIdSuffix = section.id.replace('section-', '');
+                       initialTheme = section.getAttribute('data-theme') || 'dark';
+                       break;
+                   }
+               }
+               updateActiveState(initialSectionIdSuffix, initialTheme);
+               scrollIndicatorState.scrolled = window.scrollY > 50;
+               body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
+               ScrollTrigger.refresh();
+            }, 150);
+       }
+       // --- Initialize All Animations & Functionality ---
+       function initAll() {
+         console.log("Initializing LAYA animations...");
+         initHeader();
+         initNavigation();
+         initFooter();
+         initHero();
+         initAbout();
+         initServices();
+         initPortfolio();
+         initContact();
+         // General smooth scroll for non-header/non-dot/non-logo links
+         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots')) {
+            anchor.addEventListener('click', function(e) {
+              const href = this.getAttribute('href');
+              if (href === '#portfolio-full') {
+                  console.log("Portfolio CTA clicked - implement full portfolio view/link here.");
+                  return;
+              }
+              if (href && href.startsWith('#') && href.length > 1) {
+                try {
+                    const target = document.querySelector(href);
+                    const header = document.getElementById('site-header');
+                    const offset = header ? header.offsetHeight : 75;
+                    if (target) {
+                        e.preventDefault();
+                        gsap.to(window, {
+                            duration: 1,
+                            scrollTo: { y: target, offsetY: offset },
+                            ease: "power2.inOut"
+                        });
+                    } else { console.warn("Smooth scroll target not found:", href); }
+                } catch (error) { console.warn("Could not find target for anchor:", href, error); }
+              } else if (href === "#") {
+                  e.preventDefault();
+              }
+            });
+          }
+         });
+         setTimeout(() => {
+            ScrollTrigger.refresh();
+            console.log("ScrollTrigger refreshed after init.");
+         }, 250);
+         let resizeTimer;
+         window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                console.log("Resizing - Refreshing ScrollTrigger...");
+                ScrollTrigger.refresh(true);
+            }, 250);
+         });
+         console.log("LAYA Initialization sequence complete.");
+       }
+
+       if (document.readyState === 'loading') {
+         document.addEventListener('DOMContentLoaded', initAll);
+       } else {
+         initAll();
+       }
     </script>
 </body>
 </html>
