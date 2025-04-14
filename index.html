@@ -127,7 +127,7 @@
           top: 100%;
           margin-top: 6px;
           background-color: transparent;
-          color: inherit; /* Inherits color from icon (light/dark) */
+          color: inherit;
           font-family: var(--logo-font);
           font-weight: 500;
           font-size: 0.75rem;
@@ -139,7 +139,7 @@
           transform: translateY(5px) scale(0.9);
           transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
           pointer-events: none;
-          text-shadow: 0 0 3px rgba(0, 0, 0, 0.5); /* Subtle shadow for visibility */
+          text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
       }
       .header-nav a:hover .nav-label {
           opacity: 1;
@@ -149,31 +149,31 @@
       }
 
       /* --- FOOTER STYLES --- */
-      section#section-4 { /* Apply positioning context to parent section */
+      section#section-4 {
         position: relative;
         background-color: var(--bg-light-1);
         color: var(--text-dark);
         min-height: 100vh;
         height: auto;
-        padding-bottom: 20vh; /* Space for footer */
+        padding-bottom: 20vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: hidden; /* Prevent form content from overflowing */
+        overflow: hidden;
       }
       .site-footer {
-          position: absolute; /* Position relative to section-4 */
+          position: absolute;
           bottom: 30px;
           left: 0;
           width: 100%;
-          padding: 0 30px; /* Added padding */
+          padding: 0 30px;
           display: flex;
-          flex-direction: column; /* Stack items vertically */
+          flex-direction: column;
           align-items: center;
           gap: 15px;
-          z-index: 5; /* Ensure it's above potential section content */
-          opacity: 0; /* Start hidden for animation */
-          transform: translateY(30px); /* Start lower */
+          z-index: 5;
+          opacity: 0;
+          transform: translateY(30px);
       }
       .site-footer .copyright {
           font-size: 0.85rem;
@@ -188,102 +188,75 @@
       }
       .site-footer .social-icons a {
           text-decoration: none;
-          color: #aaa; /* Lighter grey for icons */
+          color: #aaa;
           font-size: 1.2rem;
           transition: transform 0.3s ease, color 0.3s ease;
-          display: inline-block; /* Needed for transform */
+          display: inline-block;
       }
       .site-footer .social-icons a:hover {
           transform: scale(1.15);
-          color: var(--accent-color-2); /* Darker grey on hover */
+          color: var(--accent-color-2);
       }
 
       /* --- SECTION STYLES --- */
       section {
           min-height: 100vh;
-          height: auto; /* Allow content to define height if needed */
+          height: auto;
           width: 100%;
-          display: flex; /* Use flexbox for centering content */
+          display: flex;
           justify-content: center;
           align-items: center;
-          position: relative; /* For absolute positioning inside sections */
-          overflow: hidden; /* Hide overflow */
-          padding: 50px; /* Default padding */
-          padding-top: var(--header-height); /* Add top padding equal to header height */
-          margin-top: calc(-1 * var(--header-height)); /* Negative margin to pull section under header */
+          position: relative;
+          overflow: hidden;
+          padding: 50px;
+          padding-top: var(--header-height);
+          margin-top: calc(-1 * var(--header-height));
       }
-      section:first-of-type { /* Hero has no top margin/padding */
+      section:first-of-type {
           margin-top: 0;
           padding-top: 0;
       }
 
-      /* --- SECTION 0: Hero Image Stack --- */
+      /* --- SECTION 0: Hero --- */
       .hero-section {
-          background-color: var(--bg-dark-1);
-          color: var(--text-light);
-          display: block; /* Override flex for stack */
-          padding: 0; /* Remove padding for full bleed */
-          min-height: 100vh;
-          height: 100vh; /* Fixed viewport height */
-          position: relative;
-          overflow: hidden;
+          background-color: var(--bg-dark-1); color: var(--text-light); display: block;
+          padding: 0; min-height: 100vh; height: 100vh; position: relative; overflow: hidden;
       }
       .hero-content {
-        position: absolute;
-        top: 65%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-        text-align: center;
-        width: 90%;
-        max-width: 800px;
-        opacity: 1;
-        pointer-events: none;
+        position: absolute; top: 65%; left: 50%; transform: translate(-50%, -50%); z-index: 2;
+        text-align: center; width: 90%; max-width: 800px; opacity: 1; pointer-events: none;
        }
       .hero-content > * { pointer-events: auto; }
       .hero-tagline {
-        font-size: clamp(2.2rem, 5vw, 3.5rem);
-        font-weight: 600;
-        margin: 0 auto;
-        line-height: 1.4;
-        font-family: 'Montserrat', sans-serif;
-        color: var(--text-light);
-        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75);
+        font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 600; margin: 0 auto; line-height: 1.4;
+        font-family: 'Montserrat', sans-serif; color: var(--text-light); text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75);
         overflow: hidden;
        }
        .tagline-word {
-          display: inline-block;
-          opacity: 0;
-          transform: scale(0.5);
-          transform-origin: center center;
-          margin: 0 4px;
-          will-change: transform, opacity;
+          display: inline-block; opacity: 0; transform: scale(0.5); transform-origin: center center;
+          margin: 0 4px; will-change: transform, opacity;
        }
-      .hero-image-stack {
-          position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden;
-      }
+      .hero-image-stack { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
       .hero-image-stack::before {
           content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
           background-color: rgba(0, 0, 0, 0.3); z-index: 1; pointer-events: none;
       }
       .hero-image {
-          position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-          object-fit: cover; object-position: center; opacity: 0; pointer-events: none; z-index: 0;
+          position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+          object-position: center; opacity: 0; pointer-events: none; z-index: 0;
       }
       .hero-image.hero-image-active { opacity: 1; pointer-events: auto; }
 
-      /* --- SECTION 1: About Me --- */
-      .about-section {
-          background-color: var(--bg-dark-2); color: var(--text-light);
-      }
+      /* --- SECTION 1: About --- */
+      .about-section { background-color: var(--bg-dark-2); color: var(--text-light); }
       .about-content-wrapper {
-          max-width: 900px; opacity: 0; transform: translateY(50px);
-          display: flex; justify-content: space-between; align-items: flex-start; width: 100%;
+          max-width: 900px; opacity: 0; transform: translateY(50px); display: flex;
+          justify-content: space-between; align-items: flex-start; width: 100%;
       }
       .about-text-container { flex: 1; margin-right: 40px; text-align: left; }
       .about-title {
-          font-family: var(--logo-font); font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 700; margin-bottom: 30px; color: var(--accent-color-1);
+          font-family: var(--logo-font); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700;
+          margin-bottom: 30px; color: var(--accent-color-1);
       }
       .about-text { max-width: 700px; }
       .about-text p {
@@ -292,54 +265,41 @@
       }
       .about-text strong { font-weight: 600; color: var(--accent-color-3); }
       .about-portrait {
-          display: block; max-width: 350px; height: auto; border-radius: 10px;
-          border: 3px solid var(--accent-color-1); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-          opacity: 0; transform: scale(0.8); flex-shrink: 0;
+          display: block; max-width: 350px; height: auto; border-radius: 10px; border: 3px solid var(--accent-color-1);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); opacity: 0; transform: scale(0.8); flex-shrink: 0;
       }
 
       /* --- SECTION 2: Services (Text Content Area) --- */
       .new-services-section {
-          background-color: var(--bg-light-1);
-          color: var(--text-dark);
-          position: relative;
-          display: flex;
-          align-items: center; /* Center text content vertically */
-          justify-content: center;
-          padding: 50px;
-          padding-top: calc(var(--header-height) + 50px); /* Extra top padding */
-          margin-top: calc(-1 * var(--header-height));
-          min-height: 100vh;
-          overflow: hidden; /* Can hide overflow */
-          padding-bottom: 50px; /* Ensure some padding at the bottom */
+          background-color: var(--bg-light-1); color: var(--text-dark); position: relative; display: flex;
+          align-items: center; justify-content: center; padding: 50px;
+          padding-top: calc(var(--header-height) + 50px); margin-top: calc(-1 * var(--header-height));
+          min-height: 100vh; overflow: hidden; padding-bottom: 50px;
       }
       .services-background-image {
-          position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-          background-image: url('services.jpg'); /* <<< PATH TO YOUR IMAGE */
-          background-size: cover; background-position: center center;
-          opacity: 0; /* Start hidden */ z-index: 1; will-change: opacity;
+          position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('services.jpg');
+          background-size: cover; background-position: center center; opacity: 0; z-index: 1; will-change: opacity;
       }
       .services-text-content {
-          position: relative; z-index: 3; /* Above background */
-          max-width: 1100px; width: 90%; text-align: center;
-          opacity: 0; transform: translateY(30px);
-          will-change: transform, opacity; color: var(--text-dark);
-          padding: 20px 0; text-shadow: 0 1px 3px rgba(255, 255, 255, 0.4);
-          margin-bottom: 0; /* Reset margin */
+          position: relative; z-index: 3; max-width: 1100px; width: 90%; text-align: center;
+          opacity: 0; /* Set via JS */ visibility: hidden; /* Set via JS */ transform: translateY(30px); /* Set via JS */
+          will-change: transform, opacity, visibility; color: var(--text-dark); padding: 20px 0;
+          text-shadow: 0 1px 3px rgba(255, 255, 255, 0.4); margin-bottom: 0;
       }
       .services-title-new {
-          font-family: var(--logo-font); font-size: clamp(1.8rem, 4vw, 3rem);
-          font-weight: 700; margin-bottom: 50px; color: var(--accent-color-4);
-          opacity: 0; transform: translateY(20px); will-change: transform, opacity;
+          font-family: var(--logo-font); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700;
+          margin-bottom: 50px; color: var(--accent-color-4);
+          opacity: 0; /* Set via JS */ visibility: hidden; /* Set via JS */ transform: translateY(20px); /* Set via JS */
+          will-change: transform, opacity, visibility;
       }
       .services-list-new {
-          margin-top: 30px; display: flex; flex-direction: row;
-          justify-content: space-around; flex-wrap: wrap; align-items: flex-start;
-          gap: 30px;
+          margin-top: 30px; display: flex; flex-direction: row; justify-content: space-around;
+          flex-wrap: wrap; align-items: flex-start; gap: 30px;
       }
       .service-item-new {
-          opacity: 0; transform: translateY(20px); flex: 1;
-          min-width: 250px; max-width: 360px; text-align: center;
-          will-change: transform, opacity; background-color: rgba(253, 253, 253, 0.1);
+          opacity: 0; /* Set via JS */ visibility: hidden; /* Set via JS */ transform: translateY(20px); /* Set via JS */
+          flex: 1; min-width: 250px; max-width: 360px; text-align: center;
+          will-change: transform, opacity, visibility; background-color: rgba(253, 253, 253, 0.1);
           padding: 20px; border-radius: 6px;
       }
       .service-icon-new {
@@ -354,29 +314,26 @@
           color: var(--accent-color-2); font-weight: 400; min-height: 50px;
       }
 
-      /* --- SECTION 3: Portfolio Preview --- */
-      .portfolio-section {
-          background-color: var(--bg-dark-2); color: var(--text-light);
-      }
+      /* --- SECTION 3: Portfolio --- */
+      .portfolio-section { background-color: var(--bg-dark-2); color: var(--text-light); }
       .portfolio-preview-container {
-          display: flex; flex-direction: column; align-items: center;
-          width: 100%; max-width: 1200px; opacity: 0; transform: translateY(50px);
+          display: flex; flex-direction: column; align-items: center; width: 100%;
+          max-width: 1200px; opacity: 0; transform: translateY(50px);
       }
       .portfolio-title {
-          font-family: var(--logo-font); font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 700; margin-bottom: 50px; text-align: center; color: var(--accent-color-1);
+          font-family: var(--logo-font); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700;
+          margin-bottom: 50px; text-align: center; color: var(--accent-color-1);
       }
       .portfolio-grid {
-          display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 30px; width: 100%; margin-bottom: 50px;
+          display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
+          width: 100%; margin-bottom: 50px;
       }
       .portfolio-item-placeholder {
           aspect-ratio: 4 / 3; background: linear-gradient(135deg, var(--accent-color-2), var(--accent-color-4));
           border-radius: 8px; display: flex; justify-content: center; align-items: center;
           color: var(--text-light); font-family: 'Montserrat', sans-serif; font-size: 1.1rem;
-          font-weight: 700; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-          opacity: 0; transform: scale(0.9); transition: transform 0.3s ease, box-shadow 0.3s ease;
-          padding: 15px; text-align: center;
+          font-weight: 700; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); opacity: 0; transform: scale(0.9);
+          transition: transform 0.3s ease, box-shadow 0.3s ease; padding: 15px; text-align: center;
       }
       .portfolio-item-placeholder:hover { transform: scale(1.03); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); }
       .portfolio-cta {
@@ -390,45 +347,37 @@
           background-color: var(--accent-color-3); color: var(--text-dark); transform: translateY(0px) scale(1.05);
       }
 
-      /* --- SECTION 4: Contact Form --- */
-      .contact-section {
-          color: var(--text-dark); background-color: var(--bg-light-1);
-      }
+      /* --- SECTION 4: Contact --- */
+      .contact-section { color: var(--text-dark); background-color: var(--bg-light-1); }
       .contact-form-container {
-          background-color: var(--bg-light-2); padding: 50px clamp(20px, 8vw, 80px);
-          border-radius: 10px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-          width: 100%; max-width: 700px; opacity: 0; transform: translateY(50px);
-          z-index: 1; color: var(--text-dark);
+          background-color: var(--bg-light-2); padding: 50px clamp(20px, 8vw, 80px); border-radius: 10px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); width: 100%; max-width: 700px;
+          opacity: 0; transform: translateY(50px); z-index: 1; color: var(--text-dark);
       }
       .contact-title {
-          font-family: var(--logo-font); font-size: clamp(1.8rem, 4vw, 3rem);
-          font-weight: 700; margin-bottom: 40px; text-align: center; color: var(--accent-color-4);
+          font-family: var(--logo-font); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700;
+          margin-bottom: 40px; text-align: center; color: var(--accent-color-4);
       }
       .contact-form .form-group { margin-bottom: 25px; position: relative; }
       .contact-form label {
           display: block; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.9rem;
           color: var(--accent-color-2); margin-bottom: 8px; opacity: 0; transform: translateX(-20px);
       }
-      .contact-form input[type="text"],
-      .contact-form input[type="email"],
-      .contact-form textarea {
+      .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea {
           width: 100%; padding: 15px 20px; border: 1px solid #ccc; border-radius: 6px;
-          font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 400;
-          color: var(--text-dark); background-color: var(--bg-light-2);
-          transition: border-color 0.3s ease, box-shadow 0.3s ease;
+          font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 400; color: var(--text-dark);
+          background-color: var(--bg-light-2); transition: border-color 0.3s ease, box-shadow 0.3s ease;
           opacity: 0; transform: translateX(-20px);
       }
-      .contact-form input[type="text"]:focus,
-      .contact-form input[type="email"]:focus,
-      .contact-form textarea:focus {
+      .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus {
           border-color: var(--accent-color-1); box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3); outline: none;
       }
       .contact-form textarea { min-height: 150px; resize: vertical; }
       .contact-form button {
           display: block; width: 100%; padding: 15px 30px; background-color: var(--accent-color-4);
-          color: var(--text-light); border: none; border-radius: 50px;
-          font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 700;
-          cursor: pointer; transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+          color: var(--text-light); border: none; border-radius: 50px; font-family: 'Montserrat', sans-serif;
+          font-size: 1.1rem; font-weight: 700; cursor: pointer;
+          transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
           margin-top: 10px; opacity: 0; transform: translateY(20px);
       }
       .contact-form button:hover {
@@ -437,25 +386,19 @@
 
       /* --- Navigation Dots --- */
       .nav-dots {
-          position: fixed; top: 50%; right: 30px; transform: translateY(-50%);
-          display: flex; flex-direction: column; z-index: 101;
+          position: fixed; top: 50%; right: 30px; transform: translateY(-50%); display: flex;
+          flex-direction: column; z-index: 101;
       }
       .nav-dot {
           width: 10px; height: 10px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.3);
           margin: 12px 0; cursor: pointer; transition: background-color 0.3s, transform 0.3s;
           border: 1px solid rgba(0, 0, 0, 0.2);
       }
-      body.on-light-section .nav-dot {
-          background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.2);
-      }
-      .nav-dot.active {
-          background-color: white; transform: scale(1.4); border: 1px solid rgba(0, 0, 0, 0.3);
-      }
-      body.on-light-section .nav-dot.active {
-          background-color: var(--text-dark); border: 1px solid rgba(255, 255, 255, 0.3);
-      }
+      body.on-light-section .nav-dot { background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.2); }
+      .nav-dot.active { background-color: white; transform: scale(1.4); border: 1px solid rgba(0, 0, 0, 0.3); }
+      body.on-light-section .nav-dot.active { background-color: var(--text-dark); border: 1px solid rgba(255, 255, 255, 0.3); }
 
-      /* --- Scroll Indicator (First Section) --- */
+      /* --- Scroll Indicator --- */
       .scroll-indicator {
           position: absolute; bottom: 10vh; left: 50%; transform: translateX(-50%);
           color: rgba(255, 255, 255, 0.7); font-size: 0.8rem; font-family: 'Poppins', sans-serif;
@@ -464,59 +407,31 @@
       }
       .scroll-indicator span { font-weight: 400; }
       .scroll-indicator i { font-size: 1.2rem; margin-top: 8px; color: #fff; }
-      @keyframes scrollArrow {
-          0% { transform: translateY(0); opacity: 0.3; } 50% { transform: translateY(8px); opacity: 1; } 100% { transform: translateY(0); opacity: 0.3; }
-      }
+      @keyframes scrollArrow { 0% { transform: translateY(0); opacity: 0.3; } 50% { transform: translateY(8px); opacity: 1; } 100% { transform: translateY(0); opacity: 0.3; } }
       .scroll-indicator i { animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); }
       body.scrolled .scroll-indicator { opacity: 0; pointer-events: none; }
 
-
-      /* --- STICKY SVG CONTAINER STYLES --- */
+      /* --- STICKY SVG CONTAINER --- */
       #sticky-svg-drawing-container {
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 150px; /* Adjust height as needed */
-          z-index: 50; /* Below header/dots (100+), above general content */
-          opacity: 0;
-          visibility: hidden;
-          pointer-events: none;
-          overflow: hidden; /* Clip SVG drawing within this container */
-          /* Optional: Subtle fade background - adjust color for light/dark theme potentially */
-          background: linear-gradient(to top, rgba(253, 253, 253, 0.7), transparent);
-          transition: opacity 0.4s ease, visibility 0s 0.4s; /* For fade out */
+          position: fixed; bottom: 0; left: 0; width: 100%; height: 150px; /* Adjust height */
+          z-index: 50; opacity: 0; visibility: hidden; /* Controlled by JS autoAlpha */
+          pointer-events: none; overflow: hidden; background: transparent; /* Removed gradient */
+          /* No transition needed here as JS handles fade */
       }
-      /* Style for when ScrollTrigger makes it active */
-      #sticky-svg-drawing-container.active {
-          opacity: 1;
-          visibility: visible;
-          transition: opacity 0.4s ease, visibility 0s 0s; /* For fade in */
-      }
+      /* Remove .active class style */
       #sticky-svg-drawing-container svg {
-          display: block;
-          width: 100%;
-          height: 100%;
-          overflow: visible;
-          position: absolute; /* Position within the fixed container */
-          bottom: 0;
-          left: 0;
+          display: block; width: 100%; height: 100%; overflow: visible;
+          position: absolute; bottom: 0; left: 0;
       }
-      #sticky-svg-drawing-container .drawing-line { /* Target line inside new container */
-          fill: none;
-          stroke: var(--accent-color-4); /* Color for light theme background */
-          stroke-width: 2.5;
-          stroke-linecap: round;
-          stroke-linejoin: round;
-          will-change: stroke-dashoffset;
+      #sticky-svg-drawing-container .drawing-line {
+          fill: none; stroke: var(--accent-color-4); stroke-width: 3; /* Slightly thicker */
+          stroke-linecap: round; stroke-linejoin: round; will-change: stroke-dashoffset;
       }
-
 
       /* --- RESPONSIVE STYLES --- */
        @media (max-width: 992px) {
-           .site-header { padding: 0 25px; } .logo-link img { height: 45px; }
-           .header-nav ul { gap: 25px; } section { padding-left: 30px; padding-right: 30px; }
-           section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
+           .site-header { padding: 0 25px; } .logo-link img { height: 45px; } .header-nav ul { gap: 25px; }
+           section { padding-left: 30px; padding-right: 30px; } section:first-of-type { padding: 0;}
            .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
            .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
            .about-content-wrapper { flex-direction: column-reverse; align-items: center; }
@@ -527,14 +442,11 @@
            .services-text-content { max-width: 90%; }
            #sticky-svg-drawing-container { height: 130px; }
         }
-
         @media (max-width: 768px) {
-           :root { --header-height: 70px; } .site-header { padding: 0 20px; }
-           .logo-link img { height: 40px; } .header-nav ul { gap: 20px; }
-           .header-nav a { font-size: 1rem; } .nav-label { display: none; }
+           :root { --header-height: 70px; } .site-header { padding: 0 20px; } .logo-link img { height: 40px; }
+           .header-nav ul { gap: 20px; } .header-nav a { font-size: 1rem; } .nav-label { display: none; }
            .nav-dots { right: 20px; } .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
-           section { padding-left: 20px; padding-right: 20px; }
-           section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
+           section { padding-left: 20px; padding-right: 20px; } section:first-of-type { padding: 0;}
            .portfolio-grid { gap: 20px; } .portfolio-item-placeholder { font-size: 1rem; }
            .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
            .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; }
@@ -550,22 +462,18 @@
            .service-icon-new { font-size: 2.2rem; }
            #sticky-svg-drawing-container { height: 120px; }
          }
-
          @media (max-width: 480px) {
-           :root { --header-height: 65px; } .site-header { padding: 0 15px; }
-           .logo-link img { height: 35px; } .header-nav ul { gap: 15px; }
-           .header-nav a { font-size: 0.9rem; } .nav-dots { right: 15px; }
+           :root { --header-height: 65px; } .site-header { padding: 0 15px; } .logo-link img { height: 35px; }
+           .header-nav ul { gap: 15px; } .header-nav a { font-size: 0.9rem; } .nav-dots { right: 15px; }
            .hero-tagline { font-size: clamp(1.4rem, 6vw, 2rem); line-height: 1.4; }
            .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
            .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
            .about-portrait { max-width: 150px; }
            .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-           .portfolio-grid { grid-template-columns: 1fr; gap: 15px; }
-           .portfolio-item-placeholder { font-size: 0.9rem; }
+           .portfolio-grid { grid-template-columns: 1fr; gap: 15px; } .portfolio-item-placeholder { font-size: 0.9rem; }
            .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
            .scroll-indicator { bottom: 6vh; font-size: 0.75rem;}
-           section { padding-left: 15px; padding-right: 15px; }
-           section:first-of-type { padding-left: 0; padding-right: 0; padding-top: 0;}
+           section { padding-left: 15px; padding-right: 15px; } section:first-of-type { padding: 0;}
            .contact-form-container { padding: 25px 15px; } .hero-content { top: 72%; max-width: 95%; }
            .tagline-word { margin: 0 2px;}
            .services-text-content { padding: 15px 0; width: 95%; }
@@ -640,7 +548,6 @@
 
     <section class="new-services-section" id="section-services" data-theme="light">
         <div class="services-background-image"></div>
-
         <div class="services-text-content">
             <h2 class="services-title-new">What We Offer</h2>
             <div class="services-list-new">
@@ -682,22 +589,10 @@
          <div class="contact-form-container">
              <h2 class="contact-title">Get In Touch</h2>
              <form class="contact-form" action="#" method="POST">
-                 <div class="form-group">
-                     <label for="name">Name</label>
-                     <input type="text" id="name" name="name" required placeholder="Your Full Name">
-                 </div>
-                 <div class="form-group">
-                     <label for="email">Email</label>
-                     <input type="email" id="email" name="email" required placeholder="your.email@example.com">
-                 </div>
-                 <div class="form-group">
-                     <label for="subject">Subject</label>
-                     <input type="text" id="subject" name="subject" placeholder="Briefly, what's this about?">
-                 </div>
-                 <div class="form-group">
-                     <label for="message">Message</label>
-                     <textarea id="message" name="message" required placeholder="Tell us more about your project or inquiry..."></textarea>
-                 </div>
+                 <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" required placeholder="Your Full Name"></div>
+                 <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" required placeholder="your.email@example.com"></div>
+                 <div class="form-group"><label for="subject">Subject</label><input type="text" id="subject" name="subject" placeholder="Briefly, what's this about?"></div>
+                 <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" required placeholder="Tell us more about your project or inquiry..."></textarea></div>
                  <button type="submit">Send Message</button>
              </form>
         </div>
@@ -711,10 +606,9 @@
             <p class="copyright">&copy; <span id="copyright-year"></span> LAYA Architecture Studio. All rights reserved.</p>
         </footer>
     </section>
-
     <div id="sticky-svg-drawing-container">
         <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 1200 150">
-            <path class="drawing-line" d="M 100 140 H 200 V 90 L 150 50 L 100 90 V 140 M 500 140 H 620 V 100 L 560 65 L 500 100 V 140 M 900 140 H 1050 V 110 L 975 70 L 900 110 V 140" />
+            <path class="drawing-line" d="M 100 90 L 150 50 L 200 90 L 500 100 L 560 65 L 620 100 L 900 110 L 975 70 L 1050 110" />
         </svg>
     </div>
 
@@ -724,6 +618,7 @@
     <script>
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
+        // --- (Keep initHero, initAbout, initPortfolio, initContact, initHeader, initFooter, initNavigation functions as they were) ---
         // --- Hero Section Animation ---
         function initHero() {
             const heroSection = document.querySelector('.hero-section');
@@ -760,7 +655,6 @@
             images.forEach(img => { gsap.to(img, { y: -30, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1.5 } }); });
             gsap.to(content, { yPercent: -15, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 } });
         }
-
         // --- About Section Animation ---
         function initAbout() {
              const aboutSection = document.querySelector('.about-section');
@@ -771,115 +665,6 @@
              tl.to(aboutContentWrapper, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
                .to(aboutPortrait, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }, "-=0.6");
         }
-
-        // --- Sticky SVG Drawing ---
-        function initStickySVG() {
-            const stickyContainer = document.getElementById('sticky-svg-drawing-container');
-            const drawingLine = stickyContainer?.querySelector('.drawing-line');
-            const triggerSection = document.getElementById('section-services');
-
-            if (!stickyContainer || !drawingLine || !triggerSection) {
-                console.warn("Sticky SVG elements missing (container, line, or trigger section).");
-                return;
-            }
-
-            const drawTl = gsap.timeline({ paused: true });
-            let pathLength = 0;
-
-            const setupAndAnimate = () => {
-                try {
-                    pathLength = drawingLine.getTotalLength();
-                    if (pathLength <= 0) throw new Error("Path length is zero.");
-
-                    gsap.set(drawingLine, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
-
-                    drawTl.to(drawingLine, {
-                        strokeDashoffset: 0,
-                        duration: 4.0, // Slower duration for drawing
-                        ease: 'linear'
-                    });
-
-                    ScrollTrigger.create({
-                        trigger: triggerSection,
-                        start: "top bottom-=150px", // Appear when section top is 150px from viewport bottom
-                        end: "bottom top+=150px",    // Disappear when section bottom is 150px past viewport top
-                        // markers: true,
-                        onEnter: () => {
-                            stickyContainer.classList.add('active');
-                            drawTl.restart();
-                            console.log("Entering services, starting draw");
-                        },
-                        onLeave: () => {
-                            stickyContainer.classList.remove('active');
-                            console.log("Leaving services");
-                        },
-                        onEnterBack: () => {
-                            stickyContainer.classList.add('active');
-                            drawTl.restart();
-                            console.log("Entering back services, starting draw");
-                        },
-                        onLeaveBack: () => {
-                            stickyContainer.classList.remove('active');
-                            drawTl.pause(0); // Reset drawing
-                            console.log("Leaving back services");
-                        }
-                    });
-
-                } catch (error) {
-                    console.error("Error setting up SVG drawing animation:", error);
-                    stickyContainer.style.display = 'none';
-                }
-            };
-             setTimeout(setupAndAnimate, 100);
-        }
-
-        // --- Services Section Animation (Text Content Only) ---
-        function initNewServices() {
-            const servicesSection = document.querySelector('.new-services-section');
-            const bgImage = servicesSection?.querySelector('.services-background-image');
-            const textContent = servicesSection?.querySelector('.services-text-content');
-            const title = textContent?.querySelector('.services-title-new');
-            const items = textContent ? gsap.utils.toArray('.service-item-new', textContent) : [];
-
-            if (!servicesSection || !bgImage || !textContent || !title || items.length === 0) {
-                console.warn("New Services TEXT elements missing for animation.");
-                return;
-            }
-
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: servicesSection,
-                    start: "top 70%", // Start text animation a bit after SVG appears
-                    toggleActions: "play none none reverse",
-                }
-            });
-
-            tl.to(bgImage, {
-                opacity: 0.6, // Adjust opacity as needed
-                duration: 1.5,
-                ease: 'power1.inOut'
-            });
-            tl.to(textContent, {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power2.out'
-            }, "-=1.0");
-            tl.to(title, {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: 'power2.out'
-            }, "-=0.4");
-            tl.to(items, {
-                opacity: 1,
-                y: 0,
-                duration: 0.7,
-                ease: 'power2.out',
-                stagger: 0.25
-            }, "-=0.3");
-        }
-
         // --- Portfolio Section Animation ---
         function initPortfolio() {
             const portfolioSection = document.querySelector('.portfolio-section');
@@ -893,7 +678,6 @@
                .to(items, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.4)', stagger: 0.15 }, "-=0.3")
                .to(cta, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, "-=0.5");
         }
-
         // --- Contact Section Animation ---
         function initContact() {
             const contactSection = document.querySelector('.contact-section');
@@ -909,7 +693,6 @@
                .to(inputs, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, "<0.1")
                .to(button, { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.7)' }, "-=0.3");
         }
-
         // --- Header Setup ---
         function initHeader() {
              const header = document.getElementById('site-header');
@@ -942,7 +725,6 @@
                    });
               }
         }
-
         // --- Footer Setup ---
         function initFooter() {
             const footer = document.querySelector('#section-4 .site-footer');
@@ -952,7 +734,6 @@
             else { console.warn("Copyright year span missing."); }
             gsap.to(footer, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', scrollTrigger: { trigger: '#section-4', start: "center bottom-=10%", toggleActions: "play none none reverse", id: "footer-reveal" } });
         }
-
         // --- Navigation Setup ---
         function initNavigation() {
               const sectionsNodeList = document.querySelectorAll('section[id^="section-"]');
@@ -1015,6 +796,121 @@
                }, 150);
         }
 
+
+        // --- Combined Services Section Animation Sequence ---
+        function initServicesSequence() {
+            const triggerSection = document.getElementById('section-services');
+            // Sticky SVG Elements
+            const stickyContainer = document.getElementById('sticky-svg-drawing-container');
+            const drawingLine = stickyContainer?.querySelector('.drawing-line');
+            // Service Section Content Elements
+            const bgImage = triggerSection?.querySelector('.services-background-image');
+            const textContent = triggerSection?.querySelector('.services-text-content');
+            const title = textContent?.querySelector('.services-title-new');
+            const items = textContent ? gsap.utils.toArray('.service-item-new', textContent) : [];
+
+            // Ensure all elements exist
+            if (!triggerSection || !stickyContainer || !drawingLine || !bgImage || !textContent || !title || items.length === 0) {
+                console.warn("Services sequence elements missing. Aborting animation setup.");
+                // Optionally hide the sticky container permanently if setup fails
+                if(stickyContainer) stickyContainer.style.display = 'none';
+                return;
+            }
+
+            // --- Initial States (Hidden) ---
+            gsap.set(stickyContainer, { autoAlpha: 0 }); // Starts hidden
+            gsap.set(bgImage, { opacity: 0 }); // Background starts transparent
+            gsap.set(textContent, { autoAlpha: 0, y: 30 }); // Text content hidden and slightly down
+            gsap.set(title, { autoAlpha: 0, y: 20 });       // Title hidden and slightly down
+            gsap.set(items, { autoAlpha: 0, y: 20 });       // Items hidden and slightly down
+
+
+            // --- Path Length Calculation (Delayed) ---
+            let pathLength = 0;
+            let masterTl; // Define master timeline scope
+
+            const setupTimeline = () => {
+                try {
+                    pathLength = drawingLine.getTotalLength();
+                    if (pathLength <= 0) throw new Error("SVG path length is zero.");
+
+                    // Set initial drawing state AFTER path length is known
+                    gsap.set(drawingLine, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
+
+                    // --- Master Timeline ---
+                    masterTl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: triggerSection,
+                            start: "top center", // Start sequence when section top hits viewport center
+                            end: "bottom center", // Allow scroll duration for the sequence
+                            toggleActions: "play none none reverse", // Play sequence on enter, reverse on scroll up past start
+                            // markers: true // Uncomment for debugging
+                        }
+                    });
+
+                    // --- Animation Steps ---
+                    masterTl
+                        // 1. Fade in sticky container
+                        .to(stickyContainer, {
+                            autoAlpha: 1,
+                            duration: 0.4,
+                            ease: 'power1.in'
+                        })
+                        // 2. Draw the SVG line
+                        .to(drawingLine, {
+                            strokeDashoffset: 0,
+                            duration: 3.5, // Duration for drawing
+                            ease: 'linear' // Linear drawing often looks good
+                        })
+                        // 3. Fade out sticky container (starts slightly after drawing finishes)
+                        .to(stickyContainer, {
+                            autoAlpha: 0,
+                            duration: 0.4,
+                            ease: 'power1.out'
+                        }, "+=0.2") // Position parameter: starts 0.2s after previous tween ends
+                        // 4. Fade in background image (starts AFTER sticky container fades out)
+                        .to(bgImage, {
+                            opacity: 0.7, // Adjust final opacity as needed
+                            duration: 1.5,
+                            ease: 'power1.inOut'
+                        }, ">") // Position parameter: starts right after previous tween completes
+                        // 5. Fade in text content container (overlaps with bg image fade)
+                        .to(textContent, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 1.0,
+                            ease: 'power2.out'
+                        }, "-=1.2") // Start 1.2s before the background fade ends
+                        // 6. Fade in title (staggered slightly after text container starts)
+                        .to(title, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.7,
+                            ease: 'power2.out'
+                        }, "<+=0.2") // Start 0.2s after the previous tween starts
+                        // 7. Fade in service items (staggered after title starts)
+                        .to(items, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: 'power2.out',
+                            stagger: 0.25
+                        }, "<+=0.2"); // Start 0.2s after the previous tween starts
+
+                } catch (error) {
+                    console.error("Error setting up services animation timeline:", error);
+                    // Hide related elements if setup fails
+                    if (stickyContainer) stickyContainer.style.display = 'none';
+                    if (bgImage) bgImage.style.opacity = '0'; // Ensure bg is hidden
+                    if (textContent) textContent.style.visibility = 'hidden';
+                }
+            };
+
+            // Use setTimeout to calculate path length after potential layout shifts
+            setTimeout(setupTimeline, 150); // Delay might need adjustment
+        }
+
+
         // --- Main Initialization Function ---
         function initAll() {
             console.log("Initializing LAYA animations...");
@@ -1023,8 +919,9 @@
             initFooter();
             initHero();
             initAbout();
-            initStickySVG();   // <<< Initialize NEW sticky SVG animation
-            initNewServices(); // <<< Initialize MODIFIED text-only service animation
+            initServicesSequence(); // <<< CALL NEW COMBINED SEQUENCE
+            // initStickySVG();    // <<< REMOVE OLD CALL
+            // initNewServices();  // <<< REMOVE OLD CALL
             initPortfolio();
             initContact();
 
