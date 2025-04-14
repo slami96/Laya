@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>laya home | Architektura & Design</title>
+    <title>LAYA Architecture Studio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
       *, *::before, *::after {
         margin: 0;
@@ -15,18 +15,13 @@
         box-sizing: border-box;
       }
 
-      html {
-        scroll-behavior: smooth;
-      }
-
       body, html {
         margin: 0;
         padding: 0;
-        /* --- BODY FONT --- */
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Poppins', sans-serif; /* Default body font */
         color: #333;
-        overflow-x: hidden;
-        background-color: #000;
+        overflow-x: hidden; /* Prevent horizontal scroll */
+        background-color: #000; /* Default background */
       }
 
       body {
@@ -35,386 +30,844 @@
 
       /* --- BASE STYLES --- */
       :root {
-          --header-height: 75px;
-          --accent-color-1: #B89A7B;
-          --accent-color-2: #6c757d;
-          --accent-color-3: #EAEAEA;
-          --accent-color-4: #343a40;
-          --text-light: #f8f9fa;
-          --text-dark: #212529;
-          --bg-dark-1: #1a1a1a;
-          --bg-dark-2: #252525;
-          --bg-light-1: #f8f9fa;
-          --bg-light-2: #ffffff;
+          --header-height: 75px; /* Slightly taller for architect feel */
+          --accent-color-1: #C0A080; /* Muted Gold/Bronze */
+          --accent-color-2: #5A5A5A; /* Dark Grey */
+          --accent-color-3: #EAEAEA; /* Light Grey */
+          --accent-color-4: #333333; /* Near Black */
+          --text-light: #f1f1f1;
+          --text-dark: #2d2d2d; /* Slightly softer black */
+          --bg-dark-1: #1a1a1a; /* Dark background */
+          --bg-dark-2: #252525; /* Slightly lighter dark */
+          --bg-light-1: #fdfdfd; /* Very light grey */
+          --bg-light-2: #ffffff; /* White */
           --header-icon-color-dark: var(--text-light);
           --header-icon-color-light: var(--text-dark);
           --header-hover-color: var(--accent-color-1);
-          --header-bg-dark: rgba(26, 26, 26, 0.85);
-          --header-bg-light: rgba(248, 249, 250, 0.9);
-
-          /* --- LOGO FONT PLACEHOLDER --- */
-          /* IMPORTANT: Replace 'Georgia' with 'Halimum' below */
-          /* AND add your @font-face rule for Halimum above */
-          --logo-font: Georgia, serif; /* Using Georgia as a distinct placeholder */
+          --header-bg-dark: rgba(26, 26, 26, 0.8); /* Darker semi-transparent bg */
+          --header-bg-light: rgba(253, 253, 253, 0.85); /* Lighter semi-transparent bg */
+          --logo-font: 'Montserrat', sans-serif; /* Architect font */
       }
 
-      /* --- HEADER STYLES --- */
+      /* --- HEADER STYLES (MODIFIED) --- */
       .site-header {
-          position: fixed; top: 0; left: 0; right: 0; width: 100%;
-          height: var(--header-height); padding: 0 40px; z-index: 100;
-          display: flex; align-items: center;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: var(--header-height);
+          padding: 0 40px; /* More padding */
+          z-index: 100;
+          display: flex;
+          align-items: center;
           background-color: var(--header-bg-dark);
-          backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           transition: background-color 0.4s ease-out, backdrop-filter 0.4s ease-out;
       }
-      body.on-light-section .site-header { background-color: var(--header-bg-light); }
 
-      .header-logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+      body.on-light-section .site-header {
+          background-color: var(--header-bg-light);
+      }
+
+      .header-logo {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+      }
+
       .logo-link {
-          text-decoration: none; font-family: var(--logo-font);
-          font-size: 1.8rem; font-weight: normal; /* Georgia looks better normal weight */
-          letter-spacing: 0.5px; /* Less spacing for serif */
+          text-decoration: none;
+          font-family: var(--logo-font);
+          font-size: 2.0rem; /* Slightly larger logo */
+          font-weight: 700;
+          letter-spacing: 2px; /* More spacing */
           color: var(--header-icon-color-dark);
-          transition: color 0.3s ease; text-transform: lowercase; white-space: nowrap;
+          transition: color 0.3s ease, transform 0.3s ease;
       }
-      .logo-link:hover { color: var(--header-hover-color); }
-      body.on-light-section .logo-link { color: var(--header-icon-color-light); }
 
-      .header-nav { margin-left: auto; }
-      .header-nav ul { list-style: none; display: flex; gap: 35px; padding: 0; margin: 0; align-items: center; }
-      .header-nav li { position: relative; }
-      .header-nav a {
-          text-decoration: none; color: var(--header-icon-color-dark); font-size: 1.1rem;
-          transition: transform 0.3s ease, color 0.3s ease;
-          display: flex; flex-direction: column; align-items: center; position: relative;
+      .logo-link:hover {
+          color: var(--header-hover-color);
+          /* Keep centered transform on hover */
+          transform: scale(1.05) translate(-50%, -50%);
+          transform-origin: center center; /* Explicitly set origin */
       }
-      body.on-light-section .header-nav a { color: var(--header-icon-color-light); }
-      .header-nav a:hover { transform: scale(1.15); color: var(--header-hover-color); }
+
+
+      body.on-light-section .logo-link {
+          color: var(--header-icon-color-light);
+      }
+
+      .header-nav {
+          margin-left: auto; /* Pushes nav to the right */
+      }
+
+      .header-nav ul {
+          list-style: none;
+          display: flex;
+          gap: 35px; /* Increased spacing */
+          padding: 0;
+          margin: 0;
+          align-items: center;
+      }
+
+      .header-nav li {
+          position: relative;
+      }
+
+      .header-nav a {
+          text-decoration: none;
+          color: var(--header-icon-color-dark);
+          font-size: 1.1rem; /* Adjusted icon size */
+          transition: transform 0.3s ease, color 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+      }
+
+      body.on-light-section .header-nav a {
+         color: var(--header-icon-color-light);
+      }
+
+      .header-nav a:hover {
+          transform: scale(1.15);
+          color: var(--header-hover-color);
+      }
+
+      /* Label Styles */
       .nav-label {
-          position: absolute; top: 100%; margin-top: 6px; background-color: transparent;
-          color: inherit; font-family: 'Poppins', sans-serif; font-weight: 400; font-size: 0.75rem;
-          padding: 2px 4px; border-radius: 4px; white-space: nowrap; opacity: 0; visibility: hidden;
+          position: absolute;
+          top: 100%;
+          margin-top: 6px;
+          background-color: transparent;
+          color: inherit; /* Inherit color from parent link (<a>) */
+          font-family: var(--logo-font); /* Use architect font */
+          font-weight: 500;
+          font-size: 0.75rem; /* Smaller label */
+          padding: 2px 4px;
+          border-radius: 4px;
+          white-space: nowrap;
+          opacity: 0;
+          visibility: hidden;
           transform: translateY(5px) scale(0.9);
           transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
-          pointer-events: none; text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+          pointer-events: none;
+          text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
       }
-      .header-nav a:hover .nav-label { opacity: 1; visibility: visible; transform: translateY(0) scale(1); transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0s; }
+
+      .header-nav a:hover .nav-label {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0) scale(1);
+          transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0s;
+      }
+
 
       /* --- FOOTER STYLES --- */
-      section#section-4 { /* Footer parent */
-          position: relative; background-color: var(--bg-light-1); color: var(--text-dark);
-          min-height: 100vh; height: auto; padding-top: calc(var(--header-height) + 10vh);
-          padding-bottom: 20vh; display: flex; justify-content: center; align-items: center;
-          margin-top: calc(-1 * var(--header-height)); overflow: hidden;
+      /* Parent section needs position relative */
+      section#section-4 { /* Footer will be placed within the *last* content section (now section 4 - Contact) */
+          position: relative;
+          background-color: var(--bg-light-1);
+          color: var(--text-dark);
+          min-height: 100vh; /* Ensure it takes full height */
+          height: auto; /* Allow content to define height */
+          padding-top: calc(var(--header-height) + 10vh);
+          padding-bottom: 20vh; /* Space for footer */
+          display: flex; /* Use flex for centering */
+          justify-content: center; /* Center horizontally */
+          align-items: center; /* Center vertically */
+          margin-top: calc(-1 * var(--header-height));
+          overflow: hidden; /* Hide overflow */
       }
+
       .site-footer {
-          position: absolute; bottom: 30px; left: 0; width: 100%; padding: 0 30px;
-          display: flex; flex-direction: column; align-items: center; gap: 15px;
-          z-index: 5; opacity: 0; transform: translateY(30px);
+          position: absolute;
+          bottom: 30px;
+          left: 0;
+          width: 100%;
+          padding: 0 30px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 15px;
+          z-index: 5;
+          opacity: 0;
+          transform: translateY(30px);
       }
-      .site-footer .copyright { font-size: 0.85rem; color: #888; text-align: center; font-family: 'Poppins', sans-serif; }
-      .site-footer .social-icons { display: flex; justify-content: center; gap: 20px; }
-      .site-footer .social-icons a { text-decoration: none; color: #aaa; font-size: 1.2rem; transition: transform 0.3s ease, color 0.3s ease; display: inline-block; }
-      .site-footer .social-icons a:hover { transform: scale(1.15); color: var(--accent-color-2); }
+
+      .site-footer .copyright {
+          font-size: 0.85rem;
+          color: #888;
+          text-align: center;
+          font-family: 'Poppins', sans-serif;
+      }
+
+      .site-footer .social-icons {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+      }
+
+      .site-footer .social-icons a {
+          text-decoration: none;
+          color: #aaa;
+          font-size: 1.2rem;
+          transition: transform 0.3s ease, color 0.3s ease;
+          display: inline-block;
+      }
+
+      .site-footer .social-icons a:hover {
+          transform: scale(1.15);
+          color: var(--accent-color-2); /* Dark grey hover for footer */
+      }
+
 
       /* --- SECTION STYLES --- */
       section {
-        min-height: 100vh; height: auto; width: 100%; display: flex;
-        justify-content: center; align-items: center; position: relative;
-        overflow: hidden; padding: 50px; padding-top: var(--header-height);
-        margin-top: calc(-1 * var(--header-height));
+        min-height: 100vh; /* Ensure sections take at least viewport height */
+        height: auto; /* Allow sections to grow if content requires */
+        width: 100%;
+        display: flex; /* Use flex for default centering */
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden; /* Crucial for many GSAP effects */
+        padding: 50px; /* Add some default padding */
+        padding-top: var(--header-height); /* Default top padding */
+        margin-top: calc(-1 * var(--header-height)); /* Pull up */
       }
 
-      /* --- SECTION 0: Hero Auto-Fade Effect --- */
-      .hero-section { background-color: var(--bg-dark-1); color: var(--text-light); padding: 0; display: block; }
-      .hero-image-container { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden; }
-      .hero-image-layer {
-          position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-          background-size: cover; background-position: center center;
-          opacity: 0; /* Start hidden, JS controls visibility */
-          will-change: opacity; /* Hint for performance */
+      /* --- SECTION 0: Hero Image Stack --- */
+      .hero-section {
+        background-color: var(--bg-dark-1);
+        color: var(--text-light);
+        display: block; /* Override flex for specific layout */
+        padding: 0; /* Remove default padding */
+        /* Ensure it's pulled up correctly */
+        margin-top: 0;
+        padding-top: 0;
+        min-height: 100vh;
+        height: 100vh; /* Force full height */
       }
-      #hero-layer-1 { background-image: url('interior_1.png'); }
-      #hero-layer-2 { background-image: url('interior_2.png'); }
-      #hero-layer-3 { background-image: url('interior_3.png'); }
 
       .hero-content {
-        position: relative; z-index: 2; display: flex; flex-direction: column;
-        justify-content: center; align-items: center; height: 100vh;
-        text-align: center; color: var(--text-light); padding: 40px;
-        opacity: 0; /* Start hidden */
-        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.4)); /* Darker overlay */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        text-align: center;
+        color: var(--text-light);
+        opacity: 0; /* Start hidden for GSAP */
       }
+
       .hero-title {
-        font-family: var(--logo-font); font-size: clamp(2.2rem, 5vw, 3.8rem); /* Adjusted size */
-        font-weight: normal; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
-        text-transform: lowercase; line-height: 1.1;
+        font-family: var(--logo-font);
+        font-size: clamp(2.5rem, 6vw, 5rem); /* Responsive font size */
+        font-weight: 800;
+        margin-bottom: 15px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
       }
+
       .hero-tagline {
-        font-size: clamp(1rem, 2vw, 1.4rem); font-weight: 300; max-width: 650px;
-        margin: 0 auto; line-height: 1.7; text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        font-weight: 300;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
       }
 
-      /* --- SECTION 1: Philosophy --- */
-      .philosophy-section { background-color: var(--bg-light-2); color: var(--text-dark); padding: 80px 40px; }
-      .philosophy-content-wrapper { display: flex; flex-direction: column; align-items: center; gap: 50px; max-width: 1100px; width: 100%; opacity: 0; }
-      @media (min-width: 768px) { .philosophy-content-wrapper { flex-direction: row; } }
-      .philosophy-text-content { flex: 1 1 60%; max-width: 650px; opacity: 0; transform: translateX(-30px); }
-      .philosophy-title { font-family: var(--logo-font); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: bold; margin-bottom: 30px; color: var(--accent-color-4); text-align: left; }
-      .philosophy-text p {
-          /* --- ADJUSTED TEXT SIZE --- */
-          font-size: clamp(0.85rem, 1.4vw, 1rem); /* Reduced max size */
-          line-height: 1.8; /* Adjusted line height */
-          margin-bottom: 18px; /* Slightly less margin */
-          font-weight: 400; color: #495057;
+      .hero-image-stack {
+          position: absolute; /* Changed from relative */
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh; /* Full viewport height */
+          overflow: hidden; /* Keep images contained */
       }
-      .philosophy-image-container { flex: 1 1 35%; max-width: 350px; text-align: center; opacity: 0; transform: translateX(30px); }
-      .philosophy-portrait { display: block; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); object-fit: cover; }
 
-      /* --- SECTION 2: Services --- */
-        .services-section { background-color: var(--bg-dark-2); color: var(--text-light); padding: 80px 40px; }
-        .services-container { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 1200px; }
-        .services-title { font-family: var(--logo-font); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: bold; margin-bottom: 60px; text-align: center; color: var(--accent-color-1); opacity: 0; transform: translateY(-30px); }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; width: 100%; }
-        .service-card {
-            background-color: var(--bg-dark-1); border-radius: 10px; padding: 35px 30px;
-            text-align: center; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            opacity: 0; transform: translateY(30px); /* Start slightly down for vertical reveal */
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-        .service-card:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); }
-        .service-icon { font-size: 2.5rem; color: var(--accent-color-1); margin-bottom: 20px; display: inline-block; }
-        .service-card-title { font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 15px; color: var(--text-light); }
-        .service-card-description { font-size: 0.95rem; line-height: 1.7; color: var(--accent-color-3); font-weight: 300; }
+      .hero-image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover; /* Cover the area, may crop */
+          object-position: center;
+          opacity: 0; /* Start hidden */
+          scale: 1.1; /* Start slightly zoomed for effect */
+          pointer-events: none; /* Prevent interaction when hidden */
+      }
+      .hero-image.hero-image-active {
+          opacity: 1;
+          scale: 1;
+          pointer-events: auto; /* Allow interaction for active image */
+      }
 
-      /* --- SECTION 3: Portfolio Preview --- */
-      .portfolio-section { background-color: var(--bg-light-1); color: var(--text-dark); padding: 80px 40px; }
-      .portfolio-preview-container { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 1200px; opacity: 0; transform: translateY(50px); }
-      .portfolio-title { font-family: var(--logo-font); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: bold; margin-bottom: 50px; text-align: center; color: var(--accent-color-4); }
-      .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; width: 100%; margin-bottom: 50px; }
+      /* --- SECTION 1: About Me --- */
+      .about-section {
+        background-color: var(--bg-dark-2); /* Slightly lighter dark */
+        color: var(--text-light);
+      }
+
+      .about-content-wrapper {
+        max-width: 900px;
+        text-align: center;
+        padding: 40px;
+        opacity: 0; /* Start hidden */
+        transform: translateY(50px); /* Start slightly down */
+        display: flex; /* Enable flex for layout */
+        flex-direction: column; /* Stack content vertically */
+        align-items: center; /* Center items */
+      }
+
+      .about-title {
+          font-family: var(--logo-font);
+          font-size: clamp(2rem, 5vw, 3.5rem);
+          font-weight: 700;
+          margin-bottom: 30px;
+          color: var(--accent-color-1); /* Use accent color */
+      }
+
+      .about-text p {
+          font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+          line-height: 1.8;
+          margin-bottom: 20px;
+          font-weight: 300;
+          max-width: 700px; /* Limit text width */
+          margin-left: auto;
+          margin-right: auto;
+      }
+
+      .about-text strong {
+          font-weight: 600;
+          color: var(--accent-color-3); /* Light grey for emphasis */
+      }
+
+      .about-portrait {
+          display: block; /* Make it a block element */
+          max-width: 200px; /* Max width */
+          height: auto; /* Maintain aspect ratio */
+          border-radius: 50%; /* Make it circular */
+          border: 3px solid var(--accent-color-1); /* Accent border */
+          margin-top: 30px; /* Space above the image */
+          margin-bottom: 15px; /* Space below the image */
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+          opacity: 0; /* Start hidden for animation */
+          transform: scale(0.8); /* Start smaller */
+      }
+
+
+      /* --- NEW SECTION: Services --- */
+      .services-section {
+          background-color: var(--bg-light-1); /* Light background */
+          color: var(--text-dark);
+      }
+
+      .services-container {
+          max-width: 1100px;
+          width: 100%;
+          text-align: center;
+          padding: 60px 40px;
+          opacity: 0; /* Start hidden */
+          transform: translateY(50px); /* Start slightly down */
+      }
+
+      .services-title {
+          font-family: var(--logo-font);
+          font-size: clamp(2rem, 5vw, 3.5rem);
+          font-weight: 700;
+          margin-bottom: 60px;
+          color: var(--accent-color-4); /* Near black title */
+      }
+
+      .services-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 40px;
+          width: 100%;
+      }
+
+      .service-item {
+          background-color: var(--bg-light-2);
+          padding: 35px;
+          border-radius: 8px;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+          text-align: center;
+          opacity: 0; /* Start hidden for stagger */
+          transform: translateY(30px) scale(0.95); /* Start slightly down and smaller */
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .service-item:hover {
+          transform: translateY(25px) scale(1.02); /* Slight lift on hover */
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-icon {
+          font-size: 2.8rem;
+          color: var(--accent-color-1); /* Muted Gold */
+          margin-bottom: 25px;
+          display: inline-block; /* Needed for margin */
+      }
+
+      .service-item h3 {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 1.4rem;
+          font-weight: 700;
+          margin-bottom: 15px;
+          color: var(--accent-color-4);
+      }
+
+      .service-item p {
+          font-size: 0.95rem;
+          line-height: 1.7;
+          color: var(--accent-color-2); /* Dark Grey text */
+      }
+
+      /* --- SECTION 2 (Now 3): Portfolio Preview --- */
+      .portfolio-section {
+        background-color: var(--bg-dark-2); /* Dark background again */
+        color: var(--text-light); /* Light text */
+      }
+
+      .portfolio-preview-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        padding: 40px 0;
+        opacity: 0; /* Start hidden */
+        transform: translateY(50px); /* Start slightly down */
+      }
+
+      .portfolio-title {
+          font-family: var(--logo-font);
+          font-size: clamp(2rem, 5vw, 3.5rem);
+          font-weight: 700;
+          margin-bottom: 50px;
+          text-align: center;
+          color: var(--accent-color-1); /* Accent color title */
+      }
+
+      .portfolio-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 30px;
+          width: 100%;
+          margin-bottom: 50px;
+      }
+
       .portfolio-item-placeholder {
-          aspect-ratio: 4 / 3; background: linear-gradient(135deg, #e0e0e0, #cccccc); border-radius: 8px;
-          display: flex; justify-content: center; align-items: center; color: var(--accent-color-4);
-          font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); opacity: 0; transform: scale(0.9);
-          transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center; padding: 10px;
+          aspect-ratio: 4 / 3; /* Common aspect ratio */
+          background: linear-gradient(135deg, var(--accent-color-2), var(--accent-color-4)); /* Darker gradient */
+          border-radius: 8px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: var(--text-light); /* Light text */
+          font-family: var(--logo-font);
+          font-size: 1rem;
+          font-weight: 600;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on dark */
+          opacity: 0; /* Start hidden for stagger */
+          transform: scale(0.9); /* Start small for stagger */
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
-      .portfolio-item-placeholder:hover { transform: scale(1.03); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); }
-      .portfolio-cta {
-          display: inline-block; background-color: var(--accent-color-4); color: var(--text-light);
-          padding: 15px 40px; border-radius: 50px; font-family: var(--logo-font); font-weight: bold;
-          text-decoration: none; font-size: 1rem; transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-          opacity: 0; transform: translateY(20px); border: 2px solid transparent;
+      .portfolio-item-placeholder:hover {
+          transform: scale(1.03);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
       }
-      .portfolio-cta:hover { background-color: transparent; color: var(--accent-color-4); border: 2px solid var(--accent-color-4); transform: translateY(15px) scale(1.05); }
 
-      /* --- SECTION 4: Contact Form --- */
-      .contact-form-container {
-         background-color: var(--bg-light-2); padding: 50px clamp(20px, 8vw, 80px); border-radius: 10px;
-         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); width: 100%; max-width: 700px;
-         opacity: 0; transform: translateY(50px); z-index: 1;
-      }
-      .contact-title { font-family: var(--logo-font); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: bold; margin-bottom: 40px; text-align: center; color: var(--accent-color-4); }
-      .contact-form .form-group { margin-bottom: 25px; position: relative; }
-      .contact-form label { display: block; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.9rem; color: var(--accent-color-2); margin-bottom: 8px; opacity: 0; transform: translateX(-20px); }
-      .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea {
-          width: 100%; padding: 15px 20px; border: 1px solid #ccc; border-radius: 6px; font-family: 'Poppins', sans-serif;
-          font-size: 1rem; color: var(--text-dark); background-color: var(--bg-light-2);
-          transition: border-color 0.3s ease, box-shadow 0.3s ease; opacity: 0; transform: translateX(-20px);
-      }
-      .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent-color-1); box-shadow: 0 0 0 3px rgba(184, 154, 123, 0.3); outline: none; }
-      .contact-form textarea { min-height: 150px; resize: vertical; }
-      .contact-form button {
-          display: block; width: 100%; padding: 15px 30px; background-color: var(--accent-color-4);
-          color: var(--text-light); border: none; border-radius: 50px; font-family: var(--logo-font);
-          font-size: 1.1rem; font-weight: bold; cursor: pointer;
+      .portfolio-cta {
+          display: inline-block;
+          background-color: var(--accent-color-1); /* Accent color button */
+          color: var(--text-dark); /* Dark text on accent */
+          padding: 15px 40px;
+          border-radius: 50px; /* Pill shape */
+          font-family: var(--logo-font);
+          font-weight: 600;
+          text-decoration: none;
+          font-size: 1rem;
           transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
-          margin-top: 10px; opacity: 0; transform: translateY(20px);
+          opacity: 0; /* Start hidden */
+          transform: translateY(20px); /* Start slightly down */
       }
-      .contact-form button:hover { background-color: var(--accent-color-1); color: var(--bg-dark-1); transform: scale(1.03); }
+      .portfolio-cta:hover {
+          background-color: var(--accent-color-3); /* Light grey on hover */
+          color: var(--text-dark);
+          transform: translateY(15px) scale(1.05); /* Adjust transform slightly */
+      }
+
+      /* --- SECTION 3 (Now 4): Contact Form --- */
+      /* Container styles are handled by section#section-4 rule above */
+      .contact-form-container {
+         background-color: var(--bg-light-2); /* White container on light background */
+         padding: 50px clamp(20px, 8vw, 80px); /* Responsive padding */
+         border-radius: 10px;
+         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+         width: 100%;
+         max-width: 700px;
+         opacity: 0; /* Start hidden */
+         transform: translateY(50px); /* Start slightly down */
+         z-index: 1; /* Above footer */
+         color: var(--text-dark); /* Ensure text inside is dark */
+      }
+
+      .contact-title {
+          font-family: var(--logo-font);
+          font-size: clamp(1.8rem, 4vw, 3rem);
+          font-weight: 700;
+          margin-bottom: 40px;
+          text-align: center;
+          color: var(--accent-color-4);
+      }
+
+      .contact-form .form-group {
+          margin-bottom: 25px;
+          position: relative;
+      }
+
+      .contact-form label {
+          display: block;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 600;
+          font-size: 0.9rem;
+          color: var(--accent-color-2);
+          margin-bottom: 8px;
+          opacity: 0; /* GSAP animation */
+          transform: translateX(-20px); /* GSAP animation */
+      }
+
+      .contact-form input[type="text"],
+      .contact-form input[type="email"],
+      .contact-form textarea {
+          width: 100%;
+          padding: 15px 20px;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          font-family: 'Poppins', sans-serif;
+          font-size: 1rem;
+          color: var(--text-dark);
+          background-color: var(--bg-light-2);
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
+          opacity: 0; /* GSAP animation */
+          transform: translateX(-20px); /* GSAP animation */
+      }
+
+      .contact-form input[type="text"]:focus,
+      .contact-form input[type="email"]:focus,
+      .contact-form textarea:focus {
+          border-color: var(--accent-color-1);
+          box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3); /* Muted gold focus ring */
+          outline: none;
+      }
+
+      .contact-form textarea {
+          min-height: 150px;
+          resize: vertical;
+      }
+
+      .contact-form button {
+          display: block;
+          width: 100%;
+          padding: 15px 30px;
+          background-color: var(--accent-color-4);
+          color: var(--text-light);
+          border: none;
+          border-radius: 50px;
+          font-family: var(--logo-font);
+          font-size: 1.1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+          margin-top: 10px;
+          opacity: 0; /* GSAP animation */
+          transform: translateY(20px); /* GSAP animation */
+      }
+
+      .contact-form button:hover {
+          background-color: var(--accent-color-1);
+          color: var(--text-dark);
+          transform: scale(1.03);
+      }
 
       /* --- Navigation Dots --- */
-      .nav-dots { position: fixed; top: 50%; right: 30px; transform: translateY(-50%); display: flex; flex-direction: column; z-index: 101; }
-      .nav-dot { width: 10px; height: 10px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.4); margin: 12px 0; cursor: pointer; transition: background-color 0.3s, transform 0.3s; border: 1px solid rgba(0, 0, 0, 0.2); }
-      body.on-light-section .nav-dot { background-color: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.2); }
-      .nav-dot.active { background-color: white; transform: scale(1.4); border: 1px solid rgba(0, 0, 0, 0.3); }
-      body.on-light-section .nav-dot.active { background-color: var(--text-dark); border: 1px solid rgba(255, 255, 255, 0.3); }
+      .nav-dots {
+        position: fixed;
+        top: 50%;
+        right: 30px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        z-index: 101;
+      }
 
-      /* --- Scroll Indicator --- */
-      .scroll-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); color: rgba(255, 255, 255, 0.8); font-size: 0.8rem; font-family: 'Poppins', sans-serif; display: flex; flex-direction: column; align-items: center; z-index: 5; opacity: 0.8; transition: opacity 0.5s ease; letter-spacing: 1px; pointer-events: none; }
-      .scroll-arrow { margin-top: 12px; width: 18px; height: 18px; border-right: 2px solid rgba(255, 255, 255, 0.8); border-bottom: 2px solid rgba(255, 255, 255, 0.8); transform: rotate(45deg); animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); }
-      @keyframes scrollArrow { 0% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; } 50% { transform: rotate(45deg) translate(8px, 8px); opacity: 1; } 100% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; } }
-      body.scrolled .scroll-indicator { opacity: 0; pointer-events: none; }
+      .nav-dot {
+        width: 10px; /* Smaller dots */
+        height: 10px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.3);
+        margin: 12px 0; /* More spacing */
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+      }
+      body.on-light-section .nav-dot {
+         background-color: rgba(0, 0, 0, 0.2);
+         border: 1px solid rgba(255, 255, 255, 0.2);
+      }
 
-      /* --- RESPONSIVE --- */
-       @media (max-width: 992px) {
-           .site-header { padding: 0 25px; } .logo-link { font-size: 1.6rem; } .header-nav ul { gap: 25px; }
-           section { padding-left: 30px; padding-right: 30px; }
-           .philosophy-section, .services-section, .portfolio-section, section#section-4 { padding-top: 60px; padding-bottom: 60px; } /* Adjust vertical padding */
-           section#section-4 { padding-bottom: 20vh; } /* Keep footer space */
-           .services-grid, .portfolio-grid { gap: 30px; }
-           .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
+      .nav-dot.active {
+        background-color: white;
+        transform: scale(1.4); /* Larger active dot */
+        border: 1px solid rgba(0, 0, 0, 0.3);
+      }
+      body.on-light-section .nav-dot.active {
+         background-color: var(--text-dark); /* Dark active dot on light bg */
+         border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      /* --- Scroll Indicator (First Section) --- */
+      .scroll-indicator {
+        position: absolute;
+        bottom: 40px; /* Higher position */
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.8rem; /* Smaller text */
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 5;
+        opacity: 0.8;
+        transition: opacity 0.5s ease;
+        letter-spacing: 1px;
+      }
+
+      .scroll-arrow {
+        margin-top: 12px;
+        width: 18px;
+        height: 18px;
+        border-right: 2px solid rgba(255, 255, 255, 0.7);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+        transform: rotate(45deg);
+        animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncier animation */
+      }
+
+      @keyframes scrollArrow {
+        0% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; }
+        50% { transform: rotate(45deg) translate(8px, 8px); opacity: 1; } /* Smaller movement */
+        100% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; }
+      }
+
+      body.scrolled .scroll-indicator {
+         opacity: 0;
+         pointer-events: none;
+      }
+
+      /* --- RESPONSIVE STYLES --- */
+      @media (max-width: 992px) {
+          /* Header */
+          .site-header { padding: 0 25px; }
+          .logo-link { font-size: 1.8rem; }
+          .header-nav ul { gap: 25px; }
+
+          /* Sections */
+          section { padding-left: 30px; padding-right: 30px; } /* Adjust side padding */
+          .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+          .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
+          .services-grid { gap: 30px; }
+          .services-container { padding: 50px 30px; }
+      }
+
+       @media (max-width: 768px) {
+           :root { --header-height: 70px; } /* Adjust header height */
+           .site-header { padding: 0 20px; }
+           .logo-link { font-size: 1.6rem; }
+           .header-nav ul { gap: 20px; }
+           .header-nav a { font-size: 1rem; }
+           .nav-label { display: none; } /* Hide labels on smaller screens */
+
+           .nav-dots { right: 20px; }
+           .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
+
+           .portfolio-grid { gap: 20px; }
+           .portfolio-item-placeholder { font-size: 0.9rem; }
+
+           .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
+           .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; }
+           .contact-form input, .contact-form textarea { padding: 12px 15px; font-size: 0.95rem;}
+           .contact-form button { padding: 12px 25px; font-size: 1rem; }
+
+           .site-footer { bottom: 20px; }
+           .site-footer .copyright { font-size: 0.75rem; }
+           .site-footer .social-icons { gap: 15px; }
+           .site-footer .social-icons a { font-size: 1.1rem; }
+
+           .about-content-wrapper { padding: 30px; }
+           .about-portrait { max-width: 160px; }
+
+           .services-grid { grid-template-columns: 1fr; gap: 25px; } /* Stack services */
+           .services-container { padding: 40px 20px; }
+           .services-title { margin-bottom: 40px; }
+           .service-item { padding: 30px; }
+
+           /* Ensure sections still clear the header */
+           section:not(.hero-section) { padding-top: var(--header-height); }
        }
-        @media (max-width: 768px) {
-            :root { --header-height: 70px; }
-            .site-header { padding: 0 20px; } .logo-link { font-size: 1.5rem; } .header-nav ul { gap: 20px; } .header-nav a { font-size: 1rem; } .nav-label { display: none; }
-            .nav-dots { right: 20px; } .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
-            .philosophy-content-wrapper { flex-direction: column; gap: 30px; } .philosophy-text-content, .philosophy-image-container { max-width: 100%; flex-basis: auto; transform: translateX(0) !important; /* Reset transform for stacked layout */ } .philosophy-title { text-align: center; }
-            .services-grid { gap: 25px; grid-template-columns: 1fr; } .service-card { transform: translateY(30px) translateX(0) !important; /* Reset transform */ }
-            .portfolio-grid { gap: 20px; }
-            .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); } .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; } .contact-form input, .contact-form textarea { padding: 12px 15px; font-size: 0.95rem;} .contact-form button { padding: 12px 25px; font-size: 1rem; }
-            .site-footer { bottom: 20px; } .site-footer .copyright { font-size: 0.75rem; } .site-footer .social-icons { gap: 15px; } .site-footer .social-icons a { font-size: 1.1rem; }
-            section { padding-left: 20px; padding-right: 20px; padding-top: var(--header-height); }
-            section#section-4 { padding-bottom: 18vh; }
-        }
-        @media (max-width: 480px) {
-            :root { --header-height: 65px; }
-            .site-header { padding: 0 15px; } .logo-link { font-size: 1.4rem; } .header-nav ul { gap: 15px; } .header-nav a { font-size: 0.9rem; }
-            .nav-dots { right: 15px; }
-            .hero-title { font-size: clamp(2rem, 8vw, 2.8rem); } .hero-tagline { font-size: clamp(0.9rem, 4vw, 1.1rem); }
-            .philosophy-title { font-size: clamp(1.8rem, 6vw, 2.5rem); } .philosophy-text p { font-size: clamp(0.85rem, 3.5vw, 0.95rem); line-height: 1.7; }
-            .services-title { font-size: clamp(1.8rem, 6vw, 2.5rem); } .service-card { padding: 25px 20px; } .service-card-title { font-size: 1.1rem; } .service-card-description { font-size: 0.9rem; }
-            .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.5rem); } .portfolio-grid { grid-template-columns: 1fr; gap: 15px; }
-            .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
-            .scroll-indicator { bottom: 25px; font-size: 0.75rem;} .scroll-arrow { width: 16px; height: 16px; margin-top: 10px;}
-            section { padding-left: 15px; padding-right: 15px; padding-top: var(--header-height); }
-            section#section-4 { padding-bottom: 15vh; }
-        }
 
+       @media (max-width: 480px) {
+           :root { --header-height: 65px; }
+           .site-header { padding: 0 15px; }
+           .logo-link { font-size: 1.4rem; }
+           .header-nav ul { gap: 15px; } /* Reduce gap further */
+           .header-nav a { font-size: 0.9rem; }
+
+           .nav-dots { right: 15px; }
+
+           .hero-title { font-size: clamp(2rem, 8vw, 3rem); }
+           .hero-tagline { font-size: clamp(0.9rem, 4vw, 1.1rem); }
+
+           .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+           .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
+           .about-portrait { max-width: 130px; }
+
+           .services-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+
+           .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+           .portfolio-grid { grid-template-columns: 1fr; gap: 15px; } /* Stack items */
+
+           .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+
+           .scroll-indicator { bottom: 25px; font-size: 0.75rem;}
+           .scroll-arrow { width: 16px; height: 16px; margin-top: 10px;}
+
+           section:not(.hero-section) { padding-left: 15px; padding-right: 15px; padding-top: var(--header-height); }
+           .services-container { padding: 30px 15px; }
+           .contact-form-container { padding: 25px 15px; }
+       }
     </style>
 </head>
 <body data-current-theme="dark">
 
     <header class="site-header" id="site-header">
         <div class="header-logo">
-            <a href="#section-0" class="logo-link" aria-label="laya home">laya home</a>
+            <a href="#section-0" class="logo-link" aria-label="LAYA Home">LAYA</a>
         </div>
+
         <nav class="header-nav">
             <ul>
-                <li><a href="#section-0" aria-label="Domů"><i class="fas fa-home"></i><span class="nav-label">Domů</span></a></li>
-                <li><a href="#section-1" aria-label="O nás"><i class="fas fa-info-circle"></i><span class="nav-label">O nás</span></a></li>
-                <li><a href="#section-2" aria-label="Služby"><i class="fas fa-concierge-bell"></i><span class="nav-label">Služby</span></a></li>
+                <li><a href="#section-0" aria-label="Home"><i class="fas fa-home"></i><span class="nav-label">Home</span></a></li>
+                <li><a href="#section-1" aria-label="About"><i class="fas fa-info-circle"></i><span class="nav-label">About</span></a></li>
+                <li><a href="#section-services" aria-label="Services"><i class="fas fa-concierge-bell"></i><span class="nav-label">Services</span></a></li> {/* New Services Link */}
                 <li><a href="#section-3" aria-label="Portfolio"><i class="fas fa-drafting-compass"></i><span class="nav-label">Portfolio</span></a></li>
-                <li><a href="#section-4" aria-label="Kontakt"><i class="fas fa-envelope"></i><span class="nav-label">Kontakt</span></a></li>
+                <li><a href="#section-4" aria-label="Contact"><i class="fas fa-envelope"></i><span class="nav-label">Contact</span></a></li>
             </ul>
         </nav>
     </header>
 
     <div class="nav-dots">
-      <div class="nav-dot active" data-section="0"></div>
-      <div class="nav-dot" data-section="1"></div>
-      <div class="nav-dot" data-section="2"></div>
-      <div class="nav-dot" data-section="3"></div>
-      <div class="nav-dot" data-section="4"></div>
+        <div class="nav-dot active" data-section="0"></div>
+        <div class="nav-dot" data-section="1"></div>
+        <div class="nav-dot" data-section="services"></div> {/* New Services Dot */}
+        <div class="nav-dot" data-section="3"></div>
+        <div class="nav-dot" data-section="4"></div>
     </div>
 
     <section class="hero-section" id="section-0" data-theme="dark">
-        <div class="hero-image-container"> <div class="hero-image-layer" id="hero-layer-1"></div>
-            <div class="hero-image-layer" id="hero-layer-2"></div>
-            <div class="hero-image-layer" id="hero-layer-3"></div>
+        <div class="hero-image-stack">
+            <img src="interior_1.png" alt="Modern Interior Design 1" class="hero-image hero-image-active" id="hero-img-1"> {/* Added active class */}
+            <img src="interior_2.png" alt="Classic Interior Design 2" class="hero-image" id="hero-img-2">
+            <img src="interior_3.png" alt="Innovative Interior Design 3" class="hero-image" id="hero-img-3">
         </div>
          <div class="hero-content">
-             <h1 class="hero-title">laya home</h1>
-             <p class="hero-tagline">Tvoříme domovy s příběhem, kde se snoubí design, funkčnost a vaše osobnost.</p>
+             <h1 class="hero-title">LAYA Architecture</h1>
+             <p class="hero-tagline">Designing spaces that inspire. Blending innovation with timeless tradition.</p>
          </div>
         <div class="scroll-indicator">
-            <span>Objevujte s námi</span>
+            <span>Explore LAYA</span>
             <div class="scroll-arrow"></div>
         </div>
     </section>
 
-    <section class="philosophy-section" id="section-1" data-theme="light">
-        <div class="philosophy-content-wrapper">
-            <div class="philosophy-text-content">
-                <h2 class="philosophy-title">Naše filozofie</h2>
-                <div class="philosophy-text">
-                    <p>Každý domov vypráví svůj jedinečný příběh. Pod značkou laya home pomáhám vytvářet domovy, které nejsou jen esteticky působivé a funkční, ale především odrážejí osobnost a životní styl svých majitelů.</p>
-                    <p>Ať už jde o rekonstrukci starého venkovského stavení, návrh rodinného domu nebo proměnu interiéru, vždy hledám harmonii mezi tradicí, estetikou a současnými potřebami.</p>
-                    <p>Mým cílem je, aby prostor sloužil vám – ne vy jemu. Domov by měl být přirozeným pokračováním vašeho života, respektovat vaše zvyky, potřeby i sny. Ke každému projektu proto přistupuji individuálně, s maximální pečlivostí a respektem k místu i jeho historii.</p>
-                    <p>Spolupráce s architektem Vám přinese nové úhly pohledu a promyšlená řešení, která vám budou dělat radost po mnoho let. Každý projekt je pro mne jedinečný, a proto kladu důraz na osobní přístup, vzájemnou důvěru a pochopení Vašich potřeb.</p>
-                    <p>Pokud hledáte nadčasovou architekturu, která bude skutečným odrazem vaší individuality, ráda vám pomohu proměnit vaše představy a sny ve skutečnost, vytvoříme společně skutečný domov, ve kterém se budete cítit dobře každý den.</p>
-                 </div>
-            </div>
-            <div class="philosophy-image-container">
-                <img src="portrait.jpg" alt="Portrét architekta Laya" class="philosophy-portrait">
+    <section class="about-section" id="section-1" data-theme="dark">
+        <div class="about-content-wrapper">
+            <h2 class="about-title">Our Philosophy</h2>
+            <img src="portrait.jpg" alt="Architect Portrait LAYA Studio" class="about-portrait"> {/* Added Portrait Image */}
+            <div class="about-text">
+                <p>At LAYA, we believe architecture is more than just buildings; it's about crafting experiences and shaping environments. Our approach is rooted in a deep respect for <strong>tradition and context</strong>, while constantly pushing the boundaries of <strong>design innovation</strong>.</p>
+                <p>We work closely with our clients, understanding their vision and needs to create spaces that are not only aesthetically stunning but also functional, sustainable, and enduring. From initial concept to final construction, <strong>collaboration and meticulous attention to detail</strong> are at the heart of everything we do.</p>
+                 <p>Let us help you bring your vision to life.</p>
             </div>
         </div>
     </section>
 
-    <section class="services-section" id="section-2" data-theme="dark">
+    {/* */}
+    <section class="services-section" id="section-services" data-theme="light">
         <div class="services-container">
-            <h2 class="services-title">Naše služby</h2>
+            <h2 class="services-title">What We Offer</h2>
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-pencil-ruler"></i></div>
-                    <h3 class="service-card-title">Architektonická studie</h3>
-                    <p class="service-card-description">První krok k vašemu snu. Zpracujeme úvodní návrh, který definuje koncept, dispozici a vizuální styl vašeho budoucího domova či projektu, s ohledem na vaše potřeby a možnosti pozemku.</p>
+                <div class="service-item">
+                    <i class="fas fa-pencil-ruler service-icon"></i>
+                    <h3>Architectural Design</h3>
+                    <p>Creating bespoke blueprints for residential, commercial, and public spaces that balance form and function.</p>
                 </div>
-                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-drafting-compass"></i></div>
-                    <h3 class="service-card-title">Projektová dokumentace</h3>
-                    <p class="service-card-description">Detailní technické plány a dokumenty nezbytné pro získání stavebního povolení a pro samotnou realizaci stavby. Zajišťujeme preciznost a soulad s normami.</p>
+                <div class="service-item">
+                    <i class="fas fa-couch service-icon"></i>
+                    <h3>Interior Spaces</h3>
+                    <p>Designing thoughtful and elegant interiors that reflect your style and enhance daily living or working.</p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-couch"></i></div>
-                    <h3 class="service-card-title">Návrh interiéru</h3>
-                    <p class="service-card-description">Vytváříme interiéry, které mají duši. Navrhneme funkční a harmonické uspořádání prostoru, vybereme materiály, barvy, osvětlení a nábytek tak, aby vše ladilo s vaším životním stylem.</p>
-                </div>
-                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-hard-hat"></i></div>
-                    <h3 class="service-card-title">Autorský dozor</h3>
-                    <p class="service-card-description">Pohlídáme, aby realizace vaší stavby probíhala přesně podle projektu. Pravidelně navštěvujeme stavbu, kontrolujeme kvalitu prací a řešíme případné detaily přímo na místě.</p>
-                </div>
-                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-comments"></i></div>
-                    <h3 class="service-card-title">Konzultace</h3>
-                    <p class="service-card-description">Potřebujete poradit s výběrem pozemku, dispozičním řešením nebo jen získat odborný názor? Nabízíme jednorázové i pravidelné konzultace k vašim architektonickým a designovým otázkám.</p>
-                </div>
-                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-paint-roller"></i></div>
-                    <h3 class="service-card-title">Rekonstrukce</h3>
-                    <p class="service-card-description">Specializujeme se na citlivé rekonstrukce starších domů a bytů. Propojujeme historické prvky s moderním designem a funkčností, abychom zachovali charakter místa a zároveň splnili vaše současné nároky.</p>
+                <div class="service-item">
+                    <i class="fas fa-lightbulb service-icon"></i>
+                    <h3>Project Visioning</h3>
+                    <p>Collaborating from the earliest stages to define project goals, feasibility, and conceptual direction.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="portfolio-section" id="section-3" data-theme="light">
+    <section class="portfolio-section" id="section-3" data-theme="dark"> {/* Section ID updated */}
         <div class="portfolio-preview-container">
-            <h2 class="portfolio-title">Ukázky práce</h2>
+            <h2 class="portfolio-title">Featured Work</h2>
             <div class="portfolio-grid">
-                <div class="portfolio-item-placeholder">Projekt Alfa</div>
-                <div class="portfolio-item-placeholder">Vila Beta</div>
-                <div class="portfolio-item-placeholder">Městský Komplex Gama</div>
-                <div class="portfolio-item-placeholder">Kulturní Centrum Delta</div>
-                <div class="portfolio-item-placeholder">Rezidence Epsilon</div>
-                <div class="portfolio-item-placeholder">Komerční Centrum Zeta</div>
+                <div class="portfolio-item-placeholder">Project Alpha</div>
+                <div class="portfolio-item-placeholder">Villa Beta</div>
+                <div class="portfolio-item-placeholder">Urban Complex Gamma</div>
+                <div class="portfolio-item-placeholder">Cultural Center Delta</div>
+                <div class="portfolio-item-placeholder">Residence Epsilon</div>
+                <div class="portfolio-item-placeholder">Commercial Hub Zeta</div>
             </div>
-            <a href="#portfolio-full" class="portfolio-cta">Prohlédnout celé portfolio</a>
-        </div>
+            <a href="#portfolio-full" class="portfolio-cta">Explore Full Portfolio</a>
+            </div>
     </section>
 
-    <section class="contact-section" id="section-4" data-theme="light">
+    <section class="contact-section" id="section-4" data-theme="light"> {/* Section ID updated */}
          <div class="contact-form-container">
-             <h2 class="contact-title">Napište nám</h2>
+             <h2 class="contact-title">Get In Touch</h2>
              <form class="contact-form" action="#" method="POST">
                  <div class="form-group">
-                     <label for="name">Jméno</label>
-                     <input type="text" id="name" name="name" required placeholder="Vaše celé jméno">
+                     <label for="name">Name</label>
+                     <input type="text" id="name" name="name" required placeholder="Your Full Name">
                  </div>
                  <div class="form-group">
                      <label for="email">Email</label>
-                     <input type="email" id="email" name="email" required placeholder="vas.email@priklad.cz">
+                     <input type="email" id="email" name="email" required placeholder="your.email@example.com">
                  </div>
                  <div class="form-group">
-                     <label for="subject">Předmět</label>
-                     <input type="text" id="subject" name="subject" placeholder="Stručně, o co se jedná?">
+                     <label for="subject">Subject</label>
+                     <input type="text" id="subject" name="subject" placeholder="Briefly, what's this about?">
                  </div>
                  <div class="form-group">
-                     <label for="message">Zpráva</label>
-                     <textarea id="message" name="message" required placeholder="Řekněte nám více o vašem projektu nebo dotazu..."></textarea>
+                     <label for="message">Message</label>
+                     <textarea id="message" name="message" required placeholder="Tell us more about your project or inquiry..."></textarea>
                  </div>
-                 <button type="submit">Odeslat zprávu</button>
+                 <button type="submit">Send Message</button>
              </form>
          </div>
 
@@ -423,9 +876,9 @@
                 <a href="#" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="#" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#" aria-label="Pinterest" title="Pinterest"><i class="fab fa-pinterest"></i></a>
-                <a href="#" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Behance" title="Behance"><i class="fab fa-behance"></i></a>
             </div>
-            <p class="copyright">&copy; <span id="copyright-year"></span> laya home. Všechna práva vyhrazena.</p>
+            <p class="copyright">&copy; <span id="copyright-year"></span> LAYA Architecture Studio. All rights reserved.</p>
         </footer>
     </section>
 
@@ -434,416 +887,444 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 
     <script>
+      // --- JavaScript Code ---
       gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-        // --- Initialize Hero Section Animations ---
+        // --- Initialize Hero Section Animations (MODIFIED for Timed Auto-Switch) ---
         function initHero() {
             const heroSection = document.querySelector('.hero-section');
             if (!heroSection) return;
 
-            const layers = gsap.utils.toArray('.hero-image-layer');
+            const images = gsap.utils.toArray('.hero-image');
             const content = document.querySelector('.hero-content');
+            let currentImageIndex = 0;
 
-            // Initial states
-            gsap.set(layers, { opacity: 0 }); // All layers start hidden
+            // Initial setup - only set opacity/scale for non-active images
+            gsap.set(images.filter((img, index) => index !== 0), { opacity: 0, scale: 1.1 });
             gsap.set(content, { opacity: 0, y: 30 });
 
-            let heroAutoFadeTl; // Declare timeline variable
-
-            // 1. Entrance Animation (using ScrollTrigger)
-            const entranceTl = gsap.timeline({
+            // Timeline for initial content reveal (can still be triggered by scroll)
+            const contentTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: heroSection,
-                    start: "top 80%", // Trigger when section is 80% from top
-                    toggleActions: "play none none none", // Play once on enter
-                    onEnter: () => {
-                        // Start the auto-fade timeline *after* the entrance animation completes
-                        // Use entranceTl.duration() to get the exact duration
-                        gsap.delayedCall(entranceTl.duration(), () => {
-                            // Start the auto-fade timeline, ensuring it plays from the beginning
-                            if (heroAutoFadeTl) {
-                                console.log("Starting auto-fade timeline");
-                                heroAutoFadeTl.play(0);
-                            }
-                        });
-                    },
-                    // markers: true, // For debugging entrance trigger
-                    id: "heroEntranceTrigger"
+                    start: "top 80%", // Reveal content sooner
+                    toggleActions: "play none none reverse"
                 }
             });
+            contentTl.to(content, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' });
 
-            // Fade in the first layer and content
-            entranceTl.to(layers[0], { opacity: 1, duration: 1.2, ease: 'power2.out' })
-                      .to(content, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out' }, "<0.3"); // Overlap slightly
+            // Timeline for automatic image switching
+            function switchImage() {
+                const nextImageIndex = (currentImageIndex + 1) % images.length;
 
-            // 2. Automatic Fading Timeline (controlled by play/pause trigger)
-            heroAutoFadeTl = gsap.timeline({
-                paused: true, // Start paused, will be played by trigger
-                repeat: -1,   // Loop indefinitely
-                defaults: { duration: 0.8, ease: 'power1.inOut' } // Smooth fade transition
-            });
+                // Animate out current image and animate in next image
+                gsap.timeline()
+                    .to(images[currentImageIndex], { opacity: 0, duration: 1, ease: 'power1.in' })
+                    .set(images[currentImageIndex], { scale: 1.1 }) // Reset scale for next time
+                    .to(images[nextImageIndex], { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' }, "<0.2"); // Overlap slightly
 
-            // Build the repeating fade sequence:
-            // Start state assumes layers[0] is visible (from entrance animation)
-            heroAutoFadeTl.to(layers[0], { opacity: 0, delay: 3 }, "+=0") // Wait 3s, then fade out layer 0
-                          .to(layers[1], { opacity: 1 }, "<")             // Fade in layer 1 simultaneously
-                          .to(layers[1], { opacity: 0, delay: 3 }, "+=0") // Wait 3s, then fade out layer 1
-                          .to(layers[2], { opacity: 1 }, "<")             // Fade in layer 2 simultaneously
-                          .to(layers[2], { opacity: 0, delay: 3 }, "+=0") // Wait 3s, then fade out layer 2
-                          .to(layers[0], { opacity: 1 }, "<");            // Fade in layer 0 simultaneously to loop back
-
-            // 3. ScrollTrigger to Play/Pause the Auto-Fade Timeline
-            ScrollTrigger.create({
-                trigger: heroSection,
-                start: "top 60%", // Start playing when section is well in view
-                end: "bottom 40%", // Pause when section is mostly out of view
-                // markers: true, // For debugging play/pause triggers
-                onEnter: () => {
-                    // Only play if the entrance animation is complete
-                    if (heroAutoFadeTl && entranceTl.progress() === 1) {
-                        console.log("Play auto-fade on Enter");
-                        heroAutoFadeTl.play();
-                    } else {
-                         console.log("Play auto-fade on Enter skipped (entrance not done)");
-                    }
-                },
-                onLeave: () => {
-                    console.log("Pause auto-fade on Leave");
-                    if (heroAutoFadeTl) heroAutoFadeTl.pause();
-                },
-                onEnterBack: () => {
-                     console.log("Play auto-fade on EnterBack");
-                     if (heroAutoFadeTl) heroAutoFadeTl.play();
-                },
-                onLeaveBack: () => {
-                     console.log("Pause auto-fade on LeaveBack");
-                     if (heroAutoFadeTl) heroAutoFadeTl.pause();
-                },
-                id: "heroAutoFadeTrigger"
-            });
-
-            // Keep a simple parallax for content, less likely to cause lag
-            gsap.to(content, {
-                yPercent: -10, // Reduced movement
-                ease: "none",
-                scrollTrigger: {
-                    trigger: heroSection,
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: 1.5 // Slower scrub
-                }
-            });
-        }
-
-
-        // --- Initialize Philosophy Section Animations ---
-        function initPhilosophy() {
-            const section = document.querySelector('.philosophy-section');
-            const wrapper = section.querySelector('.philosophy-content-wrapper');
-            const textContent = section.querySelector('.philosophy-text-content');
-            const imageContainer = section.querySelector('.philosophy-image-container');
-
-            if (!section || !wrapper || !textContent || !imageContainer) return;
-
-            gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 70%", // Adjusted trigger point
-                    toggleActions: "play none none reverse",
-                    id: "philosophyTrigger"
-                }
-            })
-            .to(wrapper, { opacity: 1, duration: 0.4, ease: 'power1.out' }) // Faster wrapper fade
-            .to(textContent, { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' }, ">-0.1")
-            .to(imageContainer, { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' }, "<");
-        }
-
-
-       // --- Initialize Services Section Animations ---
-        function initServices() {
-            const section = document.querySelector('.services-section');
-            if (!section) return;
-            const title = section.querySelector('.services-title');
-            const cards = gsap.utils.toArray('.service-card');
-
-            if (!title || !cards.length) {
-                console.warn("Services title or cards not found.");
-                return;
+                currentImageIndex = nextImageIndex;
             }
 
-             // Animate Title first
-             gsap.from(title, {
-                 opacity: 0,
-                 y: -30,
-                 duration: 0.8,
-                 ease: 'power2.out',
-                 scrollTrigger: {
-                     trigger: title,
-                     start: 'top 85%', // Trigger when title is entering
-                     toggleActions: 'play none none reverse',
-                     id: "servicesTitleTrigger"
-                 }
+            // Start the timer after a brief delay (e.g., after initial load)
+            let imageInterval = setInterval(switchImage, 3000); // 3000ms = 3 seconds
+
+            // Optional: Pause on hover (requires wrapping stack or using section hover)
+             heroSection.addEventListener('mouseenter', () => clearInterval(imageInterval));
+             heroSection.addEventListener('mouseleave', () => {
+                 clearInterval(imageInterval); // Clear existing just in case
+                 imageInterval = setInterval(switchImage, 3000);
              });
 
-            // Animate Cards with stagger
-            gsap.from(cards, {
-                opacity: 0,
-                y: 30, // Animate from bottom up
-                duration: 0.6, // Slightly faster card animation
-                ease: 'power2.out',
-                stagger: 0.15, // Stagger the start of each card's animation
-                scrollTrigger: {
-                    trigger: section.querySelector('.services-grid'), // Trigger when the grid starts entering
-                    start: 'top 80%', // Adjust as needed
-                    toggleActions: 'play none none reverse',
-                    // markers: true, // For debugging card grid trigger
-                    id: "servicesCardsTrigger"
-                }
-            });
+             // Optional: Add subtle parallax to content (independent of image switching)
+              gsap.to(content, {
+                  yPercent: -20, // Move content up slightly on scroll
+                  ease: "none",
+                  scrollTrigger: {
+                      trigger: heroSection,
+                      start: "top top",
+                      end: "bottom top",
+                      scrub: true
+                  }
+              });
         }
 
-        // --- Initialize Portfolio Preview Animations ---
-        function initPortfolio() {
-            const portfolioSection = document.querySelector('#section-3');
-            if (!portfolioSection) return;
 
-            const container = portfolioSection.querySelector('.portfolio-preview-container');
-            const items = gsap.utils.toArray('.portfolio-item-placeholder', portfolioSection);
-            const cta = portfolioSection.querySelector('.portfolio-cta');
+       // --- Initialize About Section Animations ---
+       function initAbout() {
+           const aboutSection = document.querySelector('.about-section');
+           const aboutContent = document.querySelector('.about-content-wrapper');
+           const aboutPortrait = document.querySelector('.about-portrait'); // Select portrait
+           if (!aboutSection || !aboutContent || !aboutPortrait) return;
 
-            if (!container || !items.length || !cta) {
-                console.warn("Portfolio elements not found in #section-3");
-                return;
-            }
+           const tl = gsap.timeline({
+               scrollTrigger: {
+                   trigger: aboutSection,
+                   start: "top 70%",
+                   toggleActions: "play none none reverse"
+               }
+           });
+
+           tl.to(aboutContent, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
+             // Animate portrait slightly after content starts fading in
+             .to(aboutPortrait, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }, "-=0.6");
+       }
+
+       // --- Initialize Services Section Animations ---
+       function initServices() {
+            const servicesSection = document.querySelector('.services-section');
+            const container = document.querySelector('.services-container');
+            const title = container.querySelector('.services-title');
+            const items = gsap.utils.toArray('.service-item', container);
+
+            if (!servicesSection || !container || !title || items.length === 0) return;
 
             const tl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: portfolioSection,
-                    start: "top 70%", // Adjusted trigger
-                    toggleActions: "play none none reverse",
-                    id: "portfolioTrigger"
+                    trigger: servicesSection,
+                    start: "top 70%", // Adjust as needed
+                    toggleActions: "play none none reverse"
                 }
             });
 
-            tl.to(container, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' })
-              .to(items, {
-                opacity: 1,
-                scale: 1,
-                duration: 0.6,
-                ease: 'back.out(1.4)',
-                stagger: 0.1
-              }, "-=0.3") // Reduced stagger overlap
-              .to(cta, {
+            // Animate container fade in
+            tl.to(container, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+
+            // Stagger animation for service items
+            tl.to(items, {
                 opacity: 1,
                 y: 0,
-                duration: 0.7,
-                ease: 'power2.out'
-              }, "-=0.4"); // Adjusted overlap
-        }
+                scale: 1,
+                duration: 0.5,
+                ease: 'power2.out',
+                stagger: 0.15 // Delay between each item animation
+            }, "-=0.3"); // Overlap start slightly with container animation
+       }
 
 
-        // --- Initialize Contact Form Animations ---
-        function initContact() {
-            const contactSection = document.querySelector('#section-4');
-             if (!contactSection) return;
-            const container = contactSection.querySelector('.contact-form-container');
-            if (!container) return; // Exit if container missing
+       // --- Initialize Portfolio Preview Animations ---
+       function initPortfolio() {
+           const portfolioSection = document.querySelector('.portfolio-section');
+           const container = document.querySelector('.portfolio-preview-container');
+           const title = document.querySelector('.portfolio-title');
+           const items = gsap.utils.toArray('.portfolio-item-placeholder');
+           const cta = document.querySelector('.portfolio-cta');
 
+           if (!portfolioSection || !container || !title || !items.length || !cta) return;
+
+           const tl = gsap.timeline({
+               scrollTrigger: {
+                   trigger: portfolioSection,
+                   start: "top 65%", // Start animation a bit earlier
+                   toggleActions: "play none none reverse"
+               }
+           });
+
+            // Animate container fade in
+           tl.to(container, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
+
+           // Stagger animation for portfolio items
+           tl.to(items, {
+               opacity: 1,
+               scale: 1,
+               duration: 0.6,
+               ease: 'back.out(1.4)', // Bouncier effect
+               stagger: 0.15 // Delay between each item animation
+           }, "-=0.3"); // Overlap start slightly with title animation
+
+           // Animate CTA button
+           tl.to(cta, {
+               opacity: 1,
+               y: 0,
+               duration: 0.7,
+               ease: 'power2.out'
+           }, "-=0.5"); // Overlap start
+       }
+
+
+       // --- Initialize Contact Form Animations ---
+       function initContact() {
+           const contactSection = document.querySelector('.contact-section');
+           const container = document.querySelector('.contact-form-container');
+            const title = container.querySelector('.contact-title');
             const labels = gsap.utils.toArray('.contact-form label', container);
             const inputs = gsap.utils.toArray('.contact-form input, .contact-form textarea', container);
             const button = container.querySelector('.contact-form button');
 
-             const tl = gsap.timeline({
-                 scrollTrigger: {
-                     trigger: contactSection,
-                     start: "top 65%", // Adjusted trigger
-                     toggleActions: "play none none reverse",
-                     id: "contactTrigger"
+           if (!contactSection || !container || !title || !labels.length || !inputs.length || !button) return;
+
+           const tl = gsap.timeline({
+               scrollTrigger: {
+                   trigger: contactSection,
+                   start: "top 60%", // Adjust trigger point
+                   toggleActions: "play none none reverse"
+               }
+           });
+
+           // Animate container fade in
+           tl.to(container, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+
+           // Stagger labels and inputs
+           tl.to(labels, {
+               opacity: 1,
+               x: 0,
+               duration: 0.5,
+               ease: 'power2.out',
+               stagger: 0.1
+           }, "-=0.5"); // Overlap with container animation
+
+           tl.to(inputs, {
+               opacity: 1,
+               x: 0,
+               duration: 0.5,
+               ease: 'power2.out',
+               stagger: 0.1
+           }, "<0.1"); // Start shortly after labels
+
+           // Animate button
+           tl.to(button, {
+               opacity: 1,
+               y: 0,
+               duration: 0.6,
+               ease: 'back.out(1.7)'
+           }, "-=0.3"); // Overlap slightly
+       }
+
+
+     // --- Initialize Header Logic (for scroll links) ---
+     function initHeader() {
+         const header = document.getElementById('site-header');
+         if (!header) { console.warn("Site header not found."); return; }
+
+         const headerLinks = document.querySelectorAll('.site-header a[href^="#"]');
+         headerLinks.forEach(anchor => {
+             anchor.addEventListener('click', function(e) {
+                 const href = this.getAttribute('href');
+                 if (href && href.startsWith('#') && href.length > 1) {
+                     // Use try-catch for robust target selection
+                     try {
+                         const target = document.querySelector(href);
+                         if (target) {
+                             e.preventDefault();
+                             const headerHeight = header.offsetHeight;
+                             gsap.to(window, {
+                                 duration: 1.2,
+                                 scrollTo: { y: target, offsetY: headerHeight },
+                                 ease: "power2.inOut"
+                             });
+                         } else { console.warn(`Scroll target '${href}' not found.`); }
+                     } catch (error) {
+                         console.error(`Error selecting scroll target '${href}':`, error);
+                     }
                  }
              });
+         });
+       }
 
-             tl.to(container, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+     // --- Initialize Footer Animation ---
+     function initFooter() {
+         const footer = document.querySelector('#section-4 .site-footer'); // Target footer in last section
+         const copyrightYearSpan = document.getElementById('copyright-year');
 
-            // Only animate inner elements if they exist
-            if (labels.length > 0) {
-               tl.to(labels, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08 }, "-=0.5"); // Faster stagger
-            }
-             if (inputs.length > 0) {
-                tl.to(inputs, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08 }, "<0.1"); // Faster stagger
-            }
-             if (button) {
-                tl.to(button, { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.7)' }, "-=0.3");
-            }
-        }
+         if (!footer) { console.warn("Site footer inside #section-4 not found."); return; }
+         if(copyrightYearSpan) { copyrightYearSpan.textContent = new Date().getFullYear(); }
+         else { console.warn("Copyright year span not found."); }
 
+         gsap.to(footer, {
+             opacity: 1, y: 0, duration: 1.0, ease: 'power2.out',
+             scrollTrigger: {
+                 trigger: '#section-4', // Trigger based on last section
+                 start: "center bottom-=10%", // Trigger a bit earlier
+                 toggleActions: "play none none reverse",
+                 id: "footer-reveal"
+             }
+         });
+     }
 
-        // --- Initialize Header Logic ---
-        function initHeader() {
-          const header = document.getElementById('site-header');
-          if (!header) return;
-          const headerLinks = document.querySelectorAll('.site-header a[href^="#"]');
-          headerLinks.forEach(anchor => {
-              anchor.addEventListener('click', function(e) {
-                  const href = this.getAttribute('href');
-                  if (href && href.startsWith('#') && href.length > 1) {
-                      const target = document.querySelector(href);
-                      if (target) {
-                          e.preventDefault();
-                          const headerHeight = header.offsetHeight;
-                          gsap.to(window, { duration: 1.2, scrollTo: { y: target, offsetY: headerHeight }, ease: "power2.inOut" });
-                      } else { console.warn(`Scroll target '${href}' not found.`); }
-                  }
-              });
-          });
-        }
+     // --- Navigation Dots & Theme Switching ---
+     function initNavigation() {
+         // Select all sections that should correspond to a dot/link
+         const sections = document.querySelectorAll('section[id^="section-"]');
+         const navDots = document.querySelectorAll('.nav-dot');
+         const body = document.body;
+         const header = document.getElementById('site-header');
 
-        // --- Initialize Footer Animation ---
-        function initFooter() {
-          const footer = document.querySelector('#section-4 .site-footer');
-          const copyrightYearSpan = document.getElementById('copyright-year');
-          if (!footer) { console.warn("Site footer inside #section-4 not found."); return; }
-          if(copyrightYearSpan) { copyrightYearSpan.textContent = new Date().getFullYear(); }
-          gsap.to(footer, {
-              opacity: 1, y: 0, duration: 1.0, ease: 'power2.out',
-              scrollTrigger: { trigger: '#section-4', start: "center bottom-=15%", toggleActions: "play none none reverse", id: "footer-reveal" }
-          });
-        }
-
-        // --- Navigation Dots & Theme Switching ---
-        function initNavigation() {
-          const sections = document.querySelectorAll('section[id^="section-"]');
-          const navDots = document.querySelectorAll('.nav-dot');
-          const body = document.body;
-          const header = document.getElementById('site-header');
-          const numDots = navDots.length;
-          const sectionsWithDots = Array.from(sections).filter((sec, index) => index < numDots);
-
-          if (navDots.length === 0 || sectionsWithDots.length === 0 || !header) return;
-          if (navDots.length !== sectionsWithDots.length) console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sectionsWithDots.length} corresponding sections.`);
-
-          const getHeaderHeight = () => header.offsetHeight;
-
-          navDots.forEach(dot => {
-              dot.addEventListener('click', (e) => {
-                  e.preventDefault();
-                  const sectionIndex = parseInt(dot.getAttribute('data-section'), 10);
-                   const targetSection = document.getElementById(`section-${sectionIndex}`);
-                   if (targetSection) gsap.to(window, { duration: 1.2, scrollTo: { y: targetSection, offsetY: getHeaderHeight() }, ease: "power2.inOut" });
-                   else console.error(`Target section #section-${sectionIndex} not found.`);
-              });
-          });
-
-          sectionsWithDots.forEach((section, index) => {
-              const theme = section.getAttribute('data-theme') || 'dark';
-              ScrollTrigger.create({
-                  trigger: section,
-                  start: () => `top top+=${getHeaderHeight()}px`,
-                  end: index === sectionsWithDots.length - 1 ? "bottom bottom" : () => `bottom top+=${getHeaderHeight()}px`,
-                  id: `section-nav-${index}`,
-                  onEnter: () => updateActiveState(index, theme),
-                  onEnterBack: () => updateActiveState(index, theme),
-                  invalidateOnRefresh: true
-              });
-          });
-
-          function updateActiveState(activeIndex, activeTheme) {
-              navDots.forEach((dot) => {
-                  const dotSecIndex = parseInt(dot.getAttribute('data-section'), 10);
-                  dot.classList.toggle('active', dotSecIndex === activeIndex);
-              });
-              const currentBodyTheme = body.classList.contains('on-light-section') ? 'light' : 'dark';
-              if (activeTheme !== currentBodyTheme) body.classList.toggle('on-light-section', activeTheme === 'light');
+         if (navDots.length === 0 || sections.length === 0 || !header) {
+             console.warn("Nav dots, sections, or header not found. Navigation might be incomplete.");
+             return;
+         }
+          // Basic check - should have same number of dots and sections
+          if (navDots.length !== sections.length) {
+               console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sections.length} sections found. Check HTML structure.`);
+               // Attempt to continue, but results might be unpredictable
           }
 
-          let scrollIndicatorState = { scrolled: window.scrollY > 50 };
-          body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
-          const scrollListener = () => {
-              const isScrolled = window.scrollY > 50;
-              if (isScrolled !== scrollIndicatorState.scrolled) {
-                  body.classList.toggle('scrolled', isScrolled);
-                  scrollIndicatorState.scrolled = isScrolled;
-              }
-          };
-          window.addEventListener('scroll', scrollListener, { passive: true });
+         // Function to get the CURRENT header height (accounts for responsiveness)
+         const getHeaderHeight = () => header.offsetHeight;
 
-          // Debounced refresh function
-          const debouncedRefresh = gsap.utils.debounce(() => {
-                console.log("Debounced Refreshing ScrollTrigger...");
-                ScrollTrigger.refresh();
-            }, 100); // 100ms debounce interval
+         navDots.forEach(dot => {
+             dot.addEventListener('click', (e) => {
+                 e.preventDefault();
+                 const sectionId = dot.getAttribute('data-section'); // Use the section ID directly
+                  const targetSection = document.getElementById(`section-${sectionId}`); // Find by ID
 
-
-          setTimeout(() => {
-             let initialIndex = 0;
-             let initialTheme = 'dark';
-             const currentHeaderHeight = getHeaderHeight();
-             const viewportCenter = currentHeaderHeight + (window.innerHeight - currentHeaderHeight) / 2;
-             sectionsWithDots.forEach((section, index) => {
-                 const rect = section.getBoundingClientRect();
-                  if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
-                       initialIndex = index;
-                       initialTheme = section.getAttribute('data-theme') || 'dark';
-                   } else if (rect.top <= currentHeaderHeight && index === 0 && initialIndex === 0) {
-                       initialIndex = index;
-                       initialTheme = section.getAttribute('data-theme') || 'dark';
-                   }
+                 if (targetSection) {
+                      gsap.to(window, {
+                          duration: 1.2,
+                          scrollTo: { y: targetSection, offsetY: getHeaderHeight() }, // Use dynamic height
+                          ease: "power2.inOut"
+                      });
+                 } else { console.error(`Target section #section-${sectionId} not found for dot click.`); }
              });
-             updateActiveState(initialIndex, initialTheme);
-             scrollIndicatorState.scrolled = window.scrollY > 50;
-             body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
-             // Use debounced refresh after initial calculations
-             debouncedRefresh();
-          }, 150);
+         });
 
-           // Use debounced refresh on resize
-           window.addEventListener('resize', debouncedRefresh);
-        }
+         sections.forEach((section) => {
+             const sectionId = section.id.replace('section-', ''); // Get the ID suffix (0, 1, services, 3, 4)
+             const theme = section.getAttribute('data-theme') || 'dark'; // Default to dark if not set
 
-      // --- Initialize All ---
-      function initAll() {
-        console.log("Initializing laya home animations (v2)...");
-        // Order matters: Navigation setup might depend on header being measured
-        initHeader();
-        initNavigation();
-        initFooter();
+             ScrollTrigger.create({
+                 trigger: section,
+                 start: () => `top top+=${getHeaderHeight()}px`,
+                  // End trigger logic needs adjustment for the last section
+                 end: () => {
+                     // Check if this is the last section in the NodeList
+                     const isLastSection = section === sections[sections.length - 1];
+                     // For the last section, trigger ends when its bottom hits the bottom of the viewport
+                     // For others, trigger ends when its bottom hits the header top
+                     return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight()}px`;
+                 },
+                 id: `section-nav-${sectionId}`,
+                 // markers: true, // Uncomment for debugging trigger positions
+                 onEnter: () => updateActiveState(sectionId, theme),
+                 onEnterBack: () => updateActiveState(sectionId, theme),
+                 invalidateOnRefresh: true // Recalculate start/end on resize/refresh
+             });
+         });
 
-        // Initialize sections
-        initHero();
-        initPhilosophy();
-        initServices();
-        initPortfolio();
-        initContact();
-
-        // General smooth scroll (ensure it runs after other initializations)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-         if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots')) {
-           anchor.addEventListener('click', function(e) {
-             const href = this.getAttribute('href');
-             if (href && href.startsWith('#') && href.length > 1) {
-               try {
-                   const target = document.querySelector(href);
-                   if (target) {
-                       e.preventDefault();
-                       const header = document.getElementById('site-header');
-                       const offset = header ? header.offsetHeight : 75;
-                       gsap.to(window, { duration: 1, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" });
-                    } else { console.warn("Smooth scroll target not found:", href); }
-               } catch (error) { console.warn("Error finding target:", href, error); }
-             } else if (href === "#") { e.preventDefault(); }
-           });
+         function updateActiveState(activeSectionId, activeTheme) {
+             navDots.forEach((dot) => {
+                 const dotSecId = dot.getAttribute('data-section');
+                 dot.classList.toggle('active', dotSecId === activeSectionId);
+             });
+             const currentBodyTheme = body.classList.contains('on-light-section') ? 'light' : 'dark';
+             if (activeTheme !== currentBodyTheme) {
+                body.classList.toggle('on-light-section', activeTheme === 'light');
+             }
          }
-        });
 
-        // Final refresh after a short delay to ensure layout stability
-        setTimeout(() => {
-            ScrollTrigger.refresh();
-            console.log("Final ScrollTrigger refresh after init.");
-        }, 300);
+         // --- Scroll Indicator Logic ---
+         let scrollIndicatorState = { scrolled: window.scrollY > 50 };
+         body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
+         const scrollListener = () => {
+             const isScrolled = window.scrollY > 50;
+             if (isScrolled !== scrollIndicatorState.scrolled) {
+                 body.classList.toggle('scrolled', isScrolled);
+                 scrollIndicatorState.scrolled = isScrolled;
+             }
+         };
+         window.addEventListener('scroll', scrollListener, { passive: true });
 
-        console.log("laya home Initialization complete (v2).");
-      }
+         // --- Initial State Check (Improved) ---
+          setTimeout(() => {
+              let initialSectionId = '0'; // Default to first section ID
+              let initialTheme = 'dark';
+              const currentScrollY = window.scrollY;
+              const currentHeaderHeight = getHeaderHeight();
+              const viewTop = currentScrollY + currentHeaderHeight; // Effective top of viewport below header
+              const viewBottom = currentScrollY + window.innerHeight;
 
-       window.addEventListener('load', initAll);
+              sections.forEach(section => {
+                   const rect = section.getBoundingClientRect();
+                   const sectionTop = currentScrollY + rect.top;
+                   const sectionBottom = sectionTop + rect.height;
+
+                   // Check if the section is significantly visible within the viewport below the header
+                   // Consider a section active if its top edge is above the halfway point of the screen OR
+                   // if the viewport's top edge (below header) is within the section
+                   if ((sectionTop < viewTop + (window.innerHeight - currentHeaderHeight) / 2 && sectionBottom > viewTop + 100) ||
+                       (viewTop >= sectionTop && viewTop < sectionBottom)) {
+                         initialSectionId = section.id.replace('section-', '');
+                         initialTheme = section.getAttribute('data-theme') || 'dark';
+                   }
+              });
+
+              console.log(`Initial Active Section Detected: ${initialSectionId}`);
+              updateActiveState(initialSectionId, initialTheme);
+              scrollIndicatorState.scrolled = window.scrollY > 50;
+              body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
+              ScrollTrigger.refresh(); // Refresh triggers after initial check
+          }, 150); // Delay allows layout to stabilize
+       }
+
+     // --- Initialize All Animations & Functionality ---
+     function initAll() {
+       console.log("Initializing LAYA animations...");
+       initHeader();
+       initNavigation(); // Handles dots, themes, scroll indicator, initial state
+       initFooter();
+
+       // Initialize new section animations
+       initHero();
+       initAbout();
+       initServices(); // Initialize new Services section
+       initPortfolio();
+       initContact();
+
+
+       // General smooth scroll for non-header/non-dot links (like the portfolio button)
+       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots')) {
+          anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            // Special handling for the portfolio CTA if it doesn't point to a section ID
+            if (href === '#portfolio-full') {
+                console.log("Portfolio CTA clicked - implement full portfolio view/link.");
+                // e.preventDefault(); // Prevent default only if you handle it here (e.g., modal)
+                // return; // Stop further processing for this specific link
+            }
+
+            if (href && href.startsWith('#') && href.length > 1) {
+              try {
+                  const target = document.querySelector(href);
+                  const header = document.getElementById('site-header');
+                  const offset = header ? header.offsetHeight : 75; // Use current header height
+                  if (target) {
+                      e.preventDefault();
+                      gsap.to(window, {
+                          duration: 1,
+                          scrollTo: { y: target, offsetY: offset },
+                          ease: "power2.inOut"
+                      });
+                  } else {
+                      console.warn("Smooth scroll target not found:", href);
+                  }
+              } catch (error) { console.warn("Could not find target for anchor:", href, error); }
+            } else if (href === "#") { e.preventDefault(); }
+          });
+        }
+       });
+
+       // Refresh ScrollTrigger after all setup and potential layout shifts
+       setTimeout(() => {
+           ScrollTrigger.refresh();
+           console.log("ScrollTrigger refreshed after init.");
+       }, 250);
+
+       // Handle resize: Refresh ScrollTrigger
+       let resizeTimer;
+       window.addEventListener('resize', () => {
+           clearTimeout(resizeTimer);
+           resizeTimer = setTimeout(() => {
+               console.log("Resizing - Refreshing ScrollTrigger...");
+               ScrollTrigger.refresh(true); // Pass true to invalidate and recalculate immediately
+           }, 250);
+       });
+
+       console.log("LAYA Initialization sequence complete.");
+     }
+
+     // Start everything on window load
+      window.addEventListener('load', initAll);
 
     </script>
 </body>
