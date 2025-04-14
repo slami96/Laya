@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAYA Architecture Studio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+      *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif; /* Default body font */
+        color: #333;
+        overflow-x: hidden; /* Prevent horizontal scroll */
+        background-color: #000; /* Default background */
+      }
+
+      body {
+          overflow-y: auto;
+      }
+
+      /* --- BASE STYLES --- */
+      :root {
+          --header-height: 75px; /* Slightly taller for architect feel */
+          --accent-color-1: #C0A080; /* Muted Gold/Bronze */
+          --accent-color-2: #5A5A5A; /* Dark Grey */
+          --accent-color-3: #EAEAEA; /* Light Grey */
+          --accent-color-4: #333333; /* Near Black */
+          --text-light: #f1f1f1;
+          --text-dark: #2d2d2d; /* Slightly softer black */
+          --bg-dark-1: #1a1a1a; /* Dark background */
+          --bg-dark-2: #252525; /* Slightly lighter dark */
+          --bg-light-1: #fdfdfd; /* Very light grey */
+          --bg-light-2: #ffffff; /* White */
+          --header-icon-color-dark: var(--text-light);
+          --header-icon-color-light: var(--text-dark);
+          --header-hover-color: var(--accent-color-1);
+          --header-bg-dark: rgba(26, 26, 26, 0.8); /* Darker semi-transparent bg */
+          --header-bg-light: rgba(253, 253, 253, 0.85); /* Lighter semi-transparent bg */
+          --logo-font: 'Montserrat', sans-serif; /* Architect font */
+      }
+
+      /* --- HEADER STYLES (MODIFIED) --- */
+      .site-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: var(--header-height);
+          padding: 0 40px; /* More padding */
+          z-index: 100;
+          display: flex;
+          align-items: center;
+          background-color: var(--header-bg-dark);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          transition: background-color 0.4s ease-out, backdrop-filter 0.4s ease-out;
+      }
+
+      body.on-light-section .site-header {
+          background-color: var(--header-bg-light);
+      }
+
+      .header-logo {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+      }
+
+      .logo-link {
+          text-decoration: none;
+          font-family: var(--logo-font);
+          font-size: 2.0rem; /* Slightly larger logo */
+          font-weight: 700;
+          letter-spacing: 2px; /* More spacing */
+          color: var(--header-icon-color-dark);
+          transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      .logo-link:hover {
+          color: var(--header-hover-color);
+          transform: scale(1.05) translate(-50%, -50%); /* Adjust transform origin */
+          /* Removed the original logo link transform */
+      }
+
+
+      body.on-light-section .logo-link {
+          color: var(--header-icon-color-light);
+      }
+
+      .header-nav {
+          margin-left: auto; /* Pushes nav to the right */
+      }
+
+      .header-nav ul {
+          list-style: none;
+          display: flex;
+          gap: 35px; /* Increased spacing */
+          padding: 0;
+          margin: 0;
+          align-items: center;
+      }
+
+      .header-nav li {
+          position: relative;
+      }
+
+      .header-nav a {
+          text-decoration: none;
+          color: var(--header-icon-color-dark);
+          font-size: 1.1rem; /* Adjusted icon size */
+          transition: transform 0.3s ease, color 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+      }
+
+      body.on-light-section .header-nav a {
+         color: var(--header-icon-color-light);
+      }
+
+      .header-nav a:hover {
+          transform: scale(1.15);
+          color: var(--header-hover-color);
+      }
+
+      /* Label Styles */
+      .nav-label {
+          position: absolute;
+          top: 100%;
+          margin-top: 6px;
+          background-color: transparent;
+          color: inherit; /* Inherit color from parent link (<a>) */
+          font-family: var(--logo-font); /* Use architect font */
+          font-weight: 500;
+          font-size: 0.75rem; /* Smaller label */
+          padding: 2px 4px;
+          border-radius: 4px;
+          white-space: nowrap;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(5px) scale(0.9);
+          transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+          pointer-events: none;
+          text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      }
+
+      .header-nav a:hover .nav-label {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0) scale(1);
+          transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0s;
+      }
+
+
+      /* --- FOOTER STYLES --- */
+      /* Parent section needs position relative */
+      section#section-3 { /* Footer will be placed within the last content section */
+          position: relative;
+          /* Other styles for the contact section */
+           background-color: var(--bg-light-1);
+          color: var(--text-dark);
+          min-height: 100vh; /* Ensure it takes full height */
+          height: auto; /* Allow content to define height */
+          padding-top: calc(var(--header-height) + 10vh);
+          padding-bottom: 20vh; /* Space for footer */
+          display: flex; /* Use flex for centering */
+          justify-content: center; /* Center horizontally */
+          align-items: center; /* Center vertically */
+          margin-top: calc(-1 * var(--header-height));
+          overflow: hidden; /* Hide overflow */
+      }
+
+      .site-footer {
+          position: absolute;
+          bottom: 30px;
+          left: 0;
+          width: 100%;
+          padding: 0 30px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 15px;
+          z-index: 5;
+          opacity: 0;
+          transform: translateY(30px);
+      }
+
+      .site-footer .copyright {
+          font-size: 0.85rem;
+          color: #888;
+          text-align: center;
+          font-family: 'Poppins', sans-serif;
+      }
+
+      .site-footer .social-icons {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+      }
+
+      .site-footer .social-icons a {
+          text-decoration: none;
+          color: #aaa;
+          font-size: 1.2rem;
+          transition: transform 0.3s ease, color 0.3s ease;
+          display: inline-block;
+      }
+
+      .site-footer .social-icons a:hover {
+          transform: scale(1.15);
+          color: var(--accent-color-2); /* Dark grey hover for footer */
+      }
+
+
+      /* --- SECTION STYLES --- */
+      section {
+        min-height: 100vh; /* Ensure sections take at least viewport height */
+        height: auto; /* Allow sections to grow if content requires */
+        width: 100%;
+        display: flex; /* Use flex for default centering */
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden; /* Crucial for many GSAP effects */
+        padding: 50px; /* Add some default padding */
+        /* Add padding top only if content MUST NOT go under the fixed header */
+        /* This is handled per-section if needed more specifically */
+        padding-top: var(--header-height); /* Default top padding */
+        margin-top: calc(-1 * var(--header-height)); /* Pull up */
+      }
+
+      /* --- SECTION 0: Hero Image Stack --- */
+      .hero-section {
+        background-color: var(--bg-dark-1);
+        color: var(--text-light);
+        display: block; /* Override flex for specific layout */
+        padding: 0; /* Remove default padding */
+      }
+
+      .hero-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        text-align: center;
+        color: var(--text-light);
+        opacity: 0; /* Start hidden for GSAP */
+      }
+
+      .hero-title {
+        font-family: var(--logo-font);
+        font-size: clamp(2.5rem, 6vw, 5rem); /* Responsive font size */
+        font-weight: 800;
+        margin-bottom: 15px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      }
+
+       .hero-tagline {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        font-weight: 300;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+       }
+
+
+      .hero-image-stack {
+          position: relative; /* Changed to relative for image stacking */
+          width: 100%;
+          height: 100vh; /* Full viewport height */
+          overflow: hidden; /* Keep images contained */
+      }
+
+      .hero-image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover; /* Cover the area, may crop */
+          object-position: center;
+          opacity: 0; /* Start hidden for GSAP */
+          scale: 1.1; /* Start slightly zoomed for effect */
+      }
+
+      /* --- SECTION 1: About Me --- */
+      .about-section {
+        background-color: var(--bg-dark-2); /* Slightly lighter dark */
+        color: var(--text-light);
+        /* padding-top is handled by generic section style */
+      }
+
+      .about-content-wrapper {
+        max-width: 900px;
+        text-align: center;
+        padding: 40px;
+        opacity: 0; /* Start hidden */
+        transform: translateY(50px); /* Start slightly down */
+      }
+
+      .about-title {
+          font-family: var(--logo-font);
+          font-size: clamp(2rem, 5vw, 3.5rem);
+          font-weight: 700;
+          margin-bottom: 30px;
+          color: var(--accent-color-1); /* Use accent color */
+      }
+
+      .about-text p {
+          font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+          line-height: 1.8;
+          margin-bottom: 20px;
+          font-weight: 300;
+      }
+
+      .about-text strong {
+          font-weight: 600;
+          color: var(--accent-color-3); /* Light grey for emphasis */
+      }
+
+      /* --- SECTION 2: Portfolio Preview --- */
+      .portfolio-section {
+        background-color: var(--bg-light-2); /* White background */
+        color: var(--text-dark);
+      }
+
+      .portfolio-preview-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        padding: 40px 0;
+        opacity: 0; /* Start hidden */
+        transform: translateY(50px); /* Start slightly down */
+      }
+
+      .portfolio-title {
+          font-family: var(--logo-font);
+          font-size: clamp(2rem, 5vw, 3.5rem);
+          font-weight: 700;
+          margin-bottom: 50px;
+          text-align: center;
+          color: var(--accent-color-4); /* Near black title */
+      }
+
+      .portfolio-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 30px;
+          width: 100%;
+          margin-bottom: 50px;
+      }
+
+      .portfolio-item-placeholder {
+          aspect-ratio: 4 / 3; /* Common aspect ratio */
+          background: linear-gradient(135deg, var(--accent-color-3), #d0d0d0);
+          border-radius: 8px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: var(--accent-color-2);
+          font-family: var(--logo-font);
+          font-size: 1rem;
+          font-weight: 600;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+          opacity: 0; /* Start hidden for stagger */
+          transform: scale(0.9); /* Start small for stagger */
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+        .portfolio-item-placeholder:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+      .portfolio-cta {
+          display: inline-block;
+          background-color: var(--accent-color-4);
+          color: var(--text-light);
+          padding: 15px 40px;
+          border-radius: 50px; /* Pill shape */
+          font-family: var(--logo-font);
+          font-weight: 600;
+          text-decoration: none;
+          font-size: 1rem;
+          transition: background-color 0.3s ease, transform 0.3s ease;
+          opacity: 0; /* Start hidden */
+          transform: translateY(20px); /* Start slightly down */
+      }
+        .portfolio-cta:hover {
+            background-color: var(--accent-color-1); /* Accent color on hover */
+            color: var(--text-dark);
+            transform: translateY(15px) scale(1.05);
+        }
+
+      /* --- SECTION 3: Contact Form --- */
+      /* Container styles are handled by #section-3 rule above */
+      .contact-form-container {
+         background-color: var(--bg-light-1); /* Match section bg */
+         padding: 50px clamp(20px, 8vw, 80px); /* Responsive padding */
+         border-radius: 10px;
+         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+         width: 100%;
+         max-width: 700px;
+         opacity: 0; /* Start hidden */
+         transform: translateY(50px); /* Start slightly down */
+         z-index: 1; /* Above footer */
+      }
+
+      .contact-title {
+          font-family: var(--logo-font);
+          font-size: clamp(1.8rem, 4vw, 3rem);
+          font-weight: 700;
+          margin-bottom: 40px;
+          text-align: center;
+          color: var(--accent-color-4);
+      }
+
+      .contact-form .form-group {
+          margin-bottom: 25px;
+          position: relative;
+      }
+
+      .contact-form label {
+          display: block;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 600;
+          font-size: 0.9rem;
+          color: var(--accent-color-2);
+          margin-bottom: 8px;
+          opacity: 0; /* GSAP animation */
+          transform: translateX(-20px); /* GSAP animation */
+      }
+
+      .contact-form input[type="text"],
+      .contact-form input[type="email"],
+      .contact-form textarea {
+          width: 100%;
+          padding: 15px 20px;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          font-family: 'Poppins', sans-serif;
+          font-size: 1rem;
+          color: var(--text-dark);
+          background-color: var(--bg-light-2);
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
+          opacity: 0; /* GSAP animation */
+          transform: translateX(-20px); /* GSAP animation */
+      }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent-color-1);
+            box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3); /* Muted gold focus ring */
+            outline: none;
+        }
+
+      .contact-form textarea {
+          min-height: 150px;
+          resize: vertical;
+      }
+
+      .contact-form button {
+          display: block;
+          width: 100%;
+          padding: 15px 30px;
+          background-color: var(--accent-color-4);
+          color: var(--text-light);
+          border: none;
+          border-radius: 50px;
+          font-family: var(--logo-font);
+          font-size: 1.1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.3s ease, transform 0.3s ease;
+          margin-top: 10px;
+          opacity: 0; /* GSAP animation */
+          transform: translateY(20px); /* GSAP animation */
+      }
+
+      .contact-form button:hover {
+          background-color: var(--accent-color-1);
+          color: var(--text-dark);
+          transform: scale(1.03);
+      }
+
+      /* --- Navigation Dots --- */
+      .nav-dots {
+        position: fixed;
+        top: 50%;
+        right: 30px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        z-index: 101;
+      }
+
+      .nav-dot {
+        width: 10px; /* Smaller dots */
+        height: 10px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.3);
+        margin: 12px 0; /* More spacing */
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+      }
+        body.on-light-section .nav-dot {
+         background-color: rgba(0, 0, 0, 0.2);
+         border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+      .nav-dot.active {
+        background-color: white;
+        transform: scale(1.4); /* Larger active dot */
+        border: 1px solid rgba(0, 0, 0, 0.3);
+      }
+      body.on-light-section .nav-dot.active {
+         background-color: var(--text-dark); /* Dark active dot on light bg */
+         border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      /* --- Scroll Indicator (First Section) --- */
+      .scroll-indicator {
+        position: absolute;
+        bottom: 40px; /* Higher position */
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.8rem; /* Smaller text */
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 5;
+        opacity: 0.8;
+        transition: opacity 0.5s ease;
+        letter-spacing: 1px;
+      }
+
+      .scroll-arrow {
+        margin-top: 12px;
+        width: 18px;
+        height: 18px;
+        border-right: 2px solid rgba(255, 255, 255, 0.7);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+        transform: rotate(45deg);
+        animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncier animation */
+      }
+
+      @keyframes scrollArrow {
+        0% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; }
+        50% { transform: rotate(45deg) translate(8px, 8px); opacity: 1; } /* Smaller movement */
+        100% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; }
+      }
+
+      body.scrolled .scroll-indicator {
+         opacity: 0;
+         pointer-events: none;
+      }
+
+      /* --- RESPONSIVE STYLES --- */
+      @media (max-width: 992px) {
+          /* Header */
+          .site-header { padding: 0 25px; }
+          .logo-link { font-size: 1.8rem; }
+          .header-nav ul { gap: 25px; }
+
+          /* Sections */
+          section { padding: 30px; padding-top: var(--header-height); }
+          .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+           .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
+      }
+
+       @media (max-width: 768px) {
+           :root { --header-height: 70px; } /* Adjust header height */
+           .site-header { padding: 0 20px; }
+           .logo-link { font-size: 1.6rem; }
+           .header-nav ul { gap: 20px; }
+           .header-nav a { font-size: 1rem; }
+           .nav-label { display: none; } /* Hide labels on smaller screens */
+
+           .nav-dots { right: 20px; }
+           .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
+
+           .portfolio-grid { gap: 20px; }
+           .portfolio-item-placeholder { font-size: 0.9rem; }
+
+           .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
+           .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; }
+           .contact-form input, .contact-form textarea { padding: 12px 15px; font-size: 0.95rem;}
+           .contact-form button { padding: 12px 25px; font-size: 1rem; }
+
+           .site-footer { bottom: 20px; }
+           .site-footer .copyright { font-size: 0.75rem; }
+           .site-footer .social-icons { gap: 15px; }
+           .site-footer .social-icons a { font-size: 1.1rem; }
+
+           /* Ensure sections still clear the header */
+           section { padding-top: var(--header-height); }
+       }
+
+       @media (max-width: 480px) {
+           :root { --header-height: 65px; }
+           .site-header { padding: 0 15px; }
+           .logo-link { font-size: 1.4rem; }
+           .header-nav ul { gap: 15px; } /* Reduce gap further */
+           .header-nav a { font-size: 0.9rem; }
+
+           .nav-dots { right: 15px; }
+
+           .hero-title { font-size: clamp(2rem, 8vw, 3rem); }
+           .hero-tagline { font-size: clamp(0.9rem, 4vw, 1.1rem); }
+
+           .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+           .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
+
+           .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+           .portfolio-grid { grid-template-columns: 1fr; gap: 15px; } /* Stack items */
+
+           .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+
+           .scroll-indicator { bottom: 25px; font-size: 0.75rem;}
+           .scroll-arrow { width: 16px; height: 16px; margin-top: 10px;}
+
+           section { padding-left: 15px; padding-right: 15px; padding-top: var(--header-height);}
+       }
+    </style>
+</head>
+<body data-current-theme="dark">
+
+    <header class="site-header" id="site-header">
+        <div class="header-logo">
+            <a href="#section-0" class="logo-link" aria-label="LAYA Home">LAYA</a>
+        </div>
+
+        <nav class="header-nav">
+            <ul>
+                <li><a href="#section-0" aria-label="Home"><i class="fas fa-home"></i><span class="nav-label">Home</span></a></li>
+                <li><a href="#section-1" aria-label="About"><i class="fas fa-info-circle"></i><span class="nav-label">About</span></a></li>
+                <li><a href="#section-2" aria-label="Portfolio"><i class="fas fa-drafting-compass"></i><span class="nav-label">Portfolio</span></a></li>
+                <li><a href="#section-3" aria-label="Contact"><i class="fas fa-envelope"></i><span class="nav-label">Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="nav-dots">
+      <div class="nav-dot active" data-section="0"></div>
+      <div class="nav-dot" data-section="1"></div>
+      <div class="nav-dot" data-section="2"></div>
+      <div class="nav-dot" data-section="3"></div>
+    </div>
+
+    <section class="hero-section" id="section-0" data-theme="dark">
+        <div class="hero-image-stack">
+            <img src="interior_1.png" alt="Modern Interior Design 1" class="hero-image" id="hero-img-1">
+            <img src="interior_2.png" alt="Classic Interior Design 2" class="hero-image" id="hero-img-2">
+            <img src="interior_3.png" alt="Innovative Interior Design 3" class="hero-image" id="hero-img-3">
+        </div>
+         <div class="hero-content">
+             <h1 class="hero-title">LAYA Architecture</h1>
+             <p class="hero-tagline">Designing spaces that inspire. Blending innovation with timeless tradition.</p>
+         </div>
+        <div class="scroll-indicator">
+            <span>Explore LAYA</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <section class="about-section" id="section-1" data-theme="dark">
+        <div class="about-content-wrapper">
+            <h2 class="about-title">Our Philosophy</h2>
+            <div class="about-text">
+                <p>At LAYA, we believe architecture is more than just buildings; it's about crafting experiences and shaping environments. Our approach is rooted in a deep respect for <strong>tradition and context</strong>, while constantly pushing the boundaries of <strong>design innovation</strong>.</p>
+                <p>We work closely with our clients, understanding their vision and needs to create spaces that are not only aesthetically stunning but also functional, sustainable, and enduring. From initial concept to final construction, <strong>collaboration and meticulous attention to detail</strong> are at the heart of everything we do.</p>
+                 <p>Let us help you bring your vision to life.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-section" id="section-2" data-theme="light">
+        <div class="portfolio-preview-container">
+            <h2 class="portfolio-title">Featured Work</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item-placeholder">Project Alpha</div>
+                <div class="portfolio-item-placeholder">Villa Beta</div>
+                <div class="portfolio-item-placeholder">Urban Complex Gamma</div>
+                <div class="portfolio-item-placeholder">Cultural Center Delta</div>
+                <div class="portfolio-item-placeholder">Residence Epsilon</div>
+                <div class="portfolio-item-placeholder">Commercial Hub Zeta</div>
+            </div>
+            <a href="#portfolio-full" class="portfolio-cta">Explore Full Portfolio</a>
+            </div>
+    </section>
+
+    <section class="contact-section" id="section-3" data-theme="light">
+         <div class="contact-form-container">
+             <h2 class="contact-title">Get In Touch</h2>
+             <form class="contact-form" action="#" method="POST"> <div class="form-group">
+                     <label for="name">Name</label>
+                     <input type="text" id="name" name="name" required placeholder="Your Full Name">
+                 </div>
+                 <div class="form-group">
+                     <label for="email">Email</label>
+                     <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                 </div>
+                 <div class="form-group">
+                     <label for="subject">Subject</label>
+                     <input type="text" id="subject" name="subject" placeholder="Briefly, what's this about?">
+                 </div>
+                 <div class="form-group">
+                     <label for="message">Message</label>
+                     <textarea id="message" name="message" required placeholder="Tell us more about your project or inquiry..."></textarea>
+                 </div>
+                 <button type="submit">Send Message</button>
+             </form>
+         </div>
+
+        <footer class="site-footer">
+            <div class="social-icons">
+                <a href="#" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Pinterest" title="Pinterest"><i class="fab fa-pinterest"></i></a>
+                <a href="#" aria-label="Behance" title="Behance"><i class="fab fa-behance"></i></a>
+            </div>
+            <p class="copyright">&copy; <span id="copyright-year"></span> LAYA Architecture Studio. All rights reserved.</p>
+        </footer>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
+    <script>
+      // --- JavaScript Code ---
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+        // --- Initialize Hero Section Animations ---
+        function initHero() {
+            const heroSection = document.querySelector('.hero-section');
+            if (!heroSection) return;
+
+            const images = gsap.utils.toArray('.hero-image');
+            const content = document.querySelector('.hero-content');
+
+            // Initial setup
+            gsap.set(images, { opacity: 0, scale: 1.1 });
+            gsap.set(content, { opacity: 0, y: 30 });
+
+            // Create a timeline for the image sequence and content reveal
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: heroSection,
+                    start: "top top",
+                    end: "+=200%", // Controls how long the pinning lasts (adjust as needed)
+                    scrub: 1,     // Smooth scrubbing effect
+                    pin: true,    // Pin the hero section while animating
+                   // markers: true, // For debugging
+                    anticipatePin: 1 // Helps prevent jumps
+                }
+            });
+
+            // Fade in the first image
+            tl.to(images[0], { opacity: 1, scale: 1, duration: 1, ease: 'power2.inOut' });
+
+            // Fade in the content slightly after the first image starts appearing
+            tl.to(content, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, ">-0.5"); // Overlap slightly
+
+            // Sequence the next images
+            if (images.length > 1) {
+                tl.to(images[0], { opacity: 0, duration: 0.5, ease: 'power1.in' }, "+=1"); // Fade out first image after a pause
+                tl.to(images[1], { opacity: 1, scale: 1, duration: 1, ease: 'power2.inOut' }, "<"); // Fade in second image simultaneously
+            }
+            if (images.length > 2) {
+                tl.to(images[1], { opacity: 0, duration: 0.5, ease: 'power1.in' }, "+=1"); // Fade out second image
+                tl.to(images[2], { opacity: 1, scale: 1, duration: 1, ease: 'power2.inOut' }, "<"); // Fade in third image
+            }
+
+             // Optional: Add a subtle parallax effect to the content as you scroll through the pin
+             gsap.to(content, {
+                yPercent: -30, // Move content up slightly
+                ease: "none",
+                scrollTrigger: {
+                    trigger: heroSection,
+                    start: "top top",
+                    end: "bottom top", // End when the bottom of the hero reaches the top
+                    scrub: true
+                }
+            });
+        }
+
+
+       // --- Initialize About Section Animations ---
+        function initAbout() {
+            const aboutSection = document.querySelector('.about-section');
+            const aboutContent = document.querySelector('.about-content-wrapper');
+            if (!aboutSection || !aboutContent) return;
+
+            gsap.fromTo(aboutContent,
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: aboutSection,
+                        start: "top 70%", // Start animation when 70% of section is visible
+                        toggleActions: "play none none reverse" // Play on enter, reverse on leave back
+                    }
+                }
+            );
+        }
+
+        // --- Initialize Portfolio Preview Animations ---
+        function initPortfolio() {
+            const portfolioSection = document.querySelector('.portfolio-section');
+            const container = document.querySelector('.portfolio-preview-container');
+            const title = document.querySelector('.portfolio-title');
+            const items = gsap.utils.toArray('.portfolio-item-placeholder');
+            const cta = document.querySelector('.portfolio-cta');
+
+            if (!portfolioSection || !container || !title || !items.length || !cta) return;
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: portfolioSection,
+                    start: "top 65%", // Start animation a bit earlier
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+             // Animate container fade in
+            tl.to(container, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
+             // Animate title (can be part of container or separate)
+             // If animating separately:
+             // tl.from(title, { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, "<"); // Start slightly after container
+
+            // Stagger animation for portfolio items
+            tl.to(items, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.6,
+                ease: 'back.out(1.4)', // Bouncier effect
+                stagger: 0.15 // Delay between each item animation
+            }, "-=0.3"); // Overlap start slightly with title animation
+
+            // Animate CTA button
+            tl.to(cta, {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                ease: 'power2.out'
+            }, "-=0.5"); // Overlap start
+        }
+
+
+        // --- Initialize Contact Form Animations ---
+        function initContact() {
+            const contactSection = document.querySelector('.contact-section');
+            const container = document.querySelector('.contact-form-container');
+             const title = container.querySelector('.contact-title');
+             const labels = gsap.utils.toArray('.contact-form label', container);
+             const inputs = gsap.utils.toArray('.contact-form input, .contact-form textarea', container);
+             const button = container.querySelector('.contact-form button');
+
+            if (!contactSection || !container || !title || !labels.length || !inputs.length || !button) return;
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: contactSection,
+                    start: "top 60%", // Adjust trigger point
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            // Animate container fade in
+            tl.to(container, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+
+             // Animate title (optional, could fade with container)
+            // tl.from(title, { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out' }, "<0.2"); // Slightly delayed
+
+            // Stagger labels and inputs
+            tl.to(labels, {
+                opacity: 1,
+                x: 0,
+                duration: 0.5,
+                ease: 'power2.out',
+                stagger: 0.1
+            }, "-=0.5"); // Overlap with container animation
+
+            tl.to(inputs, {
+                opacity: 1,
+                x: 0,
+                duration: 0.5,
+                ease: 'power2.out',
+                stagger: 0.1
+            }, "<0.1"); // Start shortly after labels
+
+            // Animate button
+            tl.to(button, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: 'back.out(1.7)'
+            }, "-=0.3"); // Overlap slightly
+        }
+
+
+      // --- Initialize Header Logic (for scroll links) ---
+      function initHeader() {
+          const header = document.getElementById('site-header');
+          if (!header) { console.warn("Site header not found."); return; }
+
+          const headerLinks = document.querySelectorAll('.site-header a[href^="#"]');
+          headerLinks.forEach(anchor => {
+              anchor.addEventListener('click', function(e) {
+                  const href = this.getAttribute('href');
+                  if (href && href.startsWith('#') && href.length > 1) {
+                      const target = document.querySelector(href);
+                      if (target) {
+                          e.preventDefault();
+                          const headerHeight = header.offsetHeight;
+                          gsap.to(window, {
+                              duration: 1.2,
+                              // Correct scrollTo syntax: use target element directly
+                              scrollTo: { y: target, offsetY: headerHeight },
+                              ease: "power2.inOut"
+                          });
+                      } else { console.warn(`Scroll target '${href}' not found.`); }
+                  }
+              });
+          });
+        }
+
+      // --- Initialize Footer Animation ---
+      function initFooter() {
+          // Updated selector to target footer within section-3
+          const footer = document.querySelector('#section-3 .site-footer');
+          const copyrightYearSpan = document.getElementById('copyright-year');
+
+          if (!footer) { console.warn("Site footer inside #section-3 not found."); return; }
+          if(copyrightYearSpan) { copyrightYearSpan.textContent = new Date().getFullYear(); }
+          else { console.warn("Copyright year span not found."); }
+
+          gsap.to(footer, {
+              opacity: 1, y: 0, duration: 1.0, ease: 'power2.out',
+              scrollTrigger: {
+                  // Updated trigger to section-3
+                  trigger: '#section-3',
+                  start: "center bottom-=10%", // Trigger a bit earlier
+                  toggleActions: "play none none reverse",
+                  id: "footer-reveal"
+              }
+          });
+      }
+
+      // --- Navigation Dots & Theme Switching ---
+      function initNavigation() {
+          const sections = document.querySelectorAll('section[id^="section-"]');
+          const navDots = document.querySelectorAll('.nav-dot');
+          const body = document.body;
+          const header = document.getElementById('site-header');
+
+           // Filter out sections that might exist structurally but have no corresponding dot
+           const numDots = navDots.length;
+           const sectionsWithDots = Array.from(sections).filter((sec, index) => index < numDots);
+
+
+          if (navDots.length === 0 || sectionsWithDots.length === 0 || !header) {
+              console.warn("Nav dots, corresponding sections, or header not found."); return;
+          }
+           if (navDots.length !== sectionsWithDots.length) {
+               console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sectionsWithDots.length} corresponding sections found.`);
+               // Continue cautiously, might indicate an issue
+           }
+
+
+          // Function to get the CURRENT header height (accounts for responsiveness)
+          const getHeaderHeight = () => header.offsetHeight;
+
+          navDots.forEach(dot => {
+              dot.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  const sectionIndex = parseInt(dot.getAttribute('data-section'), 10);
+                   const targetSection = document.getElementById(`section-${sectionIndex}`);
+                   if (targetSection) {
+                      gsap.to(window, {
+                          duration: 1.2,
+                          scrollTo: { y: targetSection, offsetY: getHeaderHeight() }, // Use dynamic height
+                          ease: "power2.inOut"
+                       });
+                   } else { console.error(`Target section #section-${sectionIndex} not found.`); }
+              });
+          });
+
+          sectionsWithDots.forEach((section, index) => {
+              const theme = section.getAttribute('data-theme') || 'dark';
+              ScrollTrigger.create({
+                  trigger: section,
+                  // Use functions for start/end that calculate based on CURRENT header height
+                  start: () => `top top+=${getHeaderHeight()}px`,
+                  // Use bottom bottom for the very last section only
+                   end: index === sectionsWithDots.length - 1 ? "bottom bottom" : () => `bottom top+=${getHeaderHeight()}px`,
+                  id: `section-nav-${index}`,
+                 // markers: true, // Uncomment for debugging trigger positions
+                  onEnter: () => updateActiveState(index, theme),
+                  onEnterBack: () => updateActiveState(index, theme),
+                  invalidateOnRefresh: true // Recalculate start/end on resize/refresh
+              });
+          });
+
+          function updateActiveState(activeIndex, activeTheme) {
+              navDots.forEach((dot) => {
+                  const dotSecIndex = parseInt(dot.getAttribute('data-section'), 10);
+                  dot.classList.toggle('active', dotSecIndex === activeIndex);
+              });
+              const currentBodyTheme = body.classList.contains('on-light-section') ? 'light' : 'dark';
+              if (activeTheme !== currentBodyTheme) {
+                 body.classList.toggle('on-light-section', activeTheme === 'light');
+              }
+          }
+
+          // --- Scroll Indicator Logic ---
+          let scrollIndicatorState = { scrolled: window.scrollY > 50 };
+          body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
+          const scrollListener = () => {
+              const isScrolled = window.scrollY > 50;
+              if (isScrolled !== scrollIndicatorState.scrolled) {
+                  body.classList.toggle('scrolled', isScrolled);
+                  scrollIndicatorState.scrolled = isScrolled;
+              }
+          };
+          window.addEventListener('scroll', scrollListener, { passive: true });
+
+          // --- Initial State Check ---
+          setTimeout(() => {
+             let initialIndex = 0;
+             let initialTheme = 'dark';
+             const currentHeaderHeight = getHeaderHeight();
+             sectionsWithDots.forEach((section, index) => {
+                 const rect = section.getBoundingClientRect();
+                  // Check if the section is the most visible one near the top
+                  // A section is considered active if its top is at or above the header bottom,
+                  // and its bottom is below the header top + a threshold (e.g., 1/3 viewport height)
+                  const threshold = window.innerHeight / 3;
+                 if (rect.top <= currentHeaderHeight && rect.bottom >= currentHeaderHeight + threshold) {
+                     initialIndex = index;
+                     initialTheme = section.getAttribute('data-theme') || 'dark';
+                 } else if (rect.top <= currentHeaderHeight && index === 0) { // Fallback for very top
+                    initialIndex = index;
+                    initialTheme = section.getAttribute('data-theme') || 'dark';
+                 }
+             });
+             updateActiveState(initialIndex, initialTheme);
+             scrollIndicatorState.scrolled = window.scrollY > 50;
+             body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
+             ScrollTrigger.refresh(); // Refresh triggers after initial check
+          }, 150);
+        }
+
+      // --- Initialize All Animations & Functionality ---
+      function initAll() {
+        console.log("Initializing LAYA animations...");
+        initHeader();
+        initNavigation(); // Handles dots, themes, scroll indicator, initial state
+        initFooter();
+
+        // Initialize new section animations
+        initHero();
+        initAbout();
+        initPortfolio();
+        initContact();
+
+
+        // General smooth scroll for non-header/non-dot links (like the portfolio button)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+         if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots')) {
+           anchor.addEventListener('click', function(e) {
+             const href = this.getAttribute('href');
+             if (href && href.startsWith('#') && href.length > 1) {
+               try {
+                   const target = document.querySelector(href);
+                   const header = document.getElementById('site-header');
+                   const offset = header ? header.offsetHeight : 75; // Use current header height
+                   if (target) {
+                       e.preventDefault();
+                       gsap.to(window, {
+                           duration: 1,
+                           scrollTo: { y: target, offsetY: offset },
+                           ease: "power2.inOut"
+                        });
+                    } else {
+                        console.warn("Smooth scroll target not found:", href);
+                        // Allow default behavior if target isn't on this page (e.g., link to another page)
+                        // Or handle differently if '#portfolio-full' should open a modal etc.
+                    }
+               } catch (error) { console.warn("Could not find target for anchor:", href, error); }
+             } else if (href === "#") { e.preventDefault(); }
+           });
+         }
+        });
+
+        // Refresh ScrollTrigger after all setup and potential layout shifts
+        setTimeout(() => {
+            ScrollTrigger.refresh();
+            console.log("ScrollTrigger refreshed after init.");
+        }, 250);
+
+        // Handle resize: Refresh ScrollTrigger
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                console.log("Resizing - Refreshing ScrollTrigger...");
+                ScrollTrigger.refresh(); // This will recalculate header height dependent triggers
+            }, 250);
+        });
+
+        console.log("LAYA Initialization sequence complete.");
+      }
+
+      // Start everything on window load
+       window.addEventListener('load', initAll);
+
+    </script>
+</body>
+</html>
