@@ -155,7 +155,7 @@
         color: var(--text-dark);
         min-height: 100vh;
         height: auto;
-        padding-bottom: 20vh;
+        padding-bottom: 20vh; /* Ensure space for footer */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -172,8 +172,8 @@
           align-items: center;
           gap: 15px;
           z-index: 5;
-          opacity: 0;
-          transform: translateY(30px);
+          opacity: 0; /* Animated in */
+          transform: translateY(30px); /* Animated in */
       }
       .site-footer .copyright {
           font-size: 0.85rem;
@@ -201,25 +201,28 @@
       /* --- SECTION STYLES --- */
       section {
           min-height: 100vh;
-          height: auto;
+          height: auto; /* Allow content to define height */
           width: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
-          position: relative;
+          position: relative; /* Needed for absolute positioning inside */
           overflow: hidden;
           padding: 50px;
-          padding-top: var(--header-height);
+          /* Add top padding equal to header height for content clearance */
+          padding-top: calc(var(--header-height) + 50px);
+          /* Add negative margin to compensate for padding, making section backgrounds meet */
           margin-top: calc(-1 * var(--header-height));
       }
+      /* First section doesn't need the negative margin or top padding compensation */
       section:first-of-type {
           margin-top: 0;
-          padding-top: 0;
+          padding-top: 0; /* Hero section likely needs full height */
       }
 
       /* --- SECTION 0: Hero --- */
       .hero-section {
-          background-color: var(--bg-dark-1); color: var(--text-light); display: block;
+          background-color: var(--bg-dark-1); color: var(--text-light); display: block; /* Override flex for hero layout */
           padding: 0; min-height: 100vh; height: 100vh; position: relative; overflow: hidden;
       }
       .hero-content {
@@ -230,14 +233,14 @@
       .hero-tagline {
         font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 600; margin: 0 auto; line-height: 1.4;
         font-family: 'Montserrat', sans-serif; color: var(--text-light); text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75);
-        overflow: hidden;
+        overflow: hidden; /* Contain words */
        }
-       .tagline-word {
+        .tagline-word {
           display: inline-block; opacity: 0; transform: scale(0.5); transform-origin: center center;
           margin: 0 4px; will-change: transform, opacity;
-       }
+        }
       .hero-image-stack { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
-      .hero-image-stack::before {
+      .hero-image-stack::before { /* Dark overlay */
           content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
           background-color: rgba(0, 0, 0, 0.3); z-index: 1; pointer-events: none;
       }
@@ -258,7 +261,7 @@
           font-family: var(--logo-font); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700;
           margin-bottom: 30px; color: var(--accent-color-1);
       }
-      .about-text { max-width: 700px; }
+      .about-text { max-width: 700px; /* Limit text width */ }
       .about-text p {
           font-size: clamp(0.9rem, 1.5vw, 1.1rem); line-height: 1.8; margin-bottom: 20px;
           font-weight: 300; font-family: 'Poppins', sans-serif;
@@ -273,18 +276,23 @@
       .new-services-section {
           background-color: var(--bg-light-1); color: var(--text-dark); position: relative; display: flex;
           align-items: center; justify-content: center; padding: 50px;
-          padding-top: calc(var(--header-height) + 50px); margin-top: calc(-1 * var(--header-height));
-          min-height: 100vh; overflow: hidden; padding-bottom: 50px;
+          /* Ensure padding compensates for header even when pinned */
+          padding-top: calc(var(--header-height) + 50px);
+          /* Negative margin not needed if pinning the section itself */
+          /* margin-top: calc(-1 * var(--header-height)); */
+          min-height: 100vh; overflow: visible; /* Allow pinned elements */ padding-bottom: 50px;
       }
       .services-background-image {
           position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('services.jpg');
           background-size: cover; background-position: center center; opacity: 0; z-index: 1; will-change: opacity;
+          /* Ensure it stays behind content when section is pinned */
+          pointer-events: none;
       }
       .services-text-content {
           position: relative; z-index: 3; max-width: 1100px; width: 90%; text-align: center;
           opacity: 0; /* Set via JS */ visibility: hidden; /* Set via JS */ transform: translateY(30px); /* Set via JS */
           will-change: transform, opacity, visibility; color: var(--text-dark); padding: 20px 0;
-          text-shadow: 0 1px 3px rgba(255, 255, 255, 0.4); margin-bottom: 0;
+          text-shadow: 0 1px 3px rgba(255, 255, 255, 0.4); margin-bottom: 0; /* No extra bottom margin */
       }
       .services-title-new {
           font-family: var(--logo-font); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700;
@@ -299,7 +307,7 @@
       .service-item-new {
           opacity: 0; /* Set via JS */ visibility: hidden; /* Set via JS */ transform: translateY(20px); /* Set via JS */
           flex: 1; min-width: 250px; max-width: 360px; text-align: center;
-          will-change: transform, opacity, visibility; background-color: rgba(253, 253, 253, 0.1);
+          will-change: transform, opacity, visibility; background-color: rgba(253, 253, 253, 0.1); /* Subtle background */
           padding: 20px; border-radius: 6px;
       }
       .service-icon-new {
@@ -311,7 +319,7 @@
       }
       .service-item-new p {
           font-family: 'Poppins', sans-serif; font-size: 0.9rem; line-height: 1.6;
-          color: var(--accent-color-2); font-weight: 400; min-height: 50px;
+          color: var(--accent-color-2); font-weight: 400; min-height: 50px; /* Align bottom edges */
       }
 
       /* --- SECTION 3: Portfolio --- */
@@ -413,9 +421,12 @@
 
       /* --- STICKY SVG CONTAINER --- */
       #sticky-svg-drawing-container {
-          position: fixed; bottom: 0; left: 0; width: 100%; height: 150px;
+          /* Changed from fixed to absolute, positioned within the pinned section */
+          position: absolute;
+          bottom: 0; left: 0; width: 100%; height: 150px;
           z-index: 50; opacity: 0; visibility: hidden; /* Controlled by JS autoAlpha */
           pointer-events: none; overflow: hidden; background: transparent;
+          /* It will be positioned relative to #section-services when pinned */
       }
       #sticky-svg-drawing-container svg {
           display: block; width: 100%; height: 100%; overflow: visible;
@@ -426,61 +437,73 @@
           stroke-linecap: round; stroke-linejoin: round; will-change: stroke-dashoffset;
       }
 
+      /* Add a class for when the section is pinned (optional) */
+      #section-services.is-pinned {
+        /* Example: you could add subtle effects if needed */
+        /* border: 1px dashed red; */
+      }
+
       /* --- RESPONSIVE STYLES --- */
-       @media (max-width: 992px) {
-           .site-header { padding: 0 25px; } .logo-link img { height: 45px; } .header-nav ul { gap: 25px; }
-           section { padding-left: 30px; padding-right: 30px; } section:first-of-type { padding: 0;}
-           .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-           .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
-           .about-content-wrapper { flex-direction: column-reverse; align-items: center; }
-           .about-text-container { margin-right: 0; margin-top: 30px; text-align: center; }
-           .about-portrait { max-width: 250px; margin-bottom: 20px; }
-           .scroll-indicator { bottom: 8vh; } .hero-content { top: 68%; max-width: 90%;}
-           .hero-tagline { font-size: clamp(1.8rem, 4vw, 3rem); }
-           .services-text-content { max-width: 90%; }
-           #sticky-svg-drawing-container { height: 130px; }
-        }
-        @media (max-width: 768px) {
-           :root { --header-height: 70px; } .site-header { padding: 0 20px; } .logo-link img { height: 40px; }
-           .header-nav ul { gap: 20px; } .header-nav a { font-size: 1rem; } .nav-label { display: none; }
-           .nav-dots { right: 20px; } .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
-           section { padding-left: 20px; padding-right: 20px; } section:first-of-type { padding: 0;}
-           .portfolio-grid { gap: 20px; } .portfolio-item-placeholder { font-size: 1rem; }
-           .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
-           .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; }
-           .contact-form input, .contact-form textarea { padding: 12px 15px; font-size: 0.95rem;}
-           .contact-form button { padding: 12px 25px; font-size: 1rem; }
-           .site-footer { bottom: 20px; } .site-footer .copyright { font-size: 0.75rem; }
-           .site-footer .social-icons { gap: 15px; } .site-footer .social-icons a { font-size: 1.1rem; }
-           .about-portrait { max-width: 200px; } .hero-content { top: 70%; max-width: 90%; }
-           .hero-tagline { font-size: clamp(1.6rem, 5vw, 2.5rem); line-height: 1.4; }
-           .services-title-new { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 40px; }
-           .service-item-new { max-width: 300px; padding: 15px; }
-           .service-item-new h3 { font-size: 1.1rem; } .service-item-new p { font-size: 0.85rem; min-height: 40px;}
-           .service-icon-new { font-size: 2.2rem; }
-           #sticky-svg-drawing-container { height: 120px; }
+        @media (max-width: 992px) {
+            .site-header { padding: 0 25px; } .logo-link img { height: 45px; } .header-nav ul { gap: 25px; }
+            section { padding-left: 30px; padding-right: 30px; } section:first-of-type { padding: 0;}
+            /* Adjust section padding-top for header height consistency */
+            section:not(:first-of-type) { padding-top: calc(var(--header-height) + 40px); }
+            .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+            .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
+            .about-content-wrapper { flex-direction: column-reverse; align-items: center; }
+            .about-text-container { margin-right: 0; margin-top: 30px; text-align: center; }
+            .about-portrait { max-width: 250px; margin-bottom: 20px; }
+            .scroll-indicator { bottom: 8vh; } .hero-content { top: 68%; max-width: 90%;}
+            .hero-tagline { font-size: clamp(1.8rem, 4vw, 3rem); }
+            .services-text-content { max-width: 90%; }
+            #sticky-svg-drawing-container { height: 130px; }
          }
-         @media (max-width: 480px) {
-           :root { --header-height: 65px; } .site-header { padding: 0 15px; } .logo-link img { height: 35px; }
-           .header-nav ul { gap: 15px; } .header-nav a { font-size: 0.9rem; } .nav-dots { right: 15px; }
-           .hero-tagline { font-size: clamp(1.4rem, 6vw, 2rem); line-height: 1.4; }
-           .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-           .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
-           .about-portrait { max-width: 150px; }
-           .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-           .portfolio-grid { grid-template-columns: 1fr; gap: 15px; } .portfolio-item-placeholder { font-size: 0.9rem; }
-           .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
-           .scroll-indicator { bottom: 6vh; font-size: 0.75rem;}
-           section { padding-left: 15px; padding-right: 15px; } section:first-of-type { padding: 0;}
-           .contact-form-container { padding: 25px 15px; } .hero-content { top: 72%; max-width: 95%; }
-           .tagline-word { margin: 0 2px;}
-           .services-text-content { padding: 15px 0; width: 95%; }
-           .services-title-new { font-size: clamp(1.5rem, 6vw, 2.2rem); margin-bottom: 25px;}
-           .services-list-new { flex-direction: column; align-items: center; gap: 20px; }
-           .service-item-new { max-width: 90%; min-width: unset; padding: 12px; }
-           .service-item-new h3 { font-size: 1rem; } .service-item-new p { font-size: 0.8rem; min-height: unset; }
-           .service-icon-new { font-size: 2rem; margin-bottom: 10px;}
-           #sticky-svg-drawing-container { height: 100px; }
+         @media (max-width: 768px) {
+            :root { --header-height: 70px; } .site-header { padding: 0 20px; } .logo-link img { height: 40px; }
+            .header-nav ul { gap: 20px; } .header-nav a { font-size: 1rem; } .nav-label { display: none; }
+            .nav-dots { right: 20px; } .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
+            section { padding-left: 20px; padding-right: 20px; } section:first-of-type { padding: 0;}
+             /* Adjust section padding-top */
+             section:not(:first-of-type) { padding-top: calc(var(--header-height) + 30px); }
+            .portfolio-grid { gap: 20px; } .portfolio-item-placeholder { font-size: 1rem; }
+            .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
+            .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; }
+            .contact-form input, .contact-form textarea { padding: 12px 15px; font-size: 0.95rem;}
+            .contact-form button { padding: 12px 25px; font-size: 1rem; }
+            .site-footer { bottom: 20px; } .site-footer .copyright { font-size: 0.75rem; }
+            .site-footer .social-icons { gap: 15px; } .site-footer .social-icons a { font-size: 1.1rem; }
+            .about-portrait { max-width: 200px; } .hero-content { top: 70%; max-width: 90%; }
+            .hero-tagline { font-size: clamp(1.6rem, 5vw, 2.5rem); line-height: 1.4; }
+            .services-title-new { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 40px; }
+            .service-item-new { max-width: 300px; padding: 15px; }
+            .service-item-new h3 { font-size: 1.1rem; } .service-item-new p { font-size: 0.85rem; min-height: 40px;}
+            .service-icon-new { font-size: 2.2rem; }
+            #sticky-svg-drawing-container { height: 120px; }
+         }
+          @media (max-width: 480px) {
+            :root { --header-height: 65px; } .site-header { padding: 0 15px; } .logo-link img { height: 35px; }
+            .header-nav ul { gap: 15px; } .header-nav a { font-size: 0.9rem; } .nav-dots { right: 15px; }
+            .hero-tagline { font-size: clamp(1.4rem, 6vw, 2rem); line-height: 1.4; }
+            .about-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+            .about-text p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.7; }
+            .about-portrait { max-width: 150px; }
+            .portfolio-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+            .portfolio-grid { grid-template-columns: 1fr; gap: 15px; } .portfolio-item-placeholder { font-size: 0.9rem; }
+            .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+            .scroll-indicator { bottom: 6vh; font-size: 0.75rem;}
+            section { padding-left: 15px; padding-right: 15px; } section:first-of-type { padding: 0;}
+            /* Adjust section padding-top */
+            section:not(:first-of-type) { padding-top: calc(var(--header-height) + 25px); }
+            .contact-form-container { padding: 25px 15px; } .hero-content { top: 72%; max-width: 95%; }
+            .tagline-word { margin: 0 2px;}
+            .services-text-content { padding: 15px 0; width: 95%; }
+            .services-title-new { font-size: clamp(1.5rem, 6vw, 2.2rem); margin-bottom: 25px;}
+            .services-list-new { flex-direction: column; align-items: center; gap: 20px; }
+            .service-item-new { max-width: 90%; min-width: unset; padding: 12px; }
+            .service-item-new h3 { font-size: 1rem; } .service-item-new p { font-size: 0.8rem; min-height: unset; }
+            .service-icon-new { font-size: 2rem; margin-bottom: 10px;}
+            #sticky-svg-drawing-container { height: 100px; }
          }
     </style>
 </head>
@@ -494,12 +517,12 @@
         </div>
         <nav class="header-nav">
              <ul>
-                <li><a href="#section-0" aria-label="Home"><i class="fas fa-home"></i><span class="nav-label">Home</span></a></li>
-                <li><a href="#section-1" aria-label="About"><i class="fas fa-info-circle"></i><span class="nav-label">About</span></a></li>
-                <li><a href="#section-services" aria-label="Services"><i class="fas fa-concierge-bell"></i><span class="nav-label">Services</span></a></li>
-                <li><a href="#section-3" aria-label="Portfolio"><i class="fas fa-drafting-compass"></i><span class="nav-label">Portfolio</span></a></li>
-                <li><a href="#section-4" aria-label="Contact"><i class="fas fa-envelope"></i><span class="nav-label">Contact</span></a></li>
-            </ul>
+                 <li><a href="#section-0" aria-label="Home"><i class="fas fa-home"></i><span class="nav-label">Home</span></a></li>
+                 <li><a href="#section-1" aria-label="About"><i class="fas fa-info-circle"></i><span class="nav-label">About</span></a></li>
+                 <li><a href="#section-services" aria-label="Services"><i class="fas fa-concierge-bell"></i><span class="nav-label">Services</span></a></li>
+                 <li><a href="#section-3" aria-label="Portfolio"><i class="fas fa-drafting-compass"></i><span class="nav-label">Portfolio</span></a></li>
+                 <li><a href="#section-4" aria-label="Contact"><i class="fas fa-envelope"></i><span class="nav-label">Contact</span></a></li>
+             </ul>
         </nav>
     </header>
 
@@ -519,15 +542,15 @@
         </div>
          <div class="hero-content">
              <p class="hero-tagline">
-                 <span class="tagline-word">Design</span>
-                 <span class="tagline-word">that</span>
-                 <span class="tagline-word">inspires</span>
+                  <span class="tagline-word">Design</span>
+                  <span class="tagline-word">that</span>
+                  <span class="tagline-word">inspires</span>
              </p>
-        </div>
-        <div class="scroll-indicator">
-             <span>Explore</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
+         </div>
+         <div class="scroll-indicator">
+              <span>Explore</span>
+             <i class="fas fa-chevron-down"></i>
+         </div>
     </section>
 
     <section class="about-section" id="section-1" data-theme="dark">
@@ -541,10 +564,15 @@
                  </div>
              </div>
              <img src="portrait.jpg" alt="Architect Portrait LAYA Studio" class="about-portrait">
-        </div>
+         </div>
     </section>
 
     <section class="new-services-section" id="section-services" data-theme="light">
+        <div id="sticky-svg-drawing-container">
+            <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 1200 150">
+                <path class="drawing-line" d="M 0 140 L 100 140 V 90 L 150 50 L 200 90 V 140 H 100 L 500 140 V 100 L 560 65 L 620 100 V 140 H 500 L 900 140 V 110 L 975 70 L 1050 110 V 140 H 900 L 1200 140" />
+            </svg>
+        </div>
         <div class="services-background-image"></div>
         <div class="services-text-content">
             <h2 class="services-title-new">What We Offer</h2>
@@ -593,22 +621,17 @@
                  <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" required placeholder="Tell us more about your project or inquiry..."></textarea></div>
                  <button type="submit">Send Message</button>
              </form>
-        </div>
-        <footer class="site-footer">
-            <div class="social-icons">
-                <a href="#" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" aria-label="Pinterest" title="Pinterest"><i class="fab fa-pinterest"></i></a>
-                <a href="#" aria-label="Behance" title="Behance"><i class="fab fa-behance"></i></a>
-            </div>
-            <p class="copyright">&copy; <span id="copyright-year"></span> LAYA Architecture Studio. All rights reserved.</p>
-        </footer>
+         </div>
+         <footer class="site-footer">
+             <div class="social-icons">
+                 <a href="#" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                 <a href="#" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                 <a href="#" aria-label="Pinterest" title="Pinterest"><i class="fab fa-pinterest"></i></a>
+                 <a href="#" aria-label="Behance" title="Behance"><i class="fab fa-behance"></i></a>
+             </div>
+             <p class="copyright">&copy; <span id="copyright-year"></span> LAYA Architecture Studio. All rights reserved.</p>
+         </footer>
     </section>
-    <div id="sticky-svg-drawing-container">
-        <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 1200 150">
-            <path class="drawing-line" d="M 0 140 L 100 140 V 90 L 150 50 L 200 90 V 140 H 100 L 500 140 V 100 L 560 65 L 620 100 V 140 H 500 L 900 140 V 110 L 975 70 L 1050 110 V 140 H 900 L 1200 140" />
-        </svg>
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -616,7 +639,11 @@
     <script>
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-        // --- (Keep initHero, initAbout, initPortfolio, initContact, initHeader, initFooter, initNavigation functions as they were) ---
+        const getHeaderHeight = () => {
+            const header = document.getElementById('site-header');
+            return header ? header.offsetHeight : 75; // Fallback height
+        }
+
         // --- Hero Section Animation ---
         function initHero() {
             const heroSection = document.querySelector('.hero-section');
@@ -626,17 +653,21 @@
             const words = gsap.utils.toArray('.tagline-word', content);
             let currentImageIndex = 0;
             let imageInterval;
+
             if (images.length === 0) { console.warn("No hero images found."); return; }
             gsap.set(images[0], { opacity: 1, pointerEvents: 'auto' });
             gsap.set(images.slice(1), { opacity: 0, pointerEvents: 'none' });
-            gsap.set(content, { opacity: 1 });
+            gsap.set(content, { opacity: 1 }); // Content is visible initially
+
             const wordTl = gsap.timeline({
                 scrollTrigger: { trigger: heroSection, start: "top 65%", toggleActions: "play none none reverse" },
                 delay: 0.1
             });
+
             if (words.length > 0) {
                 wordTl.to(words, { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.5)', stagger: 0.1 });
             } else { console.warn("No tagline words found for animation."); }
+
             function switchImage() {
                  if (images.length <= 1) return;
                  const nextImageIndex = (currentImageIndex + 1) % images.length;
@@ -648,10 +679,12 @@
                    .set(images[nextImageIndex], { pointerEvents: 'auto' });
                  currentImageIndex = nextImageIndex;
              }
-            function startImageTimer() { clearInterval(imageInterval); if (images.length > 1) { imageInterval = setInterval(switchImage, 5000); } }
-            startImageTimer();
-            images.forEach(img => { gsap.to(img, { y: -30, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1.5 } }); });
-            gsap.to(content, { yPercent: -15, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 } });
+             function startImageTimer() { clearInterval(imageInterval); if (images.length > 1) { imageInterval = setInterval(switchImage, 5000); } }
+             startImageTimer();
+
+             // Parallax effect
+             images.forEach(img => { gsap.to(img, { y: -30, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1.5 } }); });
+             gsap.to(content, { yPercent: -15, ease: "none", scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 } });
         }
         // --- About Section Animation ---
         function initAbout() {
@@ -673,8 +706,8 @@
             if (!items.length || !cta) { console.warn("Portfolio items/CTA missing."); return; }
             const tl = gsap.timeline({ scrollTrigger: { trigger: portfolioSection, start: "top 65%", toggleActions: "play none none reverse" } });
             tl.to(container, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
-               .to(items, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.4)', stagger: 0.15 }, "-=0.3")
-               .to(cta, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, "-=0.5");
+              .to(items, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.4)', stagger: 0.15 }, "-=0.3")
+              .to(cta, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, "-=0.5");
         }
         // --- Contact Section Animation ---
         function initContact() {
@@ -687,9 +720,9 @@
             if (!labels.length || !inputs.length || !button) { console.warn("Contact form elements missing."); return; }
             const tl = gsap.timeline({ scrollTrigger: { trigger: contactSection, start: "top 60%", toggleActions: "play none none reverse" } });
             tl.to(container, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
-               .to(labels, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, "-=0.5")
-               .to(inputs, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, "<0.1")
-               .to(button, { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.7)' }, "-=0.3");
+              .to(labels, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, "-=0.5")
+              .to(inputs, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1 }, "<0.1")
+              .to(button, { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.7)' }, "-=0.3");
         }
         // --- Header Setup ---
         function initHeader() {
@@ -704,8 +737,8 @@
                              const target = document.querySelector(href);
                              if (target) {
                                  e.preventDefault();
-                                 const headerHeight = header.offsetHeight;
-                                 gsap.to(window, { duration: 1.2, scrollTo: { y: target, offsetY: (target.id === 'section-0' ? 0 : headerHeight) }, ease: "power2.inOut" });
+                                 const offset = (target.id === 'section-0' ? 0 : getHeaderHeight());
+                                 gsap.to(window, { duration: 1.2, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" });
                              } else { console.warn(`Scroll target '${href}' not found.`); }
                          } catch (error) { console.error(`Error selecting scroll target '${href}':`, error); }
                      }
@@ -714,14 +747,14 @@
              const logoLink = document.querySelector('.logo-link');
               if (logoLink) {
                   logoLink.addEventListener('click', function (e) {
-                       const href = this.getAttribute('href');
-                       if (href === '#section-0') {
-                            e.preventDefault();
-                            const target = document.getElementById('section-0');
-                            if(target){ gsap.to(window, { duration: 1.2, scrollTo: { y: target }, ease: "power2.inOut" }); }
-                       }
+                      const href = this.getAttribute('href');
+                      if (href === '#section-0') {
+                          e.preventDefault();
+                          const target = document.getElementById('section-0');
+                          if(target){ gsap.to(window, { duration: 1.2, scrollTo: { y: target }, ease: "power2.inOut" }); }
+                      }
                    });
-              }
+               }
         }
         // --- Footer Setup ---
         function initFooter() {
@@ -738,70 +771,96 @@
               const sections = Array.from(sectionsNodeList);
               const navDots = document.querySelectorAll('.nav-dot');
               const body = document.body;
-              const header = document.getElementById('site-header');
+              const header = document.getElementById('site-header'); // Needed for height calculation
+
               if (navDots.length === 0 || sections.length === 0 || !header) { console.warn("Navigation elements missing (dots, sections, or header)."); return; }
               if (navDots.length !== sections.length) { console.warn(`Dot/Section mismatch: ${navDots.length} dots, ${sections.length} sections. Navigation might be inaccurate.`); }
-              const getHeaderHeight = () => header.offsetHeight;
+
               navDots.forEach(dot => {
                   dot.addEventListener('click', (e) => {
                       e.preventDefault();
                       const sectionIdSuffix = dot.getAttribute('data-section');
                       const targetSection = document.getElementById(`section-${sectionIdSuffix}`);
-                      if (targetSection) { gsap.to(window, { duration: 1.2, scrollTo: { y: targetSection, offsetY: (targetSection.id === 'section-0' ? 0 : getHeaderHeight()) }, ease: "power2.inOut" }); }
+                      if (targetSection) {
+                          const offset = (targetSection.id === 'section-0' ? 0 : getHeaderHeight());
+                          gsap.to(window, { duration: 1.2, scrollTo: { y: targetSection, offsetY: offset }, ease: "power2.inOut" });
+                      }
                       else { console.error(`Target section #section-${sectionIdSuffix} not found for dot click.`); }
                   });
               });
+
               function updateActiveState(activeSectionIdSuffix, activeTheme) {
                   navDots.forEach((dot) => { dot.classList.toggle('active', dot.getAttribute('data-section') === activeSectionIdSuffix); });
                   const currentBodyTheme = body.classList.contains('on-light-section') ? 'light' : 'dark';
                   if (activeTheme !== currentBodyTheme) { body.classList.toggle('on-light-section', activeTheme === 'light'); }
               }
+
               sections.forEach((section) => {
                   const sectionIdSuffix = section.id.replace('section-', '');
                   const theme = section.getAttribute('data-theme') || 'dark';
                   ScrollTrigger.create({
                       trigger: section,
+                      // Adjust start based on whether it's the first section or not
                       start: () => section.id === 'section-0' ? `top top` : `top top+=${getHeaderHeight()}px`,
-                      end: () => { const isLastSection = section === sections[sections.length - 1]; return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight()}px`; },
+                      // End slightly before the *next* section starts (or bottom for the last one)
+                      end: () => {
+                          const isLastSection = section === sections[sections.length - 1];
+                          return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight() + 1}px`; // +1 to avoid overlap
+                      },
                       id: `section-nav-${sectionIdSuffix}`,
-                      onEnter: () => updateActiveState(sectionIdSuffix, theme),
-                      onEnterBack: () => updateActiveState(sectionIdSuffix, theme),
-                      invalidateOnRefresh: true
+                      onToggle: (self) => {
+                          if (self.isActive) {
+                              updateActiveState(sectionIdSuffix, theme);
+                          }
+                      },
+                      // Use onToggle instead of onEnter/onEnterBack for better accuracy with dynamic heights
+                      // onEnter: () => updateActiveState(sectionIdSuffix, theme),
+                      // onEnterBack: () => updateActiveState(sectionIdSuffix, theme),
+                      invalidateOnRefresh: true // Recalculate on resize
                   });
               });
+
                let scrollIndicatorState = { scrolled: window.scrollY > 50 };
                body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
                const scrollListener = () => {
-                  const isScrolled = window.scrollY > 50;
-                  if (isScrolled !== scrollIndicatorState.scrolled) { body.classList.toggle('scrolled', isScrolled); scrollIndicatorState.scrolled = isScrolled; }
-              };
+                 const isScrolled = window.scrollY > 50;
+                 if (isScrolled !== scrollIndicatorState.scrolled) { body.classList.toggle('scrolled', isScrolled); scrollIndicatorState.scrolled = isScrolled; }
+               };
                window.addEventListener('scroll', scrollListener, { passive: true });
+
+               // Initial state check after slight delay for layout stabilization
                setTimeout(() => {
                    let initialSectionIdSuffix = '0';
                    let initialTheme = 'dark';
                    const currentScrollY = window.scrollY;
                    const currentHeaderHeight = getHeaderHeight();
-                   const threshold = currentHeaderHeight + 20;
+                   const threshold = currentHeaderHeight / 2; // Check roughly center of header overlap
+
                    for (let i = sections.length - 1; i >= 0; i--) {
                        const section = sections[i];
-                       const sectionTopScrollY = section.offsetTop;
-                       if (currentScrollY + threshold >= sectionTopScrollY) { initialSectionIdSuffix = section.id.replace('section-', ''); initialTheme = section.getAttribute('data-theme') || 'dark'; break; }
+                       const sectionTopScrollY = ScrollTrigger.isInViewport(section) ? section.getBoundingClientRect().top + currentScrollY : section.offsetTop; // More reliable top position
+                       // Check if the section top is above the threshold point in the viewport
+                       if (currentScrollY >= sectionTopScrollY - threshold) {
+                            initialSectionIdSuffix = section.id.replace('section-', '');
+                            initialTheme = section.getAttribute('data-theme') || 'dark';
+                            break;
+                        }
                    }
                    updateActiveState(initialSectionIdSuffix, initialTheme);
                    scrollIndicatorState.scrolled = window.scrollY > 50;
                    body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
-                   ScrollTrigger.refresh();
+                   ScrollTrigger.refresh(); // Refresh triggers after initial state check
                }, 150);
         }
 
 
-        // --- Combined Services Section Animation Sequence ---
+        // --- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ---
+        // --- NEW: Services Section Animation Sequence with Pinning ---
+        // --- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ---
         function initServicesSequence() {
             const triggerSection = document.getElementById('section-services');
-            // Sticky SVG Elements
             const stickyContainer = document.getElementById('sticky-svg-drawing-container');
             const drawingLine = stickyContainer?.querySelector('.drawing-line');
-            // Service Section Content Elements
             const bgImage = triggerSection?.querySelector('.services-background-image');
             const textContent = triggerSection?.querySelector('.services-text-content');
             const title = textContent?.querySelector('.services-title-new');
@@ -809,7 +868,12 @@
 
             if (!triggerSection || !stickyContainer || !drawingLine || !bgImage || !textContent || !title || items.length === 0) {
                 console.warn("Services sequence elements missing. Aborting animation setup.");
-                if(stickyContainer) stickyContainer.style.display = 'none';
+                if(stickyContainer) stickyContainer.style.display = 'none'; // Hide broken element
+                // Optionally reveal content directly if animation fails
+                if(bgImage) gsap.set(bgImage, { opacity: 0.7 });
+                if(textContent) gsap.set(textContent, { autoAlpha: 1, y: 0 });
+                if(title) gsap.set(title, { autoAlpha: 1, y: 0 });
+                if(items.length > 0) gsap.set(items, { autoAlpha: 1, y: 0 });
                 return;
             }
 
@@ -820,124 +884,134 @@
             gsap.set(title, { autoAlpha: 0, y: 20 });
             gsap.set(items, { autoAlpha: 0, y: 20 });
 
-
             let pathLength = 0;
-            let masterTl;
 
-            const setupTimeline = () => {
-                try {
-                    pathLength = drawingLine.getTotalLength();
-                    if (pathLength <= 0) throw new Error("SVG path length is zero.");
+            try {
+                pathLength = drawingLine.getTotalLength();
+                if (pathLength <= 0) throw new Error("SVG path length is zero or could not be calculated.");
+                gsap.set(drawingLine, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
 
-                    gsap.set(drawingLine, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
+                // --- Timeline for Drawing (controlled by scrub) ---
+                const drawingTimeline = gsap.timeline();
+                drawingTimeline
+                    // Fade in container quickly at the beginning
+                    .to(stickyContainer, { autoAlpha: 1, duration: 0.1 }, 0)
+                    // Draw the line over most of the duration
+                    .to(drawingLine, { strokeDashoffset: 0, ease: 'linear' }, 0) // Start drawing immediately
+                    // Fade out container towards the end
+                    .to(stickyContainer, { autoAlpha: 0, duration: 0.1 }, 0.9); // Start fade out at 90% point
 
-                    masterTl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: triggerSection,
-                            start: "top center",
-                            end: "bottom center",
-                            toggleActions: "play none none reverse",
-                            // markers: true
-                        }
-                    });
+                // --- Pinning & Drawing ScrollTrigger ---
+                ScrollTrigger.create({
+                    trigger: triggerSection,
+                    pin: true, // Pin the trigger section itself
+                    // Pin spacer adds padding automatically, adjust start accordingly
+                    start: () => `top top+=${getHeaderHeight()}px`,
+                    // Define how much scroll distance the pin+scrub lasts. Adjust as needed!
+                    // This determines how much scrolling animates the line.
+                    end: "+=1500", // e.g., Pin lasts for 1500px of scroll
+                    scrub: 1.5, // Smoothly link animation progress to scroll (adjust number for smoothness)
+                    animation: drawingTimeline,
+                    toggleClass: "is-pinned", // Add class to #section-services when pinned
+                    id: "services-pin-draw",
+                    invalidateOnRefresh: true, // Recalculate on resize
+                    // markers: true // Uncomment for debugging start/end points
+                });
 
-                    // --- Animation Steps ---
-                    masterTl
-                        // 1. Fade in sticky container
-                        .to(stickyContainer, {
-                            autoAlpha: 1,
-                            duration: 0.4, // Fade in duration
-                            ease: 'power1.in'
-                        })
-                        // 2. Draw the SVG line (Faster)
-                        .to(drawingLine, {
-                            strokeDashoffset: 0,
-                            duration: 2.0, // <<< FASTER DRAWING DURATION (halved from 4.0)
-                            ease: 'linear'
-                        })
-                        // 3. Fade out sticky container
-                        .to(stickyContainer, {
-                            autoAlpha: 0,
-                            duration: 0.4, // Fade out duration
-                            ease: 'power1.out'
-                        }, "+=0.1") // Start 0.1s after drawing finishes
-                        // 4. Fade in background image
-                        .to(bgImage, {
-                            opacity: 0.7,
-                            duration: 1.5,
-                            ease: 'power1.inOut'
-                        }, ">") // Start after sticky container fade out completes
-                        // 5. Fade in text content container
-                        .to(textContent, {
-                            autoAlpha: 1,
-                            y: 0,
-                            duration: 1.0,
-                            ease: 'power2.out'
-                        }, "-=1.2")
-                        // 6. Fade in title
-                        .to(title, {
-                            autoAlpha: 1,
-                            y: 0,
-                            duration: 0.7,
-                            ease: 'power2.out'
-                        }, "<+=0.2")
-                        // 7. Fade in service items
-                        .to(items, {
-                            autoAlpha: 1,
-                            y: 0,
-                            duration: 0.8,
-                            ease: 'power2.out',
-                            stagger: 0.25
-                        }, "<+=0.2");
+                // --- Timeline for Content Reveal (plays normally) ---
+                const contentTimeline = gsap.timeline({ paused: true }); // Create paused initially
+                contentTimeline
+                    .to(bgImage, { opacity: 0.7, duration: 1.0, ease: 'power1.inOut' })
+                    .to(textContent, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power2.out' }, "-=0.8") // Overlap slightly
+                    .to(title, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' }, "<+=0.1")
+                    .to(items, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power2.out', stagger: 0.2 }, "<+=0.1");
 
-                } catch (error) {
-                    console.error("Error setting up services animation timeline:", error);
-                    if (stickyContainer) stickyContainer.style.display = 'none';
-                    if (bgImage) bgImage.style.opacity = '0';
-                    if (textContent) textContent.style.visibility = 'hidden';
-                }
-            };
+                // --- Content Reveal ScrollTrigger ---
+                // This trigger starts LATER, after the pinning/drawing has progressed significantly.
+                ScrollTrigger.create({
+                    trigger: triggerSection,
+                    // Start when the user has scrolled, e.g., 1000px *into* the pinned section's scroll duration.
+                    // The pin starts at `top top+header`, so this is relative to that.
+                    start: () => `top top+=${getHeaderHeight() + 1000}px`, // Adjust the '1000' value
+                    end: "bottom bottom", // End when the section is fully scrolled past
+                    toggleActions: "play none none reverse", // Play the content animation once when entering
+                    animation: contentTimeline, // Target the paused content timeline
+                    id: "services-content-reveal",
+                    invalidateOnRefresh: true,
+                    // markers: { startColor: "green", endColor: "red", indent: 50 } // Uncomment for debugging
+                    // Note: No 'pin' or 'scrub' here, just play the animation.
+                    // No 'containerAnimation' needed here as start is absolute document scroll position
+                });
 
-            setTimeout(setupTimeline, 150);
+            } catch (error) {
+                console.error("Error setting up services animation (SVG Path likely):", error);
+                // Fallback behavior if SVG fails
+                 if(stickyContainer) stickyContainer.style.display = 'none';
+                 if(bgImage) gsap.set(bgImage, { opacity: 0.7 });
+                 // Simple fade in for content if SVG part fails
+                 ScrollTrigger.create({
+                     trigger: triggerSection,
+                     start: () => `top center+=${getHeaderHeight()}px`,
+                     end: "bottom bottom",
+                     toggleClass: "content-visible", // Use CSS or another timeline if needed
+                     onEnter: () => {
+                         gsap.to(textContent, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power2.out' });
+                         gsap.to(title, { autoAlpha: 1, y: 0, duration: 0.6, delay: 0.2, ease: 'power2.out' });
+                         gsap.to(items, { autoAlpha: 1, y: 0, duration: 0.7, delay: 0.4, stagger: 0.2, ease: 'power2.out' });
+                     },
+                     onLeaveBack: () => {
+                         gsap.set([textContent, title, items], { autoAlpha: 0, y: 20 });
+                     }
+                 });
+            }
         }
+        // --- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ---
+        // --- END OF NEW Services Section Animation Sequence ---
+        // --- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ---
 
 
         // --- Main Initialization Function ---
         function initAll() {
             console.log("Initializing LAYA animations...");
             initHeader();
-            initNavigation();
+            initNavigation(); // Must run AFTER header for height calc, BEFORE section triggers
             initFooter();
             initHero();
             initAbout();
-            initServicesSequence(); // <<< CALL NEW COMBINED SEQUENCE
+            initServicesSequence(); // <<< CALL NEW PINNING SEQUENCE
             initPortfolio();
             initContact();
 
-            // --- Generic smooth scroll ---
+            // --- Generic smooth scroll for other links ---
              document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                 // Exclude header/nav-dot links already handled
                  if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots')) {
                      anchor.addEventListener('click', function (e) {
                          const href = this.getAttribute('href');
-                         if (href === '#portfolio-full') { e.preventDefault(); console.log("Portfolio CTA clicked - Implement desired action."); return; }
+                         if (href === '#portfolio-full') { // Handle specific CTAs if needed
+                             e.preventDefault();
+                             console.log("Portfolio CTA clicked - Implement desired action.");
+                             return;
+                         }
                          if (href && href.startsWith('#') && href.length > 1) {
                              try {
                                  const target = document.querySelector(href);
-                                 const header = document.getElementById('site-header');
-                                 const offset = header ? header.offsetHeight : 75;
-                                 if (target) { e.preventDefault(); gsap.to(window, { duration: 1, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" }); }
-                                 else { console.warn("Smooth scroll target not found:", href); }
+                                 const offset = getHeaderHeight(); // Standard offset for non-hero links
+                                 if (target) {
+                                     e.preventDefault();
+                                     gsap.to(window, { duration: 1, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" });
+                                 } else { console.warn("Smooth scroll target not found:", href); }
                              } catch (error) { console.warn("Could not find target for anchor:", href, error); }
-                         } else if (href === "#") { e.preventDefault(); }
+                         } else if (href === "#") { e.preventDefault(); } // Prevent jump for empty hash
                      });
                  }
              });
 
-            // Final refresh after a slightly longer delay
+            // Final refresh after a slightly longer delay to ensure layout is stable
             setTimeout(() => {
                 ScrollTrigger.refresh();
                 console.log("ScrollTrigger refreshed after init.");
-            }, 300);
+            }, 300); // Increased delay slightly
 
             // Refresh ScrollTrigger on resize (debounced)
             let resizeTimer;
@@ -945,10 +1019,7 @@
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(() => {
                    console.log("Resizing - Refreshing ScrollTrigger...");
-                   // Note: Re-calculating path length on resize might be needed if
-                   // the SVG scales/changes significantly, but can be complex.
-                   // For now, just refresh existing triggers.
-                   ScrollTrigger.refresh(true);
+                   ScrollTrigger.refresh(true); // Pass true to kill and recreate (safer for complex setups)
                 }, 250);
             });
 
@@ -959,7 +1030,7 @@
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initAll);
         } else {
-            initAll();
+            initAll(); // DOM already loaded
         }
     </script>
 </body>
