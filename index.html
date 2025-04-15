@@ -679,60 +679,6 @@
          pointer-events: none;
       }
 
-      /* --- Services Animation --- */
-      .services-section {
-        position: relative;
-        background-image: url('services.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
-      
-      .services-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.9);
-        z-index: 0;
-      }
-      
-      .services-container {
-        position: relative;
-        z-index: 2;
-      }
-      
-      .services-animation-container {
-        position: absolute;
-        bottom: 30%;
-        left: 0;
-        width: 100%;
-        height: 40%;
-        z-index: 1;
-        pointer-events: none;
-      }
-      
-      .services-animation-svg {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 80%;
-        max-width: 800px;
-        height: auto;
-      }
-      
-      .house-path {
-        fill: none;
-        stroke: var(--accent-color-1);
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-dasharray: 1000;
-        stroke-dashoffset: 1000;
-      }
 
       /* --- RESPONSIVE STYLES --- */
        @media (max-width: 992px) {
@@ -865,18 +811,6 @@
     </section>
 
     <section class="services-section" id="section-services" data-theme="light">
-        <div class="services-animation-container">
-            <svg class="services-animation-svg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                <!-- Simple House 1 -->
-                <path class="house-path house-1" d="M100,250 L100,150 L200,80 L300,150 L300,250 Z M100,250 L300,250 M170,250 L170,200 L230,200 L230,250" />
-                
-                <!-- Simple House 2 -->
-                <path class="house-path house-2" d="M400,250 L400,180 L500,100 L600,180 L600,250 Z M400,250 L600,250 M470,250 L470,210 L530,210 L530,250 M520,150 A20,20 0 1,1 520,149.9" />
-                
-                <!-- Simple House 3 -->
-                <path class="house-path house-3" d="M650,250 L650,170 L700,120 L750,170 L750,250 Z M650,250 L750,250 M680,250 L680,210 L720,210 L720,250 M670,170 L730,170" />
-            </svg>
-        </div>
         <div class="services-container">
             <h2 class="services-title">What We Offer</h2>
             <div class="services-grid">
@@ -1034,61 +968,12 @@
         function initServices() {
             const servicesSection = document.querySelector('.services-section');
             const container = document.querySelector('.services-container');
-            const housePaths = gsap.utils.toArray('.house-path');
-            const overlay = servicesSection.querySelector(':before');
-            
-            if (!servicesSection || !container || !housePaths.length) { 
-                console.warn("Services elements missing."); 
-                return; 
-            }
-            
+            if (!servicesSection || !container) { console.warn("Services elements missing."); return; }
             const items = gsap.utils.toArray('.service-item', container);
-            if (items.length === 0) { 
-                console.warn("No service items found."); 
-                return; 
-            }
-            
-            // Initially hide the services content
-            gsap.set(container, { opacity: 0, y: 50 });
-            gsap.set(items, { opacity: 0, y: 30, scale: 0.95 });
-            
-            // Create the animation timeline
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: servicesSection,
-                    start: "top 60%", // Trigger a bit earlier
-                    toggleActions: "play none none reverse"
-                }
-            });
-            
-            // First animate the house drawings
-            tl.to(housePaths, {
-                strokeDashoffset: 0,
-                duration: 2,
-                ease: "power2.inOut",
-                stagger: 0.3
-            })
-            // Then fade them out
-            .to(housePaths, {
-                opacity: 0,
-                duration: 0.8,
-                ease: "power1.out"
-            })
-            // Then fade in the services content
-            .to(container, { 
-                opacity: 1, 
-                y: 0, 
-                duration: 0.8, 
-                ease: 'power2.out' 
-            }, "-=0.4")
-            .to(items, { 
-                opacity: 1, 
-                y: 0, 
-                scale: 1, 
-                duration: 0.6, 
-                ease: 'power2.out', 
-                stagger: 0.15 
-            }, "-=0.5");
+            if (items.length === 0) { console.warn("No service items found."); return; }
+            const tl = gsap.timeline({ scrollTrigger: { trigger: servicesSection, start: "top 70%", toggleActions: "play none none reverse" } });
+            tl.to(container, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+            tl.to(items, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'power2.out', stagger: 0.15 }, "-=0.3");
         }
         function initPortfolio() {
             const portfolioSection = document.querySelector('.portfolio-section');
