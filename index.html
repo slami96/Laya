@@ -207,18 +207,24 @@
           justify-content: center;
           align-items: center;
           position: relative; /* Needed for absolute positioning inside */
-          overflow: hidden;
+          overflow: hidden; /* Clip content, but allow pinned SVG to show */
           padding: 50px;
           /* Add top padding equal to header height for content clearance */
           padding-top: calc(var(--header-height) + 50px);
           /* Add negative margin to compensate for padding, making section backgrounds meet */
-          margin-top: calc(-1 * var(--header-height));
+          /* Pinning handles the overlap now, so margin-top might not be needed */
+           margin-top: calc(-1 * var(--header-height));
       }
       /* First section doesn't need the negative margin or top padding compensation */
       section:first-of-type {
           margin-top: 0;
           padding-top: 0; /* Hero section likely needs full height */
       }
+       /* Prevent margin collapse issues when pinning */
+      #section-services {
+        overflow: visible; /* Allow pinned SVG to be seen */
+      }
+
 
       /* --- SECTION 0: Hero --- */
       .hero-section {
@@ -278,14 +284,13 @@
           align-items: center; justify-content: center; padding: 50px;
           /* Ensure padding compensates for header even when pinned */
           padding-top: calc(var(--header-height) + 50px);
-          /* Negative margin not needed if pinning the section itself */
-          /* margin-top: calc(-1 * var(--header-height)); */
-          min-height: 100vh; overflow: visible; /* Allow pinned elements */ padding-bottom: 50px;
+          min-height: 100vh; overflow: hidden; /* Change back to hidden */ padding-bottom: 50px;
+          /* Negative margin might be needed again if pinning adds space incorrectly */
+           margin-top: calc(-1 * var(--header-height));
       }
       .services-background-image {
           position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('services.jpg');
           background-size: cover; background-position: center center; opacity: 0; z-index: 1; will-change: opacity;
-          /* Ensure it stays behind content when section is pinned */
           pointer-events: none;
       }
       .services-text-content {
@@ -419,36 +424,40 @@
       .scroll-indicator i { animation: scrollArrow 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); }
       body.scrolled .scroll-indicator { opacity: 0; pointer-events: none; }
 
-      /* --- STICKY SVG CONTAINER --- */
+      /* --- STICKY SVG CONTAINER (POSITION FIXED) --- */
       #sticky-svg-drawing-container {
-          /* Changed from fixed to absolute, positioned within the pinned section */
-          position: absolute;
-          bottom: 0; left: 0; width: 100%; height: 150px;
-          z-index: 50; opacity: 0; visibility: hidden; /* Controlled by JS autoAlpha */
-          pointer-events: none; overflow: hidden; background: transparent;
-          /* It will be positioned relative to #section-services when pinned */
+          position: fixed; /* Use fixed positioning */
+          bottom: 5vh; /* Raise it from the bottom */
+          left: 0;
+          width: 100%;
+          height: 20vh; /* Make it taller */
+          z-index: 50;
+          opacity: 0; visibility: hidden; /* Controlled by JS autoAlpha */
+          pointer-events: none;
+          overflow: hidden; /* Keep overflow hidden */
+          background: transparent;
       }
       #sticky-svg-drawing-container svg {
           display: block; width: 100%; height: 100%; overflow: visible;
-          position: absolute; bottom: 0; left: 0;
+          position: absolute; bottom: 0; left: 0; /* Position SVG at bottom of container */
       }
       #sticky-svg-drawing-container .drawing-line {
-          fill: none; stroke: var(--accent-color-4); stroke-width: 3; /* Slightly thicker */
+          fill: none; stroke: var(--accent-color-1); /* Changed stroke color for visibility */
+          stroke-width: 3;
           stroke-linecap: round; stroke-linejoin: round; will-change: stroke-dashoffset;
       }
 
-      /* Add a class for when the section is pinned (optional) */
+      /* Optional: Style for pinned section */
       #section-services.is-pinned {
-        /* Example: you could add subtle effects if needed */
-        /* border: 1px dashed red; */
+        /* Add any styles needed when pinned */
       }
 
-      /* --- RESPONSIVE STYLES --- */
+
+      /* --- RESPONSIVE STYLES --- (Keep existing responsive styles) */
         @media (max-width: 992px) {
             .site-header { padding: 0 25px; } .logo-link img { height: 45px; } .header-nav ul { gap: 25px; }
             section { padding-left: 30px; padding-right: 30px; } section:first-of-type { padding: 0;}
-            /* Adjust section padding-top for header height consistency */
-            section:not(:first-of-type) { padding-top: calc(var(--header-height) + 40px); }
+            section:not(:first-of-type) { padding-top: calc(var(--header-height) + 40px); margin-top: calc(-1 * var(--header-height)); }
             .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
             .contact-form-container { padding: 40px clamp(15px, 6vw, 60px); }
             .about-content-wrapper { flex-direction: column-reverse; align-items: center; }
@@ -457,15 +466,14 @@
             .scroll-indicator { bottom: 8vh; } .hero-content { top: 68%; max-width: 90%;}
             .hero-tagline { font-size: clamp(1.8rem, 4vw, 3rem); }
             .services-text-content { max-width: 90%; }
-            #sticky-svg-drawing-container { height: 130px; }
+            #sticky-svg-drawing-container { height: 18vh; bottom: 4vh; } /* Adjust sticky SVG */
          }
          @media (max-width: 768px) {
             :root { --header-height: 70px; } .site-header { padding: 0 20px; } .logo-link img { height: 40px; }
             .header-nav ul { gap: 20px; } .header-nav a { font-size: 1rem; } .nav-label { display: none; }
             .nav-dots { right: 20px; } .nav-dot { width: 9px; height: 9px; margin: 10px 0; }
             section { padding-left: 20px; padding-right: 20px; } section:first-of-type { padding: 0;}
-             /* Adjust section padding-top */
-             section:not(:first-of-type) { padding-top: calc(var(--header-height) + 30px); }
+             section:not(:first-of-type) { padding-top: calc(var(--header-height) + 30px); margin-top: calc(-1 * var(--header-height)); }
             .portfolio-grid { gap: 20px; } .portfolio-item-placeholder { font-size: 1rem; }
             .contact-form-container { padding: 30px clamp(10px, 4vw, 40px); }
             .contact-title { font-size: clamp(1.6rem, 5vw, 2.5rem); margin-bottom: 30px; }
@@ -479,7 +487,7 @@
             .service-item-new { max-width: 300px; padding: 15px; }
             .service-item-new h3 { font-size: 1.1rem; } .service-item-new p { font-size: 0.85rem; min-height: 40px;}
             .service-icon-new { font-size: 2.2rem; }
-            #sticky-svg-drawing-container { height: 120px; }
+            #sticky-svg-drawing-container { height: 15vh; bottom: 3vh; } /* Adjust sticky SVG */
          }
           @media (max-width: 480px) {
             :root { --header-height: 65px; } .site-header { padding: 0 15px; } .logo-link img { height: 35px; }
@@ -493,8 +501,7 @@
             .contact-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
             .scroll-indicator { bottom: 6vh; font-size: 0.75rem;}
             section { padding-left: 15px; padding-right: 15px; } section:first-of-type { padding: 0;}
-            /* Adjust section padding-top */
-            section:not(:first-of-type) { padding-top: calc(var(--header-height) + 25px); }
+            section:not(:first-of-type) { padding-top: calc(var(--header-height) + 25px); margin-top: calc(-1 * var(--header-height)); }
             .contact-form-container { padding: 25px 15px; } .hero-content { top: 72%; max-width: 95%; }
             .tagline-word { margin: 0 2px;}
             .services-text-content { padding: 15px 0; width: 95%; }
@@ -503,7 +510,7 @@
             .service-item-new { max-width: 90%; min-width: unset; padding: 12px; }
             .service-item-new h3 { font-size: 1rem; } .service-item-new p { font-size: 0.8rem; min-height: unset; }
             .service-icon-new { font-size: 2rem; margin-bottom: 10px;}
-            #sticky-svg-drawing-container { height: 100px; }
+             #sticky-svg-drawing-container { height: 12vh; bottom: 2vh; }/* Adjust sticky SVG */
          }
     </style>
 </head>
@@ -554,7 +561,7 @@
     </section>
 
     <section class="about-section" id="section-1" data-theme="dark">
-         <div class="about-content-wrapper">
+        <div class="about-content-wrapper">
              <div class="about-text-container">
                  <h2 class="about-title">Our Philosophy</h2>
                  <div class="about-text">
@@ -568,11 +575,6 @@
     </section>
 
     <section class="new-services-section" id="section-services" data-theme="light">
-        <div id="sticky-svg-drawing-container">
-            <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 1200 150">
-                <path class="drawing-line" d="M 0 140 L 100 140 V 90 L 150 50 L 200 90 V 140 H 100 L 500 140 V 100 L 560 65 L 620 100 V 140 H 500 L 900 140 V 110 L 975 70 L 1050 110 V 140 H 900 L 1200 140" />
-            </svg>
-        </div>
         <div class="services-background-image"></div>
         <div class="services-text-content">
             <h2 class="services-title-new">What We Offer</h2>
@@ -612,7 +614,7 @@
     </section>
 
     <section class="contact-section" id="section-4" data-theme="light">
-         <div class="contact-form-container">
+        <div class="contact-form-container">
              <h2 class="contact-title">Get In Touch</h2>
              <form class="contact-form" action="#" method="POST">
                  <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" required placeholder="Your Full Name"></div>
@@ -633,6 +635,12 @@
          </footer>
     </section>
 
+    <div id="sticky-svg-drawing-container">
+        <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 1200 150">
+             <path class="drawing-line" d="M 0 100 L 100 100 V 50 L 150 10 L 200 50 V 100 H 100 L 500 100 V 60 L 560 25 L 620 60 V 100 H 500 L 900 100 V 70 L 975 30 L 1050 70 V 100 H 900 L 1200 100" />
+        </svg>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
@@ -644,6 +652,7 @@
             return header ? header.offsetHeight : 75; // Fallback height
         }
 
+        // --- (Keep initHero, initAbout, initPortfolio, initContact, initHeader, initFooter, initNavigation functions as they were before the previous attempt) ---
         // --- Hero Section Animation ---
         function initHero() {
             const heroSection = document.querySelector('.hero-section');
@@ -660,12 +669,12 @@
             gsap.set(content, { opacity: 1 }); // Content is visible initially
 
             const wordTl = gsap.timeline({
-                scrollTrigger: { trigger: heroSection, start: "top 65%", toggleActions: "play none none reverse" },
+                scrollTrigger: { trigger: heroSection, start: "top 65%", toggleActions: "play none none reset" }, // Use reset on scroll up
                 delay: 0.1
             });
 
             if (words.length > 0) {
-                wordTl.to(words, { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.5)', stagger: 0.1 });
+                wordTl.from(words, { opacity: 0, scale: 0.5, duration: 0.7, ease: 'back.out(1.5)', stagger: 0.1 });
             } else { console.warn("No tagline words found for animation."); }
 
             function switchImage() {
@@ -800,12 +809,10 @@
                   const theme = section.getAttribute('data-theme') || 'dark';
                   ScrollTrigger.create({
                       trigger: section,
-                      // Adjust start based on whether it's the first section or not
                       start: () => section.id === 'section-0' ? `top top` : `top top+=${getHeaderHeight()}px`,
-                      // End slightly before the *next* section starts (or bottom for the last one)
                       end: () => {
                           const isLastSection = section === sections[sections.length - 1];
-                          return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight() + 1}px`; // +1 to avoid overlap
+                          return isLastSection ? "bottom bottom" : `bottom top+=${getHeaderHeight() + 1}px`;
                       },
                       id: `section-nav-${sectionIdSuffix}`,
                       onToggle: (self) => {
@@ -813,10 +820,7 @@
                               updateActiveState(sectionIdSuffix, theme);
                           }
                       },
-                      // Use onToggle instead of onEnter/onEnterBack for better accuracy with dynamic heights
-                      // onEnter: () => updateActiveState(sectionIdSuffix, theme),
-                      // onEnterBack: () => updateActiveState(sectionIdSuffix, theme),
-                      invalidateOnRefresh: true // Recalculate on resize
+                      invalidateOnRefresh: true
                   });
               });
 
@@ -828,57 +832,87 @@
                };
                window.addEventListener('scroll', scrollListener, { passive: true });
 
-               // Initial state check after slight delay for layout stabilization
                setTimeout(() => {
                    let initialSectionIdSuffix = '0';
                    let initialTheme = 'dark';
                    const currentScrollY = window.scrollY;
                    const currentHeaderHeight = getHeaderHeight();
-                   const threshold = currentHeaderHeight / 2; // Check roughly center of header overlap
+                   const threshold = currentHeaderHeight / 2;
 
                    for (let i = sections.length - 1; i >= 0; i--) {
                        const section = sections[i];
-                       const sectionTopScrollY = ScrollTrigger.isInViewport(section) ? section.getBoundingClientRect().top + currentScrollY : section.offsetTop; // More reliable top position
-                       // Check if the section top is above the threshold point in the viewport
-                       if (currentScrollY >= sectionTopScrollY - threshold) {
+                        // Use getBoundingClientRect for potentially more accurate viewport position check
+                       const rect = section.getBoundingClientRect();
+                       const sectionTopRelativeToViewport = rect.top;
+                       const sectionBottomRelativeToViewport = rect.bottom;
+                       const viewportHeight = window.innerHeight;
+
+                       // Check if the section is significantly visible (e.g., top edge is above midpoint, bottom edge is below midpoint)
+                       if (sectionTopRelativeToViewport < viewportHeight / 2 && sectionBottomRelativeToViewport > threshold) {
                             initialSectionIdSuffix = section.id.replace('section-', '');
                             initialTheme = section.getAttribute('data-theme') || 'dark';
                             break;
                         }
+                       // Fallback for the very top section if nothing else matches
+                       else if (i === 0 && currentScrollY < section.offsetHeight / 2) {
+                            initialSectionIdSuffix = '0';
+                            initialTheme = 'dark';
+                            break;
+                       }
                    }
                    updateActiveState(initialSectionIdSuffix, initialTheme);
                    scrollIndicatorState.scrolled = window.scrollY > 50;
                    body.classList.toggle('scrolled', scrollIndicatorState.scrolled);
-                   ScrollTrigger.refresh(); // Refresh triggers after initial state check
-               }, 150);
+                   ScrollTrigger.refresh();
+               }, 200); // Slightly longer delay
         }
 
 
         // --- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ---
-        // --- NEW: Services Section Animation Sequence with Pinning ---
+        // --- REVISED: Services Section Animation Sequence ---
         // --- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ---
         function initServicesSequence() {
             const triggerSection = document.getElementById('section-services');
+            // SVG Drawing Elements (using fixed container now)
             const stickyContainer = document.getElementById('sticky-svg-drawing-container');
             const drawingLine = stickyContainer?.querySelector('.drawing-line');
+            // Service Section Content Elements
             const bgImage = triggerSection?.querySelector('.services-background-image');
             const textContent = triggerSection?.querySelector('.services-text-content');
             const title = textContent?.querySelector('.services-title-new');
             const items = textContent ? gsap.utils.toArray('.service-item-new', textContent) : [];
 
+            // Combined check for all necessary elements
             if (!triggerSection || !stickyContainer || !drawingLine || !bgImage || !textContent || !title || items.length === 0) {
-                console.warn("Services sequence elements missing. Aborting animation setup.");
-                if(stickyContainer) stickyContainer.style.display = 'none'; // Hide broken element
-                // Optionally reveal content directly if animation fails
-                if(bgImage) gsap.set(bgImage, { opacity: 0.7 });
-                if(textContent) gsap.set(textContent, { autoAlpha: 1, y: 0 });
-                if(title) gsap.set(title, { autoAlpha: 1, y: 0 });
-                if(items.length > 0) gsap.set(items, { autoAlpha: 1, y: 0 });
-                return;
+                console.warn("Services sequence elements missing. Aborting advanced animation setup.");
+                // Simple fallback: just reveal content on scroll past a point
+                 if(bgImage) gsap.set(bgImage, { opacity: 0 });
+                 if(textContent) gsap.set(textContent, { autoAlpha: 0, y: 30 });
+                 if(title) gsap.set(title, { autoAlpha: 0, y: 20 });
+                 if(items.length > 0) gsap.set(items, { autoAlpha: 0, y: 20 });
+
+                 ScrollTrigger.create({
+                    trigger: triggerSection,
+                    start: "top center",
+                    toggleActions: "play none none reverse",
+                    onEnter: () => {
+                        gsap.to(bgImage, { opacity: 0.7, duration: 1.0 });
+                        gsap.to(textContent, { autoAlpha: 1, y: 0, duration: 0.8, delay: 0.2 });
+                        gsap.to(title, { autoAlpha: 1, y: 0, duration: 0.6, delay: 0.4 });
+                        gsap.to(items, { autoAlpha: 1, y: 0, duration: 0.7, delay: 0.6, stagger: 0.2 });
+                    },
+                     onLeaveBack: () => { // Reset on scroll back up
+                        gsap.set(bgImage, { opacity: 0 });
+                        gsap.set(textContent, { autoAlpha: 0, y: 30 });
+                        gsap.set(title, { autoAlpha: 0, y: 20 });
+                        gsap.set(items, { autoAlpha: 0, y: 20 });
+                     }
+                 });
+                return; // Exit if elements are missing
             }
 
             // --- Initial States (Hidden) ---
-            gsap.set(stickyContainer, { autoAlpha: 0 });
+            gsap.set(stickyContainer, { autoAlpha: 0 }); // Fixed container starts hidden
             gsap.set(bgImage, { opacity: 0 });
             gsap.set(textContent, { autoAlpha: 0, y: 30 });
             gsap.set(title, { autoAlpha: 0, y: 20 });
@@ -891,82 +925,76 @@
                 if (pathLength <= 0) throw new Error("SVG path length is zero or could not be calculated.");
                 gsap.set(drawingLine, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
 
-                // --- Timeline for Drawing (controlled by scrub) ---
-                const drawingTimeline = gsap.timeline();
-                drawingTimeline
-                    // Fade in container quickly at the beginning
-                    .to(stickyContainer, { autoAlpha: 1, duration: 0.1 }, 0)
-                    // Draw the line over most of the duration
-                    .to(drawingLine, { strokeDashoffset: 0, ease: 'linear' }, 0) // Start drawing immediately
-                    // Fade out container towards the end
-                    .to(stickyContainer, { autoAlpha: 0, duration: 0.1 }, 0.9); // Start fade out at 90% point
+                // --- 1. TIMED Drawing Animation Timeline ---
+                // This plays automatically when the pin starts
+                const drawingAnimationTimeline = gsap.timeline({ paused: true });
+                drawingAnimationTimeline
+                    .to(stickyContainer, { autoAlpha: 1, duration: 0.4, ease: 'power1.in' }) // Fade in container
+                    .to(drawingLine, {
+                        strokeDashoffset: 0,
+                        duration: 2.5, // <<< DURATION of the drawing itself
+                        ease: 'linear'
+                     }, ">") // Start drawing after container fades in
+                    .to(stickyContainer, {
+                        autoAlpha: 0,
+                        duration: 0.4, // Fade out container
+                        ease: 'power1.out'
+                    }, "+=0.2"); // Start fade out shortly after drawing finishes
 
-                // --- Pinning & Drawing ScrollTrigger ---
+                // --- 2. Pinning ScrollTrigger ---
+                // This pins the section and triggers the timed drawing animation
                 ScrollTrigger.create({
                     trigger: triggerSection,
-                    pin: true, // Pin the trigger section itself
-                    // Pin spacer adds padding automatically, adjust start accordingly
+                    pin: true,
                     start: () => `top top+=${getHeaderHeight()}px`,
-                    // Define how much scroll distance the pin+scrub lasts. Adjust as needed!
-                    // This determines how much scrolling animates the line.
-                    end: "+=1500", // e.g., Pin lasts for 1500px of scroll
-                    scrub: 1.5, // Smoothly link animation progress to scroll (adjust number for smoothness)
-                    animation: drawingTimeline,
-                    toggleClass: "is-pinned", // Add class to #section-services when pinned
-                    id: "services-pin-draw",
-                    invalidateOnRefresh: true, // Recalculate on resize
-                    // markers: true // Uncomment for debugging start/end points
+                    // Pin duration needs to be long enough for the drawingAnimationTimeline to complete.
+                    // Timeline duration is approx 0.4 + 2.5 + 0.2 + 0.4 = 3.5 seconds.
+                    // We need enough scroll pixels to cover this time. Let's use a generous amount.
+                    end: "+=2000", // <<< Adjust scroll distance for pin duration
+                    toggleClass: "is-pinned",
+                    id: "services-pin",
+                    invalidateOnRefresh: true,
+                    // markers: true, // For debugging pin start/end
+                    onEnter: () => drawingAnimationTimeline.play(),
+                    onLeaveBack: () => drawingAnimationTimeline.reverse() // Reverse animation when scrolling back up
+                     // No scrub needed here
                 });
 
-                // --- Timeline for Content Reveal (plays normally) ---
-                const contentTimeline = gsap.timeline({ paused: true }); // Create paused initially
-                contentTimeline
-                    .to(bgImage, { opacity: 0.7, duration: 1.0, ease: 'power1.inOut' })
-                    .to(textContent, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power2.out' }, "-=0.8") // Overlap slightly
-                    .to(title, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' }, "<+=0.1")
-                    .to(items, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power2.out', stagger: 0.2 }, "<+=0.1");
 
-                // --- Content Reveal ScrollTrigger ---
-                // This trigger starts LATER, after the pinning/drawing has progressed significantly.
+                // --- 3. Content Reveal Timeline (Original smooth fade-in) ---
+                const contentRevealTimeline = gsap.timeline({ paused: true });
+                 contentRevealTimeline
+                     .to(bgImage, { opacity: 0.7, duration: 1.0, ease: 'power1.inOut' })
+                     .to(textContent, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power2.out' }, "-=0.8") // Overlap bg image fade slightly
+                     .to(title, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' }, "<+=0.1") // Stagger title in
+                     .to(items, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power2.out', stagger: 0.2 }, "<+=0.1"); // Stagger items in
+
+
+                // --- 4. Content Reveal ScrollTrigger ---
+                // Triggers the content reveal *after* the drawing should be finished.
                 ScrollTrigger.create({
                     trigger: triggerSection,
-                    // Start when the user has scrolled, e.g., 1000px *into* the pinned section's scroll duration.
-                    // The pin starts at `top top+header`, so this is relative to that.
-                    start: () => `top top+=${getHeaderHeight() + 1000}px`, // Adjust the '1000' value
-                    end: "bottom bottom", // End when the section is fully scrolled past
-                    toggleActions: "play none none reverse", // Play the content animation once when entering
-                    animation: contentTimeline, // Target the paused content timeline
+                    // Start this LATER. Needs to be after the pin ends OR far enough into the pin.
+                    // If pin ends at top+header+2000px, start slightly before or right after.
+                    // Let's try starting when the section's center hits the viewport center,
+                    // assuming the pin duration (2000px) is long enough. Adjust if needed.
+                    start: "center center",
+                    // Or start relative to pin end: `start: () => `top top+=${getHeaderHeight() + 1900}px`,
+                    end: "bottom bottom", // Let it finish naturally
+                    toggleActions: "play none none reverse", // Play content timeline once
+                    animation: contentRevealTimeline,
                     id: "services-content-reveal",
                     invalidateOnRefresh: true,
-                    // markers: { startColor: "green", endColor: "red", indent: 50 } // Uncomment for debugging
-                    // Note: No 'pin' or 'scrub' here, just play the animation.
-                    // No 'containerAnimation' needed here as start is absolute document scroll position
+                    // markers: { startColor: "green", endColor: "red", indent: 50 } // Debug content trigger
                 });
 
             } catch (error) {
                 console.error("Error setting up services animation (SVG Path likely):", error);
-                // Fallback behavior if SVG fails
-                 if(stickyContainer) stickyContainer.style.display = 'none';
-                 if(bgImage) gsap.set(bgImage, { opacity: 0.7 });
-                 // Simple fade in for content if SVG part fails
-                 ScrollTrigger.create({
-                     trigger: triggerSection,
-                     start: () => `top center+=${getHeaderHeight()}px`,
-                     end: "bottom bottom",
-                     toggleClass: "content-visible", // Use CSS or another timeline if needed
-                     onEnter: () => {
-                         gsap.to(textContent, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power2.out' });
-                         gsap.to(title, { autoAlpha: 1, y: 0, duration: 0.6, delay: 0.2, ease: 'power2.out' });
-                         gsap.to(items, { autoAlpha: 1, y: 0, duration: 0.7, delay: 0.4, stagger: 0.2, ease: 'power2.out' });
-                     },
-                     onLeaveBack: () => {
-                         gsap.set([textContent, title, items], { autoAlpha: 0, y: 20 });
-                     }
-                 });
+                 // Fallback already handled in the initial check
             }
         }
         // --- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ---
-        // --- END OF NEW Services Section Animation Sequence ---
+        // --- END OF REVISED Services Section Animation Sequence ---
         // --- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ---
 
 
@@ -978,17 +1006,16 @@
             initFooter();
             initHero();
             initAbout();
-            initServicesSequence(); // <<< CALL NEW PINNING SEQUENCE
+            initServicesSequence(); // <<< CALL REVISED PINNING SEQUENCE
             initPortfolio();
             initContact();
 
             // --- Generic smooth scroll for other links ---
              document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                 // Exclude header/nav-dot links already handled
                  if (!anchor.closest('.site-header') && !anchor.closest('.nav-dots')) {
                      anchor.addEventListener('click', function (e) {
                          const href = this.getAttribute('href');
-                         if (href === '#portfolio-full') { // Handle specific CTAs if needed
+                         if (href === '#portfolio-full') {
                              e.preventDefault();
                              console.log("Portfolio CTA clicked - Implement desired action.");
                              return;
@@ -996,22 +1023,22 @@
                          if (href && href.startsWith('#') && href.length > 1) {
                              try {
                                  const target = document.querySelector(href);
-                                 const offset = getHeaderHeight(); // Standard offset for non-hero links
+                                 const offset = (href === '#section-0' ? 0 : getHeaderHeight()); // Check if scrolling to top
                                  if (target) {
                                      e.preventDefault();
                                      gsap.to(window, { duration: 1, scrollTo: { y: target, offsetY: offset }, ease: "power2.inOut" });
                                  } else { console.warn("Smooth scroll target not found:", href); }
                              } catch (error) { console.warn("Could not find target for anchor:", href, error); }
-                         } else if (href === "#") { e.preventDefault(); } // Prevent jump for empty hash
+                         } else if (href === "#") { e.preventDefault(); }
                      });
                  }
              });
 
-            // Final refresh after a slightly longer delay to ensure layout is stable
+            // Final refresh after a slightly longer delay
             setTimeout(() => {
                 ScrollTrigger.refresh();
                 console.log("ScrollTrigger refreshed after init.");
-            }, 300); // Increased delay slightly
+            }, 300);
 
             // Refresh ScrollTrigger on resize (debounced)
             let resizeTimer;
@@ -1019,7 +1046,7 @@
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(() => {
                    console.log("Resizing - Refreshing ScrollTrigger...");
-                   ScrollTrigger.refresh(true); // Pass true to kill and recreate (safer for complex setups)
+                   ScrollTrigger.refresh(true); // Kill and recreate triggers on resize
                 }, 250);
             });
 
